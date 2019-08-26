@@ -1,0 +1,8 @@
+.mat-dialog-content {
+  margin: 0;
+  padding: 0;
+}
+
+mat-form-field:last-child {
+  margin-bottom: 32px;
+}

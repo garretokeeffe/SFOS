@@ -1,0 +1,342 @@
+<div class="page readonly" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)">
+  <h2 style="width:100%">
+    <mat-icon matListIcon alt="My Capacity" style="position: relative; top: 4px; margin-right: 8px;">toys</mat-icon>{{ title$ | async }}
+  </h2>
+
+  <div style="font-size: small" class="margin-bottom">
+    <mat-checkbox [(ngModel)]="pointsEnabled">UX Option: Points Enabled</mat-checkbox>
+  </div>
+
+  <div [class.closed]="!showUXOptions" fxLayout="start end" style="font-size: small;" fxLayoutGap="16px" [class.margin-bottom]="showUXOptions">
+    <div style="position: relative; top: 12px; font-weight: bold">UX Options:</div>
+    <mat-form-field style="max-width: 50px">
+      <mat-label># Vessels</mat-label>
+      <mat-select (selectionChange)="onNumberOfVesselsSelected($event.value)">
+        <mat-option value="0">None</mat-option>
+        <mat-option value="1">1</mat-option>
+        <mat-option value="2">2</mat-option>
+        <mat-option value="3">3</mat-option>
+        <mat-option value="4">4</mat-option>
+        <mat-option value="5">5</mat-option>
+        <mat-option value="ALL">All</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-checkbox [(ngModel)]="pointsEnabled" style="position: relative; top: 12px;">Points</mat-checkbox>
+    <mat-checkbox [(ngModel)]="showVesselCapacity" style="position: relative; top: 12px;">Vessel Capacity</mat-checkbox>
+    <mat-checkbox [(ngModel)]="alignColumns" style="position: relative; top: 12px;">Align Cols</mat-checkbox>
+    <mat-checkbox [(ngModel)]="optimiseLayout" style="position: relative; top: 12px;" title="No Points: Align Cols (Mobile and Desktop), Points: Align Cols on Desktop but not Mobile">Optimise</mat-checkbox>
+    <mat-button-toggle-group #displayModeToggleGroup="matButtonToggleGroup" style="max-height: 32px">
+      <mat-button-toggle value="TABLE" style="max-height: 32px">
+        <mat-icon style="vertical-align: top; padding-top: 4px">menu</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle value="GRID" style="max-height: 32px">
+        <mat-icon style="vertical-align: top; padding-top: 4px">apps</mat-icon>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+    <mat-button-toggle-group #containerToggleGroup="matButtonToggleGroup" style="max-height: 32px">
+      <mat-button-toggle value="TAB" style="max-height: 32px">
+        <mat-icon style="vertical-align: top; padding-top: 4px">vertical_split</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle value="EXPANSION_PANEL" style="max-height: 32px">
+        <mat-icon style="vertical-align: top; padding-top: 4px">view_stream</mat-icon>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <!-- TAB CONTAINER -->
+  <mat-tab-group *ngIf="container.value === 'TAB'" mat-stretch-tabs [class.centered-max-width-tabs]="displayMode.value === 'TABLE'" [selectedIndex]="0">
+
+    <!-- ON REGISTER -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="page">mobile_friendly</mat-icon>
+        <span class="wizard-label color-primary cdk-focused">On Register</span>
+      </ng-template>
+
+      <div *ngIf="capacities.onRegisterPolyvalent.length" class="mat-elevation-z8">
+        <div class="wizard-label margin-top-double padding-top-and-sides color-primary">
+          <div fxLayout="row" fxLayoutAlign="start center" class="padding-bottom" fxLayoutGap="16px">
+            <mat-icon>toys</mat-icon>
+            <span>{{ capacities.getFleetSegmentName(capacities.onRegisterPolyvalent) }}</span>
+            <span class="color-primary-soft" style="text-transform: none">{{ capacities.getTotalCapacity(capacities.onRegisterPolyvalent) }}</span>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+        <app-capacity-fleet-subsegment-table [capacities]="capacities.onRegisterPolyvalent_under18M" [showSubSegmentTotal]="this.capacities.isMultipleSubSegments(CapacityType['ON_REGISTER'], FleetSegment['POLYVALENT'])" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+        <app-capacity-fleet-subsegment-table [capacities]="capacities.onRegisterPolyvalent_18MorOver" [showSubSegmentTotal]="this.capacities.isMultipleSubSegments(CapacityType['ON_REGISTER'], FleetSegment['POLYVALENT'])" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+        <app-capacity-fleet-subsegment-table [capacities]="capacities.onRegisterPolyvalent_Scallops" [showSubSegmentTotal]="this.capacities.isMultipleSubSegments(CapacityType['ON_REGISTER'], FleetSegment['POLYVALENT'])" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+        <app-capacity-fleet-subsegment-table [capacities]="capacities.onRegisterPolyvalent_Potting" [showSubSegmentTotal]="this.capacities.isMultipleSubSegments(CapacityType['ON_REGISTER'], FleetSegment['POLYVALENT'])" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+      </div>
+      <div *ngIf="capacities.onRegisterRSWPelagic.length" class="mat-elevation-z8">
+        <div class="wizard-label margin-top-double padding-top-and-sides color-primary">
+          <div fxLayout="row" fxLayoutAlign="start center" class="padding-bottom" fxLayoutGap="16px">
+            <mat-icon>toys</mat-icon>
+            <span>{{ capacities.getFleetSegmentName(capacities.onRegisterRSWPelagic) }}</span>
+            <span class="color-primary-soft" style="text-transform: none">{{ capacities.getTotalCapacity(capacities.onRegisterRSWPelagic) }}</span>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+        <app-capacity-fleet-subsegment-table [capacities]="capacities.onRegisterRSWPelagic" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+      </div>
+      <div *ngIf="capacities.onRegisterSpecific.length" class="mat-elevation-z8">
+        <div class="wizard-label margin-top-double padding-top-and-sides color-primary">
+          <div fxLayout="row" fxLayoutAlign="start center" class="padding-bottom" fxLayoutGap="16px">
+            <mat-icon>toys</mat-icon>
+            <span>{{ capacities.getFleetSegmentName(capacities.onRegisterSpecific) }}</span>
+            <span class="color-primary-soft" style="text-transform: none">{{ capacities.getTotalCapacity(capacities.onRegisterSpecific) }}</span>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+        <app-capacity-fleet-subsegment-table [capacities]="capacities.onRegisterSpecific_Scallops" [showSubSegmentTotal]="this.capacities.isMultipleSubSegments(CapacityType['ON_REGISTER'], FleetSegment['SPECIFIC'])" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+        <app-capacity-fleet-subsegment-table [capacities]="capacities.onRegisterSpecific_General" [showSubSegmentTotal]="this.capacities.isMultipleSubSegments(CapacityType['ON_REGISTER'], FleetSegment['SPECIFIC'])" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+      </div>
+      <div *ngIf="capacities.onRegisterAquaculture.length" class="mat-elevation-z8">
+        <div class="wizard-label margin-top-double padding-top-and-sides color-primary">
+          <div fxLayout="row" fxLayoutAlign="start center" class="padding-bottom" fxLayoutGap="16px">
+            <mat-icon>toys</mat-icon>
+            <span>{{ capacities.getFleetSegmentName(capacities.onRegisterAquaculture) }}</span>
+            <span class="color-primary-soft" style="text-transform: none">{{ capacities.getTotalCapacity(capacities.onRegisterAquaculture) }}</span>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+        <app-capacity-fleet-subsegment-table [capacities]="capacities.onRegisterAquaculture" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+      </div>
+      <div *ngIf="capacities.onRegisterBeamTrawler.length" class="mat-elevation-z8">
+        <div class="wizard-label margin-top-double padding-top-and-sides color-primary">
+          <div fxLayout="row" fxLayoutAlign="start center" class="padding-bottom" fxLayoutGap="16px">
+            <mat-icon>toys</mat-icon>
+            <span>{{ capacities.getFleetSegmentName(capacities.onRegisterBeamTrawler) }}</span>
+            <span class="color-primary-soft" style="text-transform: none">{{ capacities.getTotalCapacity(capacities.onRegisterBeamTrawler) }}</span>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+        <app-capacity-fleet-subsegment-table [capacities]="capacities.onRegisterBeamTrawler" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+      </div>
+    </mat-tab>
+
+    <!-- OFF REGISTER -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="page"><mat-icon>phonelink_erase</mat-icon></mat-icon>
+        <span class="wizard-label color-primary">Off Register</span>
+      </ng-template>
+      <div *ngIf="capacities.onRegisterPolyvalent.length" class="mat-elevation-z8">
+        <div class="wizard-label margin-top-double padding-top-and-sides color-primary">
+          <div fxLayout="row" fxLayoutAlign="start center" class="padding-bottom" fxLayoutGap="16px">
+            <mat-icon>toys</mat-icon>
+            <span>{{ capacities.getFleetSegmentName(capacities.onRegisterPolyvalent) }}</span>
+            <span class="color-primary-soft" style="text-transform: none">{{ capacities.getTotalCapacity(capacities.onRegisterPolyvalent) }}</span>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+        <app-capacity-fleet-subsegment-table [offRegister]="true" [capacities]="capacities.onRegisterPolyvalent_under18M" [showSubSegmentTotal]="this.capacities.isMultipleSubSegments(CapacityType['OFF_REGISTER'], FleetSegment['POLYVALENT'])" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+
+        <!-- PROPOSED -->
+        <app-capacity-fleet-subsegment-table [offRegisterProposed]="true" [capacities]="capacities.onRegisterPolyvalent_under18M" [showSubSegmentTotal]="this.capacities.isMultipleSubSegments(CapacityType['OFF_REGISTER'], FleetSegment['POLYVALENT'])" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+
+        <app-capacity-fleet-subsegment-table [offRegister]="true" [capacities]="capacities.onRegisterPolyvalent_18MorOver" [showSubSegmentTotal]="this.capacities.isMultipleSubSegments(CapacityType['OFF_REGISTER'], FleetSegment['POLYVALENT'])" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+        <app-capacity-fleet-subsegment-table [offRegister]="true" [capacities]="capacities.onRegisterPolyvalent_Scallops" [showSubSegmentTotal]="this.capacities.isMultipleSubSegments(CapacityType['OFF_REGISTER'], FleetSegment['POLYVALENT'])" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+        <app-capacity-fleet-subsegment-table [offRegister]="true" [capacities]="capacities.onRegisterPolyvalent_Potting" [showSubSegmentTotal]="this.capacities.isMultipleSubSegments(CapacityType['OFF_REGISTER'], FleetSegment['POLYVALENT'])" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+
+      </div>
+      <div *ngIf="capacities.onRegisterRSWPelagic.length" class="mat-elevation-z8">
+        <div class="wizard-label margin-top-double padding-top-and-sides color-primary">
+          <div fxLayout="row" fxLayoutAlign="start center" class="padding-bottom" fxLayoutGap="16px">
+            <mat-icon>toys</mat-icon>
+            <span>{{ capacities.getFleetSegmentName(capacities.onRegisterRSWPelagic) }}</span>
+            <span class="color-primary-soft" style="text-transform: none">{{ capacities.getTotalCapacity(capacities.onRegisterRSWPelagic) }}</span>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+        <app-capacity-fleet-subsegment-table [offRegister]="true" [capacities]="capacities.onRegisterRSWPelagic" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+      </div>
+      <div *ngIf="capacities.onRegisterSpecific.length" class="mat-elevation-z8">
+        <div class="wizard-label margin-top-double padding-top-and-sides color-primary">
+          <div fxLayout="row" fxLayoutAlign="start center" class="padding-bottom" fxLayoutGap="16px">
+            <mat-icon>toys</mat-icon>
+            <span>{{ capacities.getFleetSegmentName(capacities.onRegisterSpecific) }}</span>
+            <span class="color-primary-soft" style="text-transform: none">{{ capacities.getTotalCapacity(capacities.onRegisterSpecific) }}</span>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+        <app-capacity-fleet-subsegment-table [offRegister]="true" [capacities]="capacities.onRegisterSpecific_Scallops" [showSubSegmentTotal]="this.capacities.isMultipleSubSegments(CapacityType['OFF_REGISTER'], FleetSegment['SPECIFIC'])" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+        <app-capacity-fleet-subsegment-table [offRegister]="true" [capacities]="capacities.onRegisterSpecific_General" [showSubSegmentTotal]="this.capacities.isMultipleSubSegments(CapacityType['OFF_REGISTER'], FleetSegment['SPECIFIC'])" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+      </div>
+      <div *ngIf="capacities.onRegisterAquaculture.length" class="mat-elevation-z8">
+        <div class="wizard-label margin-top-double padding-top-and-sides color-primary">
+          <div fxLayout="row" fxLayoutAlign="start center" class="padding-bottom" fxLayoutGap="16px">
+            <mat-icon>toys</mat-icon>
+            <span>{{ capacities.getFleetSegmentName(capacities.onRegisterAquaculture) }}</span>
+            <span class="color-primary-soft" style="text-transform: none">{{ capacities.getTotalCapacity(capacities.onRegisterAquaculture) }}</span>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+        <app-capacity-fleet-subsegment-table [offRegister]="true" [capacities]="capacities.onRegisterAquaculture" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+      </div>
+      <div *ngIf="capacities.onRegisterBeamTrawler.length" class="mat-elevation-z8">
+        <div class="wizard-label margin-top-double padding-top-and-sides color-primary">
+          <div fxLayout="row" fxLayoutAlign="start center" class="padding-bottom" fxLayoutGap="16px">
+            <mat-icon>toys</mat-icon>
+            <span>{{ capacities.getFleetSegmentName(capacities.onRegisterBeamTrawler) }}</span>
+            <span class="color-primary-soft" style="text-transform: none">{{ capacities.getTotalCapacity(capacities.onRegisterBeamTrawler) }}</span>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+        <app-capacity-fleet-subsegment-table [offRegister]="true" [capacities]="capacities.onRegisterBeamTrawler" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+      </div>
+    </mat-tab>
+
+  </mat-tab-group>
+
+  <!-- EXPANSION_PANEL CONTAINER -->
+  <!-- ON REGISTER -->
+  <div *ngIf="container.value === 'EXPANSION_PANEL'">
+    <mat-expansion-panel style="margin-bottom: 16px" [expanded]="autoExpand"> <!-- [expanded]="true" -->
+      <mat-expansion-panel-header [class.handset]="(isHandset$ | async)" class="standard-header">
+        <mat-panel-title>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon class="margin-right">mobile_friendly</mat-icon>
+            <span class="wizard-label color-primary cdk-focused">On Register</span>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div *ngIf="capacities.onRegisterPolyvalent.length" class="mat-elevation-z8">
+        <div class="wizard-label padding-top-and-sides color-primary">
+          <div fxLayout="row" fxLayoutAlign="start center" class="padding-bottom" fxLayoutGap="16px">
+            <mat-icon>toys</mat-icon>
+            <span>{{ capacities.getFleetSegmentName(capacities.onRegisterPolyvalent) }}</span>
+            <span class="color-primary-soft" style="text-transform: none">{{ capacities.getTotalCapacity(capacities.onRegisterPolyvalent) }}</span>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+        <app-capacity-fleet-subsegment-table [capacities]="capacities.onRegisterPolyvalent_under18M" [showSubSegmentTotal]="this.capacities.isMultipleSubSegments(CapacityType['ON_REGISTER'], FleetSegment['POLYVALENT'])" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+        <app-capacity-fleet-subsegment-table [capacities]="capacities.onRegisterPolyvalent_18MorOver" [showSubSegmentTotal]="this.capacities.isMultipleSubSegments(CapacityType['ON_REGISTER'], FleetSegment['POLYVALENT'])" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+        <app-capacity-fleet-subsegment-table [capacities]="capacities.onRegisterPolyvalent_Scallops" [showSubSegmentTotal]="this.capacities.isMultipleSubSegments(CapacityType['ON_REGISTER'], FleetSegment['POLYVALENT'])" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+        <app-capacity-fleet-subsegment-table [capacities]="capacities.onRegisterPolyvalent_Potting" [showSubSegmentTotal]="this.capacities.isMultipleSubSegments(CapacityType['ON_REGISTER'], FleetSegment['POLYVALENT'])" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+      </div>
+      <div *ngIf="capacities.onRegisterRSWPelagic.length" class="mat-elevation-z8">
+        <div class="wizard-label margin-top-double padding-top-and-sides color-primary">
+          <div fxLayout="row" fxLayoutAlign="start center" class="padding-bottom" fxLayoutGap="16px">
+            <mat-icon>toys</mat-icon>
+            <span>{{ capacities.getFleetSegmentName(capacities.onRegisterRSWPelagic) }}</span>
+            <span class="color-primary-soft" style="text-transform: none">{{ capacities.getTotalCapacity(capacities.onRegisterRSWPelagic) }}</span>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+        <app-capacity-fleet-subsegment-table [capacities]="capacities.onRegisterRSWPelagic" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+      </div>
+      <div *ngIf="capacities.onRegisterSpecific.length" class="mat-elevation-z8">
+        <div class="wizard-label margin-top-double padding-top-and-sides color-primary">
+          <div fxLayout="row" fxLayoutAlign="start center" class="padding-bottom" fxLayoutGap="16px">
+            <mat-icon>toys</mat-icon>
+            <span>{{ capacities.getFleetSegmentName(capacities.onRegisterSpecific) }}</span>
+            <span class="color-primary-soft" style="text-transform: none">{{ capacities.getTotalCapacity(capacities.onRegisterSpecific) }}</span>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+        <app-capacity-fleet-subsegment-table [capacities]="capacities.onRegisterSpecific_Scallops" [showSubSegmentTotal]="this.capacities.isMultipleSubSegments(CapacityType['ON_REGISTER'], FleetSegment['SPECIFIC'])" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+        <app-capacity-fleet-subsegment-table [capacities]="capacities.onRegisterSpecific_General" [showSubSegmentTotal]="this.capacities.isMultipleSubSegments(CapacityType['ON_REGISTER'], FleetSegment['SPECIFIC'])" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+      </div>
+      <div *ngIf="capacities.onRegisterAquaculture.length" class="mat-elevation-z8">
+        <div class="wizard-label margin-top-double padding-top-and-sides color-primary">
+          <div fxLayout="row" fxLayoutAlign="start center" class="padding-bottom" fxLayoutGap="16px">
+            <mat-icon>toys</mat-icon>
+            <span>{{ capacities.getFleetSegmentName(capacities.onRegisterAquaculture) }}</span>
+            <span class="color-primary-soft" style="text-transform: none">{{ capacities.getTotalCapacity(capacities.onRegisterAquaculture) }}</span>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+        <app-capacity-fleet-subsegment-table [capacities]="capacities.onRegisterAquaculture" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+      </div>
+      <div *ngIf="capacities.onRegisterBeamTrawler.length" class="mat-elevation-z8">
+        <div class="wizard-label margin-top-double padding-top-and-sides color-primary">
+          <div fxLayout="row" fxLayoutAlign="start center" class="padding-bottom" fxLayoutGap="16px">
+            <mat-icon>toys</mat-icon>
+            <span>{{ capacities.getFleetSegmentName(capacities.onRegisterBeamTrawler) }}</span>
+            <span class="color-primary-soft" style="text-transform: none">{{ capacities.getTotalCapacity(capacities.onRegisterBeamTrawler) }}</span>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+        <app-capacity-fleet-subsegment-table [capacities]="capacities.onRegisterBeamTrawler" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+      </div>
+    </mat-expansion-panel>
+
+    <!-- OFF REGISTER -->
+    <mat-expansion-panel style="margin-bottom: 16px">
+      <mat-expansion-panel-header [class.handset]="(isHandset$ | async)" class="standard-header">
+        <mat-panel-title>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon class="margin-right">phonelink_erase</mat-icon>
+            <span class="wizard-label color-primary cdk-focused">Off Register</span>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div *ngIf="capacities.onRegisterPolyvalent.length" class="mat-elevation-z8">
+        <div class="wizard-label padding-top-and-sides color-primary">
+          <div fxLayout="row" fxLayoutAlign="start center" class="padding-bottom" fxLayoutGap="16px">
+            <mat-icon>toys</mat-icon>
+            <span>{{ capacities.getFleetSegmentName(capacities.onRegisterPolyvalent) }}</span>
+            <span class="color-primary-soft" style="text-transform: none">{{ capacities.getTotalCapacity(capacities.onRegisterPolyvalent) }}</span>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+        <app-capacity-fleet-subsegment-table [offRegister]="true" [capacities]="capacities.onRegisterPolyvalent_under18M" [pointsEnabled]="this.pointsEnabled" [showSubSegmentTotal]="this.capacities.isMultipleSubSegments(CapacityType['OFF_REGISTER'], FleetSegment['POLYVALENT'])" [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+
+        <!-- PROPOSED -->
+        <app-capacity-fleet-subsegment-table [offRegisterProposed]="true" [capacities]="capacities.onRegisterPolyvalent_under18M" [pointsEnabled]="this.pointsEnabled" [showSubSegmentTotal]="this.capacities.isMultipleSubSegments(CapacityType['OFF_REGISTER'], FleetSegment['POLYVALENT'])" [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+
+        <app-capacity-fleet-subsegment-table [offRegister]="true" [capacities]="capacities.onRegisterPolyvalent_18MorOver" [showSubSegmentTotal]="this.capacities.isMultipleSubSegments(CapacityType['OFF_REGISTER'], FleetSegment['POLYVALENT'])" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+        <app-capacity-fleet-subsegment-table [offRegister]="true" [capacities]="capacities.onRegisterPolyvalent_Scallops" [showSubSegmentTotal]="this.capacities.isMultipleSubSegments(CapacityType['OFF_REGISTER'], FleetSegment['POLYVALENT'])" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+        <app-capacity-fleet-subsegment-table [offRegister]="true" [capacities]="capacities.onRegisterPolyvalent_Potting" [showSubSegmentTotal]="this.capacities.isMultipleSubSegments(CapacityType['OFF_REGISTER'], FleetSegment['POLYVALENT'])" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+
+      </div>
+      <div *ngIf="capacities.onRegisterRSWPelagic.length" class="mat-elevation-z8">
+        <div class="wizard-label margin-top-double padding-top-and-sides color-primary">
+          <div fxLayout="row" fxLayoutAlign="start center" class="padding-bottom" fxLayoutGap="16px">
+            <mat-icon>toys</mat-icon>
+            <span>{{ capacities.getFleetSegmentName(capacities.onRegisterRSWPelagic) }}</span>
+            <span class="color-primary-soft" style="text-transform: none">{{ capacities.getTotalCapacity(capacities.onRegisterRSWPelagic) }}</span>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+        <app-capacity-fleet-subsegment-table [offRegister]="true" [capacities]="capacities.onRegisterRSWPelagic" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+      </div>
+      <div *ngIf="capacities.onRegisterSpecific.length" class="mat-elevation-z8">
+        <div class="wizard-label margin-top-double padding-top-and-sides color-primary">
+          <div fxLayout="row" fxLayoutAlign="start center" class="padding-bottom" fxLayoutGap="16px">
+            <mat-icon>toys</mat-icon>
+            <span>{{ capacities.getFleetSegmentName(capacities.onRegisterSpecific) }}</span>
+            <span class="color-primary-soft" style="text-transform: none">{{ capacities.getTotalCapacity(capacities.onRegisterSpecific) }}</span>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+        <app-capacity-fleet-subsegment-table [offRegister]="true" [capacities]="capacities.onRegisterSpecific_Scallops" [showSubSegmentTotal]="this.capacities.isMultipleSubSegments(CapacityType['OFF_REGISTER'], FleetSegment['SPECIFIC'])" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+        <app-capacity-fleet-subsegment-table [offRegister]="true" [capacities]="capacities.onRegisterSpecific_General" [showSubSegmentTotal]="this.capacities.isMultipleSubSegments(CapacityType['OFF_REGISTER'], FleetSegment['SPECIFIC'])" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+      </div>
+      <div *ngIf="capacities.onRegisterAquaculture.length" class="mat-elevation-z8">
+        <div class="wizard-label margin-top-double padding-top-and-sides color-primary">
+          <div fxLayout="row" fxLayoutAlign="start center" class="padding-bottom" fxLayoutGap="16px">
+            <mat-icon>toys</mat-icon>
+            <span>{{ capacities.getFleetSegmentName(capacities.onRegisterAquaculture) }}</span>
+            <span class="color-primary-soft" style="text-transform: none">{{ capacities.getTotalCapacity(capacities.onRegisterAquaculture) }}</span>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+        <app-capacity-fleet-subsegment-table [offRegister]="true" [capacities]="capacities.onRegisterAquaculture" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+      </div>
+      <div *ngIf="capacities.onRegisterBeamTrawler.length" class="mat-elevation-z8">
+        <div class="wizard-label margin-top-double padding-top-and-sides color-primary">
+          <div fxLayout="row" fxLayoutAlign="start center" class="padding-bottom" fxLayoutGap="16px">
+            <mat-icon>toys</mat-icon>
+            <span>{{ capacities.getFleetSegmentName(capacities.onRegisterBeamTrawler) }}</span>
+            <span class="color-primary-soft" style="text-transform: none">{{ capacities.getTotalCapacity(capacities.onRegisterBeamTrawler) }}</span>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+        <app-capacity-fleet-subsegment-table [offRegister]="true" [capacities]="capacities.onRegisterBeamTrawler" [pointsEnabled]="this.pointsEnabled"  [showVesselCapacity]="this.showVesselCapacity" [displayMode]="this.displayMode.value" [alignColumns]="getOptimisedLayout()"></app-capacity-fleet-subsegment-table>
+      </div>
+    </mat-expansion-panel>
+  </div>
+
+</div>

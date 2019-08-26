@@ -1,0 +1,297 @@
+body {
+  color: darkslategrey;
+}
+
+.banner {
+  background-color: #4e5882; /* #373f6d; */
+  background-image: linear-gradient(to right, #2d3252, #4e5882);
+  color: whitesmoke;
+}
+
+.mat-raised-button {
+  color: #2d3252;
+}
+
+.xmat-form-field-appearance-legacy .mat-form-field-label {
+  color: rgba(255, 255, 255, 0.54) !important;
+}
+
+.xmat-input-element {
+  caret-color: whitesmoke; /* #673ab7; */
+}
+
+.mat-sort-header-arrow {
+  xcolor: whitesmoke;
+  color: grey;
+}
+
+table {
+  background-color: inherit;
+}
+table tbody tr:nth-child(odd) {
+  background-color:rgba(50, 112, 104, 0.35); /*mid green;*/
+}
+table tbody tr.error-row:nth-child(odd) {
+  background-color: rgba(128,0,0, 0.45); /* maroon */
+}
+table tbody tr:nth-child(even) {
+  background-color:rgba(50, 112, 104,0.20); /*light green;*/
+}
+table tbody tr.error-row:nth-child(even) {
+  background-color: rgba(128,0,0, 0.30); /* light maroon */
+}
+table tbody tr:hover {
+  background-color:rgba(50, 112, 104,0.50); /*dark green;*/
+}
+table tbody tr.error-row:hover {
+  background-color: rgba(128,0,0, 0.60); /* dark maroon */
+}
+
+table thead:first-child {
+  /* DMcD: this only works if the table header is not sticky */
+  background-color: #fafafa; /* #4e5882;*/ /* #373f6d; */
+}
+table thead button {
+  xcolor: whitesmoke !important;
+  color: grey !important;
+}
+table th.mat-header-cell {
+  xcolor: whitesmoke !important;
+  color: grey !important;
+  line-height: 14px;
+  font-size: 14px;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-align: left;
+  font-weight: 700;
+  transition: .25s;
+}
+
+table tbody .mat-stroked-button:hover {
+  background-color: rgba(50, 112, 104, .75);
+  color: whitesmoke;
+}
+table tbody .mat-stroked-button.transparent:hover {
+  background-color: transparent;
+  color: currentColor;
+}
+
+.pagination-bar {
+  xbackground-color: rgba(241,241,241, 1); /* original light grey */
+  background-color: #fafafa;
+}
+
+/* progress controls */
+.progressContainer {
+  margin-top: 1.5em;
+}
+.progressContainerInline {
+  margin-left: 32px;
+  display: inline-block;
+  width: 15em;
+  overflow: hidden;
+  position: relative;
+}
+.progressText {
+  text-align: left;
+  font-size: 0.85em;
+  font-weight: normal;
+  color: whitesmoke;
+  margin-left: 16px;
+  margin-bottom: 0.50em;
+}
+.progressContainerInline .progressText {
+  margin-left: 0;
+}
+.progressText::after {
+  content:'...';
+}
+
+md-progress-bar {
+
+}
+
+.mat-stroked-button {
+  color: whitesmoke;
+  background-color: #327068; /*rgba(50, 112, 104, 1)*/
+}
+.mat-stroked-button.transparent {
+  color: currentColor;
+  background-color: transparent;
+}
+.mat-stroked-button[disabled] {
+  color: whitesmoke;
+  background-color: rgba(50, 112, 104, .25);
+}
+.mat-stroked-button[disabled].transparent {
+  color: lightgray;
+  background-color: transparent;
+}
+.mat-stroked-button:hover {
+  background-color: rgba(50, 112, 104, .75);
+  color: whitesmoke;
+}
+.mat-stroked-button.transparent:hover {
+  background-color: transparent;
+  color: whitesmoke;
+}
+.mat-stroked-button[disabled]:hover {
+  background-color: rgba(50, 112, 104, .25);
+  cursor: not-allowed;
+}
+.mat-stroked-button.transparent[disabled]:hover {
+  background-color: transparent;
+  cursor: not-allowed;
+}
+.mat-stroked-button.waitCursor[disabled]:hover {
+  background-color: rgba(50, 112, 104, .25);
+  cursor: wait;
+}
+.mat-stroked-button.transparent.waitCursor[disabled]:hover {
+  background-color: transparent;
+  cursor: wait;
+}
+
+.mat-icon-button {
+  border-radius: 4px !important; /* without this icon buttons are round, 4px is same as mat-raised-button */
+}
+
+.banner .mat-stroked-button {
+  color: whitesmoke;
+}
+.banner .mat-stroked-button:hover {
+  background-color: whitesmoke;
+  color: #4e5882;
+}
+
+mat-spinner:not(.loadingStatus) {
+  position: relative;
+  top: 6px;
+}
+
+td.mat-cell:not(last-child), td.mat-footer-cell:not(last-child), th.mat-header-cell:not(last-child) {
+  padding-right: 16px;
+}
+.mat-cell, .mat-footer-cell, .mat-header-cell {
+  font-size: 12px;
+}
+
+.mat-toolbar.mat-primary {
+  background: #327068;
+  color: #fff;
+}
+
+.mat-list-base .mat-list-item {
+  font-size: 15px; /* was 16px */
+}
+
+/* green dafm logo theme */
+.color-primary {
+  color: rgba(50, 112, 104, 1) !important;
+}
+.color-primary-soft {
+  color: rgba(50, 112, 104, 0.66) !important;
+}
+.color-warning {
+  color: darkorange;
+}
+
+.mat-list-text,
+mat-icon,
+.mat-expansion-panel-header-title,
+.mat-nav-list .mat-list-base .mat-list-item {
+  color: rgba(50, 112, 104, 1);
+}
+.mat-badge-content {
+  background-color: rgba(50, 112, 104, 1);
+}
+.mat-card-image {
+  width: calc(100% - 3px) !important;
+  margin: 0 -3px 0px -3px;
+  border-radius: 5px;
+}
+
+.wizard-label {
+  xmargin-left: 15px;
+  color: grey;
+  line-height: 14px;
+  font-size: 14px;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-align: left;
+  font-weight: 700;
+  transition: .25s;
+}
+
+aw-wizard .wizard-steps.vertical {
+  width: 100% !important;
+}
+
+.centered-content {
+  margin: auto;
+  text-align: center !important;
+}
+
+.toolbar-font {
+  font: 500 20px/32px Roboto,"Helvetica Neue",sans-serif;
+}
+
+progress-bar .progress-outer,
+progress-bar .progress-inner {
+  border-radius: 4px !important;
+}
+
+.card-data-header {
+  font-size: small;
+  font-weight: bold;
+  color: grey !important; /* rgba(50, 112, 104, 1) !important; /* same as .color-primary-soft */
+  xcolor: rgba(50, 112, 104, 1) !important; /* dafm theme */
+  xtext-transform: uppercase;
+}
+.card-data {
+  color: rgba(0,0,0,.54) !important;
+  font-size: 14px;
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: rgba(50, 112, 104, 1) !important; /* dafm theme */
+}
+
+.mat-button-toggle-label-content {
+  line-height: 32px !important;
+}
+.mat-button-toggle-appearance-standard {
+  color: rgba(0,0,0,.38);
+  background: #fff;
+}
+.mat-button-toggle-checked.mat-button-toggle-appearance-standard {
+  color: whitesmoke;
+  background: rgba(50, 112, 104, 1)
+}
+
+.mat-form-field.mat-focused .mat-form-field-ripple {
+  background-color: rgba(50, 112, 104, 1);
+}
+.mat-form-field.mat-focused .mat-form-field-label {
+  color: rgba(50, 112, 104, 1);
+}
+
+.actionRequired {
+  color: #ae2833;;
+}
+
+/*
+ 1. solve the vertical alignment problem of the icon inside the button
+ 2. material icon fonts are always a little too small compared to button text
+*/
+/*
+button.mat-button .mat-icon,
+a.mat-button .mat-icon,
+a.mat-raised-button .mat-icon,
+a.mat-flat-button .mat-icon,
+a.mat-stroked-button .mat-icon {
+  vertical-align: top;
+  font-size: 1.25em;
+}
+*/

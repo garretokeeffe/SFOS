@@ -1,0 +1,28 @@
+<div class="page" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)">
+
+  <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px">
+    <div fxFlexAlign="start">
+      <h2>
+        <mat-icon matListIcon alt="Licences" style="position: relative; top: 4px; margin-right: 8px;">chrome_reader_mode</mat-icon>
+        <span class="margin-right">Licence Application</span>
+        <span class="wizard-label">{{ licenceApplication.refId }}</span>
+      </h2>
+    </div>
+    <div *ngIf="authentication.access.userGroup === UserGroup['REPRESENTATIVE']" style="position: relative; top: -4px">
+      <button mat-raised-button routerLink="/licencesinternal" [state]="{title: 'Applications'}">
+        <span >APPLICATIONS LIST</span>
+      </button>
+    </div>
+    <div *ngIf="authentication.access.userGroup !== UserGroup['REPRESENTATIVE']" style="position: relative; top: -4px">
+      <button mat-raised-button routerLink="/licences" [state]="{title: 'My Applications'}">
+        <span>MY APPLICATIONS</span>
+      </button>
+    </div>
+  </div>
+
+  <app-la-navbar [user]="user" [licenceApplication]="licenceApplication"></app-la-navbar>
+
+</div>
+
+
+

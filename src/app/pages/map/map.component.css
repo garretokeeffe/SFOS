@@ -1,0 +1,12 @@
+img:first-child {
+  border-radius: 5px;
+  width: 100%;
+}
+
+.zoomButton {
+  position: absolute;
+  xtop: 125px;
+  xleft: 350px;
+  top: 10%;
+  right: 5%;
+}

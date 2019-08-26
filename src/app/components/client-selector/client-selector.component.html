@@ -1,0 +1,20 @@
+<div class="client-selector" [class.embedded]="inline" [class.handset]="(isHandset$ | async)" [class.absoluteContainer]="inline">
+  <div fxLayout="row" fxLayoutAlign="end start" class="padding-right">
+    <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="-6px">
+      <div class="acting-on-behalf-of">Acting on behalf of&nbsp;</div>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <span class="toolbar-font">{{ client.firstName }}&nbsp;{{ client.surname }}</span>
+        <mat-icon aria-label="Side nav toggle icon" class="hoverable margin-left-half" [matMenuTriggerFor]="clientmenu">group_outline</mat-icon>
+      </div>
+    </div>
+
+    <mat-menu #clientmenu="matMenu">
+      <button mat-menu-item (click)="selectClient()">
+        <mat-icon alt="Select Client">group</mat-icon>
+        <span>Select a different client</span>
+      </button>
+    </mat-menu>
+  </div>
+</div>
+
+

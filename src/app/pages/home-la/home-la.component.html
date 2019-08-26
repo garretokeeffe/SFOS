@@ -1,0 +1,3 @@
+<div class="page" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)">
+  <app-la-applications-list></app-la-applications-list>
+</div>

@@ -1,0 +1,15 @@
+<div class="logobar"> <!-- class="logobar fixed padding-top" --> <!-- add fixed to the class list to anchor the logobar to the page footer -->
+
+  <div class="logos" fxLayout="column" fxLayoutAlign="center center" >
+    <app-divider></app-divider>
+    <div class="margin-top-half margin-bottom-half">
+      <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="{{ (isSmall$ | async) ? '8px' : '16px' }}">
+        <!--<div><img height="{{(isAtLeastLarge$ | async) ? '75' : (isMedium$ | async) ? '65' : (isSmall$ | async) ? '55' : '45'}}" alt="Department of Agriculture, Food and the Marine" src="assets/images/logos/dafm.png"/></div>-->
+        <div><img height="{{(isAtLeastLarge$ | async) ? '75' : (isMedium$ | async) ? '65' : (isSmall$ | async) ? '55' : '45'}}" alt="EU Funding Logo" src="assets/images/logos/eufunds.png"/></div>
+        <div><img height="{{(isAtLeastLarge$ | async) ? '75' : (isMedium$ | async) ? '65' : (isSmall$ | async) ? '55' : '45'}}" alt="Co-funded by the European Maritime and Fisheries Fund" src="assets/images/logos/emff.png"/></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+

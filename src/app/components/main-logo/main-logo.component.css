@@ -1,0 +1,8 @@
+.horizontal {
+  left: -25px;
+  position: relative;
+}
+
+.handset .horizontal {
+  left: -15px;
+}

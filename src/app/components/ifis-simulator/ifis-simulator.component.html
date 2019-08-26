@@ -1,0 +1,12 @@
+<select #userType (change)="onChangeUserType(userType.value)">
+  <option [selected]="_userType === 'keycloak'" value="keycloak" *ngIf="user.isUsingKeycloak()">--- KEYCLOAK ---</option>
+  <option [selected]="_userType === 'sfos_vessel_owner'" value="sfos_vessel_owner">VESSEL OWNER</option>
+  <option [selected]="_userType === 'sfos_representative'" value="sfos_representative">REPRESENTATIVE</option>
+  <option [selected]="_userType === 'sfos_la'" value="sfos_la">LA</option>
+  <option [selected]="_userType === 'sfos_la2'" value="sfos_la2">LA LEVEL 2</option>
+  <option [selected]="_userType === 'sfos_fish_buyer'" value="sfos_fish_buyer">FISH BUYER</option>
+  <option [selected]="_userType === 'sfos_sfpa'" value="sfos_sfpa">SFPA</option>
+  <option [selected]="_userType === 'sfos_sfpmd'" value="sfos_sfpmd">SFPMD</option>
+  <!--<option [selected]="userType === 'no-access'" value="no-access">NO ACCESS</option>-->
+</select>
+

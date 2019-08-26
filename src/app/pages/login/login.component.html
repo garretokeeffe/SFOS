@@ -1,0 +1,43 @@
+<!-- <mat-toolbar color="primary">{{ appComponent.title }}</mat-toolbar> -->
+<div class="page" [class.handset]="(isHandset$ | async)">
+
+  <app-main-logo [orientation]="mainLogoOrientation"></app-main-logo>
+
+  <div fxLayout="column" fxLayoutAlign="space-around center" [class.margin-top]="mainLogoOrientation === 'vertical'">
+    <div class="text-small">
+      Please login<!--or <a class="underline hoverable" (click)="onRegister()">register</a>-->
+    </div>
+    <!--<div class="margin-top text-small error bold" >
+      Unrecognised Username or Password
+    </div>-->
+    <div *ngIf="loginFailed" class="margin-top errorBar" fxLayoutAlign="start center">
+      <mat-icon class="info-icon">error_outline</mat-icon>
+      <div [innerHTML]="errorMessage | safe: 'html'"></div>
+    </div>
+    <form>
+      <div [class.margin-top-double]="!loginFailed" [class.margin-top]="loginFailed">
+        <mat-form-field>
+          <input matInput mat-required [formControl]="username" placeholder="Username" [type]="'text'">
+          <mat-icon matSuffix class="hoverable" title="Please enter your CCS username">person</mat-icon>
+          <!--<mat-error *ngIf="username.invalid">Required</mat-error>-->
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput mat-required [formControl]="password" placeholder="Password" [type]="hidePassword ? 'password' : 'text'">
+          <mat-icon matSuffix class="hoverable" title="{{hidePassword ? 'Show password' : 'Hide password'}}" (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <!--<mat-error *ngIf="password.invalid">Required</mat-error>-->
+        </mat-form-field>
+      </div>
+      <div class="forgotPassword hoverable underline" fxLayoutAlign="end">
+        <a (click)="onForgottenPassword()">Forgot Password?</a>
+      </div>
+      <div class="margin-top-double" fxLayoutAlign="space-around end">
+        <span><button mat-raised-button type="login" [disabled]="this.username.value === '' || this.password.value === ''" (click)="onLogin()">Login</button></span>
+        <span class="margin-left"><button mat-raised-button (click)="onCancel()">Cancel</button></span>
+      </div>
+    </form>
+  </div>
+
+</div>
+<app-logobar></app-logobar>

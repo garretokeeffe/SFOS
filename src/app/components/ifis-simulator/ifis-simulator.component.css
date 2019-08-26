@@ -1,0 +1,19 @@
+* {
+  xmargin-bottom: 16px;
+}
+
+select {
+  background-color: transparent;
+  color: whitesmoke;
+  padding: inherit;
+  font-size: x-small;
+}
+select:hover {
+  cursor: pointer;
+}
+
+select option {
+  color: #4e5882;
+}
+
+

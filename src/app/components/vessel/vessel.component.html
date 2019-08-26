@@ -1,0 +1,563 @@
+  <mat-card [class.handset]="(isHandset$ | async)" class="vessel-card"> <!-- matBadge="{{notificationBadge}}" matBadgePosition="after" matBadgeColor="warn" -->
+    <mat-card-header>
+      <!--<div mat-card-avatar class="vessel-header-image" [class.hidden]="(isHandset$ | async)"></div>-->
+      <mat-card-title>
+        <div fxFill fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="8px"><!-- append fxFlexOffset="-16" if displaying the vessel index -->
+          <div fxFlexAlign="center">
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <mat-icon>directions_boat</mat-icon>
+              <!--<span class="wizard-label color-primary-soft margin-left-quarter">#{{vCardInfo.index}}/{{vCardInfo.totalVessels}}</span>-->
+            </div>
+          </div>
+           <div fxFlexAlign="center" >
+              <span >{{vessel.name}}</span>
+          </div>
+       </div>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-subtitle>
+      <div fxFill fxLayout="row" fxLayoutAlign="center start">
+        <div [class.text-small]="(isHandset$ | async)" class="card-data-header">{{ vessel.status === 2 ? 'DEREGISTERED' : 'REGISTERED' }}</div>
+      </div>
+    </mat-card-subtitle>
+    <mat-card-subtitle xstyle="margin-left: 72px; margin-right: 72px">
+      <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px">
+        <div fxFlexAlign="start">
+          <div class="text-x-small left card-data-header">Capacity</div>
+          <div>{{ vessel.gt }}&nbsp;GT&nbsp;&nbsp;{{ vessel.kw}}&nbsp;kW</div>
+        </div>
+        <div class="left">
+          <div class="text-x-small card-data-header">LOA</div>
+          <div>{{ vessel.loa }}m</div>
+        </div>
+      </div>
+    </mat-card-subtitle>
+    <mat-card-subtitle xstyle="margin-left: 72px; margin-right: 72px">
+      <div fxFill fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="8px">
+        <div fxFlexAlign="start">
+          <div class="text-x-small left card-data-header">CFR</div>
+          <div>{{ vessel.cfr }}</div>
+        </div>
+        <div class="left">
+          <div class="text-x-small card-data-header">Port&nbsp;Reg&nbsp;No.</div>
+          <div>{{ vessel.prn }}</div>
+        </div>
+        <div class="left">
+          <div class="text-x-small card-data-header">Safety Cert Expires</div>
+          <div>{{ vessel.safetyCertificateExpiryDate }}</div>
+        </div>
+      </div>
+    </mat-card-subtitle>
+
+    <mat-card-content>
+      <div class="imageContainer">
+        <div *ngIf="display === 'IMAGE'" [@fadeInOut]="'fadeIn'">
+          <img mat-card-image [src]="vessel.images.length > 0 ? vessel.images[0] : 'assets/images/vessels/default.jpg'" alt="Photo of {{ vessel.name }}" >
+        </div>
+        <div *ngIf="display === 'LOCATION' && vessel.name === 'Star of Hope'" [@fadeInOut]="'fadeIn'">
+          <div class="absoluteContainer">
+            <img mat-card-image [src]="'assets/demo/images/star_of_hope_location.png'">
+            <button class="zoomButton" mat-raised-button mat-icon-button routerLink="/map">
+              <mat-icon class="hoverable">zoom_out_map</mat-icon>
+            </button>
+          </div>
+          <mat-card-subtitle>
+            <div fxFill fxLayout="row" fxLayoutAlign="space-evenly start" fxLayoutGap="16px">
+              <div fxFlexAlign="start">
+                <div class="text-x-small left">Position</div>
+                <div>053°21'32"N</div>
+                <div>012°10'13"W</div>
+              </div>
+              <div class="left">
+                <div class="text-x-small">ICES Zone</div>
+                <div>VIIc2</div>
+              </div>
+              <div class="left">
+                <div class="text-x-small">Stat Rect</div>
+                <div>35D7</div>
+              </div>
+              <div class="left">
+                <div class="text-x-small">Bearing</div>
+                <div>0°</div>
+              </div>
+              <div class="left">
+                <div class="text-x-small">Knots</div>
+                <div>5.1</div>
+              </div>
+            </div>
+          </mat-card-subtitle>
+        </div>
+        <div *ngIf="display === 'LOCATION' && vessel.name === 'Celtic Explorer'" [@fadeInOut]="'fadeIn'">
+          <div class="absoluteContainer">
+            <img mat-card-image [src]="'assets/demo/images/celtic_explorer_location.png'">
+            <button class="zoomButton" mat-raised-button mat-icon-button routerLink="/map">
+              <mat-icon class="hoverable">zoom_out_map</mat-icon>
+            </button>
+          </div>
+          <mat-card-subtitle>
+            <div fxFill fxLayout="row" fxLayoutAlign="space-evenly start" fxLayoutGap="16px">
+              <div fxFlexAlign="start">
+                <div class="text-x-small left">Position</div>
+                <div>051°34'12"N</div>
+                <div>007°14'34"W</div>
+              </div>
+              <div class="left">
+                <div class="text-x-small">ICES Zone</div>
+                <div>VIIg</div>
+              </div>
+              <div class="left">
+                <div class="text-x-small">Stat Rect</div>
+                <div>32E2</div>
+              </div>
+              <div class="left">
+                <div class="text-x-small">Bearing</div>
+                <div>270°</div>
+              </div>
+              <div class="left">
+                <div class="text-x-small">Knots</div>
+                <div>12.4</div>
+              </div>
+            </div>
+          </mat-card-subtitle>
+        </div>
+      </div>
+
+      <!-- LICENCE -->
+      <div>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header [class.handset]="(isHandset$ | async)" class="padding large-header">
+            <mat-panel-title>
+              <div fxFill fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="16px">
+                <div>
+                  <div class="text-x-small left padding-top-half padding-bottom-half">Licence</div>
+                  <div class="left" [class.text-small]="(isHandset$ | async)">{{ vessel.licence.displayCombinedFleetSegment() }}</div>
+                  <div class="text-x-small left padding-bottom-half">
+                    <span>{{ vessel.licence.startDate }}</span> - <span>{{ vessel.licence.endDate }}</span>
+                  </div>
+                </div>
+                <div class="padding-top-half padding-bottom-half">
+                  <div class="text-x-small left">&nbsp;</div> <!-- Blank line for spacing -->
+                  <div class="margin-top-half padding-bottom-half" [class.text-small]="(isHandset$ | async)">{{ vessel.licence.displayStatus() }}</div>
+                </div>
+              </div>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="padding-horizontal padding-bottom">
+            <div fxFill fxLayout="column" fxAlign="start start">
+              <div class="text-x-small card-data-header margin-top-half left">Safety Cert Expires</div>
+              <div class="card-data left">{{ vessel.safetyCertificateExpiryDate }}</div>
+            </div>
+          </div>
+
+          <div class="margin-top padding-horizontal padding-bottom" *ngIf="globals.prototype">
+            <div fxLayout="column" fxAlign="start start" fxLayoutGap="16px">
+              <button fxFill mat-raised-button routerLink="/licence-application">APPLY FOR NEW LICENCE</button>
+              <button fxFill mat-raised-button routerLink="/licences">MY APPLICATIONS</button>
+            </div>
+          </div>
+
+        </mat-expansion-panel>
+      </div>
+
+      <!-- AUTHORISATIONS -->
+      <div class="margin-top" *ngIf="globals.prototype">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header [class.handset]="(isHandset$ | async)" class="padding large-header">
+            <mat-panel-title>
+              <div fxFill fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="16px">
+                <div>
+                  <div class="text-x-small left padding-top-half padding-bottom-half">Authorisation</div>
+                  <div class="left" [class.text-small]="(isHandset$ | async)">2019 NW HERRING</div>
+                  <div class="text-x-small left padding-bottom-half">01/01/2019 - 31/12/2019</div>
+                </div>
+                <div class="padding-top-half padding-bottom-half">
+                  <div class="text-x-small left">Catch Limit</div>
+                  <div class="margin-top-half padding-bottom-half" [class.text-small]="(isHandset$ | async)">10 Tonnes</div>
+                </div>
+              </div>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px" class="padding">
+            <div fxFlexAlign="start">
+              <div>More info goes here</div>
+            </div>
+          </div>
+          <mat-card-actions>
+            <button mat-raised-button>AUTHORISATIONS</button>
+            <button mat-raised-button>BALANCING STATEMENTS</button>
+          </mat-card-actions>
+        </mat-expansion-panel>
+      </div>
+
+      <!-- LOG SHEETS -->
+      <div class="margin-top" *ngIf="globals.prototype">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header [class.handset]="(isHandset$ | async)" class="standard-header">
+            <mat-panel-title>
+              LOG SHEETS
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px" class="padding">
+            <div fxFlexAlign="start">
+              <div>List of recent log sheets goes here (date and id columns - like Vessel Tracker). Selecting log sheet item will display log sheet details.</div>
+            </div>
+          </div>
+          <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px" class="padding">
+            <div fxFlexAlign="start">
+              <div>Facility to search for log sheet by id or date</div>
+            </div>
+          </div>
+          <mat-card-actions>
+            <button mat-raised-button>SEARCH</button>
+          </mat-card-actions>
+        </mat-expansion-panel>
+      </div>
+
+      <!-- LOCATION -->
+      <div class="margin-top" style="display: none">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header [class.handset]="(isHandset$ | async)" class="padding">
+            <mat-panel-title>
+              <div fxFill fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+                <div fxFlexAlign="start">
+                  <div class="text-x-small left">Position</div>
+                  <div>051°34'12"N</div>
+                  <div>007°14'34"W</div>
+                </div>
+                <div class="left">
+                  <div class="text-x-small">ICES Zone</div>
+                  <div>VIIg</div>
+                </div>
+                <div class="left">
+                  <div class="text-x-small">Stat Rect</div>
+                  <div>32E2</div>
+                </div>
+                <div class="left">
+                  <div class="text-x-small">Bearing</div>
+                  <div>270°</div>
+                </div>
+                <div class="left">
+                  <div class="text-x-small">Knots</div>
+                  <div>12.4</div>
+                </div>
+              </div>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="absoluteContainer padding-horizontal">
+            <img mat-card-image [src]="'assets/demo/images/celtic_explorer_location.png'">
+            <button class="zoomButton" mat-raised-button mat-icon-button routerLink="/map">
+              <mat-icon class="hoverable">zoom_out_map</mat-icon>
+            </button>
+          </div>
+        </mat-expansion-panel>
+      </div>
+
+      <!-- VESSEL DETAILS -->
+      <div class="margin-top left">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header [class.handset]="(isHandset$ | async)" class="standard-header">
+            <mat-panel-title class="left">VESSEL DETAILS</mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div class="text-small right margin-horizontal margin-bottom">
+            <a class="underline hoverable" (click)="showAllAdditionalVessionDetails = !showAllAdditionalVessionDetails;">{{ showAllAdditionalVessionDetails ? 'close all' : 'expand all' }}</a>
+          </div>
+
+          <div class="margin-bottom">
+            <mat-expansion-panel class="margin-horizontal" [expanded]="showAllAdditionalVessionDetails">
+              <mat-expansion-panel-header [class.handset]="(isHandset$ | async)" class="narrow-header">
+                <mat-panel-title>OWNERS</mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="padding-horizontal padding-bottom">
+                <div fxFill fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+                  <div fxFlexAlign="start">
+                    <!--<div class="text-x-small left card-data-header">Name</div>-->
+                    <div *ngFor="let owner of vessel.owners" class="card-data">
+                      {{ owner.fullName }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </div>
+
+          <div class="margin-bottom">
+            <mat-expansion-panel class="margin-horizontal" [expanded]="showAllAdditionalVessionDetails">
+              <mat-expansion-panel-header [class.handset]="(isHandset$ | async)" class="narrow-header">
+                <mat-panel-title>GEAR</mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="padding-horizontal padding-bottom">
+                <div fxFill fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+                  <div fxFlex="15" class="text-x-small card-data-header margin-bottom-half">Code</div>
+                  <div fxFlex class="text-x-small card-data-header margin-bottom-half">Description</div>
+                </div>
+                <div fxFill fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px" *ngFor="let gearItem of vessel.gear">
+                  <div fxFlex="15"  class="card-data margin-bottom-half">{{ gearItem.code }}</div>
+                  <div fxFlex class="card-data margin-bottom-half">{{ gearItem.description }}</div>
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </div>
+
+          <div class="margin-bottom">
+            <mat-expansion-panel class="margin-horizontal" [expanded]="showAllAdditionalVessionDetails">
+              <mat-expansion-panel-header [class.handset]="(isHandset$ | async)" class="narrow-header">
+                <mat-panel-title class="left">IDENTIFIERS &amp; SYSTEMS</mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="padding-horizontal padding-bottom">
+                <div fxFill fxLayout="row" fxLayoutAlign="space-around start" fxLayoutGap="16px">
+                  <div fxFlexAlign="start" fxFlex="50">
+                    <div class="text-x-small left card-data-header">CFR</div>
+                    <div class="card-data">{{ vessel.cfr }}</div>
+                  </div>
+                  <div fxFlexAlign="start">
+                    <div class="text-x-small left card-data-header">IRCS</div>
+                    <div class="card-data">{{ vessel.ircs }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="padding-horizontal padding-bottom">
+                <div fxFill fxLayout="row" fxLayoutAlign="space-around start" fxLayoutGap="16px">
+                  <div class="left">
+                    <div class="text-x-small card-data-header">Port Reg No.</div>
+                    <div class="card-data">{{ vessel.prn }}</div>
+                  </div>
+                  <div fxFlexAlign="start">
+                    <div class="text-x-small left card-data-header">UVI</div>
+                    <div class="card-data">{{ vessel.uvi }}</div>
+                  </div>
+                  <div class="left">
+                    <div class="text-x-small card-data-header">MMSI</div>
+                    <div class="card-data">{{ vessel.mmsi }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="padding-horizontal padding-bottom">
+                <div fxFill fxLayout="row" fxLayoutAlign="space-around start" fxLayoutGap="16px">
+                  <div>
+                    <div class="text-x-small left card-data-header">VMS</div>
+                    <!-- DMcD: Deliberately using == (rather than ===) to check for null or not present -->
+                    <div class="card-data" [class.italic]="vessel.vms == null">{{ vessel.vms === true ? '&#10004;' : vessel.vms === false ? '&#10060;' : '?' }}</div>
+                  </div>
+                  <div>
+                    <div class="text-x-small card-data-header">ERS</div>
+                    <!-- DMcD: Deliberately using == (rather than ===) to check for null or not present -->
+                    <div class="card-data" [class.italic]="vessel.ers == null">{{ vessel.ers === true ? '&#10004;' : vessel.ers === false ? '&#10060;' : '?' }}</div>
+                  </div>
+                  <div>
+                    <div class="text-x-small card-data-header">AIS</div>
+                    <!-- DMcD: Deliberately using == (rather than ===) to check for null or not present -->
+                    <div class="card-data" [class.italic]="vessel.ais == null">{{ vessel.ais === true ? '&#10004;' : vessel.ais === false ? '&#10060;' : '?' }}</div>
+                  </div>
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </div>
+
+          <div class="margin-bottom">
+            <mat-expansion-panel class="margin-horizontal" [expanded]="showAllAdditionalVessionDetails">
+              <mat-expansion-panel-header [class.handset]="(isHandset$ | async)" class="narrow-header">
+                <mat-panel-title class="left">DIMENSIONS</mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="padding-horizontal padding-bottom">
+                <div fxFill fxLayout="column" fxAlign="start start">
+                  <div class="text-x-small card-data-header margin-top-half">Tonnage</div>
+                  <div class="card-data">{{ vessel.gt }}<span *ngIf="vessel.gt">&nbsp;GT</span></div>
+
+                  <div class="margin-top-half">
+                    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+                      <div>
+                        <div class="text-x-small card-data-header">
+                          <span *ngIf="(isXSmall$ | async)">Reg&nbsp;Length</span>
+                          <span *ngIf="!(isXSmall$ | async)">Registered&nbsp;Length</span>
+                        </div>
+                        <div class="card-data">{{ vessel.registeredLength }}<span *ngIf="vessel.registeredLength">m</span></div>
+                      </div>
+                      <div>
+                        <div class="text-x-small card-data-header">LOA</div>
+                        <div class="card-data">{{ vessel.loa }}<span *ngIf="vessel.loa">m</span></div>
+                      </div>
+                      <!--
+                      <div>
+                        <div class="text-x-small card-data-header">
+                          Perpendiculars
+                        </div>
+                        <div class="card-data">{{ vessel.lengthBetweenPerpendiculars }}<span *ngIf="vessel.lengthBetweenPerpendiculars">m apart</span></div>
+                      </div>
+                      -->
+                    </div>
+                  </div>
+
+                  <div class="margin-top-half">
+                    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+                      <div>
+                        <div class="text-x-small card-data-header">Draught (Depth)</div>
+                        <div class="card-data">{{ vessel.draught }}<span *ngIf="vessel.draught">m</span></div>
+                      </div>
+                      <!--
+                      <div>
+                        <div class="text-x-small card-data-header">&#8681;&nbsp;Maximum</div>
+                        <div class="card-data">{{ vessel.maximumDraught }}<span *ngIf="vessel.maximumDraught">m</span></div>
+                      </div>
+                      -->
+                    </div>
+                  </div>
+
+                  <div class="text-x-small card-data-header margin-top-half">Breadth (Beam)</div>
+                  <div class="card-data">{{ vessel.boa }}<span *ngIf="vessel.boa">m</span></div>
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </div>
+
+          <div class="margin-bottom">
+            <mat-expansion-panel class="margin-horizontal" [expanded]="showAllAdditionalVessionDetails">
+              <mat-expansion-panel-header [class.handset]="(isHandset$ | async)" class="narrow-header">
+                <mat-panel-title class="left">PROPULSION</mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="padding-horizontal padding-bottom">
+                <div fxFill fxLayout="column" fxAlign="start start">
+                  <div class="text-x-small card-data-header margin-top-half">Propulsion&nbsp;Type</div>
+                  <div class="card-data">{{ vessel.propulsionType }}</div>
+                </div>
+
+                <div fxFill fxLayout="column" fxAlign="start start">
+                  <div class="text-x-small card-data-header margin-top-half">Engine&nbsp;Make</div>
+                  <div class="card-data">{{ vessel.engineMake }}</div>
+                </div>
+                <div fxFill fxLayout="column" fxAlign="start start">
+                  <div class="text-x-small card-data-header margin-top-half">Engine&nbsp;Model</div>
+                  <div class="card-data">{{ vessel.engineModel }}</div>
+                </div>
+
+                <div class="margin-top-half">
+                  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+                    <div>
+                      <div class="text-x-small card-data-header">Engine&nbsp;Power</div>
+                      <div class="card-data">{{ vessel.kw }}<span *ngIf="vessel.kw">&nbsp;kW</span></div>
+                    </div>
+                    <div>
+                      <div class="text-x-small card-data-header">Other</div>
+                      <div class="card-data" *ngIf="vessel.allOtherEnginePower != null">{{ vessel.allOtherEnginePower }}&nbsp;kW</div>
+                      <div class="card-data" *ngIf="vessel.allOtherEnginePower == null">-</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </mat-expansion-panel>
+          </div>
+
+          <div class="margin-bottom">
+            <mat-expansion-panel class="margin-horizontal" [expanded]="showAllAdditionalVessionDetails">
+              <mat-expansion-panel-header [class.handset]="(isHandset$ | async)" class="narrow-header">
+                <mat-panel-title class="left">PROVENANCE</mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="padding-horizontal padding-bottom">
+
+                <div class="margin-top-half">
+                  <div fxFill fxLayout="column" fxAlign="start start">
+                    <div class="text-x-small card-data-header margin-top-half">Vessel Type</div>
+                    <div class="card-data">{{ vessel.vesselType }}</div>
+                  </div>
+                </div>
+
+                <div class="margin-top-half">
+                  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+                    <div fxFlex="50">
+                      <div class="text-x-small card-data-header">Construction&nbsp;Date</div>
+                      <div class="card-data">{{ vessel.constructionDate }}</div>
+                    </div>
+                    <div fxFlex="50">
+                      <div class="text-x-small card-data-header">Constructed In</div>
+                      <div class="card-data">{{ vessel.countryOfConstruction }}</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="margin-top-half">
+                  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+                    <div fxFlex="50">
+                      <div class="text-x-small card-data-header" *ngIf="(isXSmall$ | async)">First&nbsp;Registered&nbsp;In</div>
+                      <div class="text-x-small card-data-header" *ngIf="!(isXSmall$ | async)">First&nbsp;Registered&nbsp;In</div>
+                      <div class="card-data">{{ vessel.firstCountryOfRegistration }}</div>
+                    </div>
+                    <div fxFlex="50">
+                      <div class="text-x-small card-data-header" *ngIf="(isXSmall$ | async)">First&nbsp;Safety&nbsp;Cert&nbsp;Granted</div>
+                      <div class="text-x-small card-data-header" *ngIf="!(isXSmall$ | async)">First&nbsp;Safety&nbsp;Cert&nbsp;Granted</div>
+                      <div class="card-data">{{ vessel.firstSafetyCertificateDate }}</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="margin-top-half">
+                  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+                    <div fxFlex="50" *ngIf="vessel.countryExportedTo">
+                      <div class="text-x-small card-data-header">Exported&nbsp;to</div>
+                      <div class="card-data">{{ vessel.countryExportedTo }}</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="margin-top-half">
+                  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+                    <div fxFlex="50">
+                      <div class="text-x-small card-data-header">Current&nbsp;Nationality</div>
+                      <div class="card-data">{{ vessel.currentNationality }}</div>
+                    </div>
+                    <div fxFlex="50" *ngIf="vessel.countryImportedFrom">
+                      <div class="text-x-small card-data-header">Imported&nbsp;from</div>
+                      <div class="card-data">{{ vessel.countryImportedFrom }}</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div fxFill fxLayout="column" fxAlign="start start">
+                  <div class="text-x-small card-data-header margin-top-half">Home&nbsp;Port</div>
+                  <div class="card-data">{{ vessel.homePort }}</div>
+                </div>
+
+                <div class="margin-top-half">
+                  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+                    <div fxFlex="50">
+                      <div class="text-x-small card-data-header" *ngIf="(isXSmall$ | async)">First&nbsp;Reg&nbsp;In&nbsp;Ireland</div>
+                      <div class="text-x-small card-data-header" *ngIf="!(isXSmall$ | async)">First&nbsp;Registered&nbsp;In&nbsp;Ireland</div>
+                      <div class="card-data">{{ vessel.firstRegisteredInIrelandDate }}</div>
+                    </div>
+                    <div fxFlex="50">
+                      <div class="text-x-small card-data-header" *ngIf="(isXSmall$ | async)">Irish&nbsp;Registration&nbsp;Port</div>
+                      <div class="text-x-small card-data-header" *ngIf="!(isXSmall$ | async)">Irish&nbsp;Registration&nbsp;Port</div>
+                      <div class="card-data">{{ vessel.irishRegistrationPort }}</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div fxFill fxLayout="column" fxAlign="start start">
+                  <div class="text-x-small card-data-header margin-top-half">Construction&nbsp;Material</div>
+                  <div class="card-data">{{ vessel.constructionMaterial }}</div>
+                </div>
+
+                <div fxFill fxLayout="column" fxAlign="start start">
+                  <div class="text-x-small card-data-header margin-top-half">Maximum Crew</div>
+                  <div class="card-data">{{ vessel.maximumCrew }}</div>
+                </div>
+
+              </div>
+            </mat-expansion-panel>
+          </div>
+
+          <!--
+          <div class="margin-top-double margin-bottom">
+            <a href="https://confluence.agriculture.gov.ie/confluence/display/FISHERIES/ITSFISHAGL-8511+View+My+Vessels" target="_blank">(Link to Jira)</a>
+          </div>
+          -->
+        </mat-expansion-panel>
+      </div>
+    </mat-card-content>
+    <!--
+    <mat-card-actions>
+      <button mat-raised-button *ngIf="vessel.isRegistered()" (click)="display = 'LOCATION'">LOCATE</button>
+      <button mat-raised-button (click)="display = 'IMAGE'">IMAGES</button>
+    </mat-card-actions>
+    -->
+  </mat-card>

@@ -1,0 +1,23 @@
+<!--
+  <mat-card class="mat-elevation-z8">
+    <mat-card-content>
+      <mat-card-title class="title">Quota Balancing</mat-card-title>
+      <mat-card-subtitle class="subtitle italic">{{ user.access.userGroup }}</mat-card-subtitle>
+    </mat-card-content>
+  </mat-card>
+-->
+<div class="title-bar-container"
+     [class.handset]="(isHandset$ | async)"
+     [class.desktop]="!(isHandset$ | async)"
+     [class.desktop-large]="(isAtLeastLarge$ | async)"
+     [class.unauthenticated]="!authenticated">
+  <div class="title-bar">
+    <div class="qb-parallax-container">
+      <div class="mat-elevation-z8 parallax-image" parallax [ratio]="0.375" #Image1 [@fadeInOut]="openImage ? 'fadeIn' : 'fadeOut'"></div>
+      <div class="parallax-title" parallax [ratio]="0.75">Seafood Online Services</div>
+      <div class="parallax-welcome" *ngIf="authenticated" parallax [ratio]="0.25">{{ user.firstName ? user.firstName + ', ' : '' }}welcome back to</div>
+      <!--<div class="parallax-version" parallax [ratio]="0.675">{{ version }}</div>-->
+    </div>
+  </div>
+</div>
+<app-divider *ngIf="authenticated"></app-divider>

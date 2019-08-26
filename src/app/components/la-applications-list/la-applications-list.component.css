@@ -1,0 +1,19 @@
+.assignButton {
+  width: 128px;
+  max-width: 128px;
+  height: 34px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: transparent;
+  color: rgba(0,0,0,.87);
+  font-size: smaller;
+}
+.assignButton:hover {
+  color: whitesmoke;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+

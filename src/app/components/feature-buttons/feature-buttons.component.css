@@ -1,0 +1,23 @@
+h1 {
+  color: darkslategray;
+}
+
+.mat-card {
+  xwidth: 440px;
+  xmin-height: 100px;
+  margin-bottom: 16px;
+}
+
+.mat-card-content {
+  padding-top: 8px;
+  width: 80%;
+  text-align: center;
+  margin: auto;
+}
+
+@media screen and (min-width: 1600px) {
+  .mat-card {
+    display: inline-block;
+    margin-right: 16px;
+  }
+}

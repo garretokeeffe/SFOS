@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "LICENCE"
+  },
+  {
+    "id": 2,
+    "name": "VESSEL"
+  },
+  {
+    "id": 3,
+    "name": "AUTHORISATIONS"
+  },
+  {
+    "id": 4,
+    "name": "GENERAL"
+  }
+]

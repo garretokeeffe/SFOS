@@ -1,0 +1,25 @@
+::ng-deep .mat-card-header .mat-card-title {
+  xmargin-bottom: 0 !important; /* only apply this if there is no text below the title */
+}
+
+h1 {
+  xtext-shadow: 0px 0px 30px rgba(50, 112, 104, 1);
+  color: darkslategray;
+  xbackground-color: rgba(50,112,104,0.56);
+}
+
+.mat-card {
+  width: 440px;
+  min-height: 100px;
+}
+
+.handset .mat-card {
+  width: 300px;
+}
+
+.mat-card-content {
+  padding-top: 8px;
+  width: 80%;
+  text-align: center;
+  margin: auto;
+}

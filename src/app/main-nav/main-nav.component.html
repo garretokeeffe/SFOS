@@ -1,0 +1,214 @@
+
+<!--<div *ngIf="!authenticated" class="sidenav-container">
+  <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
+    <span title="{{ appComponent.title }}">{{ appComponent.title }}</span>
+  </mat-toolbar>
+  <app-home *ngIf="!login"></app-home>
+  <app-login *ngIf="login"></app-login>
+</div>
+-->
+<mat-sidenav-container class="sidenav-container"> <!-- *ngIf="authenticated"  -->
+  <!--
+  <mat-sidenav #drawer
+      class="sidenav"
+      [class.hidden]="!(isHandset$ | async)"
+      fixedInViewport="true"
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="!(isHandset$ | async)">
+  -->
+  <mat-sidenav #drawer
+      class="sidenav"
+      fixedInViewport="true"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="!(isHandset$ | async) && !manuallyClosed && !isHomeOrLoginPage()">
+
+    <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
+      Menu
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle(); manuallyClosed = true"
+        style="position: relative; left: 8px">
+        <mat-icon aria-label="Side nav toggle icon">chevron_left</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <!--
+    <div class="center">
+      <img width="200" alt="DAFM Logo" src="assets/images/dafm.png"/>
+    </div>
+     -->
+
+    <mat-nav-list>
+      <a *ngIf="authentication.access.userGroup !== UserGroup['REPRESENTATIVE'] && authentication.access.userGroup !== UserGroup['LA'] && authentication.access.userGroup !== UserGroup['FISH_BUYER']" mat-list-item routerLink="/home-vessel-owner"><mat-icon matListIcon alt="Home">home</mat-icon><span class="color-primary">Home</span></a>
+      <a *ngIf="authentication.access.userGroup === UserGroup['REPRESENTATIVE']" mat-list-item routerLink="/rephome"><mat-icon matListIcon alt="Home">home</mat-icon><span class="color-primary">Home</span></a>
+      <a *ngIf="authentication.access.userGroup === UserGroup['LA']" mat-list-item routerLink="/lahome"><mat-icon matListIcon alt="Home">home</mat-icon><span class="color-primary">Home</span></a>
+      <a *ngIf="authentication.access.userGroup === UserGroup['FISH_BUYER']" mat-list-item routerLink="/fishbuyerhome"><mat-icon matListIcon alt="Home">home</mat-icon><span class="color-primary">Home</span></a>
+
+      <mat-divider></mat-divider>
+      <a mat-list-item routerLink="/notifications"><mat-icon matListIcon alt="Notifications">mail</mat-icon><span class="color-primary">My Inbox</span></a>
+      <mat-divider></mat-divider>
+      <a *ngIf="authentication.access.userGroup === UserGroup['REPRESENTATIVE']" mat-list-item routerLink="/clientprofile" [state]="{title: 'Client Profile'}"><mat-icon matListIcon alt="Client Profile">person_outline</mat-icon><span class="color-primary">Client Profile</span></a>
+      <mat-divider *ngIf="authentication.access.userGroup === UserGroup['REPRESENTATIVE'] && globals.configuration.showPWATestMenuItem"></mat-divider>
+      <a *ngIf="globals.configuration.showPWATestMenuItem" mat-list-item routerLink="/pwatest"><mat-icon matListIcon alt="PWA Test">gesture</mat-icon><span class="color-primary">PWA Test</span></a>
+
+      <div *ngIf="isLicensingApplication() && [UserGroup['FISHERMAN'], UserGroup['FISHERMAN_RO']].includes(authentication.access.userGroup)">
+        <a mat-list-item routerLink="/vessels" [state]="{title: 'My Vessels'}"><mat-icon matListIcon>directions_boat</mat-icon><span class="color-primary">My Vessels</span></a><!-- submenu to include Registration History -->
+        <mat-divider></mat-divider>
+        <a mat-list-item routerLink="/capacity" [state]="{title: 'My Capacity'}"><mat-icon matListIcon>toys</mat-icon><span class="color-primary">My Capacity</span></a>
+        <div *ngIf="globals.prototype">
+          <mat-divider></mat-divider>
+          <a mat-list-item routerLink="/licences" [state]="{title: 'My Applications'}"><mat-icon matListIcon>chrome_reader_mode</mat-icon><span class="color-primary">My Applications</span></a>
+        </div>
+      </div>
+    </mat-nav-list>
+
+    <div *ngIf="globals.prototype">
+      <mat-divider></mat-divider>
+      <div class="margin-top-half"></div>
+    </div>
+
+    <mat-accordion *ngIf="authentication.access.userGroup !== UserGroup['FISH_BUYER'] && authentication.access.userGroup !== UserGroup['FISH_BUYER_RO']">
+      <div *ngIf="globals.prototype">
+          <ng-template ngFor let-application [ngForOf]="applications" let-i="index">
+            <mat-expansion-panel [expanded]="applications.length === 1" *ngIf="canDisplayApplication(application)">
+              <mat-expansion-panel-header *ngIf="applications.length > 1">
+                <mat-panel-title>
+                  {{ application.name }}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-nav-list *ngIf="application.id === applicationID.LICENSING && [UserGroup['FISHERMAN'], UserGroup['FISHERMAN_RO']].includes(authentication.access.userGroup)">
+                <a mat-list-item routerLink="/vessels" [state]="{title: 'My Vessels'}"><mat-icon matListIcon>directions_boat</mat-icon>My Vessels</a><!-- submenu to include Registration History -->
+                <a mat-list-item routerLink="/capacity" [state]="{title: 'My Capacity'}"><mat-icon matListIcon>toys</mat-icon>My Capacity</a>
+                <a mat-list-item routerLink="/licences" [state]="{title: 'My Applications'}"><mat-icon matListIcon>chrome_reader_mode</mat-icon>My Applications</a>
+                <mat-divider></mat-divider>
+              </mat-nav-list>
+              <mat-nav-list *ngIf="application.id === applicationID.LICENSING && authentication.access.userGroup === UserGroup['REPRESENTATIVE']">
+                <a mat-list-item routerLink="/clientvessels" [state]="{title: 'Client Vessels'}"><mat-icon matListIcon>directions_boat</mat-icon>Client Vessels</a><!-- submenu to include Registration History -->
+                <a mat-list-item routerLink="/clientcapacity" [state]="{title: 'Client Capacity'}"><mat-icon matListIcon>toys</mat-icon>Client Capacity</a>
+                <a mat-list-item routerLink="/licencesinternal" [state]="{title: 'Client Applications'}"><mat-icon matListIcon>chrome_reader_mode</mat-icon>Client Applications</a>
+                <mat-divider></mat-divider>
+              </mat-nav-list>
+              <mat-nav-list *ngIf="application.id === applicationID.LICENSING && authentication.access.userGroup === UserGroup['LA']">
+                <a mat-list-item routerLink="/vessels"><mat-icon matListIcon>directions_boat</mat-icon>Vessels</a><!-- submenu to include Registration History -->
+                <a mat-list-item routerLink="/licencesinternal"><mat-icon matListIcon>chrome_reader_mode</mat-icon>Applications</a>
+                <mat-divider></mat-divider>
+              </mat-nav-list>
+              <mat-nav-list *ngIf="application.id === applicationID.LICENSING && authentication.access.userGroup === UserGroup['LA2']">
+                <a mat-list-item routerLink="/licencesinternal"><mat-icon matListIcon>spellcheck</mat-icon>Pending Approvals</a>
+                <mat-divider></mat-divider>
+              </mat-nav-list>
+              <mat-nav-list *ngIf="application.id === applicationID.AUTHORISATIONS">
+                <a mat-list-item routerLink="/catchlimits"><mat-icon matListIcon>pan_tool</mat-icon>Catch Limits</a><!-- (Authorisations -->
+                <a mat-list-item routerLink="/balancingstatements"><mat-icon matListIcon>insert_drive_file</mat-icon>Balancing Statements</a><!--vertical_align_center-->
+                <a mat-list-item routerLink="/pairings"><mat-icon matListIcon>looks_two</mat-icon>Pairings</a>
+                <mat-divider></mat-divider>
+                <a mat-list-item routerLink="/inspections"><mat-icon matListIcon>verified_user</mat-icon>Inspections</a>
+                <a mat-list-item routerLink="/points"><mat-icon matListIcon>security</mat-icon>Points</a>
+                <mat-divider></mat-divider>
+                <a mat-list-item routerLink="/logsheets"><mat-icon matListIcon>date_range</mat-icon>Log Sheets</a><!-- for some reason calendar_today renders incorrectly on the right of the text -->
+                <mat-divider></mat-divider>
+              </mat-nav-list>
+
+              <mat-nav-list *ngIf="application.id === applicationID.LOGSHEETS &&
+                (authentication.access.userGroup === UserGroup['FISHERMAN'] || authentication.access.userGroup === UserGroup['FISHERMAN_RO']
+                || authentication.access.userGroup === UserGroup['SFPA'] || authentication.access.userGroup === UserGroup['SFPA_RO'])">
+                <a mat-list-item routerLink="/logsheets"><mat-icon matListIcon>date_range</mat-icon>History</a><!-- for some reason calendar_today renders incorrectly on the right of the text -->
+                <mat-divider></mat-divider>
+              </mat-nav-list>
+
+            </mat-expansion-panel>
+        </ng-template>
+      </div>
+    </mat-accordion>
+
+    <mat-nav-list *ngIf="authentication.access.userGroup === UserGroup['FISH_BUYER'] || authentication.access.userGroup === UserGroup['FISH_BUYER_RO']" class="margin-top-half">
+      <mat-divider></mat-divider>
+      <a mat-list-item [routerLink]="['/redirect/', salesNotesURL]"><mat-icon matListIcon>chevron_right</mat-icon><span class="color-primary">Sales Notes</span></a>
+      <mat-divider></mat-divider>
+    </mat-nav-list>
+
+    <mat-nav-list> <!-- class="margin-top-half" -->
+      <mat-divider></mat-divider>
+      <a mat-list-item routerLink="/profile" [state]="{title: 'My Profile'}"><mat-icon matListIcon alt="My Profile">person</mat-icon><span class="color-primary">My Profile</span></a>
+      <mat-divider></mat-divider>
+      <a mat-list-item routerLink="/help" [state]="{title: 'Help'}"><mat-icon matListIcon alt="Help">help</mat-icon><span class="color-primary">Help</span></a>
+      <mat-divider></mat-divider>
+      <a mat-list-item routerLink="/home" (click)="logout()"><mat-icon matListIcon alt="Logout">cancel</mat-icon><span class="color-primary">Logout</span></a>
+      <mat-divider></mat-divider>
+    </mat-nav-list>
+
+    <button class="addToHomeScreenButton centered-content" mat-raised-button (click)="addToHomeScreen()" *ngIf="showA2HSButton">Add to Home Screen</button>
+
+  </mat-sidenav>
+
+
+  <mat-sidenav-content>
+    <!--<mat-toolbar color="primary" *ngIf="isHomeOrLoginPage()" fxLayout="row" fxLayoutAlign="center center">
+      <span title="{{ appComponent.title }}">{{ (isAtLeastMedium$ | async) ? appComponent.title : appComponent.shortTitle }}</span>
+    </mat-toolbar>-->
+
+    <app-title-bar *ngIf="isHomeOrLoginPage()" [authenticated]="false"></app-title-bar>
+
+    <mat-toolbar color="primary" *ngIf="!isHomeOrLoginPage()">
+
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          *ngIf="(isHandset$ | async) || !drawer.opened">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+
+        <a mat-list-item routerLink="/home">
+          <span class="inline">
+            <mat-icon matListIcon style="vertical-align: text-bottom">home</mat-icon>
+            <span class="indent5" title="{{ appComponent.title }}">{{ (isAtLeastMedium$ | async) ? appComponent.title : appComponent.shortTitle }}</span>
+          </span>
+        </a>
+        <div *ngIf="environmentName == 'DEV'" class="simulator margin-left-half">
+          <app-ifis-simulator></app-ifis-simulator>
+        </div>
+      </div>
+
+      <span class="spacer"></span>
+
+      <span *ngIf="!(isHandset$ | async) && user">{{ user.firstName }}&nbsp;{{ user.surname }}</span>
+      <mat-icon aria-label="Side nav toggle icon" class="hoverable margin-left-half" routerLink="/notifications" title="My Inbox"
+                matBadge="{{ '3' }}" matBadgePosition="after" matBadgeColor="warn">email</mat-icon>
+      <mat-icon aria-label="Side nav toggle icon" class="hoverable margin-left" [matMenuTriggerFor]="menu">person</mat-icon>
+
+      <span *ngIf="authentication.access.userGroup === UserGroup['REPRESENTATIVE'] && (isAtLeastMedium$ | async)" class="margin-left-double">
+        <app-client-selector [inline]="true"></app-client-selector>
+      </span>
+
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/notifications">
+          <mat-icon alt="My Inbox">email</mat-icon>
+          <span>My Inbox</span>
+        </button>
+        <button mat-menu-item routerLink="/profile" [state]="{title: 'My Profile'}">
+          <mat-icon alt="My Profile">person</mat-icon>
+          <span>My Profile</span>
+        </button>
+        <button mat-menu-item (click)="logout()" routerLink="/home">
+          <mat-icon alt="Logout">cancel</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </mat-toolbar>
+
+    <span *ngIf="authentication.access.userGroup === UserGroup['REPRESENTATIVE'] && !(isAtLeastMedium$ | async)">
+      <span class="spacer"></span>
+      <app-client-selector></app-client-selector>
+    </span>
+
+    <!-- The content of the app-main-nav element gets injected between the ng-content tags below -->
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

@@ -1,0 +1,25 @@
+<div [class.page]="!embedded" [class.margin-top-double]="embedded" [class.handset]="(isHandset$ | async)"
+     [class.desktop]="!(isHandset$ | async)">
+
+  <h2 *ngIf="!embedded">
+    <mat-icon matListIcon alt="My Vessels" style="position: relative; top: 4px; margin-right: 8px;">directions_boat
+    </mat-icon>
+
+    <span *ngIf="vessels.length > 1">
+      My {{ vessels.length }} Vessels
+    </span>
+    <span *ngIf="vessels.length === 1">
+      My Vessel
+    </span>
+
+  </h2>
+
+  <div *ngIf="vessels.length > 0">
+    <div fxLayout="{{(isHandset$ | async) ? 'column' : 'row wrap'}}" fxLayoutAlign="{{(isHandset$ | async) ? 'center start' : 'space-evenly start'}}">
+      <app-vessel *ngFor="let vessel of vessels; let i = index;" [vessel]="vessel" [vCardInfo]="createVesselCardInfo(i+1, vessels.length)"
+                  [notificationBadge]="getVesselNotificationsBadge(vessel)"></app-vessel>
+    </div>
+  </div>
+
+</div>
+

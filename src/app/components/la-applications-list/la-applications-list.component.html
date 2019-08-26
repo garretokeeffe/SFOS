@@ -1,0 +1,140 @@
+<div class="page" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)">
+
+  <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px">
+    <div fxFlexAlign="start">
+      <h2>
+        <mat-icon matListIcon alt="Licences" style="position: relative; top: 4px; margin-right: 8px;">chrome_reader_mode</mat-icon>
+        <span class="margin-right">Applications</span>
+      </h2>
+    </div>
+    <div style="position: relative; top: -4px">
+      <button mat-raised-button (click)="onNewApplication()">
+        START NEW APPLICATION
+      </button>
+    </div>
+  </div>
+  <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px">
+    <!--<div fxFlexAlign="start">-->
+      <!--<div style="position: relative; top: -4px">-->
+        <mat-button-toggle-group [(ngModel)]="clientToggleGroup" *ngIf="authentication.access.userGroup === UserGroup['REPRESENTATIVE']" class="margin-right margin-bottom-half">
+          <mat-button-toggle #selectedClientToggle aria-label="Text align center" value="SELECTED_CLIENT" (click)="applyFilter()">
+            SELECTED CLIENT
+          </mat-button-toggle>
+          <mat-button-toggle #allClientsToggle aria-label="Text align right" value="ALL_CLIENTS" (click)="applyFilter()">
+            ALL CLIENTS
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+        <!--
+        <mat-button-toggle-group #clientToggleGroup *ngIf="authentication.access.userGroup === UserGroup'REPRESENTATIVE']" multiple class="margin-right margin-bottom-half">
+          <mat-button-toggle #selectedClientToggle aria-label="Text align center" checked="true" (click)="allClientsToggle.checked = !allClientsToggle.checked; !allClientsToggle.checked ? applyFilter('Mahoney') : applyFilter('')">
+            SELECTED CLIENT
+          </mat-button-toggle>
+          <mat-button-toggle #allClientsToggle aria-label="Text align right" (click)="selectedClientToggle.checked = !selectedClientToggle.checked; selectedClientToggle.checked ? applyFilter('Mahoney') : applyFilter('')">
+            ALL CLIENTS
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+        -->
+        <mat-button-toggle-group multiple class="margin-right margin-bottom-half">
+          <mat-button-toggle #licenceToggle aria-label="Text align center" (click)="applyFilter()">
+            LICENCE
+          </mat-button-toggle>
+          <mat-button-toggle #capacityToggle aria-label="Text align right" (click)="applyFilter()">
+            CAPACITY
+          </mat-button-toggle>
+          <!--<mat-button-toggle value="left" aria-label="Text align left">
+           BOTH
+          </mat-button-toggle>-->
+        </mat-button-toggle-group>
+        <mat-button-toggle-group multiple class="margin-bottom-half margin-right-double">
+          <mat-button-toggle #pendingToggle value="PENDING" aria-label="Text align left" (click)="applyFilter()">
+            <!--<mat-icon>format_align_left</mat-icon>-->PENDING
+          </mat-button-toggle>
+          <mat-button-toggle #completedToggle value="COMPLETED" aria-label="Text align left" (click)="applyFilter()">
+            <!--<mat-icon>format_align_left</mat-icon>-->COMPLETED
+          </mat-button-toggle>
+          <!--<mat-button-toggle value="left" aria-label="Text align left">
+            ALL
+          </mat-button-toggle>-->
+        </mat-button-toggle-group>
+        <mat-form-field >
+          <input matInput (keyup)="applyFilter($event.target.value)" [(ngModel)]="filterValue" placeholder="FILTER">
+          <button mat-button *ngIf="filterValue" matSuffix mat-icon-button aria-label="Clear" (click)="filterValue=''; applyFilter()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+
+      <!--</div>-->
+    <!--</div>-->
+  </div>
+
+  <table *ngIf="dataSource.data.length > 0" mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="createDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Submitted</th>
+      <td mat-cell *matCellDef="let submission;"> {{ submission.createDate }} <!-- {{ utils.toDate(submission.createDate) | date }} --> </td>
+    </ng-container>
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header [@flyInOut]="'in'">Type</th>
+      <td mat-cell *matCellDef="let submission;" [@flyInOut]="'in'"> {{submission.displayType()}} </td>
+    </ng-container>
+    <ng-container matColumnDef="userId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header [@flyInOut]="'in'">Applicant(s)</th>
+      <td mat-cell *matCellDef="let submission;" [@flyInOut]="'in'">
+      <div *ngFor="let applicant of submission.applicants">
+        {{ applicant.firstName }} {{ applicant.surname }}
+      </div>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="vessel">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header [@flyInOut]="'in'">Vessel(s)</th>
+      <td mat-cell *matCellDef="let submission;" [@flyInOut]="'in'">
+        <div *ngFor="let vessel of submission.vessels">
+          {{ vessel.name }}
+        </div>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="refId">
+      <th mat-header-cell *matHeaderCellDef [@flyInOut]="'in'">Ref. No.</th>
+      <td mat-cell *matCellDef="let submission;" [@flyInOut]="'in'"> {{submission.refId}} </td>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef [@flyInOut]="'in'" mat-sort-header>Status</th>
+      <td mat-cell *matCellDef="let submission;" [@flyInOut]="'in'"> {{submission.displayStatus()}} </td>
+    </ng-container>
+    <ng-container matColumnDef="updateDate">
+      <th mat-header-cell *matHeaderCellDef [@flyInOut]="'in'" mat-sort-header>Updated</th>
+      <td mat-cell *matCellDef="let submission;" [@flyInOut]="'in'"> {{submission.updateDate}} </td>
+    </ng-container>
+    <ng-container matColumnDef="assignee">
+      <th mat-header-cell *matHeaderCellDef [@flyInOut]="'in'" mat-sort-header>Assignee</th>
+      <td mat-cell *matCellDef="let submission; let i=index" [@flyInOut]="'in'">
+        <div class="sub-cell button" *ngIf="!submission.assignInProgress">
+          <button mat-stroked-button class="assignButton" (click)="selectAssignee(submission, i)">{{submission.assignee ? submission.assignee.fullName : ''}}</button>
+        </div>
+        <div class="search-results" *ngIf="submission.assignInProgress">
+          <input matInput [value]="submission.assignee.fullName"
+                 ngxTypeahead
+                 class="form-control"
+                 [taUrl]=""
+                 [taList]="assignees"
+                 [taListItemLabel]="'fullName'"
+                 (taSelected)="assignSubmission(submission.assignee, i, $event)">
+          <ng-template #itemTpl let-result>
+            <strong>MY {{ result.result }}</strong>
+          </ng-template>
+        </div>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="buttons">
+      <th mat-header-cell *matHeaderCellDef [@flyInOut]="'in'"></th>
+      <td mat-cell *matCellDef="let submission;" [@flyInOut]="'in'">
+        <div class="sub-cell button"><button mat-stroked-button (click)="displaySubmission(submission, i)">Select</button></div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <mat-paginator *ngIf="!errorMessage" class="pagination-bar" [pageSizeOptions]="pageSizeOptions"></mat-paginator>
+
+
+</div>

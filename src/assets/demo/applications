@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Licensing",
+    "description": "Vessel licensing and capacity management"
+  },
+  {
+    "id": 2,
+    "name": "Authorisations",
+    "description": "Quota and authorisation management"
+  },
+  {
+    "id": 3,
+    "name": "Log Sheets",
+    "description": "Log sheet analysis"
+  },
+  {
+    "id": 4,
+    "name": "Vessel Tracking",
+    "description": "Vessel location tracking"
+  }
+]
+

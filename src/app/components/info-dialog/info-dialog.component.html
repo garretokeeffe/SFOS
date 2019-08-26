@@ -1,0 +1,22 @@
+<div fxLayout="column" fxLayoutAlign="space-around center">
+
+  <h1 mat-dialog-title>{{popupInfo.title}}</h1>
+
+  <div mat-dialog-content>
+    <div class="centered-content">
+      <ng-template ngFor let-nvp [ngForOf]="popupInfo.data" let-i="index">
+        <mat-icon *ngIf="popupInfo.icons" matListIcon fxlayoutalign="space-between start" alt="Name">{{nvp.icon}}}</mat-icon>
+        <mat-form-field>
+          <input matInput placeholder="{{nvp.name}}" value="{{nvp.value ? nvp.value : ' '}}" readonly>
+        </mat-form-field>
+      </ng-template>
+    </div>
+    <mat-divider [inset]="false"></mat-divider>
+
+  </div>
+
+  <div mat-dialog-actions class="margin-bottom-double">
+    <button mat-raised-button [mat-dialog-close]="" (click)="onClose()" cdkFocusInitial>Close</button>
+  </div>
+
+</div>

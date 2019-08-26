@@ -1,0 +1,639 @@
+@charset "UTF-8";
+
+/* Reference */
+/*
+  Down Arrow:   &#8681;
+  Up Arrow:     &#8679;
+  Right Arrow:  &#8680;
+  Left Arrow:   &#8678;
+*/
+
+* {/* makes fonts a bit thinner and easier on the eye */
+  -webkit-font-smoothing:antialiased;
+  -moz-font-smoothing:antialiased;
+  -ms-font-smoothing:antialiased;
+  -o-font-smoothing:antialiased;
+  font-smoothing:antialiased;
+}
+
+html, .mat-raised-button, .mat-form-field {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+/*HTML 5 support - Sets new HTML 5 tags to display:block so browsers know how to render the tags properly. */
+header, section, footer, aside, article, figure {
+  display: block;
+}
+/* ~~ The header is not given a width. It will extend the full width of your layout. ~~ */
+header {
+  overflow:hidden;
+  padding: 0 1.5em;
+}
+header:after {
+  float:none;
+  clear:both;
+}
+
+h1 {
+  font-weight: 500;
+  xtext-transform: uppercase;
+  margin-top:0.25em;
+}
+
+header h1 {
+  color:azure;
+  text-transform: uppercase;
+  xletter-spacing: -.1em;
+  word-spacing: .3em;
+  font-weight:200;
+  font-size: 2.5em;
+  margin-top: .3em;
+  margin-bottom: .3em;
+}
+
+h2 {
+  xtext-transform: uppercase;
+  font-weight: 500;
+  margin-top: 0.25em;
+}
+
+h3 {
+  font-weight:500;
+  font-size:1em;
+  text-transform:uppercase;
+  display:inline-block;
+  color:darkblue;
+  margin: 0.5em;
+}
+
+body {
+  margin: 0;
+  xmin-width: 960px;/*1024px;*/
+  xbackground-color: #4e5882 !important;
+  xbackground-image: linear-gradient(to right, #2d3252, #4e5882) !important;
+}
+
+button {
+  text-transform:uppercase;
+}
+button.no-text-transform {
+  text-transform:inherit;
+}
+button.fixed-size {
+  width:6em; /* keep same width for MORE | LESS toggle buttons */
+}
+
+/* multi select dropdown */
+button.dropdown-toggle {
+  text-transform:inherit;
+}
+
+.inset {
+  padding-left: 3em;
+}
+
+.buttongroup {
+  white-space: nowrap;
+}
+
+.noBorder {
+  border:none;
+}
+.border {
+  border: solid #e1e1e1 1px;
+}
+.noTopBorder{
+  border-top: 0;
+}
+.noBottomBorder{
+  border-bottom: 0;
+}
+.borderSelected {
+  border-width: 5px;
+}
+
+footer {
+  margin-top:.5em;
+  overflow:hidden;
+  width:100%;
+  /*background: rgb(57,123,197) url("../images/header-bg.jpg") 0% 100% no-repeat;*/
+  background: rgb(57,123,197) 0% 100% no-repeat;
+  background-size: cover;
+  -moz-border-radius:5px;
+  border-radius:5px;
+  min-height:2em;
+}
+
+input.noBottomMargin {
+  margin-bottom:0;
+}
+
+select {
+  color: black;
+  font: inherit;
+  /*padding: .35em .35em .5em .35em;*/
+  padding: .25em .35em .55em .35em; /* makes select list same height as a button */
+  moz-border-radius: 5px;
+  border-radius: 5px;
+  border: solid 1px lightslategrey;
+}
+/* the following block should but doesn't work */
+select:focus,
+select:active {
+  border: solid 1px #009688; /* green to match material default theme */
+}
+
+/* ~~ Miscellaneous float/clear classes ~~ */
+.floatRight {  /* this class can be used to float an element right in your page. The floated element must precede the element it should be next to on the page. */
+  float: right;
+  margin-left: 8px;
+}
+.floatLeft { /* this class can be used to float an element left in your page. The floated element must precede the element it should be next to on the page. */
+  float: left;
+  margin-right: 8px;
+}
+.floatClear {
+  float: none;
+  clear: both;
+}
+.clearfloat { /* this class can be placed on a <br /> or empty block element as the final element following the last floated block (within the .container) if the footer is removed or taken out of the .container */
+  float:none;
+  clear:both;
+  height:0;
+  font-size: 1px;
+  line-height: 0px;
+}
+
+.transitionAll {
+  -webkit-transition: all 1s ease-in-out .3s;
+  -moz-transition: all 1s ease-in-out .3s;
+  -ms-transition: all 1s ease-in-out .3s;
+  -o-transition: all 1s ease-in-out .3s;
+  transition: all 1s ease-in-out .3s;
+}
+
+/* place absolutely positioned elements inside this */
+.absoluteContainer {
+  position:relative;
+  top:0px;
+  left:0px;
+}
+.absoluteTopLeft {
+  position:absolute;
+  top:0px;
+  left:0px;
+}
+.absoluteTopRight {
+  position:absolute;
+  top:0px;
+  right:0px;
+}
+.topLeft {
+  top:0px;
+  left:0px;
+}
+.show {
+  left:0px;
+  visibility:visible;
+}
+.hide {
+  visibility:hidden;
+}
+.closed {
+  visibility:hidden;
+  height:0;
+  width:0;
+}
+
+.error {
+  color: #ae2833;
+}
+.warning {
+  color: orangered;
+}
+.valid {
+  color:#5d9e5e;
+}
+.italic {
+  font-style:italic;
+}
+.normal {
+  font-style:normal;
+}
+.bold {
+  font-weight:bold;
+}
+.overline {
+  text-decoration: overline;
+}
+.line-through {
+  text-decoration: line-through;
+}
+.valign-bottom {
+  vertical-align: bottom;
+}
+.red {
+  color: darkred;
+}
+.green {
+  color: darkgreen;
+}
+
+.fullWidth {
+  width:100%;
+  min-width:100%;
+}
+
+.indent5 {
+  padding-left: 5px;
+}
+.indent20 {
+  padding-left: 20px;
+}
+.indentRight10 {
+  padding-right: 10px;
+}
+.indentRight20 {
+  padding-right: 20px;
+}
+
+.topline {
+  vertical-align: top;
+}
+
+input[type="number"] {
+  text-align:right;
+}
+
+.uppercase,
+.uppercase input {
+  text-transform: uppercase;
+}
+.uppercase label { /* Don't uppercase placeholder text */
+  text-transform: none;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.transparentBackground {
+  background-color: transparent;
+}
+
+.flash {
+  background-color:#e6e6e6 !important;
+}
+
+.ie input[type='number'] {
+  text-align:right;
+}
+
+.helpCursor:hover {
+  cursor:help;
+}
+.waitCursor:hover {
+  cursor:wait;
+}
+
+.br {
+  display:inline-block;
+  margin-top: 1em;
+}
+
+.inline {
+  display:inline-block;
+}
+
+.has-success {
+  color: green;
+}
+
+table {
+  width: 100%;
+}
+
+.basic-container {
+  padding: 30px;
+}
+
+.padding {
+  padding: 16px;
+}
+.padding-double {
+  padding: 32px;
+}
+.padding-horizontal {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+.padding-vertical {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+.padding-top-and-sides {
+  padding-top: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+.padding-top {
+  padding-top: 16px;
+}
+.padding-top-half {
+  padding-top: 8px;
+}
+.padding-bottom {
+  padding-bottom: 16px;
+}
+.padding-bottom-half {
+  padding-bottom: 8px;
+}
+.padding-bottom-double {
+  padding-bottom: 32px;
+}
+.padding-left {
+  padding-left: 16px;
+}
+.padding-left-double {
+  padding-left: 32px;
+}
+.padding-right {
+  padding-right: 16px;
+}
+.padding-right-double {
+  padding-right: 32px;
+}
+.padding-horizontal-double {
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.margin {
+  margin: 16px;
+}
+.margin-double {
+  margin: 32px;
+}
+.no-margin-top {
+  margin-top: 0 !important;
+}
+.margin-top {
+  margin-top: 16px;
+}
+.margin-top-half {
+  margin-top: 8px;
+}
+.margin-top-double {
+  margin-top: 32px;
+}
+.no-margin-bottom {
+  margin-bottom: 0 !important;
+}
+.margin-bottom {
+  margin-bottom: 16px;
+}
+.margin-bottom-double {
+  margin-bottom: 32px;
+}
+.margin-bottom-half {
+  margin-bottom: 8px;
+}
+.margin-left {
+  margin-left: 16px;
+}
+.margin-left-double {
+   margin-left: 32px;
+ }
+.margin-left-half {
+  margin-left: 8px;
+}
+.margin-left-quarter {
+  margin-left: 4px;
+}
+.margin-right {
+  margin-right: 16px;
+}
+.margin-right-double {
+  margin-right: 32px;
+}
+.margin-right-half {
+  margin-right: 8px;
+}
+.margin-horizontal {
+  margin-left: 16px !important;
+  margin-right: 16px !important;
+}
+.margin-horizontal-double {
+  margin-left: 32px;
+  margin-right: 32px;
+}
+.margin-vertical {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+.margin-vertical-double {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+.full-width-with-margin {
+  width: 100%;
+  margin: auto;
+}
+
+.title {
+  text-transform: uppercase;
+  xletter-spacing: -0.05em;
+  word-spacing: .3em;
+  font-weight: 200;
+  font-size: 2.5em;
+  display: inline-block !important; /* override material styling */
+  margin-bottom: 0 !important; /* override material styling */
+}
+.subtitle {
+  text-transform: uppercase;
+  xletter-spacing: 0.05em;
+  word-spacing: .3em;
+  font-weight: 200;
+  font-size: 1.75em;
+  display: inline-block !important;
+  margin-left: 16px;
+}
+
+th {
+  text-transform: uppercase;
+}
+
+.width32 {
+  width: 32px;
+  min-width: 32px;
+  max-width: 32px;
+  /*text-align: center;*/
+}
+
+.mat-footer-cell {
+  text-transform: uppercase;
+}
+
+.version-info {
+  font-size: 8pt;
+  float: right;
+}
+
+
+.sub-cell {
+  margin-top: 8px;
+}
+.sub-cell.text {
+  min-height: 36px; /* keep text in line with button height */
+  line-height: 36px;
+}
+.sub-cell:last-child {
+  margin-bottom: 8px;
+}
+.sub-text {
+  line-height: 8px;
+  font-size: x-small;
+  position: relative;
+  top: -8px;
+}
+
+.total {
+  border-top: dotted 1px black;
+  min-width: 3em;
+  /*position: fixed;*/
+}
+
+.right {
+  text-align: right !important;
+}
+.left {
+  text-align: left;
+}
+.center {
+  text-align: center !important;
+}
+
+.text-small {
+  font-size: small;
+}
+.text-x-small {
+  font-size: x-small;
+}
+.text-xx-small {
+  font-size: xx-small;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+*.hoverable {
+  cursor: pointer;
+}
+
+.mat-snack-bar-container {
+  min-width: inherit !important; /* don't display blank space after text. otherwise min-width would be 344px */
+}
+.snackBarConfig {
+  justify-content: center;
+  text-align: center;
+}
+
+th label {
+  display: inline-flex;
+  position: relative;
+  top: -14px;
+}
+.chrome th label {
+  top: -12px;
+}
+th mat-checkbox {
+  position: relative;
+  left: -24px;
+  top: 13px;
+}
+.padded-column {
+  padding-left: 2em !important;
+  padding-right: 2em !important;
+}
+
+.input-row {
+  height: 32px;
+  min-height: 32px;
+}
+
+.button-row:not(.inline) {
+  margin-top: 32px;
+}
+.button-row button,
+.button-row a,
+.button-row mat-icon {
+  margin-right: 8px;
+}
+
+.hidden {
+  visibility: hidden;
+  display: none;
+}
+
+.display-block {
+  display: block;
+}
+
+.na {
+  position: relative;
+  left: -8px;
+}
+
+.highlightData {
+  color: red;
+}
+
+.mat-table {
+  font-family: inherit;
+}
+
+.form-field-icons mat-icon {
+  position: relative;
+  top: -12px;
+  margin-right: 12px;
+}
+
+mat-form-field.multiline {
+  height: 1.5em;
+}
+
+.readonly-wrapper {
+  cursor: not-allowed;
+}
+
+.readonly-wrapper .readonly-block {
+  pointer-events: none;
+}
+
+.point-down {
+  transform: rotate(0deg);
+}
+.point-up {
+  transform: rotate(180deg);
+}
+
+.centered-max-width-tabs .mat-tab-body {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.mat-tab-label-active {
+  opacity: 1 !important;
+}
+
+.light-grey-background {
+  background-color: rgba(0,0,0,0.035);
+}
+
+.border-bottom {
+  border-bottom: darkgrey solid 1px;
+}
+.border-top {
+  border-top: darkgrey solid 1px;
+}

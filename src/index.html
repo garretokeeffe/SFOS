@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8">
+
+  <title>Seafood Online Services</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#1976d2">
+  <script>
+    <!-- fix for bug in urlParse which otherwise results in an ERROR ReferenceError: global is not defined when attempting to redirect to sso login screen after timeout -->
+    if (global === undefined) {
+      var global = window;
+    }
+  </script>
+</head>
+<body>
+  <app-root></app-root>
+  <noscript>Please enable JavaScript to continue using this application.</noscript>
+  <div style="display: none">
+    Icons made by
+    <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from
+    <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by
+    <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+  </div>
+</body>
+</html>

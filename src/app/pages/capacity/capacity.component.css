@@ -1,0 +1,201 @@
+.example-card {
+  max-width: 400px;
+}
+
+.example-header-image {
+  background-image: url('../../../assets/images/vessels/star_of_hope.jpg');
+  background-size: cover;
+  margin-right: 16px;
+}
+
+.expansion-panel-title {
+  font-size: larger;
+  margin-right: 16px;
+  width: 200px;
+  min-width: 200px;
+}
+
+.mat-expansion-panel-header.standard-header {
+  padding: 0 16px !important;
+}
+::ng-deep .mat-expansion-panel-body {
+  padding: 0 !important;
+  margin-right: 32px !important;
+  margin-left: 16px !important;
+}
+
+.xmat-column-vesselIcon {
+  width: 32px;
+  max-width: 32px;
+}
+.mat-column-vesselName {
+  text-transform: uppercase;
+}
+.mat-column-vesselName.alignCols {
+  width: 225px;
+  max-width: 225px;
+}
+.mat-column-vesselName.alignCols.pointsEnabled {
+  width: 175px;
+  max-width: 175px;
+}
+::ng-deep .mat-card-title:not(.card-data-header) {
+  text-transform: uppercase;
+  font-size: smaller !important;
+  font-weight: bolder !important; /* remove this if you remove font-size: smaller */
+  color: rgba(50, 112, 104, 1) !important;
+}
+::ng-deep .mat-card-title .card-data-header {
+  text-transform: none;
+  font-size: small !important;
+  font-weight: bold !important;
+}
+
+::ng-deep .mat-card-header-text {
+  margin: 0 !important;
+}
+
+.mat-card {
+ background: rgba(50, 112, 104, .05) !important;
+}
+
+/*
+.mat-column-capacity {
+  width: 100px;
+  max-width: 100px;
+}
+.mat-column-points {
+  width: 100px;
+  max-width: 100px;
+}
+.mat-column-pointsExpiryDate {
+  width: 150px;
+  max-width: 150px;
+}
+*/
+
+.mat-elevation-z8 {
+  /* these adjustments are necessary to display the left and right box shadows */
+  width: calc(100% - 8px);
+  left: 4px;
+  position: relative;
+}
+
+::ng-deep .mat-tab-labels .mat-tab-label {
+  justify-content: left;
+  padding: 0;
+}
+::ng-deep .mat-tab-labels .mat-tab-label .mat-icon {
+  padding: 0 16px 0 0;
+}
+
+.desktop .expansion-panel-title {
+  position: relative;
+  top: 16px;
+}
+
+.vessel-primary-info {
+  width: 125px;
+}
+.vessel-primary-info.port-reg {
+  width: 100px;
+}
+.vessel-primary-info.capacity {
+  width: 200px;
+}
+
+.readonly ::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
+.handset ::ng-deep .mat-tab-body .mat-form-field {
+  display: block;
+}
+
+xmat-divider {
+  margin-bottom: 16px;
+}
+
+.xmat-card-avatar {
+  height: 50px;
+  width: 50px;
+  min-height: 50px;
+  min-width: 50px;
+  border-radius: 50%;
+}
+
+.mat-grid-tile img {
+  width: auto;
+  height: 100%;
+}
+
+.example-small-box, .example-large-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px 0;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.example-small-box {
+  height: 100px;
+  width: 100px;
+}
+
+.example-large-box {
+  height: 300px;
+  width: 300px;
+}
+
+/*---------------------------*/
+table {
+  width: 100%;
+}
+xtable thead {
+  background-color: whitesmoke;
+  color: #4e5882;
+  border: 0;
+}
+xth {
+  text-align: inherit; /* otherwise it will be centered by default */
+  background-color: whitesmoke;
+  color: #4e5882;
+  font-weight: 200;
+  font-size: inherit;
+  border: 0;
+}
+
+/* // unfortunately this can't be applied directly to the generated style so wrap expanded content in aligned-content class instead
+.mat-expansion-panel-body {
+  padding: 0 64px 24px 24px !important;
+}
+*/
+
+mat-card-header {
+  justify-content: center;
+  margin-bottom: 8px
+}
+
+mat-expansion-panel .aligned-content {
+  padding: 0 40px 0px 0px;
+}
+
+mat-panel-title {
+  width: 100%;
+}
+.fleetSegmentColumn {
+  width: 50%;
+}
+.capacityColumn {
+  width: 25%;
+}
+
+::ng-deep th.mat-column-trackRecord,
+::ng-deep th.mat-column-quotaEligibility {
+  text-transform: none !important;
+  font-size: 13px !important;
+}
+.trackRecordTable ::ng-deep tr.mat-header-row {
+  height: 32px !important;
+}

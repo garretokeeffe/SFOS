@@ -1,0 +1,74 @@
+<div class="page" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)">
+
+  <!--
+  <div class="center">
+    <img width="300" alt="DAFM Logo" src="assets/images/AgricultureMARKMASTERStdColour050318.png"/>
+  </div>
+  -->
+
+  <div *ngIf="user" class="center">
+
+    <h1 class="center">{{ user.firstName }}, welcome back <span [class.display-block]="(isHandset$ | async)">to {{ appComponent.title }}.</span></h1>
+    <p class="text-small">You last logged in on {{ utils.toDate(user.lastLoginDate) | date: (isHandset$ | async) ? 'E, d LLL' : 'EEEE, d LLLL yyyy' }} at {{ utils.toDate(user.lastLoginDate) | date: 'H:mm' }}</p>
+    <p class="text-small no-margin-bottom" *ngIf="notifications.length > 0 && !showSubmissions">
+      You have {{ notifications.length }} new {{ notifications.length === 1 ? 'notification' : 'notifications' }}
+      <a class="margin-left-double underline hoverable" (click)="hideNotifications = !hideNotifications;">{{ hideNotifications ? 'show' : 'hide' }}</a>
+    </p>
+    <div fxLayout="submissions.length > 0 && notifications.length > 0 ? 'column' : 'row'" fxLayoutAlign="space-around start stretch">
+
+      <div *ngIf="showSubmissions && submissions.length > 0" class="submissionList notificationList margin-top-double">
+        <h2 class="center no-margin-bottom">Current Status of Your {{ submissions.length > 1 ? submissions.length : null }} {{ submissions.length === 1 ? 'Application' : 'Applications' }}
+          <span class="text-small">
+            <a class="underline hoverable" (click)="hideApplicationStatuses = !hideApplicationStatuses;">{{ hideApplicationStatuses ? 'show' : 'hide' }}</a>
+          </span>
+        </h2>
+        <div style="margin: 0 auto; width: 100%" class="center" *ngIf="!hideApplicationStatuses">
+          <mat-list  class="center">
+            <mat-list-item class="margin-top" *ngFor="let submission of submissions" (click)="goToSubmissionItem(submission)">
+              <mat-icon matListIcon>ballot</mat-icon>
+              <div mat-line class="left" fxLayout="column" fxLayoutAlign="space-between stretch" style="width:100%">
+                <span class="submissionType">{{ submission.displayType() }}</span>
+                <span *ngIf="submission.vesselName" class="italic">{{ submission.vesselName }}</span>
+              </div>
+
+              <div fxLayout="column" fxLayoutAlign="space-between stretch" style="width:66%" class="margin-left">
+                <span class="submissionStatus">
+                  {{ submission.displayStatus() }}
+                </span>
+                <span mat-line class="text-small italic"> {{ utils.toDate(submission.statusDate) | date }} </span>
+              </div>
+              <!--<p mat-line class="text-small left italic"> {{ utils.toDate(submission.statusDate) | date }} </p>-->
+              <mat-icon class="margin-left hoverable">forward</mat-icon>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+          </mat-list>
+        </div>
+      </div>
+
+      <div *ngIf="notifications.length > 0" class="notificationList" [class.margin-top-double]="showSubmissions" [class.fullWidth]="!showSubmissions">
+        <h2 *ngIf="showSubmissions" class="center no-margin-bottom">You have {{ notifications.length }} {{ notifications.length === 1 ? 'Notification' : 'Notifications' }}
+          <span class="text-small">
+            <a class="underline hoverable" (click)="hideNotifications = !hideNotifications;">{{ hideNotifications ? 'show' : 'hide' }}</a>
+          </span>
+        </h2>
+        <div style="margin: 0 auto; width: 100%" class="center" *ngIf="!hideNotifications">
+          <mat-list style="margin: 0 5%;" class="center">
+            <mat-list-item class="margin-top" *ngFor="let notification of notifications" (click)="goToNotificationItem(notification)">
+              <mat-icon matListIcon>{{notification.icon}}</mat-icon>
+              <h4 mat-line class="left">{{notification.text}}
+                <span *ngIf="notification.vesselName"> for <span class="italic">{{ notification.vesselName }}</span></span>
+              </h4>
+              <p mat-line class="text-small left italic"> {{ utils.toDate(notification.date) | date }} </p>
+              <mat-icon class="hoverable margin-left">forward</mat-icon>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+          </mat-list>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <app-la-applications-list></app-la-applications-list>
+
+</div>

@@ -1,0 +1,18 @@
+body {
+  background-image: linear-gradient(to right, #2d3252, #4e5882) !important;
+  color: whitesmoke !important;
+}
+
+.banner .mat-stroked-button,
+.contrastButton .mat-stroked-button {
+  color: whitesmoke;
+}
+.banner .mat-stroked-button:hover,
+.contrastButton .mat-stroked-button:hover{
+  background-color: whitesmoke;
+  color: #4e5882;
+}
+
+.comments .mat-input-element:disabled {
+  color: rgba(255, 255, 255, .87) !important;
+}

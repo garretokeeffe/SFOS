@@ -1,0 +1,32 @@
+.errorBar {
+  background-color: indianred;
+  color: whitesmoke;
+  margin: 16px 16px 0 16px;
+  padding: 8px;
+}
+.info-icon {
+  margin-right: 4px;
+  color: whitesmoke;
+}
+
+mat-toolbar {
+  justify-content: center;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.forgotPassword {
+  font-size: small;
+  justify-content: right;
+}
+.forgotPassword a {
+  visibility: hidden;
+}
+
+.img {
+  width: 100%;
+  margin-bottom: 18%;
+}
+

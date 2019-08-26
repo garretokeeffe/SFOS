@@ -1,0 +1,40 @@
+[
+  {
+    "refId": 2,
+    "type": 1,
+    "applicants": [
+      {
+        "id": 1,
+        "firstName": "John",
+        "surname": "Murphy"
+      },
+      {
+        "id": 2,
+        "firstName": "James",
+        "surname": "Cassidy"
+      }
+    ],
+    "vesselId": 3,
+    "vesselName": "Celtic Explorer",
+    "status": 2,
+    "createDate": "07/12/18",
+    "statusDate": "15/03/19"
+  },
+  {
+    "refId": 1,
+    "type": 2,
+    "applicants": [
+      {
+        "id": 1,
+        "firstName": "John",
+        "surname": "Murphy"
+      }
+    ],
+    "vesselId": 3,
+    "vesselName": "Star of Hope",
+    "status": 1,
+    "createDate": "15/01/19",
+    "statusDate": "13/03/19"
+  }
+]
+

@@ -1,0 +1,85 @@
+.mat-card-avatar {
+  /* increase from 40px x 40px so that the text is bottom aligned.
+  remove these height and width adjustments of we dont displayed the data descriptions (ie just display values)
+  */
+  width: 55px;
+  height: 55px;
+  display: none;
+}
+::ng-deep .mat-expansion-panel-header.large-header {
+  height: 64px !important;
+}
+::ng-deep .mat-card-title {
+  /* move the title left 15px to compensate for increasing the size of the avatar */
+  xposition: relative;
+  xleft: -15px;
+}
+::ng-deep .mat-card-header {
+  justify-content: center !important;
+  width: 100% !important;
+  xmargin-bottom: 8px;
+}
+.vessel-card {
+  max-width: 400px;
+  margin: 0 32px 32px 0;
+  min-height: 290px;
+  xmin-height: 400px; /* Only use this if vessel image is displayed, TODO: need to set min-height on the card content pane rather than overall card */
+  border-radius: 12px;
+  text-align: center; /* centers the image and the action buttons */
+  padding-bottom: 16px;
+}
+.vessel-card.handset,
+.handset.vessel-card {
+  min-width: calc(100vw - 64px);/*308px;*/
+  max-width: calc(100vw - 64px);
+  width: calc(100vw - 64px);
+}
+
+.vessel-card .mat-expansion-panel-header:not(.standard-header) {
+  padding: 8px 16px !important;
+}
+.vessel-card .mat-expansion-panel-header.standard-header {
+  padding: 0 16px !important;
+}
+.vessel-card .mat-expansion-panel-header.standard-header.mat-expanded {
+  height: 48px !important;
+}
+.vessel-card .mat-expansion-panel-header.narrow-header {
+  padding: 0 16px !important;
+  height: 48px !important;
+}
+.vessel-card .mat-expansion-panel-header.narrow-header.mat-expanded {
+  height: 48px !important;
+}
+
+.vessel-header-image {
+  background-image: url('../../../assets/images/ship-green.png');
+  background-size: cover;
+  position: relative;
+  top: 28px;
+  left: 0;
+  border-radius: 25%;
+  width: 64px;
+  height: 64px;
+}
+
+.mat-card-image:first-child {
+  margin-top: unset;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.imageContainer {
+  min-height: 275px;
+  height: 275px;
+  display: none;
+}
+
+.zoomButton {
+  position: absolute;
+  /*top: 2%;
+  right: 1.5%;*/
+  top: 8px;
+  right: 24px;
+}
+

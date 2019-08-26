@@ -1,0 +1,31 @@
+.client-selector:not(.embedded) {
+  position: sticky;
+  top: 64px;
+  z-index: 1;
+  padding-top: 4px;
+  background-color:rgba(50, 112, 104,0.75);
+  xbackground-image: linear-gradient(rgba(50, 112, 104, 1), rgba(50, 112, 104,0.75));
+  color: whitesmoke;
+}
+.client-selector:not(.embedded).handset  {
+  xtop: 56px;
+}
+.acting-on-behalf-of {
+  font-size: x-small;
+  font-style: italic;
+}
+.embedded .acting-on-behalf-of {
+  position: absolute;
+  top: 0;
+  top: -16px;
+}
+
+mat-icon {
+  color: whitesmoke;
+}
+
+@media only screen and (max-width: 959px) {
+  .client-selector:not(.embedded)  {
+    top: 56px;
+  }
+}

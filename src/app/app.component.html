@@ -1,0 +1,13 @@
+<!--<app-login *ngIf="!isAuthenticated"></app-login>-->
+<!--<app-home *ngIf="!isAuthenticated">
+  <router-outlet></router-outlet>
+</app-home>
+-->
+<app-main-nav [login]="login" [authenticated]="isAuthenticated" [beforeinstallprompt]="deferredPrompt">
+  <!-- the content in between app-main-nav tags gets reflected into the ng-content element in the main-nav.component.html -->
+  <router-outlet></router-outlet>
+  <!--<app-logobar></app-logobar>--> <!-- uncomment to display logobar on all pages -->
+</app-main-nav>
+
+
+

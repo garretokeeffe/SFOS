@@ -1,0 +1,44 @@
+@import 'material-design-icons-iconfont/dist/material-design-icons.css';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import 'style/theme.css';
+@import 'style/common.css';
+
+html, body {
+  height: 100%;
+}
+body {
+  margin: 0;
+}
+
+.page {
+  padding: 16px;
+  xpadding-bottom: 64px; /* so user can scroll entire page above logobar */
+}
+.page-margin-top {
+  padding: 32px 16px 16px 16px;
+}
+
+mat-form-field {
+  xmargin-right: 32px;
+}
+
+.handset .mat-form-field {
+ display: block;
+}
+
+::ng-deep mat-divider {
+  margin-bottom: 16px;
+}
+
+.button-row:not(.inline) {
+  margin-top: 32px;
+}
+.button-row button,
+.button-row a {
+  margin-right: 8px;
+}
+
+h1 {
+  font-size: 1.25em;
+}
+

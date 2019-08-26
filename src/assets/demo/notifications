@@ -1,0 +1,14 @@
+[
+  {
+    "id": 4,
+    "categoryId": 3,
+    "applicationId": 1,
+    "vesselId": 1,
+    "vesselName": "Star of Hope",
+    "type": 8,
+    "title": "Balancing Statements",
+    "text": "A final balancing statement has been issued",
+    "date": "26/07/2019",
+    "actionRequiredText": "Please review before 13/8/2019"
+  }
+]

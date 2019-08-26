@@ -1,0 +1,64 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+  box-shadow: 3px 0 6px rgba(0,0,0,.24);
+}
+
+.sidenav .mat-toolbar {
+  xbackground: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.spacer.handset {
+  flex: 0.25 1 auto;
+}
+
+.content-container {
+  margin: 16px;
+}
+
+.hidden {
+  xdisplay: none; /* activate this and set mat-sidenav fixedInViewport="false" to hide menu on larger displays */
+}
+
+.mat-toolbar a, .mat-toolbar div a {
+  text-decoration: none;
+  color: inherit;
+}
+
+::ng-deep .mat-expansion-panel-body {
+  padding: 0 !important;
+}
+
+.mat-toolbar  mat-icon {
+  color: whitesmoke;
+}
+
+.mat-list-base {
+  padding-top: inherit;
+}
+
+.mat-accordion > .mat-expansion-panel-spacing:first-child {
+  margin-top: 16px; /* allow Licensing expansion header to drop down when clicked because Home/My Profile is displayed above it */
+  /* if Home/My Profile is not to be displayed separately on the side panel then remove this styling */
+}
+
+.addToHomeScreenButton {
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 16px;
+  color: rgba(50, 112, 104, 1);
+}
+

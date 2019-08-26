@@ -1,0 +1,18 @@
+mat-divider {
+  margin-bottom: 16px;
+}
+
+.margin-right-narrow ::ng-deep mat-form-field,
+::ng-deep mat-form-field.margin-right-narrow {
+  margin-right: 8px;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.readonly ::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
+

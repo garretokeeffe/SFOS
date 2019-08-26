@@ -1,0 +1,25 @@
+<div class="page">
+  <div class="center">
+    <img width="300" alt="DAFM Logo" src="assets/images/AgricultureMARKMASTERStdColour050318.png"/>
+  </div>
+
+  <h1 class="center">John, welcome back to {{ appComponent.title }}.</h1>
+
+  <div *ngIf="notifications.length > 0">
+    <h2 class="center">You have {{ notifications.length }} new {{ notifications.length === 1 ? 'notification' : 'notifications' }}:</h2>
+
+    <div style="margin: 0 auto; width: 100%" class="center">
+      <mat-list style="margin: 0 25%;" class="center">
+        <mat-list-item class="margin-top" *ngFor="let notification of notifications" (click)="goToNotificationItem(notification)">
+          <mat-icon matListIcon>{{notification.icon}}</mat-icon>
+          <h4 mat-line class="left">{{notification.text}}</h4>
+          <p mat-line class="left italic"> {{ utils.toDate(notification.date) | date}} </p>
+          <mat-icon>forward</mat-icon>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </mat-list>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,13 @@
+.simulator {
+  position: absolute;
+  top: 15px;
+  right: 12px;
+}
+.mode {
+  color: whitesmoke;
+  position: relative;
+  top: 1px;
+}
+app-ifis-simulator {
+  display: inline-block;
+}

@@ -1,0 +1,11 @@
+<div class="center no-margin-top no-margin-bottom">
+  <img *ngIf="orientation === 'vertical'" height="{{(isAtLeastLarge$ | async) ? '190' : (isMedium$ | async) ? '182' : (isSmall$ | async) ? '175' : '160'}}"
+       alt="Government of Ireland"
+       class="vertical"
+       src="assets/images/logos/gov-of-ireland-vert.png"/>
+  <img *ngIf="orientation === 'horizontal'"
+       width="{{(isAtLeastLarge$ | async) ? '360' : (isMedium$ | async) ? '340' : (isSmall$ | async) ? '320' : '300'}}"
+       class="hoizontal"
+       alt="Government of Ireland"
+       src="assets/images/logos/gov-of-ireland-horz.png"/>
+</div>

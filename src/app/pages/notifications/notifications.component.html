@@ -1,0 +1,74 @@
+<div class="page" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)">
+
+  <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px">
+    <div fxFlexAlign="start">
+      <h2>
+        <mat-icon matListIcon alt="My Inbox" style="position: relative; top: 4px; margin-right: 8px;">mail</mat-icon>
+        <span class="margin-right">My Inbox</span>
+      </h2>
+    </div>
+  </div>
+  <div fxFill fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="32px">
+
+    <mat-form-field>
+      <mat-label>Category</mat-label>
+      <mat-select (selectionChange)="categoryChanged($event.value)" [(value)]="selectedNotificationCategory">
+        <mat-option [value]="-1">
+          --- ALL ---
+        </mat-option>
+        <mat-option *ngFor="let category of notificationCategories" [value]="category.id">
+          {{ category.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-button-toggle-group multiple class="margin-bottom-half margin-right-double">
+      <mat-button-toggle #unreadToggle value="UNREAD" aria-label="Text align left" (click)="applyFilter()">UNREAD</mat-button-toggle>
+      <mat-button-toggle #readToggle value="READ" aria-label="Text align left" (click)="applyFilter()">READ</mat-button-toggle>
+    </mat-button-toggle-group>
+    <mat-form-field >
+      <input matInput (keyup)="applyFilter($event.target.value)" [(ngModel)]="filterValue" placeholder="FILTER">
+      <button mat-button *ngIf="filterValue" matSuffix mat-icon-button aria-label="Clear" (click)="filterValue=''; applyFilter()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <!--</div>-->
+    <!--</div>-->
+  </div>
+
+  <table *ngIf="dataSource.data.length > 0" mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+      <td mat-cell *matCellDef="let notification;" [@flyInOut]="'in'"> {{ notification.date }} <!-- {{ utils.toDate(notification.date) | date }} --> </td>
+    </ng-container>
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header [@flyInOut]="'in'">Category</th>
+      <td mat-cell *matCellDef="let notification;" [@flyInOut]="'in'"> {{ displayCategoryName(notification.categoryId) }} </td>
+    </ng-container>
+    <ng-container matColumnDef="vesselName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header [@flyInOut]="'in'">Vessel</th>
+      <td mat-cell *matCellDef="let notification;" [@flyInOut]="'in'"> {{ notification.vesselName }} </td>
+    </ng-container>
+    <ng-container matColumnDef="text">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header [@flyInOut]="'in'">Notification</th>
+      <td mat-cell *matCellDef="let notification;" [@flyInOut]="'in'"> {{ notification.text }} </td>
+    </ng-container>
+    <ng-container matColumnDef="actionRequired">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header [@flyInOut]="'in'">Action Required</th>
+      <td mat-cell *matCellDef="let notification;" [@flyInOut]="'in'"> {{ notification.actionRequiredText }} </td>
+    </ng-container>
+    <ng-container matColumnDef="buttons">
+      <th mat-header-cell *matHeaderCellDef [@flyInOut]="'in'"></th>
+      <td mat-cell *matCellDef="let notification;" [@flyInOut]="'in'">
+        <div class="sub-cell button"><button mat-stroked-button (click)="displayNotification(notification)">Select</button></div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <mat-paginator *ngIf="!errorMessage && dataSource && dataSource.data.length > 0" class="pagination-bar" [pageSizeOptions]="pageSizeOptions"></mat-paginator>
+  <div *ngIf="!dataSource || dataSource.data.length < 1" class="margin-top-double">No Notifications</div>
+</div>
+

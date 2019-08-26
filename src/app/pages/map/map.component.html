@@ -1,0 +1,7 @@
+<div class="page center absoluteContainer" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)">
+
+  <img alt="Vessel Map" src="assets/demo/images/all_vessels_map.png"/>
+  <button class="zoomButton" mat-raised-button mat-icon-button routerLink="/home">
+    <mat-icon class="hoverable">fullscreen_exit</mat-icon>
+  </button>
+</div>

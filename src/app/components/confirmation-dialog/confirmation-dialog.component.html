@@ -1,0 +1,22 @@
+<div fxLayout="column" fxLayoutAlign="space-around center">
+
+  <h1 mat-dialog-title>{{confirmationInfo.title}}</h1>
+
+  <div mat-dialog-content>
+    <div *ngIf="confirmationInfo.text" class="centered-content">
+      {{confirmationInfo.text}}
+    </div>
+    <div *ngIf="confirmationInfo.prompt" class="centered-content" [class.margin-top]="confirmationInfo.text !== ''">
+      {{confirmationInfo.prompt}}
+    </div>
+    <div class="margin-top-double">
+      <mat-divider [inset]="false"></mat-divider>
+    </div>
+  </div>
+
+  <div mat-dialog-actions class="margin-bottom-double">
+    <button mat-raised-button [mat-dialog-close]="true">{{confirmationInfo.yesButtonText}}</button>
+    <button mat-raised-button [mat-dialog-close]="false" cdkFocusInitial>{{confirmationInfo.noButtonText}}</button>
+  </div>
+
+</div>

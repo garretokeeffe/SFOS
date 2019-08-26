@@ -1,0 +1,34 @@
+<div class="page" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)">
+
+  <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px">
+    <div fxFlexAlign="start">
+      <h2>
+        <mat-icon matListIcon alt="Licences" style="position: relative; top: 4px; margin-right: 8px;">chrome_reader_mode</mat-icon>
+        <!--{{ title$ | async }}-->
+        My Applications
+        <!--<span class="margin-left" style="position: relative; top: -4px"></span>-->
+      </h2>
+    </div>
+    <div style="position: relative; top: -4px">
+      <button mat-raised-button routerLink="/licence-application">
+        START NEW APPLICATION
+      </button>
+    </div>
+  </div>
+
+  List of Applications (if any) here
+  <!--
+  <app-progress></app-progress>
+
+  <div *ngIf="vessels.length === 0">
+    <h2>You have no applications in progress</h2>
+  </div>
+
+  <div *ngIf="vessels.length > 0">
+    <div fxLayout="(isHandset$ | async) ? 'row' : 'column'" fxLayoutAlign="space-around start" >
+      <app-vessel *ngFor="let vessel of vessels; let i = index;" [vessel]="vessel"></app-vessel>
+    </div>
+  </div>
+  -->
+
+</div>

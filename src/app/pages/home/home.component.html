@@ -1,0 +1,64 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px" class="page" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)">
+
+  <app-main-logo [orientation]="'vertical'"></app-main-logo>
+
+  <h2 class="no-margin-bottom">Welcome to</h2>
+  <h1 class="center">{{ appComponent.title }}</h1>
+  <div class="center">The Irish Government's Sea Fishing and Aquaculture Portal</div>
+
+  <div fxLayout="row" fxLayoutGap="16px" class="margin-top-double margin-bottom-double">
+    <button mat-raised-button (click)="login()" routerLink="/login">LOGIN</button>
+    <button mat-raised-button (click)="register()" routerLink="/register">REGISTER</button>
+  </div>
+
+  <div *ngIf="globals.prototype" fxFill class="margin-vertical">
+    <!--<mat-divider></mat-divider>-->
+    <app-divider></app-divider>
+  </div>
+
+  <div *ngIf="globals.prototype" class="margin light-grey-background padding-left padding-right padding-bottom-double" [class.padding-horizontal-double]="!(isHandset$ | async)">
+    <div class="wizard-label margin-top margin-bottom-double centered-content">PUBLIC SERVICES</div>
+    <div fxLayout="{{ (isAtLeastMedium$ | async) ? 'row' : 'column' }}" fxLayoutAlign="center center" fxLayoutGap="{{ (isAtLeastMedium$ | async) ? '16px' : '' }}">
+
+      <mat-card>
+        <mat-card-header fxLayoutAlign="center center">
+          <mat-card-title>
+            <div>
+              <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="16px">
+                <mat-icon>directions_boat</mat-icon>
+                <div>Apply for a Sea Fishing Vessel Licence</div>
+              </div>
+            </div>
+          </mat-card-title>
+          <mat-card-subtitle></mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          Initiate a preliminary application and determine the conditions that must be satisfied. Fulfillment of the conditions will require <a (click)="register()" routerLink="/register">registration</a>.
+        </mat-card-content>
+      </mat-card>
+
+      <!--
+      <mat-card>
+        <mat-card-header fxLayoutAlign="center center">
+          <mat-card-title>
+            <div>
+              <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="16px">
+                <mat-icon>mail</mat-icon>
+                <div>Subscribe to Fishery Notifications</div>
+              </div>
+            </div>
+          </mat-card-title>
+          <mat-card-subtitle></mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          Receive e-mail notifications when Fishery Management Periods are opening and closing.
+        </mat-card-content>
+      </mat-card>
+      -->
+
+    </div>
+  </div>
+
+</div>
+<app-logobar></app-logobar>
+

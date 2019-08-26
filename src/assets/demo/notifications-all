@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "categoryId": 1,
+    "applicationId": 2,
+    "vesselId": 2,
+    "vesselName": "Celtic Explorer",
+    "type": 6,
+    "title": "Licenses",
+    "text": "A license application has been approved",
+    "date": "14/06/2019",
+    "actionRequiredText": ""
+  },
+  {
+    "id": 2,
+    "categoryId": 3,
+    "applicationId": 1,
+    "vesselId": 1,
+    "vesselName": "Star of Hope",
+    "type": 5,
+    "title": "Balancing Statements",
+    "text": "A provisional balancing statement has been issued",
+    "date": "18/06/2019",
+    "actionRequiredText": ""
+  },
+  {
+    "id": 3,
+    "categoryId": 2,
+    "applicationId": 1,
+    "vesselId": 1,
+    "vesselName": "Western Endeavour",
+    "type": 5,
+    "title": "Vessel Details",
+    "text": "Vessel details have been updated",
+    "date": "20/07/2019",
+    "actionRequiredText": ""
+  },
+  {
+    "id": 4,
+    "categoryId": 3,
+    "applicationId": 1,
+    "vesselId": 1,
+    "vesselName": "Star of Hope",
+    "type": 8,
+    "title": "Balancing Statements",
+    "text": "A final balancing statement has been issued",
+    "date": "26/07/2019",
+    "actionRequiredText": "Please review before 13/8/2019"
+  }
+]
