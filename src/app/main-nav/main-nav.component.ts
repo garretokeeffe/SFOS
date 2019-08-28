@@ -35,7 +35,7 @@ export class MainNavComponent implements OnInit, OnChanges, AfterViewChecked {
   private loggingIn: boolean = false;
 
   private deferredPrompt: any;
-  public showA2HSButton = false;
+  public showA2HSButton: boolean = false;
 
   public user: UserView = null;
   public applications: Array<ApplicationView> = [];
@@ -86,10 +86,10 @@ export class MainNavComponent implements OnInit, OnChanges, AfterViewChecked {
     this.getUserProfile();
 
     EmitterService.get(Emitters[Emitters.RETURN_TO_DASHBOARD]).subscribe((returnToDashboard: boolean) => {
-      this.returnToDashboard();
+      this.navigateToDashboard();
     });
 
-    this.returnToDashboard();
+    this.navigateToDashboard();
   }
 
   public isHomeOrLoginPage(): boolean {
@@ -133,7 +133,7 @@ export class MainNavComponent implements OnInit, OnChanges, AfterViewChecked {
           // this.router.navigate(['/home-vessel-owner']).then( (e) => { });
         },
         (error) => {
-          console.error('Failed to retrieve applications for user');
+          console.error('Failed to retrieve applications for userprofile');
 
           this.router.navigate(['/noaccess']).then( (e) => {
             if (e) {
@@ -146,7 +146,7 @@ export class MainNavComponent implements OnInit, OnChanges, AfterViewChecked {
       );
     },
     (error) => {
-      console.error('Failed to retrieve user');
+      console.error('Failed to retrieve userprofile');
       this.user = null;
     });
   }
@@ -164,11 +164,11 @@ export class MainNavComponent implements OnInit, OnChanges, AfterViewChecked {
     }
 
     if (changes['authenticated'] && changes['authenticated'].previousValue === false && changes['authenticated'].currentValue === true) {
-      this.returnToDashboard();
+      this.navigateToDashboard();
     }
   }
 
-  public returnToDashboard(): void {
+  public navigateToDashboard(): void {
 
     if (this.globals.demo && !this.authentication.demoModeAuthenticated) {
       if (this.globals.demoSkipLoginScreen) {
@@ -205,11 +205,11 @@ export class MainNavComponent implements OnInit, OnChanges, AfterViewChecked {
   }
 
   public addToHomeScreen(): void {
-    // hide our user interface that shows our A2HS button
+    // hide our userprofile interface that shows our A2HS button
     this.showA2HSButton = false;
     // Show the prompt
     this.deferredPrompt.prompt();
-    // Wait for the user to respond to the prompt
+    // Wait for the userprofile to respond to the prompt
     this.deferredPrompt.userChoice
     .then((choiceResult) => {
       if (choiceResult.outcome === 'accepted') {
@@ -227,7 +227,7 @@ export class MainNavComponent implements OnInit, OnChanges, AfterViewChecked {
     this.router.navigate(['/home']).then((e) => {});
   }
 
-  // This method was designed for the demo, it may be removed if applications list is dynamic based on user role in the demo
+  // This method was designed for the demo, it may be removed if applications list is dynamic based on userprofile role in the demo
   public canDisplayApplication(application: ApplicationView): boolean {
     if (application.name === 'Licensing') {
       // My Vessels, My Capacity, My Applications will be displayed at top level instead

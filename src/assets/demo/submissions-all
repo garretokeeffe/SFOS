@@ -6,12 +6,12 @@
       {
         "id": 1,
         "firstName": "John",
-        "surname": "Murphy"
+        "lastName": "Murphy"
       },
       {
         "id": 2,
         "firstName": "James",
-        "surname": "Cassidy"
+        "lastName": "Cassidy"
       }
     ],
     "vesselId": 3,
@@ -27,7 +27,7 @@
       {
         "id": 1,
         "firstName": "John",
-        "surname": "Murphy"
+        "lastName": "Murphy"
       }
     ],
     "vesselId": 3,

@@ -15,7 +15,7 @@ export const environment: any = {
   keycloakConfig: kcConfig,
   authenticationURL: 'https://sso-keycloak-sso1.apps.rhos.agriculture.gov.ie/auth/realms/Staging-Realm/protocol/openid-connect/token',
   getVersionURL: 'assets/demo/version',
-  getUserURL: 'assets/demo/user',
+  getUserProfileURL: 'assets/demo/userprofile',
   getUsersURL: 'assets/demo/users',
   getApplicationsURL: 'assets/demo/applications',
   getNotificationsURL: 'assets/demo/notifications',

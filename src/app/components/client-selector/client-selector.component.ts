@@ -24,7 +24,7 @@ export class ClientSelectorComponent implements OnInit {
 
   ngOnInit() {
     this.client.firstName = 'Peter';
-    this.client.surname = 'Mahoney';
+    this.client.lastName = 'Mahoney';
   }
 
   public selectClient(): void {

@@ -21,9 +21,9 @@ export class IFISAuthentication {
 
   public systemDown: boolean = false;
 
-                            // internal user groups...
+                            // internal userprofile groups...
   private roles: string[];  //    sfos_vessel_owner | sfos_vessel_owner_ro | sfos_representative | sfos_representative_ro | sfos_sfpa | sfos_sfpa_ro | sfos_sfpmd | sfos_sfpmd_ro
-                            // external user groups
+                            // external userprofile groups
                             //    sfos_la | sfos_la_ro | sfos_la2 | sfos_la2_ro | sfos_fish_buyer | sfos_fish_buyer_ro
 
   constructor(roles: string[] = []) {

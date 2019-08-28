@@ -6,6 +6,7 @@ import { KeycloakAuthGuard, KeycloakService } from 'keycloak-angular';
 import { environment } from '../../environments/environment';
 import { IFISAuthentication } from '../types/ifisauthentication';
 import { Globals } from '../globals';
+import { UserService } from './user.service';
 
 declare var require: any;
 
@@ -43,7 +44,10 @@ export class AuthenticationService extends KeycloakAuthGuard {
   public service: any = null; // only required to prevent IDE errors (Property 'service' does not exist on type 'AuthenticationService'.). see comment in authSuccess()
 
   constructor(private globals: Globals,
-              private http: HttpClient, protected router: Router, protected keycloakService: KeycloakService) {
+              private http: HttpClient,
+              protected router: Router,
+              protected keycloakService: KeycloakService,
+              protected userService: UserService) {
     super(router, keycloakService);
     this.authenticate();
   }
@@ -54,6 +58,7 @@ export class AuthenticationService extends KeycloakAuthGuard {
     } else {
       this.demoModeAuthenticated = false;
     }
+    this.userService.logout();
   }
 
   public isUsingKeycloak(): boolean {
@@ -132,7 +137,7 @@ export class AuthenticationService extends KeycloakAuthGuard {
       console.log('Keycloak service not employed');
     }
 
-    // As this service is injected into the appComponent, the simulator user will not have been set the first time ths service is called.
+    // As this service is injected into the appComponent, the simulator userprofile will not have been set the first time ths service is called.
     // Therefore, if running in DEV mode automatically simulate authentication for the first call.
     console.log('Authentication environment: ' + environment.name);
     if (this.simulatorUser !== null || (environment.name === 'DEV' && AuthenticationService.countAuthenticationCalls === 1)) {

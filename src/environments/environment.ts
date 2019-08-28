@@ -26,7 +26,7 @@ export const environment: any = {
   keycloakConfig: kcConfig,
   authenticationURL: 'http://localhost:8080/ws/login',
   getVersionURL: 'assets/demo/version',
-  getUserURL: 'assets/demo/user',
+  getUserProfileURL: 'assets/demo/userprofile',
   getUsersURL: 'assets/demo/users',
   getApplicationsURL: 'assets/demo/applications',
   getNotificationCategoriesURL: 'assets/demo/notification-categories',

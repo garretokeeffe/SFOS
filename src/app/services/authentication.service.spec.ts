@@ -110,18 +110,18 @@ describe('AuthenticateService', () => {
   }));
 
   it('Admin access should be simulated', async(() => {
-    let user: IFISAuthentication = new IFISAuthentication(['ifisqb_sfpa_admin', 'ifisqb_sfpmd_admin']);
-    httpSpy.post.and.returnValue(of(user.getRoles()));
-    service.setSimulatorUser(user);
+    let userprofile: IFISAuthentication = new IFISAuthentication(['ifisqb_sfpa_admin', 'ifisqb_sfpmd_admin']);
+    httpSpy.post.and.returnValue(of(userprofile.getRoles()));
+    service.setSimulatorUser(userprofile);
     service.authenticate().subscribe ((access: IFISAuthentication) => {
       expect(access.writeAccess).toBe(true);
     });
   }));
 
   it('View access should be simulated', async(() => {
-    let user: IFISAuthentication = new IFISAuthentication(['ifisqb_sfpa_view', 'ifisqb_sfpmd_view']);
-    httpSpy.post.and.returnValue(of(user.getRoles()));
-    service.setSimulatorUser(user);
+    let userprofile: IFISAuthentication = new IFISAuthentication(['ifisqb_sfpa_view', 'ifisqb_sfpmd_view']);
+    httpSpy.post.and.returnValue(of(userprofile.getRoles()));
+    service.setSimulatorUser(userprofile);
     service.authenticate().subscribe ((access: IFISAuthentication) => {
       expect(access.readAccess).toBe(true);
       expect(access.writeAccess).toBe(false);

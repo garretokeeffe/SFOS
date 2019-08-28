@@ -19,28 +19,28 @@
       <mat-form-field [style.width]="dynamicWidth('Murphy', 'Surname')" class="margin-right-narrow">
         <!-- TODO: Remove the ngIfs which are only there for the DEMO -->
         <input *ngIf="(title$ | async) === 'Client Profile'" matInput placeholder="Surname" value="Mahoney" readonly>
-        <input *ngIf="(title$ | async) !== 'Client Profile'" matInput placeholder="Surname" value="{{profileDetails.surname}}" readonly>
+        <input *ngIf="(title$ | async) !== 'Client Profile'" matInput placeholder="Surname" value="{{profileDetails.lastName}}" readonly>
       </mat-form-field>
     </div>
 
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-icon matListIcon fxlayoutalign="space-between start" alt="Date of Birth">date_range</mat-icon> <!-- for some reason calendar_today renders incorrectly on the right of the text -->
       <mat-form-field>
-        <input matInput placeholder="Date of Birth" value="DD/MM/YYYY" readonly>
+        <input matInput placeholder="Date of Birth" value="{{ profileDetails.dob }}" readonly>
       </mat-form-field>
     </div>
 
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-icon matListIcon fxlayoutalign="space-between start" alt="Nationality">flag</mat-icon>
       <mat-form-field>
-        <input matInput placeholder="Country of Nationality" value="Ireland" readonly>
+        <input matInput placeholder="Country of Nationality" value="{{ profileDetails.countryOfNationality }}" readonly>
       </mat-form-field>
     </div>
 
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-icon matListIcon fxlayoutalign="space-between start" alt="PPSN">folder_shared</mat-icon>
       <mat-form-field [style.width]="dynamicWidth('5372214A', 'PPSN')" class="margin-right-narrow">
-        <input matInput placeholder="PPSN" value="{{profileDetails.ppsn}}" readonly>
+        <input matInput placeholder="PPSN" value="{{ profileDetails.ppsn }}" readonly>
       </mat-form-field>
       <!-- DMcD: we can remove User Reference No. if LA applicants can be identified by email address -->
       <!--
@@ -55,17 +55,23 @@
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-icon matListIcon fxlayoutalign="space-between start" alt="Address">place</mat-icon>
       <div fxLayout="column" fxLayout.sm="column" fxLayoutAlign="start center">
-        <mat-form-field class="multiline">
-          <input matInput placeholder="Address" value="1 Main Street" readonly>
+        <mat-form-field class="multiline" *ngIf="profileDetails.addressLine1">
+          <input matInput placeholder="Address" value="{{ profileDetails.addressLine1 }}" readonly>
         </mat-form-field>
-        <mat-form-field class="multiline">
-          <input matInput value="Any Town" readonly>
+        <mat-form-field class="multiline" *ngIf="profileDetails.addressLine2">
+          <input matInput value="{{ profileDetails.addressLine2 }}" readonly>
         </mat-form-field>
-        <mat-form-field class="multiline">
-          <input matInput value="Any County" readonly>
+        <mat-form-field class="multiline" *ngIf="profileDetails.addressLine3">
+          <input matInput value="{{ profileDetails.addressLine3 }}" readonly>
         </mat-form-field>
-        <mat-form-field class="multiline">
-          <input matInput value="W23 X3PH" readonly>
+        <mat-form-field class="multiline" *ngIf="profileDetails.addressLine4">
+          <input matInput value="{{ profileDetails.addressLine4 }}" readonly>
+        </mat-form-field>
+        <mat-form-field class="multiline" *ngIf="profileDetails.addressLine5">
+          <input matInput value="{{ profileDetails.addressLine5 }}" readonly>
+        </mat-form-field>
+        <mat-form-field class="multiline" *ngIf="profileDetails.eircode">
+          <input matInput value="{{ profileDetails.eircode }}" readonly>
         </mat-form-field>
       </div>
     </div>
@@ -79,11 +85,11 @@
 
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-icon matListIcon fxlayoutalign="space-between start" alt="Phone">phone</mat-icon>
-      <mat-form-field [style.width]="dynamicWidth('087-7654321', 'Mobile Phone')" class="margin-right-narrow">
-        <input matInput placeholder="Mobile Phone" value="087-7654321" readonly>
+      <mat-form-field [style.width]="dynamicWidth(profileDetails.phoneMobile, 'Mobile Phone')" class="margin-right-narrow">
+        <input matInput placeholder="Mobile Phone" value="{{profileDetails.phoneMobile}}" readonly>
       </mat-form-field>
-      <mat-form-field [style.width]="dynamicWidth('01-1234567', 'Home Phone')" class="margin-right-narrow">
-        <input matInput placeholder="Home Phone" value="01-1234567" readonly>
+      <mat-form-field [style.width]="dynamicWidth(profileDetails.phoneLandline, 'Landline')" class="margin-right-narrow">
+        <input matInput placeholder="Landline" value="{{profileDetails.phoneLandline}}" readonly>
       </mat-form-field>
     </div>
 

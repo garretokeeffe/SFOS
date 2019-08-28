@@ -1,7 +1,7 @@
 {
   "id": 1,
   "firstName": "John",
-  "surname": "Murphy",
+  "lastName": "Murphy",
   "email": "John@demo.com",
   "userReferenceNumber": "11111",
   "lastLoginDate": "13/03/19 13:25"

@@ -54,6 +54,7 @@ export class TitleBarComponent implements OnInit {
   public ngOnInit(): void {
     console.log('Initialising title bar');
     this.getUserProfile();
+
     this.preloadImages();
     // this.getServerVersion();
   }

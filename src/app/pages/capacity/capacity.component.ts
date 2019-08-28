@@ -93,7 +93,7 @@ export class CapacityComponent implements OnInit, AfterViewChecked {
         this.user = user;
       },
       error => {
-        console.error('Failed to retrieve user');
+        console.error('Failed to retrieve userprofile');
         this.user = null;
       }
     );

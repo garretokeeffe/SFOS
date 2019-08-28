@@ -177,7 +177,7 @@
 
       <span class="spacer"></span>
 
-      <span *ngIf="!(isHandset$ | async) && user">{{ user.firstName }}&nbsp;{{ user.surname }}</span>
+      <span *ngIf="!(isHandset$ | async) && user">{{ user.firstName }}&nbsp;{{ user.lastName }}</span>
       <mat-icon aria-label="Side nav toggle icon" class="hoverable margin-left-half" routerLink="/notifications" title="My Inbox"
                 matBadge="{{ '3' }}" matBadgePosition="after" matBadgeColor="warn">email</mat-icon>
       <mat-icon aria-label="Side nav toggle icon" class="hoverable margin-left" [matMenuTriggerFor]="menu">person</mat-icon>

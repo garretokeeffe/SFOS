@@ -23,7 +23,7 @@ export class Applicant {
       // copy constructor
       this.id = applicant.id;
       this.firstName = applicant.firstName;
-      this.surname = applicant.surname;
+      this.surname = applicant.lastName;
       this.numberOfShares = applicant.numberOfShares;
       this.userReferenceNumber = applicant.userReferenceNumber;
       this.email = applicant.email;

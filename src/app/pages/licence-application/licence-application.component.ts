@@ -45,7 +45,7 @@ export class LicenceApplicationComponent implements OnInit, AfterViewChecked {
       // }
     },
     error => {
-      console.error('Failed to retrieve user');
+      console.error('Failed to retrieve userprofile');
       this.user = null;
     });
 

@@ -39,11 +39,11 @@ export class AppComponent implements OnInit {
     this.showA2HSButton = true;
   }
   public addToHomeScreen(): void {
-    // hide our user interface that shows our A2HS button
+    // hide our userprofile interface that shows our A2HS button
     this.showA2HSButton = false;
     // Show the prompt
     this.deferredPrompt.prompt();
-    // Wait for the user to respond to the prompt
+    // Wait for the userprofile to respond to the prompt
     this.deferredPrompt.userChoice
     .then((choiceResult) => {
       if (choiceResult.outcome === 'accepted') {

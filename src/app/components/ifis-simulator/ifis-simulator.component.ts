@@ -11,7 +11,7 @@ import { Emitters } from '../../types/emitters';
 })
 export class IfisSimulatorComponent implements OnInit {
 
-  private _userType: string = 'sfos_vessel_owner'; // default user role,
+  private _userType: string = 'sfos_vessel_owner'; // default userprofile role,
     // sfos_vessel_owner | sfos_vessel_owner_ro | sfos_representative | sfos_representative_ro | sfos_la | sfos_la_ro | sfos_la2 | sfos_la2_ro
     // sfos_fish_buyer | sfos_fish_buyer_ro | sfos_sfpa | sfos_sfpa_ro | sfos_sfpmd | sfos_sfpmd_ro
   private previousUserType: string = this._userType;
@@ -21,7 +21,7 @@ export class IfisSimulatorComponent implements OnInit {
   constructor(private user: AuthenticationService) { }
 
   public ngOnInit(): void {
-    // if keycloak authentication has already been used don't fire up the simulator automatically - let the user select a role
+    // if keycloak authentication has already been used don't fire up the simulator automatically - let the userprofile select a role
     if (this.user.isUsingKeycloak()) {
       this._userType = 'keycloak';
       console.log('KEYCLOAK LOG IN - IFIS ROLE SIMULATOR IS AVAILABLE BUT NOT YET IN USE');
@@ -44,10 +44,10 @@ export class IfisSimulatorComponent implements OnInit {
 
     this.userType = userType;
 
-    // if user type has changed from EXT to INT or vice-versa we need to re-display the dashboard so incorrect screen 2s are not displayed
+    // if userprofile type has changed from EXT to INT or vice-versa we need to re-display the dashboard so incorrect screen 2s are not displayed
     let returnToDashboard: boolean = false;
 
-    // if user group stays the same but access has changed from write to view or vice-versa
+    // if userprofile group stays the same but access has changed from write to view or vice-versa
     let accessLevelChanged: boolean = false;
 
     if (this.userType === 'keycloak') {

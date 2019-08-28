@@ -90,7 +90,7 @@ export class SubmissionView extends Submission {
     s += this.displayType();
     this.applicants.forEach( (applicant: User) => {
       s += applicant.firstName;
-      s += applicant.surname;
+      s += applicant.lastName;
     });
     this.vessels.forEach( (vessel: Vessel) => {
       s += vessel.name;
@@ -100,7 +100,7 @@ export class SubmissionView extends Submission {
     s += this.updateDate;
     if (this.assignee) {
       s += this.assignee.firstName;
-      s += this.assignee.surname;
+      s += this.assignee.lastName;
     }
 
     return s;

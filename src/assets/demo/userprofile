@@ -1,0 +1,22 @@
+{
+  "id": 1,
+  "firstName": "John",
+  "lastName": "Murphy",
+  "email": "John@demo.com",
+
+  "userReferenceNumber": "11111",
+  "title": "Mr",
+  "dob": "27/01/1950",
+  "countryOfNationality": "Ireland",
+  "ppsn": "5372209E",
+
+  "lastLoginDate": "13/03/19 13:25",
+  "addressLine1": "30 St. Patrick's Street",
+  "addressLine2": "Blackrock",
+  "addressLine3": "Cork",
+  "addressLine4": "Co. Cork",
+  "addressLine5": "Ireland",
+  "eircode": "C56 A15",
+  "phoneMobile": "087-1122331",
+  "phoneLandline": "021-1231234"
+}

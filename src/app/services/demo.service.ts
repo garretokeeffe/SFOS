@@ -1,8 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-
 import { environment } from '../../environments/environment';
+import { Keycloak } from 'keycloak-angular/lib/core/services/keycloak.service';
+import { UserView } from '../types/user';
+import { Capacity, CapacityView } from '../types/capacity';
 
 /* istanbul ignore next */
 @Injectable({
@@ -12,6 +14,21 @@ export class DemoService {
 
   private urlVersion: string = 'assets/demo/version';
   public packageJsonVersion: string = environment.version;
+
+  public getVersionURL: string = 'assets/demo/version';
+  public getKeycloakProfileURL: string = 'assets/demo/keycloakuserprofile';
+  public getUserProfileURL: string = 'assets/demo/userprofile';
+  public getUsersURL: string = 'assets/demo/users';
+  public getApplicationsURL: string = 'assets/demo/applications';
+  public getNotificationCategoriesURL: string = 'assets/demo/notification-categories';
+  public getNotificationsURL: string = 'assets/demo/notifications';
+  public getStatusesOfSubmissionsURL: string = 'assets/demo/statuses-of-submissions';
+  public getVesselsURL: string = 'assets/demo/vessels';
+  public getVesselURL: string = 'assets/demo/vessel';
+  public getLetterOfOfferTermsURL: string = 'assets/demo/letter-of-offer-terms';
+  public getSubmissionsAllURL: string = 'assets/demo/submissions-all';
+  public getSubmissionsInProgressURL: string = 'assets/demo/submissions-in-progress';
+  public getCapacityURL: string = 'assets/demo/capacity';
 
   constructor(private http: HttpClient) { }
 
@@ -30,6 +47,34 @@ export class DemoService {
         (error) => {
           console.log(JSON.stringify(error));
           observer.next('');
+        });
+    });
+  }
+
+  public getKeycloakUserProfile(): Observable<Keycloak.KeycloakProfile> {
+    const url: string = this.getKeycloakProfileURL;
+
+    return Observable.create((observer) => {
+      this.http.get(url, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache, no-store, must-revalidate', // HTTP 1.1
+          'Pragma': 'no-cache', // HTTP 1.0
+          'Expires': '0', // Proxies
+        }),
+        observe: 'body',
+      })
+      .subscribe(
+        (keycloakProfile: Keycloak.KeycloakProfile) => {
+          observer.next(keycloakProfile);
+          observer.complete();
+
+        },
+        (error) => {
+          // logger.error(JSON.stringify(error));
+          console.log(JSON.stringify(error));
+          observer.error(error);
+          observer.complete();
         });
     });
   }

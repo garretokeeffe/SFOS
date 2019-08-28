@@ -126,11 +126,11 @@ export class LaPreliminaryInfoComponent implements OnInit, AfterViewChecked {
   public findApplicant(userRefNo: string, index: number): void {
     this.userService.getUserByUserReferenceNumber(userRefNo).subscribe((user: UserView) => {
       if (user) {
-        // this.licenceApplication.applicants[index] = new ApplicantView(user);
+        // this.licenceApplication.applicants[index] = new ApplicantView(userprofile);
         this.licenceApplication.applicants[index].id = user.id;
         this.licenceApplication.applicants[index].userReferenceNumber = user.userReferenceNumber;
         this.licenceApplication.applicants[index].firstName = user.firstName;
-        this.licenceApplication.applicants[index].surname = user.surname;
+        this.licenceApplication.applicants[index].lastName = user.lastName;
         this.licenceApplication.applicants[index].email = user.email;
         this.licenceApplication.applicants[index].numberOfShares = 0;
         this.licenceApplication.applicants[index].notFound = false;
@@ -141,7 +141,7 @@ export class LaPreliminaryInfoComponent implements OnInit, AfterViewChecked {
       }
     },
     error => {
-      console.error('Failed to retrieve user by user ref no');
+      console.error('Failed to retrieve userprofile by userprofile ref no');
       this.licenceApplication.applicants[index].notFound = true;
     });
   }

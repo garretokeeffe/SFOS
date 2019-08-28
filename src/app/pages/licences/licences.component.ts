@@ -54,7 +54,7 @@ export class LicencesComponent implements OnInit, DoCheck {
         this.user = user;
       },
       error => {
-        console.error('Failed to retrieve user');
+        console.error('Failed to retrieve userprofile');
         this.user = null;
       });
 

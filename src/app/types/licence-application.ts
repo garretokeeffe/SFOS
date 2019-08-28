@@ -75,7 +75,7 @@ export class LicenceApplicationView extends LicenceApplication {
       return true;
     } else {
       console.log('Failed to setActiveApplicant. No match found for User Reference Number: ' + userReferenceNumber);
-      return false; // no such user.
+      return false; // no such userprofile.
     }
   }
   public getApplicant(userReferenceNumber: string): ApplicantView {
@@ -83,7 +83,7 @@ export class LicenceApplicationView extends LicenceApplication {
     if (applicant) {
       return applicant;
     } else {
-      return null; // no such user.
+      return null; // no such userprofile.
     }
   }
 
@@ -100,7 +100,7 @@ export class LicenceApplicationView extends LicenceApplication {
       this.activeApplicant.setLetterOfOfferTermsAccepted();
       return true;
     } else {
-      return false; // no such user.
+      return false; // no such userprofile.
     }
   }
   public setLetterOfOfferTermsRejected(): boolean {
@@ -108,7 +108,7 @@ export class LicenceApplicationView extends LicenceApplication {
       this.activeApplicant.setLetterOfOfferTermsRejected();
       return true;
     } else {
-      return false; // no such user.
+      return false; // no such userprofile.
     }
   }
 

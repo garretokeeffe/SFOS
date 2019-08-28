@@ -93,31 +93,31 @@ export class LaApplicationsListComponent implements OnInit, AfterViewInit {
     this.assignees.push(new User({
       'id': 1,
       'firstName' : 'Emma',
-      'surname': 'Doyle',
+      'lastName': 'Doyle',
       'lastLoginDate': ''
     }));
     this.assignees.push(new User({
       'id': 2,
       'firstName' : 'Paul',
-      'surname': 'Harris',
+      'lastName': 'Harris',
       'lastLoginDate': ''
     }));
     this.assignees.push(new User({
       'id': 3,
       'firstName' : 'Peter',
-      'surname': 'Harrington',
+      'lastName': 'Harrington',
       'lastLoginDate': ''
     }));
     this.assignees.push(new User({
       'id': 4,
       'firstName' : 'John',
-      'surname': 'Murphy',
+      'lastName': 'Murphy',
       'lastLoginDate': ''
     }));
     this.assignees.push(new User({
       'id': 5,
       'firstName' : 'Suzanna',
-      'surname': 'Lopez',
+      'lastName': 'Lopez',
       'lastLoginDate': ''
     }));
 
@@ -135,7 +135,7 @@ export class LaApplicationsListComponent implements OnInit, AfterViewInit {
       {
         'id': 4,
         'firstName': 'Peter',
-        'surname': 'Mahoney',
+        'lastName': 'Mahoney',
         'userReferenceNumber': '44444',
         'lastLoginDate': '01/05/19 17:19'
       });
@@ -163,13 +163,13 @@ export class LaApplicationsListComponent implements OnInit, AfterViewInit {
       this.dataSource.filterPredicate = (data: SubmissionView, filter: string) => (
         data.refId.toString().indexOf(filter.toUpperCase()) >= 0
         || data.displayType().indexOf(filter.toUpperCase()) >= 0
-        || data.applicants.filter( applicant => (applicant.firstName.toUpperCase().indexOf(filter) >= 0 || applicant.surname.toUpperCase().indexOf(filter) >= 0)).length > 0
+        || data.applicants.filter( applicant => (applicant.firstName.toUpperCase().indexOf(filter) >= 0 || applicant.lastName.toUpperCase().indexOf(filter) >= 0)).length > 0
         || data.vessels.filter( vessel => vessel.name.toUpperCase().indexOf(filter) >= 0).length > 0
         || data.displayStatus().indexOf(filter.toUpperCase()) >= 0
         || data.createDate.toUpperCase().indexOf(filter.toUpperCase()) >= 0
         || data.updateDate.toUpperCase().indexOf(filter.toUpperCase()) >= 0
         || (data.assignee && data.assignee.firstName.toUpperCase().indexOf(filter.toUpperCase()) >= 0)
-        || (data.assignee && data.assignee.surname.toUpperCase().indexOf(filter.toUpperCase()) >= 0)
+        || (data.assignee && data.assignee.lastName.toUpperCase().indexOf(filter.toUpperCase()) >= 0)
       );
     }
     */
@@ -328,7 +328,7 @@ export class LaApplicationsListComponent implements OnInit, AfterViewInit {
     // Display Client Selector warning message
     // TODO: Replace this hard coded demo implementation
     if (this.authentication.access.userGroup === UserGroup['REPRESENTATIVE']
-      && submission.applicants.filter( applicant => applicant.firstName === 'Peter' && applicant.surname === 'Mahoney').length === 0) {
+      && submission.applicants.filter( applicant => applicant.firstName === 'Peter' && applicant.lastName === 'Mahoney').length === 0) {
       this.confirmClientSelection(submission).subscribe((selectionConfirmed: boolean) => {
         if (selectionConfirmed) {
           this.selectedSubmission = submission;
@@ -383,10 +383,10 @@ export class LaApplicationsListComponent implements OnInit, AfterViewInit {
       /*
       let text: string =
         `In selecting this application you will be acting on behalf of <br><br>
-      ${submission.applicants[0].firstName} ${submission.applicants[0].surname}.`;
+      ${submission.applicants[0].firstName} ${submission.applicants[0].lastName}.`;
        */
       const text: string = 'In selecting this application you will be acting on behalf of';
-      const prompt: string = `${submission.applicants[0].firstName} ${submission.applicants[0].surname}`;
+      const prompt: string = `${submission.applicants[0].firstName} ${submission.applicants[0].lastName}`;
 
       const confirmationInfo: ConfirmationInfo = new ConfirmationInfo('Confirm Representation', text, prompt, 'OK', 'CANCEL');
 
@@ -411,7 +411,7 @@ export class LaApplicationsListComponent implements OnInit, AfterViewInit {
 
       } else {
         const text: string = 'You are about to start a new application on behalf of';
-        const prompt: string = `${this.selectedClient.firstName} ${this.selectedClient.surname}`;
+        const prompt: string = `${this.selectedClient.firstName} ${this.selectedClient.lastName}`;
 
         const confirmationInfo: ConfirmationInfo = new ConfirmationInfo('Confirm Representation', text, prompt, 'OK', 'CANCEL');
 

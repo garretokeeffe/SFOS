@@ -46,8 +46,8 @@ export class LaNavbarComponent implements OnInit, OnChanges {
   ngOnInit() { }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['user'].currentValue) {
-      this.licenceApplication.setActiveApplicant(changes['user'].currentValue.userReferenceNumber);
+    if (changes['userprofile'].currentValue) {
+      this.licenceApplication.setActiveApplicant(changes['userprofile'].currentValue.userReferenceNumber);
     }
   }
 
@@ -80,7 +80,7 @@ export class LaNavbarComponent implements OnInit, OnChanges {
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Confirmation result: ${result}`);
       if (result) {
-        // user confirmed rejection
+        // userprofile confirmed rejection
         this.licenceApplication.activeApplicant.letterOfOfferTermsAcceptanceStatus = LetterOfOfferTermsAcceptanceStatus['REJECTED'];
         this.licenceApplication.activeApplicant.letterOfOfferTermsRejectedDate = moment.utc().format('DD/MM/YYYY HH:MM'); // new Date().toString('dd/mm/yyyy hh:mm');
       }
