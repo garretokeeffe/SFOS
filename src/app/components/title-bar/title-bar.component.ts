@@ -34,17 +34,12 @@ export class TitleBarComponent implements OnInit {
   public openImage: boolean = true;
 
   public version: string = environment.version; // = '';
+  public user: UserView = new UserView();
 
   public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
   .pipe(
-    map((result) => result.matches),
+    map((result) => result.matches)
   );
-  public isAtLeastLarge$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.Large, Breakpoints.XLarge])
-  .pipe(
-    map((result) => result.matches),
-  );
-
-  public user: UserView = new UserView();
 
   constructor(public userService: UserService,
               private breakpointObserver: BreakpointObserver,

@@ -11,8 +11,16 @@
     <span *ngIf="vessels.length === 1">
       My Vessel
     </span>
+    <span *ngIf="vessels.length === 0">
+      My Vessels
+    </span>
 
   </h2>
+
+  <div *ngIf="errorMessage" class="errorBanner" fxLayoutAlign="start start">
+    <mat-icon class="info-icon">error_outline</mat-icon>
+    <div>{{ errorMessage }}</div>
+  </div>
 
   <div *ngIf="vessels.length > 0">
     <div fxLayout="{{(isHandset$ | async) ? 'column' : 'row wrap'}}" fxLayoutAlign="{{(isHandset$ | async) ? 'center start' : 'space-evenly start'}}">

@@ -1,16 +1,7 @@
-<!--
-  <mat-card class="mat-elevation-z8">
-    <mat-card-content>
-      <mat-card-title class="title">Quota Balancing</mat-card-title>
-      <mat-card-subtitle class="subtitle italic">{{ userprofile.access.userGroup }}</mat-card-subtitle>
-    </mat-card-content>
-  </mat-card>
--->
-<div class="title-bar-container"
-     [class.handset]="(isHandset$ | async)"
-     [class.desktop]="!(isHandset$ | async)"
-     [class.desktop-large]="(isAtLeastLarge$ | async)"
-     [class.unauthenticated]="!authenticated">
+<!-- for some reason [class.desktop]="!(isHandset$ | async)" MUST be specified in the containing div below,
+otherwise the title doesn't resize correctly. desktop isn't not being used in the code so not sure why this is. -->
+
+<div class="title-bar-container" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)" [class.unauthenticated]="!authenticated">
   <div class="title-bar">
     <div class="qb-parallax-container">
       <div class="mat-elevation-z8 parallax-image" parallax [ratio]="0.375" #Image1 [@fadeInOut]="openImage ? 'fadeIn' : 'fadeOut'"></div>

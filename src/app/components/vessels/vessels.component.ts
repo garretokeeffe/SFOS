@@ -41,6 +41,8 @@ export class VesselsComponent implements OnInit {
   public hideNotifications: boolean = true;
   public hideApplicationStatuses: boolean = true;
 
+  public errorMessage: string = '';
+
   constructor(public activatedRoute: ActivatedRoute,
               public breakpointObserver: BreakpointObserver,
               public appComponent: AppComponent,
@@ -51,7 +53,9 @@ export class VesselsComponent implements OnInit {
 
   ngOnInit() {
     this.title$ = this.activatedRoute.paramMap.pipe(map(() => window.history.state.title));
+    this.errorMessage = '';
 
+    /*
     this.userService.getUserByUserId().subscribe((user: UserView) => {
         this.user = user;
       },
@@ -59,6 +63,7 @@ export class VesselsComponent implements OnInit {
         console.error('Failed to retrieve userprofile');
         this.user = null;
       });
+    */
 
     this.vesselService.getVessels().subscribe((vessels: Array<VesselView>) => {
         this.vessels = vessels.sort((v1, v2) => {
@@ -68,6 +73,7 @@ export class VesselsComponent implements OnInit {
       error => {
         console.error('Failed to retrieve vessels');
         this.vessels = [];
+        this.errorMessage = 'Sorry, something went wrong. Your vessels could not be retrieved at this time.';
       });
 
     this.licenceService.getStatusesOfSubmissions().subscribe(submissions => {

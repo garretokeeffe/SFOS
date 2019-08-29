@@ -8,9 +8,9 @@ export enum LetterOfOfferTermsAcceptanceStatus {
 }
 
 export class Applicant {
-  public id: number = null;
+  public id: string = null;
   public firstName: string = '';
-  public surname: string;
+  public lastName: string;
   public numberOfShares: number; // max =64
   public userReferenceNumber: string;
   public email: string;
@@ -23,7 +23,7 @@ export class Applicant {
       // copy constructor
       this.id = applicant.id;
       this.firstName = applicant.firstName;
-      this.surname = applicant.lastName;
+      this.lastName = applicant.lastName;
       this.numberOfShares = applicant.numberOfShares;
       this.userReferenceNumber = applicant.userReferenceNumber;
       this.email = applicant.email;
@@ -58,7 +58,7 @@ export class ApplicantView extends Applicant {
 
   public set fullName(val: string) { }
   public get fullName(): string {
-    return this.firstName + ' ' + this.surname;
+    return this.firstName + ' ' + this.lastName;
   }
 
   public setLetterOfOfferTermsAccepted(accepted: boolean = true): void {

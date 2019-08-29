@@ -8,38 +8,61 @@ import { UserService } from 'src/app/services/user.service';
 import { UserView } from 'src/app/types/user';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Utils } from '../../services/utils.service';
+import { Globals } from '../../globals';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
 
-  public utils = Utils; // .getInstance(); // provide access to static Utils functions in html
-  public profileDetails: UserView = new UserView();
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
-  .pipe(
-    map(result => result.matches)
-  );
+  // UX Options (Can be removed after demo)
+  public isCompanyMode: boolean = false;
 
-  title$: Observable<object>;
+  public utils: Utils = Utils; // .getInstance(); // provide access to static Utils functions in html
+  public user: UserView = new UserView();
+  public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
+  .pipe(
+    map((result) => result.matches),
+  );
+  public isAtLeastMedium$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.Medium, Breakpoints.Large, Breakpoints.XLarge])
+  .pipe(
+    map((result) => result.matches),
+  );
+  public isAtLeastLarge$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.Large, Breakpoints.XLarge])
+  .pipe(
+    map((result) => result.matches),
+  );
+  public title$: Observable<object>;
 
   constructor(public authentication: AuthenticationService,
               public activatedRoute: ActivatedRoute,
               private breakpointObserver: BreakpointObserver,
               private snackBar: MatSnackBar,
-              private userService: UserService) { }
+              private userService: UserService,
+              public globals: Globals) { }
 
   public ngOnInit(): void {
     this.title$ = this.activatedRoute.paramMap.pipe(map(() => window.history.state.title));
     this.getUserProfile();
   }
 
+  public isCompany(): boolean {
+    // IMPORTANT TODO: return this.user.isCompany() rather than this.isCompanyMode when UX Options are removed
+    // return this.user.isCompany();
+
+    if (this.globals.demo) {
+      return this.isCompanyMode;
+    } else {
+      return this.user.isCompany();
+    }
+  }
+
   private getUserProfile(): void {
     this.userService.getUserProfile().subscribe(
       (data: UserView) => {
-        this.profileDetails = new UserView(data);
+        this.user = new UserView(data);
       },
       (error) => {
         console.error('Error in getting profile data ' + error);

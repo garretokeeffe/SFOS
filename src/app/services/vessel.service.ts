@@ -3,28 +3,30 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Vessel, VesselView } from '../types/vessel';
-import {VesselOwnerView} from '../types/vessel-owner';
+import { VesselOwnerView } from '../types/vessel-owner';
+import { Globals } from '../globals';
+import { DemoService } from './demo.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VesselService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public globals: Globals, public demoService: DemoService) { }
 
   public getVessels(ownerId?: number): Observable<Array<VesselView>> {
 
-    const url: string = environment.getVesselsURL;
+    const url: string = this.globals.demo ? this.demoService.getVesselsURL : environment.getVesselsURL;
 
-    return Observable.create(observer => {
+    return Observable.create((observer) => {
       this.http.get(url, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
           'Cache-Control': 'no-cache, no-store, must-revalidate', // HTTP 1.1
           'Pragma': 'no-cache', // HTTP 1.0
-          'Expires': '0' // Proxies
+          'Expires': '0', // Proxies
         }),
-        observe: 'body'
+        observe: 'body',
       })
       .subscribe(
         (res: Array<Vessel>) => {

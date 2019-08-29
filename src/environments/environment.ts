@@ -33,6 +33,7 @@ export const environment: any = {
   getNotificationsURL: 'assets/demo/notifications',
   getStatusesOfSubmissionsURL: 'assets/demo/statuses-of-submissions',
   getVesselsURL: 'assets/demo/vessels',
+  garret_getVesselsURL: 'http://WKEBNFS23452:9001/vessels/ifis/74',
   getVesselURL: 'assets/demo/vessel',
   getLetterOfOfferTermsURL: 'assets/demo/letter-of-offer-terms',
   getSubmissionsAllURL: 'assets/demo/submissions-all',

@@ -49,7 +49,9 @@ export class Utils {
   }
 
   public static dynamicWidth(value: string, placeHolder: string = value): string {
-    return value.length ? Math.max(value.length, placeHolder.length * 0.5) + 'em' : '0';
+    const width: string = value.length ? Math.max(value.length * 0.66, placeHolder.length * 0.5) + 'em' : '0';
+    // console.log('dynamic width of (value: ' + value + ', placeHolder: ' + placeHolder + ' = ' + width);
+    return width;
   }
 
   constructor() { }

@@ -49,7 +49,7 @@ export class UserService {
         .subscribe(
           (profile: Keycloak.KeycloakProfile) => {
             // simulate getting the remaining user attributes from ifis
-            this.getUserProfileByCcsId(profile.id, profile).subscribe((user: UserView) => {
+            this.getUserProfileByCcsId(profile.id).subscribe((user: UserView) => {
               observer.next(user);
               observer.complete();
             });
@@ -63,7 +63,7 @@ export class UserService {
           .then(
             (profile: Keycloak.KeycloakProfile) => {
               // get the remaining user attributes from ifis
-              this.getUserProfileByCcsId(profile.id, profile).subscribe((user: UserView) => {
+              this.getUserProfileByCcsId(profile.id).subscribe((user: UserView) => {
                 observer.next(user);
                 observer.complete();
               });
@@ -78,11 +78,11 @@ export class UserService {
     }
   }
 
-  private getUserProfileByCcsId(ccsId: string, keycloakProfile?: Keycloak.KeycloakProfile): Observable<UserView> {
-    console.log('getUserProfileByCcsId profile.id: ' + keycloakProfile.id);
+  private getUserProfileByCcsId(ccsId: string): Observable<UserView> {
+    console.log('getUserProfileByCcsId: ' + ccsId);
     let url: string = this.globals.demo ? this.demoService.getUserProfileURL : environment.getUserProfileURL;
 
-    // don't append the userId in demo mode
+    // don't append the ccsId in demo mode
     if (!this.globals.demo && ccsId) {
       url += '/' + ccsId;
     }
@@ -102,7 +102,7 @@ export class UserService {
           const user: UserView = new UserView(res);
 
           // override any attributes values returned by ifis with those persisted in CCS
-          user.setKeycloakAttributes(keycloakProfile); // remove this line if all user attributes are returned from ifis
+          // user.setKeycloakAttributes(keycloakProfile); // remove this line if all user attributes are returned from ifis
 
           this.currentUserProfile = user;
           observer.next(user);

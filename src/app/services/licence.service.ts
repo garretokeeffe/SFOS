@@ -14,14 +14,14 @@ export class LicenceService {
 
   constructor(private http: HttpClient) { }
 
-  public getStatusesOfSubmissions(applicantId?: number): Observable<Array<SubmissionView>> {
+  public getStatusesOfSubmissions(applicantId?: string): Observable<Array<SubmissionView>> {
 
     let url: string = environment.getStatusesOfSubmissionsURL;
     if (applicantId) {
       url += '/' + applicantId;
     }
 
-    return Observable.create(observer => {
+    return Observable.create((observer) => {
       this.http.get(url, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ export class LicenceService {
           if (applicantId) {
             const filteredSubmissions: Array<SubmissionView> = [];
             submissions.forEach((submission: SubmissionView) => {
-              const matched: number = submission.applicants.filter(applicant => applicant.id === applicantId).length;
+              const matched: number = submission.applicants.filter((applicant) => applicant.id === applicantId).length;
               if (matched) {
                 filteredSubmissions.push(submission);
               }
