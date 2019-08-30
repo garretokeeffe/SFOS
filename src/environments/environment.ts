@@ -14,9 +14,10 @@ let keycloakConfig: KeycloakConfig = {
 */
 
 export const kcConfig: KeycloakConfig = {
-  url: 'http://localhost:8080/auth',
-  realm: 'Dev-Realm',
-  clientId: 'ccs-service',
+  url: 'https://sso-keycloak-sso1.apps.rhos.agriculture.gov.ie/auth',
+  realm: 'Staging-Realm',
+  clientId: '9d5d5361',
+  credentials:{secret: '8a6ad8d597f8915f43b31a912098c2ee'} 
 };
 
 export const environment: any = {
@@ -32,7 +33,7 @@ export const environment: any = {
   getNotificationCategoriesURL: 'assets/demo/notification-categories',
   getNotificationsURL: 'assets/demo/notifications',
   getStatusesOfSubmissionsURL: 'assets/demo/statuses-of-submissions',
-  getVesselsURL: 'assets/demo/vessels',
+  getVesselsURL: 'https://api-3scale-apicast-staging.apps.rhos.agriculture.gov.ie:443/sfos/vessels/users/ccs/FBY10123C',
   garret_getVesselsURL: 'http://WKEBNFS23452:9001/vessels/ifis/74',
   getVesselURL: 'assets/demo/vessel',
   getLetterOfOfferTermsURL: 'assets/demo/letter-of-offer-terms',

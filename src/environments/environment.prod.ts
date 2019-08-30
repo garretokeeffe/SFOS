@@ -5,7 +5,8 @@ declare const require: any;
 export const kcConfig: KeycloakConfig = {
   url: 'https://sso-keycloak-sso1.apps.rhos.agriculture.gov.ie/auth',
   realm: 'Staging-Realm',
-  clientId: 'ccs-service',
+  clientId: '9d5d5361',
+  credentials:{secret: '8a6ad8d597f8915f43b31a912098c2ee'} 
 };
 
 export const environment: any = {
