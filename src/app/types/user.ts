@@ -25,7 +25,7 @@ export class User {
   public ppsn: string = '';
 
   // attributes - company
-  public companyName: string = ''; // if present, we assume we are dealing with a company
+  public companyName: string = ''; // if present, the UI assumes we are dealing with a company
   public registeredCountry: string = '';
   public companyNumber: string = '';
   public vatNumber: string = '';

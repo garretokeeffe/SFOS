@@ -47,7 +47,7 @@
 
       <div fxLayout="row" fxLayoutAlign="start center">
         <mat-icon matListIcon fxlayoutalign="space-between start" alt="PPSN">folder_shared</mat-icon>
-        <mat-form-field [style.width]="dynamicWidth(user.ppsn, 'PPSN')" class="margin-right-narrow">
+        <mat-form-field>
           <input matInput placeholder="PPSN" value="{{ user.ppsn }}" readonly>
         </mat-form-field>
         <!-- DMcD: we can remove User Reference No. if LA applicants can be identified by email address -->
