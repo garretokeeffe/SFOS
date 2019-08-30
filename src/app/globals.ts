@@ -14,7 +14,7 @@ export class Configuration {
 
 @Injectable()
 export class Globals {
-  public demo: boolean = true;
+  public demo: boolean = false;
   public demoSkipLoginScreen: boolean = false; // demo must be true for demoSkipLoginScreen = true to take effect
   public prototype: boolean = false; // set true to display proposed features
 

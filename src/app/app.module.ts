@@ -128,6 +128,8 @@ import { DemoService } from './services/demo.service';
 import { TitleBarComponent } from './components/title-bar/title-bar.component';
 import { ParallaxDirective } from './directives/parallax/parallax.directive';
 import { MainLogoComponent } from './components/main-logo/main-logo.component';
+import { TokenInterceptor } from './services/token.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -255,6 +257,11 @@ import { MainLogoComponent } from './components/main-logo/main-logo.component';
     SidenavService,
     VersionService,
     DemoService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
     { provide: APP_INITIALIZER, useFactory: keycloakInitializer, multi: true, deps: [KeycloakService, Globals] },
   ],
   schemas: [

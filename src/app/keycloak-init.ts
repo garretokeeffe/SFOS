@@ -29,7 +29,7 @@ export function keycloakInitializer(keycloak: KeycloakService, globals: Globals)
               onLoad: 'login-required',
               checkLoginIframe: true,
             },
-            enableBearerInterceptor: true,
+            enableBearerInterceptor: false,
             bearerExcludedUrls: [],
           });
           resolve();
