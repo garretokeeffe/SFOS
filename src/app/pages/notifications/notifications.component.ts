@@ -43,7 +43,7 @@ export class NotificationsComponent implements OnInit, AfterViewInit {
     },
     {
       id: 4,
-      name: 'GENERAL',
+      name: 'NONE',
     },
   ];
    */

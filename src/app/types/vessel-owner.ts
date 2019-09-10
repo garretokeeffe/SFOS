@@ -1,7 +1,7 @@
 export class VesselOwner {
   public id: number = null;
   public firstName: string = '';
-  public surname: string = '';
+  public lastName: string = '';
   public numberOfShares: number; // max =64
   public userReferenceNumber: string = '';
   public email: string = '';
@@ -11,7 +11,7 @@ export class VesselOwner {
       // copy constructor
       this.id = vesselOwner.id;
       this.firstName = vesselOwner.firstName;
-      this.surname = vesselOwner.surname;
+      this.lastName = vesselOwner.lastName;
       this.numberOfShares = vesselOwner.numberOfShares;
       this.userReferenceNumber = vesselOwner.userReferenceNumber;
       this.email = vesselOwner.email;
@@ -26,6 +26,6 @@ export class VesselOwnerView extends VesselOwner {
 
   public set fullName(val: string) { }
   public get fullName(): string {
-    return this.firstName + ' ' + this.surname;
+    return this.firstName + ' ' + this.lastName;
   }
 }

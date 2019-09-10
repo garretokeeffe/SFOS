@@ -130,11 +130,25 @@ import { ParallaxDirective } from './directives/parallax/parallax.directive';
 import { MainLogoComponent } from './components/main-logo/main-logo.component';
 import { TokenInterceptor } from './services/token.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { CapacityCardComponent } from './components/capacity/capacity-card/capacity-card.component';
+import { Filter } from './pipes/filter.pipe';
+import { Unique } from './pipes/unique.pipe';
+import { Contain } from './pipes/contain.pipe';
+import { FleetSegmentComponent } from './components/capacity/fleet-segment/fleet-segment.component';
+import { TrackRecordComponent } from './components/capacity/track-record/track-record.component';
+import { OrderBy } from './pipes/orderBy.pipe';
+import { CapacityDetailComponent } from './components/capacity/capacity-detail/capacity-detail.component';
+import { VesselCapacityCardComponent } from './components/capacity/vessel-capacity-card/vessel-capacity-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SafePipe,
+    Filter,
+    Contain,
+    Unique,
+    OrderBy,
     ParallaxDirective,
     IfisSimulatorComponent,
     LoginComponent,
@@ -189,6 +203,11 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     DividerComponent,
     TitleBarComponent,
     MainLogoComponent,
+    CapacityCardComponent,
+    FleetSegmentComponent,
+    TrackRecordComponent,
+    CapacityDetailComponent,
+    VesselCapacityCardComponent,
   ],
   imports: [
     routingModule,
@@ -260,7 +279,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
-      multi: true
+      multi: true,
     },
     { provide: APP_INITIALIZER, useFactory: keycloakInitializer, multi: true, deps: [KeycloakService, Globals] },
   ],

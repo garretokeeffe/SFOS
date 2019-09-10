@@ -13,18 +13,24 @@ let keycloakConfig: KeycloakConfig = {
 };
 */
 
+export const kcConfigLocal: KeycloakConfig = {
+  url: 'http://localhost:8080/auth',
+  realm: 'Dev-Realm',
+  clientId: 'ccs-service',
+};
+
 export const kcConfig: KeycloakConfig = {
   url: 'https://sso-keycloak-sso1.apps.rhos.agriculture.gov.ie/auth',
   realm: 'Staging-Realm',
   clientId: '9d5d5361',
-  credentials:{secret: '8a6ad8d597f8915f43b31a912098c2ee'} 
+  credentials: {secret: '8a6ad8d597f8915f43b31a912098c2ee'},
 };
 
 export const environment: any = {
   production: false,
   name: 'DEV',
   version: require('../../package.json').version.replace(/-SNAPSHOT|trunk-/gi, ''),
-  keycloakConfig: kcConfig,
+  keycloakConfig: kcConfigLocal,
   authenticationURL: 'http://localhost:8080/ws/login',
   getVersionURL: 'assets/demo/version',
   getUserProfileURL: 'assets/demo/userprofile',

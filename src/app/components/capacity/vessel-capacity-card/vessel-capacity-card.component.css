@@ -1,0 +1,25 @@
+.mat-card {
+  min-width: 250px;
+  background: rgba(50, 112, 104, .05) !important;
+}
+
+.innerCard {
+  max-width: 220px;
+  min-width: 220px;
+}
+
+.innerCard.handset {
+  max-width: 204px;
+  min-width: 204px;
+}
+mat-card-header {
+  margin-bottom: 8px;
+}
+::ng-deep .mat-card-header-text {
+  width: 100%; /* allows centering of vessel name */
+}
+::ng-deep .mat-expansion-panel-body {
+  padding: 0 !important;
+  margin-right: 16px !important;
+  margin-left: 16px !important;
+}

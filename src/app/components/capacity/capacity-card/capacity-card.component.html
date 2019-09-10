@@ -1,0 +1,50 @@
+<div *ngIf="capacities.length" class="padding-horizontal padding-bottom margin-bottom">
+  <div class="wizard-label margin-top color-primary margin-bottom">
+    <span *ngIf="[FleetSegment['POLYVALENT'], FleetSegment['SPECIFIC']].includes(capacities[0].fleetSegment)">
+      {{ (capacities[0]).displayFleetSubSegment() }}
+    </span>
+    <span *ngIf="showSubSegmentTotal" class="color-primary-soft margin-left" style="text-transform: none">{{ allCapacities.getTotalCapacity(capacities) }}</span>
+  </div>
+
+  <div *ngIf="capacities[0].fleetSubSegment === FleetSubSegment['NONE']"class="margin-bottom"></div>
+
+  <!-- ON REGISTER -->
+  <div *ngIf="!offRegister" fxLayout="(isHandset$ | async) ? 'row' : 'column'"  fxLayoutAlign="start stretch" fxLayoutGap="16px" class="mat-card-group">
+    <div *ngFor="let capacity of capacities; let i = index;" [class.fullWidth]="(isHandset$ | async)">
+      <app-vessel-capacity-card [capacity]="capacity" [pointsEnabled]="pointsEnabled"></app-vessel-capacity-card>
+    </div>
+  </div>
+
+  <!-- OFF REGISTER -->
+  <div *ngIf="offRegister">
+    <div *ngFor="let capacity of capacities; let i = index;">
+
+      <div *ngIf="capacity.proposed" fxLayout="(isHandset$ | async) ? 'row' : 'column'"  fxLayoutAlign="start stretch" fxLayoutGap="16px" class="mat-card-group">
+        <!-- proposed capacity - display as a vessel card -->
+        <div [class.fullWidth]="(isHandset$ | async)">
+          <app-vessel-capacity-card [capacity]="capacity" [pointsEnabled]="pointsEnabled"></app-vessel-capacity-card>
+        </div>
+      </div>
+
+      <div *ngIf="!capacity.proposed" fxLayout="(isHandset$ | async) ? 'row' : 'column'"  fxLayoutAlign="start stretch" fxLayoutGap="16px" class="mat-card-group">
+        <!-- standard off register capacity - display non-vessel specific details -->
+        <div *ngFor="let detail of capacity.details | orderBy : ['capacityType']" class="capacityDetails" [class.fullWidth]="(isHandset$ | async)">
+          <mat-card #card class="margin-bottom" [@fadeInOut]="'fadeIn'">
+            <mat-card-header>
+              <mat-card-title>
+                <div fxFill fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="16px">
+                  <mat-icon>{{ detail.capacityType.toUpperCase() === 'KW' ? 'speed' : 'gradient'}}</mat-icon>
+                  <div>{{ detail.capacityAmount }}&nbsp;<span style="text-transform: none">{{ detail.capacityType }}</span></div>
+                </div>
+              </mat-card-title>
+              <mat-card-subtitle></mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <app-capacity-detail [detail]="detail" [pointsEnabled]="pointsEnabled"></app-capacity-detail>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

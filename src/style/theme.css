@@ -281,6 +281,10 @@ progress-bar .progress-inner {
   color: #ae2833;;
 }
 
+.mat-menu-item {
+  color: rgba(50, 112, 104, 1) !important;
+}
+
 /*
  1. solve the vertical alignment problem of the icon inside the button
  2. material icon fonts are always a little too small compared to button text

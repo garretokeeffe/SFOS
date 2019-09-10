@@ -8,6 +8,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
 import { UserView } from '../../types/user';
 import { UserService } from '../../services/user.service';
+import { Globals } from '../../globals';
 
 @Component({
   selector: 'app-title-bar',
@@ -44,7 +45,8 @@ export class TitleBarComponent implements OnInit {
   constructor(public userService: UserService,
               private breakpointObserver: BreakpointObserver,
               public versionService: VersionService,
-              public http: HttpClient) { }
+              public http: HttpClient,
+              public globals: Globals) { }
 
   public ngOnInit(): void {
     console.log('Initialising title bar');

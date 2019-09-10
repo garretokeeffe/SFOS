@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Optional } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -12,7 +12,9 @@ import { DemoService } from './demo.service';
 })
 export class VesselService {
 
-  constructor(private http: HttpClient, public globals: Globals, public demoService: DemoService) { }
+  constructor(private http: HttpClient,
+              private globals: Globals,
+              @Optional() private demoService: DemoService) { }
 
   public getVessels(ownerId?: number): Observable<Array<VesselView>> {
 

@@ -1,4 +1,5 @@
 import {SubmissionType} from './submission';
+import { PenaltyPoints } from './points';
 
 export enum TrackRecordType {
   NONE = 0,
@@ -6,9 +7,11 @@ export enum TrackRecordType {
   TIER_2_MACKERAL = 2,
   CS_HERRING = 3,
   NW_HERRING = 4,
-  WHITE_FISH = 5
+  GENERAL = 5,
 }
+
 export class TrackRecord {
+
   public type: number = TrackRecordType['NONE']; // corresponds to TrackRecordType
   public quotaEligibility: boolean = false;
 
@@ -30,7 +33,8 @@ export class TrackRecordView extends TrackRecord {
     // display the enum description replacing the _ with a space
     if (TrackRecordType[this.type]) {
       const s: string = TrackRecordType[this.type].replace(/_/g, ' ');
-      return this.toTitleCase(s);
+      const s2: string = this.toTitleCase(s).replace(/Cs/g, 'CS').replace(/Nw/g, 'NW');
+      return s2;
     } else {
       return String(this.type);
     }

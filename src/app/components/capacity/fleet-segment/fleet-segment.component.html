@@ -1,0 +1,19 @@
+<div class="mat-elevation-z8 forceShadow">
+  <div *ngIf="(capacities | filter: 'fleetSegment' : fleetSegment).length" >
+    <div class="wizard-label margin-top-double padding-top-and-sides color-primary">
+      <div fxLayout="row" fxLayoutAlign="start center" class="padding-bottom" fxLayoutGap="16px">
+        <mat-icon>toys</mat-icon>
+        <span>{{ FleetSegmentManager.displayFleetSegment(fleetSegment) }}</span>
+        <span class="color-primary-soft" style="text-transform: none">{{ allCapacity.getTotalCapacity(capacities | filter: 'fleetSegment' : fleetSegment) }}</span>
+      </div>
+      <mat-divider></mat-divider>
+    </div>
+    <ng-template ngFor let-fleetSubSegment [ngForOf]="fleetSubSegments">
+      <app-capacity-card [capacities]="capacities | filter: 'fleetSubSegment' : fleetSubSegment"
+                         [showSubSegmentTotal]="allCapacity.getTotalCapacity(capacities | filter: 'fleetSubSegment' : fleetSubSegment) < allCapacity.getTotalCapacity(capacities | filter: 'fleetSegment' : fleetSegment)"
+                         [pointsEnabled]="this.pointsEnabled"
+                         [offRegister]="offRegister">
+      </app-capacity-card>
+    </ng-template>
+  </div>
+</div>

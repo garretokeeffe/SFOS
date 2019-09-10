@@ -8,6 +8,39 @@ export enum VesselStatus {
   DEREGISTERED = 2,
 }
 
+export class VesselSummary {
+  public id: number = null;
+  public name: string = '';
+  public status: number = null; // corresponds to VESSEL_STATUS enum
+
+  // Identifiers
+  public cfr: string = '';
+  public prn: string = ''; // port reg number
+
+  // Capacity
+  public gt: number = null; // Dimensions - tonnage
+  public kw: number = null; // Propulsion - engine power
+
+  constructor(vessel?: Vessel | any) { // DMcD: added any option to permit unit testing with incomplete mock data
+    if (vessel) {
+      // copy constructor
+
+      this.id = vessel.id;
+      this.name = vessel.name ? vessel.name : '';
+      this.status = vessel.status ? vessel.status : '';
+
+      // Identifiers
+      this.cfr = vessel.cfr ? vessel.cfr : '';
+      this.prn = vessel.prn ? vessel.prn : '';
+
+      // Capacity
+      this.gt = vessel.gt;
+      this.kw = vessel.kw;
+    }
+  }
+}
+
+// TODO: extend Vessel from VesselSummary and move out common attributes
 export class Vessel {
 
   public id: number = null;

@@ -73,7 +73,7 @@ body {
   xbackground-image: linear-gradient(to right, #2d3252, #4e5882) !important;
 }
 
-button {
+button:not(.mat-menu-item) {
   text-transform:uppercase;
 }
 button.no-text-transform {
@@ -206,10 +206,10 @@ select:active {
 }
 
 .error {
-  color: #ae2833;
+  color: #ae2833 !important;
 }
 .warning {
-  color: orangered;
+  color: orangered !important;
 }
 .valid {
   color:#5d9e5e;
@@ -648,5 +648,39 @@ mat-form-field.multiline {
 .info-icon {
   margin-right: 8px;
   color: whitesmoke;
+}
+
+.mat-elevation-z8.forceShadow {
+  width: calc(100% - 8px);
+  position: relative;
+  left: 4px;
+  right: -4px;
+}
+
+
+.blink {
+  animation:1s blinker linear infinite;
+  -webkit-animation:1s blinker linear infinite;
+  -moz-animation:1s blinker linear infinite;
+
+  color: #ae2833 !important; /* error red */
+}
+
+@-moz-keyframes blinker {
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes blinker {
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+
+@keyframes blinker {
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
 }
 

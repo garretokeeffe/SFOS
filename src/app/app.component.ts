@@ -5,7 +5,7 @@ import { environment } from '../environments/environment';
 import { Globals } from './globals';
 import { AuthenticationService } from './services/authentication.service';
 import { Emitters } from './types/emitters';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 declare const require: any;
 

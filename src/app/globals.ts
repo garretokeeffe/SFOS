@@ -10,11 +10,14 @@ export class Configuration {
   public letterOfOfferReviewDelay: number = 0; // 5000
   public embeddedLetterOfOffer: boolean = false;
   public penaltyPointsEnabled: boolean = true;
+
+  // application config defined by the business
+  public warnIfCapacityExpiryDateIsApproachingDays: number = 60;
 }
 
 @Injectable()
 export class Globals {
-  public demo: boolean = false;
+  public demo: boolean = true;
   public demoSkipLoginScreen: boolean = false; // demo must be true for demoSkipLoginScreen = true to take effect
   public prototype: boolean = false; // set true to display proposed features
 

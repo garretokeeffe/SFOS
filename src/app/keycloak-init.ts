@@ -1,14 +1,31 @@
 import { KeycloakService } from 'keycloak-angular';
 import { environment } from '../environments/environment';
 import { Globals } from './globals';
+import * as urlParse from 'url-parse';
+import { UrlObject } from 'url';
 
 export function keycloakInitializer(keycloak: KeycloakService, globals: Globals): () => Promise<any> {
   // This function is invoked BEFORE app.component constructor, so we also need to check for the presence of a demo attribute in the url here.
   const urlParams: URLSearchParams = new URLSearchParams(window.location.search);
   globals.demo = urlParams.has('demo') ? urlParams.get('demo').toLowerCase() === 'false' ? false : true : globals.demo;
 
-  if (globals.demo) {
-    console.log('Keycloak bypassed in Demo mode');
+  let isPublicPage: boolean = false;
+
+  // const publicPagePaths: Array<string> = ['/', '/home'];
+  // const referrerURL: UrlObject = urlParse(document.referrer, true);
+  // isPublicPage = referrerURL && publicPagePaths.includes(referrerURL.pathname);
+  // if (!isPublicPage) {
+  //   const windowLocationURL: UrlObject = urlParse(window.top.location, true);
+  //   isPublicPage = windowLocationURL && publicPagePaths.includes(windowLocationURL.pathname);
+  // }
+
+  if (globals.demo || isPublicPage) {
+    if (globals.demo) {
+      console.log('Keycloak bypassed in Demo mode');
+    } else {
+      console.log('Keycloak bypassed - target is a public page');
+    }
+
     return (): Promise<any> => {
       return new Promise(async (resolve, reject) => {
         try {

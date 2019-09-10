@@ -11,7 +11,9 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { IFISAuthentication } from '../../types/ifisauthentication';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
-
+import { UrlObject } from "url";
+import { environment } from '../../../environments/environment';
+import * as urlParse from 'url-parse';
 
 @Component({
   selector: 'app-login',
@@ -33,33 +35,33 @@ export class LoginComponent implements OnInit {
 
   public access: IFISAuthentication = new IFISAuthentication();
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
+  public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
   .pipe(
-    map(result => result.matches)
+    map((result) => result.matches),
   );
-  isAtLeastMedium$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.Medium, Breakpoints.Large, Breakpoints.XLarge])
+  public isAtLeastMedium$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.Medium, Breakpoints.Large, Breakpoints.XLarge])
   .pipe(
-    map(result => result.matches)
+    map((result) => result.matches),
   );
-  isAtLeastLarge$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.Large, Breakpoints.XLarge])
+  public isAtLeastLarge$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.Large, Breakpoints.XLarge])
   .pipe(
-    map(result => result.matches)
+    map((result) => result.matches),
   );
-  isXSmall$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.XSmall)
+  public isXSmall$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.XSmall)
   .pipe(
-    map(result => result.matches)
+    map((result) => result.matches),
   );
-  isSmall$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Small)
+  public isSmall$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Small)
   .pipe(
-    map(result => result.matches)
+    map((result) => result.matches),
   );
-  isMedium$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Medium)
+  public isMedium$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Medium)
   .pipe(
-    map(result => result.matches)
+    map((result) => result.matches),
   );
-  isLarge$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Large)
+  public isLarge$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Large)
   .pipe(
-    map(result => result.matches)
+    map((result) => result.matches),
   );
 
   constructor(private authenticationService: AuthenticationService,
@@ -87,7 +89,7 @@ export class LoginComponent implements OnInit {
       duration: 2500,
       horizontalPosition: 'center',
       verticalPosition: 'top',
-      panelClass: 'snackBarConfig'
+      panelClass: 'snackBarConfig',
     });
   }
 
@@ -97,16 +99,33 @@ export class LoginComponent implements OnInit {
     if (!this.loginFailed) {
       this.authenticationService.demoModeAuthenticated = true;
       this.router.navigate(['/home-vessel-owner']).then((e) => {});
-
-      // EmitterService.get(Emitters[Emitters.LOGIN]).emit(false);
-      // EmitterService.get(Emitters[Emitters.AUTHENTICATED]).emit(true);
     }
   }
 
-  public onCancel(): void {
-    // EmitterService.get(Emitters[Emitters.LOGIN]).emit(false);
-    // this.location.back();
+  public onCancel_DemoLoginPage(): void {
     this.router.navigate(['/home']).then((e) => { });
+  }
+
+  public onCancel(): void {
+
+    let newURL: string = '';
+
+    let oldURL: UrlObject = urlParse(document.referrer, true);
+    if (!oldURL) {
+      oldURL = urlParse(window.top.location, true);
+    }
+    if (oldURL.protocol) {
+      newURL = oldURL.protocol + '//';
+    }
+    newURL += oldURL.hostname;
+    if (oldURL.port) {
+      newURL = newURL + ':' + oldURL.port;
+    }
+    newURL += '/home';
+
+    console.log('Redirecting to ' + newURL);
+    // window.top.location.href = newURL; // user can hit back button
+    window.top.location.replace(newURL); // takes url out of the browser history so user cant hit back button
   }
 
 }

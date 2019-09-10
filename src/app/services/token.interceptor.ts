@@ -16,15 +16,28 @@ export class TokenInterceptor implements HttpInterceptor {
   constructor(protected keycloakService: KeycloakService) {}
 
   public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<string>> {
-    this.keycloakService.getToken().then((token: string) => {
-      this.tokenData = token;
-      // console.log('token data :  ' + this.tokenData);
-    });
+
+    if (this.isUsingKeycloak()) {
+      this.keycloakService.getToken().then((token: string) => {
+        this.tokenData = token;
+        // console.log('token data :  ' + this.tokenData);
+      });
+    }
     request = request.clone({
        setHeaders: {
         Authorization: `Bearer ${this.tokenData}`,
       },
     });
     return next.handle(request);
+  }
+
+  public isUsingKeycloak(): boolean {
+    try {
+      const roles: Array<string> = this.keycloakService.getUserRoles();
+      return roles.length > 0 ? true : false;
+    }
+    catch (err) {
+      return false;
+    }
   }
 }

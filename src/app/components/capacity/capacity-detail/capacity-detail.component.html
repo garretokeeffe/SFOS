@@ -1,0 +1,48 @@
+<div *ngIf="detail" class="centered-content">
+  <div fxFill fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+    <div class="text-small card-data-header" fxFlex="{{ innerCard ? '65' : '50' }}">Track Record</div> <!-- 65 35 -->
+    <div class="text-small card-data-header" title='Quota Eligibility' fxFlex="{{ innerCard ? '35' : '50' }}">{{ innerCard ? 'QE' : 'Quota Eligibility' }}</div>
+
+  </div>
+  <ng-template ngFor let-trackRecord [ngForOf]="detail.trackRecord">
+    <div fxFill fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+      <div class="card-data" fxFlex="{{ innerCard ? '65' : '50' }}">{{ trackRecord.displayType() }}</div>
+      <!-- &#10004; = Tick,  &#10006; = X -->
+      <div class="card-data" fxFlex="{{ innerCard ? '35' : '50' }}">{{ trackRecord.quotaEligibility ? '&#10004;' : '&#10006;' }}</div>
+    </div>
+  </ng-template>
+  <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px" class="margin-top">
+    <div class="left">
+      <div class="text-small card-data-header">Off Register Since</div>
+      <div class="card-data centered-content">{{ detail.offRegisterDate }}</div>
+    </div>
+    <div class="left">
+      <div class="text-small card-data-header centered-content">Expiry Date</div>
+      <div class="card-data centered-content" [class.error]="isExpiringSoon()">
+        <span *ngIf="isExpiringSoon()">&#x26A0;&nbsp;</span> <!-- warning symbol -->
+        {{ detail.expiryDate }}
+      </div>
+    </div>
+  </div>
+  <div *ngIf="pointsEnabled" fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px" class="margin-top">
+    <div class="left">
+      <div class="text-small card-data-header">Points</div>
+      <div *ngIf="!detail.penaltyPoints || !detail.penaltyPoints.length" class="card-data centered-content">0</div>
+      <div *ngFor="let penaltyPoints of detail.penaltyPoints" class="card-data centered-content">{{ penaltyPoints.numberOfPoints }}</div>
+      <div *ngIf="detail.penaltyPoints && detail.penaltyPoints.length > 1" class="card-data centered-content border-top">
+        {{ this.getTotalPenaltyPoints() }}
+      </div>
+    </div>
+    <div class="left">
+      <div class="text-small card-data-header">Points&nbsp;Expire</div>
+      <div *ngIf="!detail.penaltyPoints || !detail.penaltyPoints.length" class="card-data centered-content">-</div>
+      <div *ngFor="let penaltyPoints of detail.penaltyPoints" class="card-data centered-content">{{ penaltyPoints.expiryDate || '-' }}</div>
+    </div>
+  </div>
+  <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px" class="margin-top">
+    <div>
+      <div class="text-small card-data-header">Originating Vessel</div>
+      <div class="card-data centered-content">{{ detail.originatingVesselName }}</div>
+    </div>
+  </div>
+</div>

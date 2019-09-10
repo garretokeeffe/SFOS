@@ -1,188 +1,608 @@
-[
-  {
-    "id": 1,
-    "ownerId": 1,
-    "type": 1,
-    "fleetSegment": 1,
-    "fleetSubSegment": 1942697,
-    "gt": 50,
-    "kw": 150,
-    "trackRecord": {
+{
+  "ownerId": 1,
+  "onRegister":
+  [
+    {
+      "id": 1,
+      "ownerId": 1,
+      "offRegister": false,
+      "proposed": false,
       "type": 1,
-      "quotaEligibility": false
-    },
-    "penaltyPoints": [{
-        "pointsAssigned": 5,
-        "expiryDate": "31/12/2021"
-      }
-    ],
-    "vessel": {
-      "name": "Vessel with a really long name",
-      "loa": 40,
-      "boa": 8,
-      "cfr": "IRL000I13333",
-      "prn": "G233",
-      "description": "Description of vessel here or possibly current fmp?",
-      "gt": 100,
-      "kw": 300,
-      "penaltyPoints": [{
-          "pointsAssigned": 5,
+      "fleetSegment": 1,
+      "fleetSubSegment": 1942697,
+      "gt": 50,
+      "kw": 150,
+      "details":
+      [
+        {
+          "capacityAmount": 160,
+          "capacityType": "GT",
+          "trackRecord":
+          [
+            {
+              "type": 1,
+              "quotaEligibility": true
+            },
+            {
+              "type": 4,
+              "quotaEligibility": true
+            }
+          ],
+          "penaltyPoints": null
+        },
+        {
+          "capacityAmount": 20,
+          "capacityType": "GT",
+          "trackRecord":
+          [
+            {
+              "type": 2,
+              "quotaEligibility": false
+            }
+          ],
+          "penaltyPoints": null
+        },
+        {
+          "capacityAmount": 20,
+          "capacityType": "GT",
+          "trackRecord":
+          [
+            {
+              "type": 5,
+              "quotaEligibility": false
+            }
+          ],
+          "penaltyPoints": null
+        },
+        {
+          "capacityAmount": 500,
+          "capacityType": "kW",
+          "trackRecord":
+          [
+            {
+              "type": 1,
+              "quotaEligibility": true
+            }
+          ],
+          "penaltyPoints": null
+        }
+      ],
+      "penaltyPoints":
+      [
+        {
+          "numberOfPoints": 5,
           "expiryDate": "31/12/2021"
         }
       ],
-      "status": 1,
-      "images": ["assets/images/vessels/star_of_hope.jpg"]
-    }
-  },
-  {
-    "id": 2,
-    "ownerId": 1,
-    "type": 1,
-    "fleetSegment": 1,
-    "fleetSubSegment": 1942697,
-    "gt": 75,
-    "kw": 130,
-    "trackRecord": {
-      "type": 1,
-      "quotaEligibility": true
-    },
-    "penaltyPoints": [{
-        "pointsAssigned": 3,
-        "expiryDate": "21/10/2021"
-      },
-      {
-        "pointsAssigned": 4,
-        "expiryDate": "01/06/2022"
+      "vessel": {
+        "id": 1,
+        "name": "Vessel with a really long name",
+        "status": 1,
+        "cfr": "IRL000I13333",
+        "prn": "G233",
+        "gt": 100,
+        "kw": 300
       }
-    ],
-    "vessel": {
-      "name": "Star of Hope",
-      "loa": 40,
-      "boa": 8,
-      "cfr": "IRL000I13012",
-      "prn": "G233",
-      "description": "Description of vessel here or possibly current fmp?",
-      "gt": 150,
-      "kw": 260,
-      "penaltyPoints": [{
-          "pointsAssigned": 3,
-          "expiryDate": "21/10/2021"
+    },
+
+    {
+      "id": 2,
+      "ownerId": 1,
+      "offRegister": false,
+      "proposed": false,
+      "type": 1,
+      "fleetSegment": 1,
+      "fleetSubSegment": 1942697,
+      "gt": 75,
+      "kw": 130,
+      "details":
+      [
+        {
+          "capacityAmount": 25,
+          "capacityType": "GT",
+          "trackRecord":
+          [
+            {
+              "type": 2,
+              "quotaEligibility": true
+            },
+            {
+              "type": 3,
+              "quotaEligibility": false
+            }
+          ],
+          "penaltyPoints": null
         },
         {
-          "pointsAssigned": 4,
-          "expiryDate": "01/06/2022"
+          "capacityAmount": 25,
+          "capacityType": "GT",
+          "trackRecord":
+          [
+            {
+              "type": 1,
+              "quotaEligibility": false
+            }
+          ],
+          "penaltyPoints": null
+        },
+        {
+          "capacityAmount": 25,
+          "capacityType": "GT",
+          "trackRecord":
+          [
+            {
+              "type": 5,
+              "quotaEligibility": false
+            }
+          ],
+          "penaltyPoints": null
+        },
+        {
+          "capacityAmount": 130,
+          "capacityType": "kW",
+          "trackRecord":
+          [
+            {
+              "type": 1,
+              "quotaEligibility": true
+            }
+          ],
+          "penaltyPoints": null
         }
       ],
-      "status": 1,
-      "images": ["assets/images/vessels/star_of_hope.jpg"]
-    }
-  },
-  {
-    "id": 3,
-    "ownerId": 1,
-    "type": 1,
-    "fleetSegment": 1,
-    "fleetSubSegment": 338360921,
-    "gt": 195,
-    "kw": 305,
-    "penaltyPoints": [],
-    "vessel": {
-      "name": "Celtic Explorer",
-      "loa": 46,
-      "boa": 10,
-      "cfr": "IRL000I19876",
-      "prn": "S11",
-      "description": "Description of vessel here or possibly current fmp?",
+      "penaltyPoints":
+      [
+        {
+          "numberOfPoints": 3,
+          "expiryDate": "21/10/2021"
+        }
+      ],
+      "vessel": {
+        "id": 2,
+        "name": "Star of Hope",
+        "status": 1,
+        "cfr": "IRL000I13012",
+        "prn": "G233",
+        "gt": 150,
+        "kw": 260
+      }
+    },
+
+    {
+      "id": 3,
+      "ownerId": 1,
+      "offRegister": false,
+      "proposed": false,
+      "type": 1,
+      "fleetSegment": 1,
+      "fleetSubSegment": 338360921,
       "gt": 195,
       "kw": 305,
+      "details":
+      [
+        {
+          "capacityAmount": 195,
+          "capacityType": "GT",
+          "trackRecord": null,
+          "penaltyPoints": null
+        },
+        {
+          "capacityAmount": 305,
+          "capacityType": "kW",
+          "trackRecord": null,
+          "penaltyPoints": null
+        }
+      ],
       "penaltyPoints": [],
-      "status": 1,
-      "images": ["assets/images/vessels/celtic_explorer.jpg"]
-    }
-  },
-  {
-    "id": 4,
-    "ownerId": 1,
-    "type": 1,
-    "fleetSegment": 2,
-    "fleetSubSegment": 0,
-    "gt": 120,
-    "kw": 290,
-    "trackRecord": {
-      "type": 4,
-      "quotaEligibility": true
+      "vessel": {
+        "id": 2,
+        "name": "Celtic Explorer",
+        "status": 1,
+        "cfr": "IRL000I19876",
+        "prn": "S11",
+        "gt": 195,
+        "kw": 305
+      }
     },
-    "penaltyPoints": [],
-    "vessel": {
-      "name": "Roise Catriona",
-      "loa": 30,
-      "boa": 9,
-      "cfr": "IRL000I15566",
-      "prn": "S12",
-      "description": "Description of vessel here or possibly current fmp?",
+
+    {
+      "id": 4,
+      "ownerId": 1,
+      "offRegister": false,
+      "proposed": false,
+      "type": 1,
+      "fleetSegment": 2,
+      "fleetSubSegment": 1807585,
       "gt": 120,
       "kw": 290,
+      "details":
+      [
+        {
+          "capacityAmount": 120,
+          "capacityType": "GT",
+          "trackRecord": null,
+          "penaltyPoints": null
+        },
+        {
+          "capacityAmount": 290,
+          "capacityType": "kW",
+          "trackRecord": null,
+          "penaltyPoints": null
+        }
+      ],
       "penaltyPoints": [],
-      "status": 1,
-      "images": ["assets/images/vessels/roise_catriona.jpg"]
-    }
-  },
-  {
-    "id": 5,
-    "ownerId": 1,
-    "type": 1,
-    "fleetSegment": 3,
-    "fleetSubSegment": 338360923,
-    "gt": 100,
-    "kw": 200,
-    "trackRecord": {
-      "type": 0,
-      "quotaEligibility": false
+      "vessel": {
+        "id": 2,
+        "name": "Roise Catriona",
+        "status": 1,
+        "cfr": "IRL000I15566",
+        "prn": "S12",
+        "gt": 120,
+        "kw": 290
+      }
     },
-    "points": 3,
-    "pointsExpiryDate": "30/05/2022",
-    "vessel": {
-      "name": "Scallop Hunter",
-      "loa": 15.1,
-      "boa": 4.5,
-      "cfr": "IRL000I98765",
-      "prn": "S595",
-      "description": "Description of vessel here or possibly current fmp?",
-      "gt": 200,
-      "kw": 400,
-      "penaltyPoints": [],
-      "status": 0,
-      "images": ["assets/images/vessels/neptune.jpg"]
-    }
-  },
-  {
-    "id": 6,
-    "ownerId": 1,
-    "type": 2,
-    "fleetSegment": 2,
-    "fleetSubSegment": 0,
-    "gt": 200,
-    "kw": 300,
-    "offRegisterDate": "01/01/2019",
-    "offRegisterExpiryDate": "01/01/2021",
-    "trackRecord": {
-      "type": 3,
-      "quotaEligibility": true
-    },
-    "penaltyPoints": [],
-    "vessel": {
-      "name": "Neptune",
-      "loa": 37.5,
-      "boa": 7.75,
-      "cfr": "IRL000I56567",
-      "prn": "S567",
-      "description": "Description of vessel here or possibly current fmp?",
-      "gt": 118,
-      "kw": 226,
-      "penaltyPoints": [],
-      "status": 0,
-      "images": ["assets/images/vessels/neptune.jpg"]
-    }
-  }
-]
 
+    {
+      "id": 5,
+      "ownerId": 1,
+      "offRegister": false,
+      "proposed": false,
+      "type": 1,
+      "fleetSegment": 3,
+      "fleetSubSegment": 338360923,
+      "gt": 100,
+      "kw": 200,
+      "details":
+      [
+        {
+          "capacityAmount": 100,
+          "capacityType": "GT",
+          "trackRecord": null,
+          "penaltyPoints": null
+        },
+        {
+          "capacityAmount": 200,
+          "capacityType": "kW",
+          "trackRecord": null,
+          "penaltyPoints": null
+        }
+      ],
+      "penaltyPoints": [],
+      "vessel": {
+        "id": 2,
+        "name": "Scallop Hunter",
+        "status": 1,
+        "cfr": "IRL000I98765",
+        "prn": "S595",
+        "gt": 100,
+        "kw": 200
+      }
+    }
+  ],
+  "offRegister":
+  [
+    {
+      "id": 1,
+      "ownerId": 1,
+      "offRegister": true,
+      "proposed": false,
+      "type": 1,
+      "fleetSegment": 1,
+      "fleetSubSegment": 1942697,
+      "gt": 200,
+      "kw": 500,
+      "details":
+      [
+        {
+          "capacityAmount": 160,
+          "capacityType": "GT",
+          "trackRecord":
+          [
+            {
+              "type": 1,
+              "quotaEligibility": true
+            },
+            {
+              "type": 4,
+              "quotaEligibility": true
+            }
+          ],
+          "offRegisterDate": "01/09/2019",
+          "expiryDate": "31/08/2021",
+          "originatingVesselName": "Star of Hope",
+          "originatingVesselId": "1234",
+          "penaltyPoints":
+          [
+            {
+              "numberOfPoints": 5,
+              "expiryDate": "31/12/2021"
+            }
+          ]
+        },
+        {
+          "capacityAmount": 20,
+          "capacityType": "GT",
+          "trackRecord":
+          [
+            {
+              "type": 2,
+              "quotaEligibility": false
+            }
+          ],
+          "offRegisterDate": "01/11/2017",
+          "expiryDate": "31/10/2019",
+          "originatingVesselName": "Atlantic Challenge",
+          "originatingVesselId": "5678",
+          "penaltyPoints":
+          [
+            {
+              "numberOfPoints": 3,
+              "expiryDate": "31/10/2019"
+            }
+          ]
+        },
+        {
+          "capacityAmount": 20,
+          "capacityType": "GT",
+          "trackRecord":
+          [
+            {
+              "type": 5,
+              "quotaEligibility": false
+            }
+          ],
+          "offRegisterDate": "01/09/2019",
+          "expiryDate": "31/08/2021",
+          "originatingVesselName": "Star of Hope",
+          "originatingVesselId": "1234",
+          "penaltyPoints": null
+        },
+        {
+          "capacityAmount": 500,
+          "capacityType": "kW",
+          "trackRecord":
+          [
+            {
+              "type": 1,
+              "quotaEligibility": true
+            }
+          ],
+          "offRegisterDate": "01/09/2019",
+          "expiryDate": "31/12/2021",
+          "originatingVesselName": "Star of Hope",
+          "originatingVesselId": "1234",
+          "penaltyPoints": null
+        }
+      ],
+      "penaltyPoints": null,
+      "vessel": null
+    },
+
+    {
+      "id": 1,
+      "ownerId": 1,
+      "offRegister": true,
+      "proposed": true,
+      "type": 1,
+      "fleetSegment": 1,
+      "fleetSubSegment": 1942697,
+      "gt": 300,
+      "kw": 600,
+      "details":
+      [
+        {
+          "capacityAmount": 160,
+          "capacityType": "GT",
+          "trackRecord":
+          [
+            {
+              "type": 1,
+              "quotaEligibility": true
+            },
+            {
+              "type": 4,
+              "quotaEligibility": true
+            }
+          ],
+          "offRegisterDate": "01/09/2019",
+          "expiryDate": "31/08/2021",
+          "originatingVesselName": "Roise Catriona",
+          "originatingVesselId": "2",
+          "penaltyPoints":
+          [
+            {
+              "numberOfPoints": 3,
+              "expiryDate": "31/12/2019"
+            }
+          ]
+        },
+        {
+          "capacityAmount": 20,
+          "capacityType": "GT",
+          "trackRecord":
+          [
+            {
+              "type": 2,
+              "quotaEligibility": false
+            }
+          ],
+          "offRegisterDate": "20/01/2019",
+          "expiryDate": "19/01/2021",
+          "originatingVesselName": "Roise Catriona",
+          "originatingVesselId": "2",
+          "penaltyPoints":
+          [
+            {
+              "numberOfPoints": 3,
+              "expiryDate": "31/12/2020"
+            }
+          ]
+        },
+        {
+          "capacityAmount": 100,
+          "capacityType": "GT",
+          "trackRecord":
+          [
+            {
+              "type": 2,
+              "quotaEligibility": false
+            }
+          ],
+          "offRegisterDate": "22/03/2020",
+          "expiryDate": "21/03/2022",
+          "originatingVesselName": "Roise Catriona",
+          "originatingVesselId": "2",
+          "penaltyPoints": [
+            {
+              "numberOfPoints": 0,
+              "expiryDate": null
+            }
+           ]
+        },
+        {
+          "capacityAmount": 20,
+          "capacityType": "GT",
+          "trackRecord":
+          [
+            {
+              "type": 5,
+              "quotaEligibility": false
+            }
+          ],
+          "offRegisterDate": "20/01/2019",
+          "expiryDate": "19/01/2021",
+          "originatingVesselName": "Roise Catriona",
+          "originatingVesselId": "2",
+          "penaltyPoints": [
+            {
+              "numberOfPoints": 0,
+              "expiryDate": null
+            }
+          ]
+        },
+        {
+          "capacityAmount": 500,
+          "capacityType": "kW",
+          "trackRecord":
+          [
+            {
+              "type": 1,
+              "quotaEligibility": true
+            }
+          ],
+          "offRegisterDate": "20/03/2018",
+          "expiryDate": "19/03/2020",
+          "originatingVesselName": "Roise Catriona",
+          "originatingVesselId": "2",
+          "penaltyPoints": [
+            {
+              "numberOfPoints": 0,
+              "expiryDate": null
+            }
+          ]
+        },
+        {
+          "capacityAmount": 100,
+          "capacityType": "kW",
+          "trackRecord":
+          [
+            {
+              "type": 2,
+              "quotaEligibility": true
+            }
+          ],
+          "offRegisterDate": "22/03/2020",
+          "expiryDate": "21/03/2022",
+          "originatingVesselName": "Roise Catriona",
+          "originatingVesselId": "2",
+          "penaltyPoints": [
+            {
+              "numberOfPoints": 0,
+              "expiryDate": null
+            }
+          ]
+        }
+      ],
+      "penaltyPoints": [
+        {
+          "numberOfPoints": 6,
+          "expiryDate": "31/12/2020"
+        }
+      ],
+      "vessel": {
+        "id": 456,
+        "name": "Star of Hope",
+        "status": 1,
+        "cfr": "IRL000I13012",
+        "prn": "G233",
+        "gt": 300,
+        "kw": 600
+      }
+    },
+
+    {
+      "id": 1,
+      "ownerId": 1,
+      "offRegister": true,
+      "proposed": false,
+      "type": 1,
+      "fleetSegment": 2,
+      "fleetSubSegment": 1807585,
+      "gt": 500,
+      "kw": 300,
+      "details":
+      [
+        {
+          "capacityAmount": 500,
+          "capacityType": "GT",
+          "trackRecord":
+          [
+            {
+              "type": 1,
+              "quotaEligibility": true
+            },
+            {
+              "type": 4,
+              "quotaEligibility": true
+            }
+          ],
+          "offRegisterDate": "01/09/2019",
+          "expiryDate": "31/08/2021",
+          "originatingVesselName": "Menhaden",
+          "originatingVesselId": "555",
+          "penaltyPoints":
+          [
+            {
+              "numberOfPoints": 5,
+              "expiryDate": "31/12/2021"
+            }
+          ]
+        },
+        {
+          "capacityAmount": 300,
+          "capacityType": "kW",
+          "trackRecord":
+          [
+            {
+              "type": 2,
+              "quotaEligibility": false
+            }
+          ],
+          "offRegisterDate": "01/11/2018",
+          "expiryDate": "31/10/2020",
+          "originatingVesselName": "Menhaden",
+          "originatingVesselId": "555",
+          "penaltyPoints":
+          [
+            {
+              "numberOfPoints": 3,
+              "expiryDate": "31/10/2019"
+            }
+          ]
+        }
+      ],
+      "penaltyPoints": null,
+      "vessel": null
+    }
+  ]
+}

@@ -188,15 +188,15 @@
 
       <mat-menu #menu="matMenu">
         <button mat-menu-item routerLink="/notifications">
-          <mat-icon alt="My Inbox">email</mat-icon>
+          <mat-icon alt="My Inbox" class="color-primary">email</mat-icon>
           <span>My Inbox</span>
         </button>
         <button mat-menu-item routerLink="/profile" [state]="{title: 'My Profile'}">
-          <mat-icon alt="My Profile">person</mat-icon>
+          <mat-icon alt="My Profile" class="color-primary">person</mat-icon>
           <span>My Profile</span>
         </button>
         <button mat-menu-item (click)="logout()" routerLink="/home">
-          <mat-icon alt="Logout">cancel</mat-icon>
+          <mat-icon alt="Logout" class="color-primary">cancel</mat-icon>
           <span>Logout</span>
         </button>
       </mat-menu>

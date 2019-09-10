@@ -1,4 +1,4 @@
-// FleetSegment and FleetSubSegment are IFIS system defined values
+// FleetSegment is an agreed value (identifier) derived by the MW and returned to the UI
 export enum FleetSegment {
   NONE = 0,
   POLYVALENT = 1,
@@ -7,6 +7,7 @@ export enum FleetSegment {
   AQUACULTURE = 4,
   BEAM_TRAWLER = 5,
 }
+// FleetSubSegment is an IFIS system defined value
 export enum FleetSubSegment {
   NONE = 0,
   RSW_PELAGIC = 1807585,

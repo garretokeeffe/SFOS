@@ -164,6 +164,7 @@ export class MainNavComponent implements OnInit, OnChanges, AfterViewChecked {
     }
 
     if (changes['authenticated'] && changes['authenticated'].previousValue === false && changes['authenticated'].currentValue === true) {
+      console.log('MAIN-NAV AUTHENTICATION CHANGED, NAVIGATING TO DASHBOARD - IS THIS OK?');
       this.navigateToDashboard();
     }
   }

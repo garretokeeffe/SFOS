@@ -58,6 +58,13 @@
         -->
       </div>
 
+      <div fxLayout="row" fxLayoutAlign="start center" *ngIf="user.fishBuyerRegistrationNumber">
+        <mat-icon matListIcon fxlayoutalign="space-between start" alt="Name">local_offer</mat-icon>
+        <mat-form-field class="margin-right-narrow">
+          <input matInput placeholder="Fish Buyer Registration Number" value="{{ user.fishBuyerRegistrationNumber }}" readonly>
+        </mat-form-field>
+      </div>
+
       <mat-divider [inset]="false"></mat-divider>
 
       <div fxLayout="row" fxLayoutAlign="start start">
@@ -159,7 +166,7 @@
       </div>
 
       <div fxLayout="row" fxLayoutAlign="start center" *ngIf="user.fishBuyerRegistrationNumber">
-        <mat-icon matListIcon fxlayoutalign="space-between start" alt="Name">folder_shared</mat-icon>
+        <mat-icon matListIcon fxlayoutalign="space-between start" alt="Name">local_offer</mat-icon>
         <mat-form-field class="margin-right-narrow">
           <input matInput placeholder="Fish Buyer Registration Number" value="{{ user.fishBuyerRegistrationNumber }}" readonly>
         </mat-form-field>

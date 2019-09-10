@@ -1,0 +1,92 @@
+<mat-card *ngIf="capacity" #card class="margin-bottom" [@fadeInOut]="'fadeIn'">
+  <mat-card-header>
+    <mat-card-title class="fullWidth">
+      <div *ngIf="capacity.proposed" class="error centered-content margin-bottom">*** PROPOSED ***</div>
+      <div fxFill fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="16px">
+        <mat-icon>directions_boat</mat-icon>
+        <div>{{ capacity.vessel.name }}</div>
+      </div>
+    </mat-card-title>
+    <mat-card-subtitle></mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px" class="margin-top-double">
+      <div>
+        <div class="text-small card-data-header">My&nbsp;Capacity</div>
+        <div class="card-data centered-content">{{ capacity.gt }}&nbsp;GT {{ capacity.kw }}&nbsp;kW</div>
+      </div>
+      <div>
+        <div class="text-small card-data-header">Vessel&nbsp;Capacity</div>
+        <div class="card-data centered-content">{{ capacity.vessel.gt }}&nbsp;GT {{ capacity.vessel.kw }}&nbsp;kW</div>
+      </div>
+    </div>
+    <div *ngIf="pointsEnabled" fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px" class="margin-top">
+      <div class="left">
+        <div class="text-small card-data-header">Points</div>
+        <div *ngIf="!capacity.penaltyPoints || !capacity.penaltyPoints.length" class="card-data centered-content">0</div>
+        <div *ngFor="let penaltyPoints of capacity.penaltyPoints" class="card-data centered-content">{{ penaltyPoints.numberOfPoints }}</div>
+        <div *ngIf="capacity.penaltyPoints && capacity.penaltyPoints.length > 1" class="card-data centered-content border-top">
+          {{ capacity.getTotalPenaltyPoints() }}
+        </div>
+      </div>
+      <div class="left">
+        <div class="text-small card-data-header">Points&nbsp;Expire</div>
+        <div *ngIf="!capacity.penaltyPoints || !capacity.penaltyPoints.length" class="card-data centered-content">-</div>
+        <div *ngFor="let penaltyPoints of capacity.penaltyPoints" class="card-data centered-content">{{ penaltyPoints.expiryDate || '-' }}</div>
+      </div>
+    </div>
+    <div *ngIf="capacity.hasQuotaEligibility()" fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px" class="margin-top">
+      <div>
+        <div class="text-small card-data-header">Quota Eligibility</div>
+        <div class="card-data centered-content" *ngFor="let trackRecord of capacity.getTrackRecordWithQuotaEligibility()">{{ trackRecord }}</div>
+      </div>
+    </div>
+
+    <div class="margin-top" *ngIf="!capacity.proposed && capacity.hasTrackRecord()">
+      <mat-expansion-panel [expanded]="false">
+        <mat-expansion-panel-header>
+          <mat-panel-title><div style="width: 100%; text-align: center">TRACK RECORD</div></mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-track-record [capacity]="capacity"></app-track-record>
+      </mat-expansion-panel>
+    </div>
+
+    <div class="margin-top" *ngIf="capacity.proposed">
+
+      <mat-expansion-panel [expanded]="false" *ngIf="capacity.hasTrackRecord()">
+        <mat-expansion-panel-header>
+          <mat-panel-title><div style="width: 100%; text-align: center">TRACK RECORD</div></mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-track-record [capacity]="capacity"></app-track-record>
+      </mat-expansion-panel>
+
+      <div *ngIf="capacity.hasTrackRecord()" class="margin-top"></div>
+
+      <mat-expansion-panel [expanded]="false">
+        <mat-expansion-panel-header>
+          <mat-panel-title><div style="width: 100%; text-align: center">DETAILS</div></mat-panel-title>
+        </mat-expansion-panel-header>
+        <div fxLayout="column"  fxLayoutAlign="start stretch" xfxLayoutGap="16px" class="mat-card-group">
+          <div *ngFor="let detail of capacity.details | orderBy : ['capacityType']" class="capacityDetails" [class.fullWidth]="(isHandset$ | async)">
+            <mat-card #card class="margin-bottom innerCard" [@fadeInOut]="'fadeIn'" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)">
+              <mat-card-header>
+                <mat-card-title>
+                  <div fxFill fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="16px">
+                    <mat-icon>{{ detail.capacityType.toUpperCase() === 'KW' ? 'speed' : 'gradient'}}</mat-icon>
+                    <div>{{ detail.capacityAmount }}&nbsp;<span style="text-transform: none">{{ detail.capacityType }}</span></div>
+                  </div>
+                </mat-card-title>
+                <mat-card-subtitle></mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                <app-capacity-detail [detail]="detail" [pointsEnabled]="pointsEnabled" [innerCard]="true"></app-capacity-detail>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </div>
+
+  </mat-card-content>
+</mat-card>
