@@ -112,7 +112,6 @@ import { ClientSelectorComponent } from './components/client-selector/client-sel
 import { HomeLaComponent } from './pages/home-la/home-la.component';
 import { MapComponent } from './pages/map/map.component';
 import { ProgressBarModule} from 'angular-progress-bar';
-import { CapacityFleetSubSegmentComponent } from './pages/capacity/capacity-fleet-subsegment-table.component';
 import { RedirectComponent } from './main-nav/redirect/redirect.component';
 import { SidenavService } from './services/sidenav.service';
 import { HomeFishBuyerComponent } from './pages/home-fish-buyer/home-fish-buyer.component';
@@ -130,7 +129,6 @@ import { ParallaxDirective } from './directives/parallax/parallax.directive';
 import { MainLogoComponent } from './components/main-logo/main-logo.component';
 import { TokenInterceptor } from './services/token.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { CapacityCardComponent } from './components/capacity/capacity-card/capacity-card.component';
 import { Filter } from './pipes/filter.pipe';
 import { Unique } from './pipes/unique.pipe';
@@ -192,7 +190,6 @@ import { VesselCapacityCardComponent } from './components/capacity/vessel-capaci
     ClientSelectorComponent,
     HomeLaComponent,
     MapComponent,
-    CapacityFleetSubSegmentComponent,
     RedirectComponent,
     HomeFishBuyerComponent,
     HomeComponent,

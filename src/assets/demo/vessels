@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "Star of Hope",
-    "status": 1,
+    "status": 1811007,
     "safetyCertificateExpiryDate": "31/12/2020",
     "owners": [
       {
@@ -81,7 +81,7 @@
   {
     "id": 2,
     "name": "Celtic Explorer",
-    "status": 1,
+    "status": 1811007,
     "safetyCertificateExpiryDate": "31/12/2020",
     "owners": [
       {
@@ -151,7 +151,7 @@
   {
     "id": 3,
     "name": "Neptune",
-    "status": 2,
+    "status": 1811009,
     "safetyCertificateExpiryDate": "31/12/2020",
     "owners": [
       {

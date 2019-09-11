@@ -1,17 +1,33 @@
 <div *ngIf="detail" class="centered-content">
-  <div fxFill fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
-    <div class="text-small card-data-header" fxFlex="{{ innerCard ? '65' : '50' }}">Track Record</div> <!-- 65 35 -->
-    <div class="text-small card-data-header" title='Quota Eligibility' fxFlex="{{ innerCard ? '35' : '50' }}">{{ innerCard ? 'QE' : 'Quota Eligibility' }}</div>
 
-  </div>
-  <ng-template ngFor let-trackRecord [ngForOf]="detail.trackRecord">
-    <div fxFill fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
-      <div class="card-data" fxFlex="{{ innerCard ? '65' : '50' }}">{{ trackRecord.displayType() }}</div>
-      <!-- &#10004; = Tick,  &#10006; = X -->
-      <div class="card-data" fxFlex="{{ innerCard ? '35' : '50' }}">{{ trackRecord.quotaEligibility ? '&#10004;' : '&#10006;' }}</div>
+  <div *ngIf="detail.trackRecord.length > 0">
+    <div *ngIf="(detail.trackRecord | filter: 'quotaEligibility' : true).length">
+      <div fxFill fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+        <div class="text-small card-data-header" fxFlex="{{ innerCard ? '65' : '50' }}">Track Record</div> <!-- 65 35 -->
+        <div class="text-small card-data-header" title='Quota Eligibility' fxFlex="{{ innerCard ? '35' : '50' }}">{{ innerCard ? 'QE' : 'Quota Eligibility' }}</div>
+      </div>
+      <ng-template ngFor let-trackRecord [ngForOf]="detail.trackRecord">
+        <div fxFill fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+          <div class="card-data" fxFlex="{{ innerCard ? '65' : '50' }}">{{ trackRecord.displayType() }}</div>
+          <!-- &#10004; = Tick,  &#10006; = X -->
+          <div class="card-data" fxFlex="{{ innerCard ? '35' : '50' }}">{{ trackRecord.quotaEligibility ? '&#10004;' : '&#10006;' }}</div>
+        </div>
+      </ng-template>
     </div>
-  </ng-template>
-  <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px" class="margin-top">
+    <div *ngIf="!(detail.trackRecord | filter: 'quotaEligibility' : true).length">
+      <!-- There is no Quota Eligibility so just display Track Record (centered) -->
+      <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px">
+        <div class="text-small card-data-header">Track Record</div>
+      </div>
+      <ng-template ngFor let-trackRecord [ngForOf]="detail.trackRecord">
+        <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px">
+          <div class="card-data">{{ trackRecord.displayType() }}</div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px" [class.margin-top]="detail.trackRecord.length > 0">
     <div class="left">
       <div class="text-small card-data-header">Off Register Since</div>
       <div class="card-data centered-content">{{ detail.offRegisterDate }}</div>
@@ -41,8 +57,8 @@
   </div>
   <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px" class="margin-top">
     <div>
-      <div class="text-small card-data-header">Originating Vessel</div>
-      <div class="card-data centered-content">{{ detail.originatingVesselName }}</div>
+      <div class="text-small card-data-header">Last Registered to</div>
+      <div class="card-data centered-content">{{ detail.sourceVesselName }}</div>
     </div>
   </div>
 </div>

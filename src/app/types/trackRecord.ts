@@ -1,5 +1,3 @@
-import {SubmissionType} from './submission';
-import { PenaltyPoints } from './points';
 
 export enum TrackRecordType {
   NONE = 0,

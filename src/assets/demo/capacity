@@ -7,7 +7,6 @@
       "ownerId": 1,
       "offRegister": false,
       "proposed": false,
-      "type": 1,
       "fleetSegment": 1,
       "fleetSubSegment": 1942697,
       "gt": 50,
@@ -77,7 +76,7 @@
       "vessel": {
         "id": 1,
         "name": "Vessel with a really long name",
-        "status": 1,
+        "status": 1811007,
         "cfr": "IRL000I13333",
         "prn": "G233",
         "gt": 100,
@@ -90,7 +89,6 @@
       "ownerId": 1,
       "offRegister": false,
       "proposed": false,
-      "type": 1,
       "fleetSegment": 1,
       "fleetSubSegment": 1942697,
       "gt": 75,
@@ -104,7 +102,7 @@
           [
             {
               "type": 2,
-              "quotaEligibility": true
+              "quotaEligibility": false
             },
             {
               "type": 3,
@@ -144,7 +142,7 @@
           [
             {
               "type": 1,
-              "quotaEligibility": true
+              "quotaEligibility": false
             }
           ],
           "penaltyPoints": null
@@ -160,7 +158,7 @@
       "vessel": {
         "id": 2,
         "name": "Star of Hope",
-        "status": 1,
+        "status": 1811007,
         "cfr": "IRL000I13012",
         "prn": "G233",
         "gt": 150,
@@ -173,7 +171,6 @@
       "ownerId": 1,
       "offRegister": false,
       "proposed": false,
-      "type": 1,
       "fleetSegment": 1,
       "fleetSubSegment": 338360921,
       "gt": 195,
@@ -197,7 +194,7 @@
       "vessel": {
         "id": 2,
         "name": "Celtic Explorer",
-        "status": 1,
+        "status": 1811007,
         "cfr": "IRL000I19876",
         "prn": "S11",
         "gt": 195,
@@ -210,7 +207,6 @@
       "ownerId": 1,
       "offRegister": false,
       "proposed": false,
-      "type": 1,
       "fleetSegment": 2,
       "fleetSubSegment": 1807585,
       "gt": 120,
@@ -234,7 +230,7 @@
       "vessel": {
         "id": 2,
         "name": "Roise Catriona",
-        "status": 1,
+        "status": 1811007,
         "cfr": "IRL000I15566",
         "prn": "S12",
         "gt": 120,
@@ -247,7 +243,6 @@
       "ownerId": 1,
       "offRegister": false,
       "proposed": false,
-      "type": 1,
       "fleetSegment": 3,
       "fleetSubSegment": 338360923,
       "gt": 100,
@@ -271,7 +266,7 @@
       "vessel": {
         "id": 2,
         "name": "Scallop Hunter",
-        "status": 1,
+        "status": 1811007,
         "cfr": "IRL000I98765",
         "prn": "S595",
         "gt": 100,
@@ -279,14 +274,14 @@
       }
     }
   ],
+
   "offRegister":
   [
     {
-      "id": 1,
+      "id": 100,
       "ownerId": 1,
       "offRegister": true,
       "proposed": false,
-      "type": 1,
       "fleetSegment": 1,
       "fleetSubSegment": 1942697,
       "gt": 200,
@@ -309,8 +304,8 @@
           ],
           "offRegisterDate": "01/09/2019",
           "expiryDate": "31/08/2021",
-          "originatingVesselName": "Star of Hope",
-          "originatingVesselId": "1234",
+          "sourceVesselName": "Star of Hope",
+          "sourceVesselId": "1234",
           "penaltyPoints":
           [
             {
@@ -322,17 +317,11 @@
         {
           "capacityAmount": 20,
           "capacityType": "GT",
-          "trackRecord":
-          [
-            {
-              "type": 2,
-              "quotaEligibility": false
-            }
-          ],
+          "trackRecord": null,
           "offRegisterDate": "01/11/2017",
           "expiryDate": "31/10/2019",
-          "originatingVesselName": "Atlantic Challenge",
-          "originatingVesselId": "5678",
+          "sourceVesselName": "Atlantic Challenge",
+          "sourceVesselId": "5678",
           "penaltyPoints":
           [
             {
@@ -353,24 +342,18 @@
           ],
           "offRegisterDate": "01/09/2019",
           "expiryDate": "31/08/2021",
-          "originatingVesselName": "Star of Hope",
-          "originatingVesselId": "1234",
+          "sourceVesselName": "Star of Hope",
+          "sourceVesselId": "1234",
           "penaltyPoints": null
         },
         {
           "capacityAmount": 500,
           "capacityType": "kW",
-          "trackRecord":
-          [
-            {
-              "type": 1,
-              "quotaEligibility": true
-            }
-          ],
+          "trackRecord": null,
           "offRegisterDate": "01/09/2019",
           "expiryDate": "31/12/2021",
-          "originatingVesselName": "Star of Hope",
-          "originatingVesselId": "1234",
+          "sourceVesselName": "Star of Hope",
+          "sourceVesselId": "1234",
           "penaltyPoints": null
         }
       ],
@@ -379,11 +362,10 @@
     },
 
     {
-      "id": 1,
+      "id": 101,
       "ownerId": 1,
       "offRegister": true,
       "proposed": true,
-      "type": 1,
       "fleetSegment": 1,
       "fleetSubSegment": 1942697,
       "gt": 300,
@@ -406,8 +388,8 @@
           ],
           "offRegisterDate": "01/09/2019",
           "expiryDate": "31/08/2021",
-          "originatingVesselName": "Roise Catriona",
-          "originatingVesselId": "2",
+          "sourceVesselName": "Roise Catriona",
+          "sourceVesselId": "2",
           "penaltyPoints":
           [
             {
@@ -428,8 +410,8 @@
           ],
           "offRegisterDate": "20/01/2019",
           "expiryDate": "19/01/2021",
-          "originatingVesselName": "Roise Catriona",
-          "originatingVesselId": "2",
+          "sourceVesselName": "Roise Catriona",
+          "sourceVesselId": "2",
           "penaltyPoints":
           [
             {
@@ -450,8 +432,8 @@
           ],
           "offRegisterDate": "22/03/2020",
           "expiryDate": "21/03/2022",
-          "originatingVesselName": "Roise Catriona",
-          "originatingVesselId": "2",
+          "sourceVesselName": "Roise Catriona",
+          "sourceVesselId": "2",
           "penaltyPoints": [
             {
               "numberOfPoints": 0,
@@ -471,8 +453,8 @@
           ],
           "offRegisterDate": "20/01/2019",
           "expiryDate": "19/01/2021",
-          "originatingVesselName": "Roise Catriona",
-          "originatingVesselId": "2",
+          "sourceVesselName": "Roise Catriona",
+          "sourceVesselId": "2",
           "penaltyPoints": [
             {
               "numberOfPoints": 0,
@@ -492,8 +474,8 @@
           ],
           "offRegisterDate": "20/03/2018",
           "expiryDate": "19/03/2020",
-          "originatingVesselName": "Roise Catriona",
-          "originatingVesselId": "2",
+          "sourceVesselName": "Roise Catriona",
+          "sourceVesselId": "2",
           "penaltyPoints": [
             {
               "numberOfPoints": 0,
@@ -513,8 +495,8 @@
           ],
           "offRegisterDate": "22/03/2020",
           "expiryDate": "21/03/2022",
-          "originatingVesselName": "Roise Catriona",
-          "originatingVesselId": "2",
+          "sourceVesselName": "Roise Catriona",
+          "sourceVesselId": "2",
           "penaltyPoints": [
             {
               "numberOfPoints": 0,
@@ -532,7 +514,7 @@
       "vessel": {
         "id": 456,
         "name": "Star of Hope",
-        "status": 1,
+        "status": 1811007,
         "cfr": "IRL000I13012",
         "prn": "G233",
         "gt": 300,
@@ -541,11 +523,10 @@
     },
 
     {
-      "id": 1,
+      "id": 102,
       "ownerId": 1,
       "offRegister": true,
       "proposed": false,
-      "type": 1,
       "fleetSegment": 2,
       "fleetSubSegment": 1807585,
       "gt": 500,
@@ -568,8 +549,8 @@
           ],
           "offRegisterDate": "01/09/2019",
           "expiryDate": "31/08/2021",
-          "originatingVesselName": "Menhaden",
-          "originatingVesselId": "555",
+          "sourceVesselName": "Menhaden",
+          "sourceVesselId": "555",
           "penaltyPoints":
           [
             {
@@ -590,8 +571,8 @@
           ],
           "offRegisterDate": "01/11/2018",
           "expiryDate": "31/10/2020",
-          "originatingVesselName": "Menhaden",
-          "originatingVesselId": "555",
+          "sourceVesselName": "Menhaden",
+          "sourceVesselId": "555",
           "penaltyPoints":
           [
             {

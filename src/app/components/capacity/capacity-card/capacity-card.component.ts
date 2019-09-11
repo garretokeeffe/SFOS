@@ -6,7 +6,6 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AllCapacityView, CapacityView } from '../../../types/capacity';
-import { CapacityManager } from '../../../pages/capacity/capacity-manager.component';
 import { FleetSegment, FleetSubSegment } from '../../../types/fleet-segment';
 import { animations } from '../../../animations';
 

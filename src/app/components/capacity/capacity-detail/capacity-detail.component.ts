@@ -13,6 +13,7 @@ import { Globals } from '../../../globals';
 export class CapacityDetailComponent implements OnInit {
 
   @Input() public detail: CapacityDetail = null;
+  @Input() public showQuotaEligibility: boolean = false;
   @Input() public pointsEnabled: boolean = false;
   @Input() public innerCard: boolean = false; /* for styling */
 

@@ -1,14 +1,31 @@
 <div *ngFor="let i = index; let detail of capacity.details | orderBy : ['capacityType']" class="centered-content fullWidth margin-bottom capacityDetails">
-  <div fxFill fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
-    <div class="text-small card-data-header" fxFlex="65">{{ detail.capacityAmount }}&nbsp;{{ detail.capacityType }}</div>
-    <div class="text-small card-data-header" title='Quota Eligibility' fxFlex="35">{{ i === 0 ? 'QE' : '' }}</div>
-  </div>
 
-  <div *ngFor="let trackRecord of detail.trackRecord">
+  <div *ngIf="showQuotaEligibility">
+    <!-- Capacity has track record with quota eligibility -->
     <div fxFill fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
-      <div class="card-data" fxFlex="65">{{ trackRecord.displayType() }}</div>
-      <!-- &#10004; = Tick,  &#10006; = X -->
-      <div class="card-data" fxFlex="35">{{ trackRecord.quotaEligibility ? '&#10004;' : '&#10006;' }}</div>
+      <div class="text-small card-data-header" fxFlex="65">{{ detail.capacityAmount }}&nbsp;{{ detail.capacityType }}</div>
+      <div class="text-small card-data-header" title='Quota Eligibility' fxFlex="35">{{ i === 0 ? 'QE' : '' }}</div>
+    </div>
+
+    <div *ngFor="let trackRecord of detail.trackRecord">
+      <div fxFill fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+        <div class="card-data" fxFlex="65">{{ trackRecord.displayType() }}</div>
+        <!-- &#10004; = Tick,  &#10006; = X -->
+        <div class="card-data" fxFlex="35">{{ trackRecord.quotaEligibility ? '&#10004;' : '&#10006;' }}</div>
+      </div>
     </div>
   </div>
+
+  <div *ngIf="!showQuotaEligibility">
+    <!-- Capacity has track record without quota eligibility -->
+    <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px">
+      <div class="text-small card-data-header">{{ detail.capacityAmount }}&nbsp;{{ detail.capacityType }}</div>
+    </div>
+    <div *ngFor="let trackRecord of detail.trackRecord">
+      <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px">
+        <div class="card-data">{{ trackRecord.displayType() }}</div>
+      </div>
+    </div>
+  </div>
+
 </div>

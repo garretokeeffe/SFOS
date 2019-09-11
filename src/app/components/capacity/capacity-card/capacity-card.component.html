@@ -40,7 +40,7 @@
               <mat-card-subtitle></mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
-              <app-capacity-detail [detail]="detail" [pointsEnabled]="pointsEnabled"></app-capacity-detail>
+              <app-capacity-detail [detail]="detail" [showQuotaEligibility]="capacity.hasQuotaEligibility()"  [pointsEnabled]="pointsEnabled"></app-capacity-detail>
             </mat-card-content>
           </mat-card>
         </div>

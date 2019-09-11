@@ -70,7 +70,7 @@ export class VesselsComponent implements OnInit {
           return (v1.name < v2.name ? -1 : 1); // ascending
         });
       },
-      error => {
+      (error) => {
         console.error('Failed to retrieve vessels');
         this.vessels = [];
         this.errorMessage = 'Sorry, something went wrong. Your vessels could not be retrieved at this time.';

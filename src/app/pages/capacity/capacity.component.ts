@@ -6,8 +6,7 @@ import { ActivatedRoute} from '@angular/router';
 import { UserView} from '../../types/user';
 import { UserService} from '../../services/user.service';
 import { CapacityService} from '../../services/capacity.service';
-import { AllCapacity, AllCapacityView, CapacityDetail, CapacityType, CapacityView } from '../../types/capacity';
-import { CapacityManager} from './capacity-manager.component';
+import { AllCapacity, AllCapacityView, CapacityDetail, CapacityView } from '../../types/capacity';
 import { FleetSegment, FleetSegmentManager, FleetSubSegment } from '../../types/fleet-segment';
 import { Globals} from '../../globals';
 import { MatButtonToggleGroup, MatSelect, MatTabGroup} from '@angular/material';
@@ -21,14 +20,6 @@ export interface Capacity {
   kw: number;
 }
 
-const ELEMENT_DATA: Capacity[] = [
-  {fleetSegment: 'Polyvalent General',  gt: 1.079, kw: 2.079},
-  {fleetSegment: 'Beamer',              gt: 4.026, kw: 3.026},
-  {fleetSegment: 'Pelagic',             gt: 6.941,  kw: 4.941},
-  {fleetSegment: 'Aquaculture',         gt: 9.122, kw: 5.012},
-  {fleetSegment: 'Specific',            gt: 10.811, kw: 6.811}
-];
-
 @Component({
   selector: 'app-capacity',
   templateUrl: './capacity.component.html',
@@ -38,31 +29,26 @@ export class CapacityComponent implements OnInit, AfterViewChecked {
 
   public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
   .pipe(
-    map(result => result.matches)
+    map((result) => result.matches),
   );
 
   public title$: Observable<string>;
 
   public user: UserView = null;
-  public capacities: CapacityManager = new CapacityManager(); // TODO: remove once allCapacity has been implemented
-
-  // public capacityManager: CapacityManager = new CapacityManager(); // for access to static utility methods
   public allCapacity: AllCapacityView = new AllCapacityView();
 
   // Temp UX Design Variables  TODO: REMOVE THIS BLOCK and References in HTML
-  @ViewChild(MatSelect) numberOfVesselsSelector: MatSelect;
-  @ViewChild('displayModeToggleGroup') displayMode: MatButtonToggleGroup; // table vs card
+  @ViewChild(MatSelect) public numberOfVesselsSelector: MatSelect;
+  @ViewChild('displayModeToggleGroup') public displayMode: MatButtonToggleGroup; // table vs card
 
   public showUXOptions: boolean = false;
   public pointsEnabled: boolean = false;
   public showVesselCapacity: boolean = true;
-  public capacitiesLoaded: CapacityManager = new CapacityManager();
   public alignColumns: boolean = false;
   public optimiseLayout: boolean = false;
   public autoExpand: boolean = false;
   // End Temp UX Variables
 
-  public CapacityType: any = CapacityType; // enum reference
   public FleetSegment: any = FleetSegment; // enum reference
   public FleetSubSegment: any = FleetSubSegment; // enum reference
   public FleetSegmentManager: any = FleetSegmentManager; // access to static methods
@@ -98,21 +84,6 @@ export class CapacityComponent implements OnInit, AfterViewChecked {
       },
     );
 
-    /*
-    this.capacityService.getCapacities().subscribe(capacities => {
-        this.capacitiesLoaded = new CapacityManager(capacities); // TODO: change this block to this.capacities = new capacityManager(capacities); once UI has been agreed
-        this.capacities = new CapacityManager(this.capacitiesLoaded.capacities);
-        this.numberOfVesselsSelector.value = (this.capacitiesLoaded.capacities.length - 1).toString();
-      },
-      error => {
-        console.error('Failed to retrieve capacity');
-        this.capacitiesLoaded = new CapacityManager(); // TODO: change this block to this.capacities = new capacityManager(); once UI has been agreed
-        this.capacities = new CapacityManager();
-        this.numberOfVesselsSelector.value = '0';
-      }
-    );
-    */
-
     // TODO: pass ownerId into getAllCapacity
     this.capacityService.getAllCapacity().subscribe(
     (allCapacity: AllCapacity) => {
@@ -128,31 +99,6 @@ export class CapacityComponent implements OnInit, AfterViewChecked {
 
   public ngAfterViewChecked(): void {
     this.resizeCards();
-  }
-  // TODO: these next 2 methods may be removed when the UI has been agreed
-  public onNumberOfVesselsSelected(count: string): void {
-    if (count === 'ALL') {
-      this.capacities = new CapacityManager(this.capacitiesLoaded.capacities);
-    } else {
-      this.capacities = new CapacityManager(this.capacitiesLoaded.capacities.filter((elem: CapacityView) => elem.id <= parseInt(count, 10)));
-    }
-    this.autoExpand = parseInt(count, 10) === 1 ? true : false;
-  }
-  public getOptimisedLayout(): boolean {
-    let alignColumns: boolean = this.alignColumns;
-
-    // If OptimisedLayout is selected
-    // No Points:     Align Columns on both Mobile and Desktop
-    // Point Enabled: Align Columns on Desktop Only
-    if (this.optimiseLayout) {
-      if (this.pointsEnabled) {
-        alignColumns = !this.breakpointObserver.isMatched(Breakpoints.HandsetPortrait);
-      } else {
-        alignColumns = true;
-      }
-    }
-
-    return alignColumns;
   }
 
   public resizeCards(): void {

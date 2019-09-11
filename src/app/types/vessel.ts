@@ -4,8 +4,11 @@ import {Gear, GearView} from './gear';
 import {Licence, LicenceView} from './licence';
 
 export enum VesselStatus {
-  REGISTERED = 1,
-  DEREGISTERED = 2,
+  UNKNOWN = 0,
+  PENDING_REGISTRATION = 1811006,
+  REGISTERED = 1811007,
+  PENDING_DEREGISTRATION = 1811008,
+  DEREGISTERED = 1811009,
 }
 
 export class VesselSummary {
