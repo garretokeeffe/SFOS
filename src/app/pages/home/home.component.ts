@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
     map((result) => result.matches),
   );
 
-  constructor(private globals: Globals,
+  constructor(public globals: Globals,
               private breakpointObserver: BreakpointObserver,
               public appComponent: AppComponent,
               private router: Router) { }

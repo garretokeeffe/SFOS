@@ -64,7 +64,7 @@ export class TitleBarComponent implements OnInit {
 
   public getServerVersion(): void {
     this.versionService.getVersion().subscribe ((version: string) => {
-      console.log('QBS Application Version: ' + version);
+      console.log('SFOS Application Version: ' + version);
       this.version = version;
     });
   }

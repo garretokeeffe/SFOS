@@ -21,7 +21,7 @@ export class FleetSegmentComponent implements OnInit, OnChanges {
   public FleetSubSegment: any = FleetSubSegment; // enum reference
   public FleetSegmentManager: any = FleetSegmentManager; // access to static methods
 
-  private capacities: Array<Capacity | CapacityView> = [];
+  public capacities: Array<Capacity | CapacityView> = [];
 
   constructor() { }
 

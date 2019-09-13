@@ -16,9 +16,12 @@ export class CapacityService {
               private globals: Globals,
               @Optional() private demoService: DemoService) { }
 
-  public getAllCapacity(ownerId?: number): Observable<AllCapacityView> {
+  public getAllCapacity(ownerId?: string): Observable<AllCapacityView> {
 
-    const url: string = this.globals.demo ? this.demoService.getCapacityURL : environment.getCapacityURL;
+    // ownerId = CCS Id from keycloak profile
+    // sample ownerId for hard-coding = VA100131F
+
+    const url: string = this.globals.demo ? this.demoService.getCapacityURL : environment.getCapacityURL + '/' + ownerId;
 
     return Observable.create( (observer) => {
       this.http.get(url, {

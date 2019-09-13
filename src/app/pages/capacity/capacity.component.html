@@ -7,32 +7,9 @@
     <mat-checkbox [(ngModel)]="pointsEnabled">UX Option: Points Enabled</mat-checkbox>
   </div>
 
-  <div [class.closed]="!showUXOptions" fxLayout="start end" style="font-size: small;" fxLayoutGap="16px" [class.margin-bottom]="showUXOptions">
-    <div style="position: relative; top: 12px; font-weight: bold">UX Options:</div>
-    <mat-form-field style="max-width: 50px">
-      <mat-label># Vessels</mat-label>
-      <mat-select (selectionChange)="onNumberOfVesselsSelected($event.value)">
-        <mat-option value="0">None</mat-option>
-        <mat-option value="1">1</mat-option>
-        <mat-option value="2">2</mat-option>
-        <mat-option value="3">3</mat-option>
-        <mat-option value="4">4</mat-option>
-        <mat-option value="5">5</mat-option>
-        <mat-option value="ALL">All</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-checkbox [(ngModel)]="pointsEnabled" style="position: relative; top: 12px;">Points</mat-checkbox>
-    <mat-checkbox [(ngModel)]="showVesselCapacity" style="position: relative; top: 12px;">Vessel Capacity</mat-checkbox>
-    <mat-checkbox [(ngModel)]="alignColumns" style="position: relative; top: 12px;">Align Cols</mat-checkbox>
-    <mat-checkbox [(ngModel)]="optimiseLayout" style="position: relative; top: 12px;" title="No Points: Align Cols (Mobile and Desktop), Points: Align Cols on Desktop but not Mobile">Optimise</mat-checkbox>
-    <mat-button-toggle-group #displayModeToggleGroup="matButtonToggleGroup" style="max-height: 32px">
-      <mat-button-toggle value="TABLE" style="max-height: 32px">
-        <mat-icon style="vertical-align: top; padding-top: 4px">menu</mat-icon>
-      </mat-button-toggle>
-      <mat-button-toggle value="GRID" style="max-height: 32px">
-        <mat-icon style="vertical-align: top; padding-top: 4px">apps</mat-icon>
-      </mat-button-toggle>
-    </mat-button-toggle-group>
+  <div *ngIf="errorMessage" class="errorBanner" fxLayoutAlign="start center">
+    <mat-icon class="info-icon">error_outline</mat-icon>
+    <div>{{ errorMessage }}</div>
   </div>
 
   <!-- Expiry Date Approaching Warning Bar -->
@@ -41,7 +18,7 @@
     <div>You have capacity expiring soon!</div>
   </div>
 
-  <mat-tab-group mat-stretch-tabs [class.centered-max-width-tabs]="displayMode.value === 'TABLE'" [selectedIndex]="0">
+  <mat-tab-group mat-stretch-tabs [selectedIndex]="0">
 
     <!-- ON REGISTER -->
     <mat-tab>

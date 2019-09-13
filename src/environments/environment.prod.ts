@@ -1,18 +1,18 @@
 import {KeycloakConfig} from 'keycloak-angular';
 
-declare const require: any;
+// declare const require: any;
 
 export const kcConfig: KeycloakConfig = {
   url: 'https://sso-keycloak-sso1.apps.rhos.agriculture.gov.ie/auth',
   realm: 'Staging-Realm',
   clientId: '9d5d5361',
-  credentials:{secret: '8a6ad8d597f8915f43b31a912098c2ee'} 
+  credentials: {secret: '8a6ad8d597f8915f43b31a912098c2ee'}
 };
 
 export const environment: any = {
   production: true,
   name: 'PROD',
-  version: require('../../package.json').version.replace(/-SNAPSHOT|trunk-/gi, ''),
+  version: '1.0.0', // require('../../package.json').version.replace(/-SNAPSHOT|trunk-/gi, ''),
   keycloakConfig: kcConfig,
   authenticationURL: 'https://sso-keycloak-sso1.apps.rhos.agriculture.gov.ie/auth/realms/Staging-Realm/protocol/openid-connect/token',
   getVersionURL: 'assets/demo/version',
@@ -22,7 +22,7 @@ export const environment: any = {
   getNotificationsURL: 'assets/demo/notifications',
   getNotificationCategoriesURL: 'assets/demo/notification-categories',
   getStatusesOfSubmissionsURL: 'assets/demo/statuses-of-submissions',
-  getVesselsURL: 'assets/demo/vessels',
+  getVesselsURL: 'https://api-3scale-apicast-staging.apps.rhos.agriculture.gov.ie:443/sfos/vessels/users/ccs',
   getVesselURL: 'assets/demo/vessel',
   getLetterOfOfferTermsURL: 'assets/demo/letter-of-offer-terms',
   getSubmissionsAllURL: 'assets/demo/submissions-all',

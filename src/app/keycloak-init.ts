@@ -43,11 +43,11 @@ export function keycloakInitializer(keycloak: KeycloakService, globals: Globals)
           await keycloak.init({
             config: environment.keycloakConfig,
             initOptions: {
-              onLoad: 'login-required',
-              checkLoginIframe: true,
+              onLoad: 'check-sso',
+              checkLoginIframe: false,
             },
-            enableBearerInterceptor: false,
-            bearerExcludedUrls: [],
+            enableBearerInterceptor: true,
+            bearerExcludedUrls: ['assets/demo/'],
           });
           resolve();
         } catch (error) {

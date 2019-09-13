@@ -273,11 +273,11 @@ import { VesselCapacityCardComponent } from './components/capacity/vessel-capaci
     SidenavService,
     VersionService,
     DemoService,
-    {
+    /*{
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true,
-    },
+    },*/
     { provide: APP_INITIALIZER, useFactory: keycloakInitializer, multi: true, deps: [KeycloakService, Globals] },
   ],
   schemas: [

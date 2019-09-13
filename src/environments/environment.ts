@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 import { KeycloakConfig } from 'keycloak-angular';
 
-declare const require: any;
+// declare const require: any;
 
 /*
 let keycloakConfig: KeycloakConfig = {
@@ -29,8 +29,8 @@ export const kcConfig: KeycloakConfig = {
 export const environment: any = {
   production: false,
   name: 'DEV',
-  version: require('../../package.json').version.replace(/-SNAPSHOT|trunk-/gi, ''),
-  keycloakConfig: kcConfig,
+  version: '1.0.0', // require('../../package.json').version.replace(/-SNAPSHOT|trunk-/gi, ''),
+  keycloakConfig: kcConfigLocal,
   authenticationURL: 'http://localhost:8080/ws/login',
   getVersionURL: 'assets/demo/version',
   getUserProfileURL: 'assets/demo/userprofile',
@@ -39,7 +39,7 @@ export const environment: any = {
   getNotificationCategoriesURL: 'assets/demo/notification-categories',
   getNotificationsURL: 'assets/demo/notifications',
   getStatusesOfSubmissionsURL: 'assets/demo/statuses-of-submissions',
-  getVesselsURL: 'https://api-3scale-apicast-staging.apps.rhos.agriculture.gov.ie:443/sfos/vessels/users/ccs/VA100131F',
+  getVesselsURL: 'https://api-3scale-apicast-staging.apps.rhos.agriculture.gov.ie:443/sfos/vessels/users/ccs',
   garret_getVesselsURL: 'http://WKEBNFS23452:9001/vessels/ifis/74',
   getVesselURL: 'assets/demo/vessel',
   getLetterOfOfferTermsURL: 'assets/demo/letter-of-offer-terms',

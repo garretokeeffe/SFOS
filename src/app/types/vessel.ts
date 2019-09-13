@@ -64,7 +64,8 @@ export class Vessel {
   public ais: boolean = null;
 
   // Licence
-  public licence: Licence | LicenceView = new LicenceView();
+  // public licence: Licence | LicenceView = new LicenceView();
+  public licence: LicenceView = new LicenceView();
 
   // Owners
   public owners: Array<VesselOwner | VesselOwnerView> = [];
@@ -111,7 +112,7 @@ export class Vessel {
   // Penalty Points
   public penaltyPoints: Array<PenaltyPoints> = []; // Prototype Attribute
 
-  constructor(vessel?: Vessel | any) { // DMcD: added any option to permit unit testing with incomplete mock data
+  constructor(vessel?: Vessel | VesselView | any) { // DMcD: added any option to permit unit testing with incomplete mock data
     if (vessel) {
       // copy constructor
 

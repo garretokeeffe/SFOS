@@ -15,9 +15,9 @@ import {Globals} from '../../globals';
 })
 export class VesselComponent implements OnInit {
 
-  @Input() private vessel: VesselView;
-  @Input() private vCardInfo: VesselCardInfo;
-  @Input() private notificationBadge: string = null;
+  @Input() public vessel: VesselView;
+  @Input() public vCardInfo: VesselCardInfo;
+  @Input() public notificationBadge: string = null;
 
   public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
   .pipe(
@@ -31,7 +31,7 @@ export class VesselComponent implements OnInit {
   public display: string = 'IMAGE'; // IMAGE | LOCATION (by default show vessel image)
   public showAllAdditionalVessionDetails: boolean = false;
 
-  constructor(private globals: Globals,
+  constructor(public globals: Globals,
               private breakpointObserver: BreakpointObserver) { }
 
   public ngOnInit(): void { }

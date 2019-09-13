@@ -41,7 +41,7 @@ export class MainNavComponent implements OnInit, OnChanges, AfterViewChecked {
   public applications: Array<ApplicationView> = [];
   public applicationID: any = ApplicationID;
 
-  private manuallyClosed: boolean = false;
+  public manuallyClosed: boolean = false;
 
   public UserGroup: typeof UserGroup = UserGroup;
 

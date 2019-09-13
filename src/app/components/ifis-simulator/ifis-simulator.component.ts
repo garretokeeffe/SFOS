@@ -11,14 +11,14 @@ import { Emitters } from '../../types/emitters';
 })
 export class IfisSimulatorComponent implements OnInit {
 
-  private _userType: string = 'sfos_vessel_owner'; // default userprofile role,
+  public _userType: string = 'sfos_vessel_owner'; // default userprofile role,
     // sfos_vessel_owner | sfos_vessel_owner_ro | sfos_representative | sfos_representative_ro | sfos_la | sfos_la_ro | sfos_la2 | sfos_la2_ro
     // sfos_fish_buyer | sfos_fish_buyer_ro | sfos_sfpa | sfos_sfpa_ro | sfos_sfpmd | sfos_sfpmd_ro
   private previousUserType: string = this._userType;
 
   public access: IFISAuthentication = null;
 
-  constructor(private user: AuthenticationService) { }
+  constructor(public user: AuthenticationService) { }
 
   public ngOnInit(): void {
     // if keycloak authentication has already been used don't fire up the simulator automatically - let the userprofile select a role

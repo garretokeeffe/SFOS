@@ -16,9 +16,12 @@ export class VesselService {
               private globals: Globals,
               @Optional() private demoService: DemoService) { }
 
-  public getVessels(ownerId?: number): Observable<Array<VesselView>> {
+  public getVessels(ownerId?: string): Observable<Array<VesselView>> {
 
-    const url: string = this.globals.demo ? this.demoService.getVesselsURL : environment.getVesselsURL;
+    // ownerId = CCS Id from keycloak profile
+    // sample ownerId for hard-coding = VA100131F
+
+    const url: string = this.globals.demo ? this.demoService.getVesselsURL : environment.getVesselsURL + '/' + ownerId;
 
     return Observable.create((observer) => {
       this.http.get(url, {
@@ -32,23 +35,26 @@ export class VesselService {
       })
       .subscribe(
         (res: Array<Vessel>) => {
-          let vessels: Array<VesselView> = [];
+          const vessels: Array<VesselView> = [];
           res = res ? res : [];
           res.forEach((vessel: Vessel) => {
             vessels.push(new VesselView(vessel));
           });
 
-          if (ownerId) {
+          /*
+          if (this.globals.demo && ownerId) {
             const vesselsFiltered: Array<VesselView> = [];
             vessels.forEach((vessel: VesselView) => {
               vessel.owners.forEach((owner: VesselOwnerView) => {
-                if (owner.id === ownerId) {
+                if (owner.id === parseInt(ownerId)) {
                   vesselsFiltered.push(vessel);
                 }
               });
             });
             vessels = vesselsFiltered;
           }
+          */
+
           observer.next(vessels);
           observer.complete();
 

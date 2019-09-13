@@ -7,9 +7,11 @@
     "distserver": "http-server -p 8080 -c-1 dist/SFOS",
     "build": "ng build",
     "buildlocal": "ng build --base-href ./ --deploy-url ./",
+    "buildprod": "ng build --prod --base-href ./ --deploy-url ./",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "localwar": "ng build --base-href ./ --deploy-url ./ && gradle war"
   },
   "private": true,
   "dependencies": {
@@ -51,7 +53,7 @@
     "@angular/language-service": "~7.2.9",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
-    "@types/node": "^10.11.3",
+    "@types/node": "^10.14.18",
     "codelyzer": "~4.5.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",

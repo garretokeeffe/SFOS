@@ -13,6 +13,7 @@ import { MatButtonToggleGroup, MatSelect, MatTabGroup} from '@angular/material';
 import { of } from 'rxjs';
 import * as moment from 'moment';
 import { Duration } from 'moment';
+import { VesselView } from '../../types/vessel';
 
 export interface Capacity {
   fleetSegment: string;
@@ -37,10 +38,6 @@ export class CapacityComponent implements OnInit, AfterViewChecked {
   public user: UserView = null;
   public allCapacity: AllCapacityView = new AllCapacityView();
 
-  // Temp UX Design Variables  TODO: REMOVE THIS BLOCK and References in HTML
-  @ViewChild(MatSelect) public numberOfVesselsSelector: MatSelect;
-  @ViewChild('displayModeToggleGroup') public displayMode: MatButtonToggleGroup; // table vs card
-
   public showUXOptions: boolean = false;
   public pointsEnabled: boolean = false;
   public showVesselCapacity: boolean = true;
@@ -54,6 +51,7 @@ export class CapacityComponent implements OnInit, AfterViewChecked {
   public FleetSegmentManager: any = FleetSegmentManager; // access to static methods
 
   public document: HTMLElement;
+  public errorMessage: string = '';
 
   constructor(public activatedRoute: ActivatedRoute,
               public breakpointObserver: BreakpointObserver,
@@ -66,7 +64,7 @@ export class CapacityComponent implements OnInit, AfterViewChecked {
   }
 
   public ngOnInit(): void {
-    this.displayMode.value = 'GRID'; // GRID | TABLE  TODO: remove this when UI has been agreed
+    this.errorMessage = '';
 
     // TODO: for now set title = 'MY CAPACITY' , when Representative User is implemented w need to use window.history.state.title
     // but this is not being passed correctly from the MY CAPACITY feature button on the vessel owner home screen
@@ -84,17 +82,23 @@ export class CapacityComponent implements OnInit, AfterViewChecked {
       },
     );
 
-    // TODO: pass ownerId into getAllCapacity
-    this.capacityService.getAllCapacity().subscribe(
-    (allCapacity: AllCapacity) => {
-      this.allCapacity = new AllCapacityView(allCapacity);
-      this.numberOfVesselsSelector.value = (this.allCapacity.onRegister.length - 1).toString();
-    },
-    (error) => {
-      console.error('Failed to retrieve capacity');
-      this.allCapacity = new AllCapacityView();
-      this.numberOfVesselsSelector.value = '0';
-    });
+    this.userService.getUserProfile().subscribe((user: UserView) => {
+      this.user = user;
+
+      this.capacityService.getAllCapacity(user.id).subscribe(
+        (allCapacity: AllCapacity) => {
+          this.allCapacity = new AllCapacityView(allCapacity);
+        },
+        (error) => {
+          console.error('Failed to retrieve capacity');
+          this.allCapacity = new AllCapacityView();
+          this.errorMessage = 'Sorry, something went wrong. Your capacity could not be retrieved at this time.';
+        });
+      },
+      (error) => {
+        console.error('Failed to retrieve user profile and hence capacity');
+        this.errorMessage = 'Sorry, something went wrong. Your capacity could not be retrieved at this time.';
+      });
   }
 
   public ngAfterViewChecked(): void {

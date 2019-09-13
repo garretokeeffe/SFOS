@@ -14,11 +14,13 @@ import { SubmissionView } from '../../types/submission';
 import { UserView } from '../../types/user';
 import { VesselView } from '../../types/vessel';
 import { VesselCardInfo } from '../../types/vesselCardInfo';
+import { animations } from '../../animations';
 
 @Component({
   selector: 'app-vessels',
   templateUrl: './vessels.component.html',
-  styleUrls: ['./vessels.component.css']
+  styleUrls: ['./vessels.component.css'],
+  animations: animations,
 })
 export class VesselsComponent implements OnInit {
 
@@ -55,27 +57,26 @@ export class VesselsComponent implements OnInit {
     this.title$ = this.activatedRoute.paramMap.pipe(map(() => window.history.state.title));
     this.errorMessage = '';
 
-    /*
-    this.userService.getUserByUserId().subscribe((user: UserView) => {
-        this.user = user;
-      },
-      error => {
-        console.error('Failed to retrieve userprofile');
-        this.user = null;
-      });
-    */
+    this.userService.getUserProfile().subscribe((user: UserView) => {
+      this.user = user;
 
-    this.vesselService.getVessels().subscribe((vessels: Array<VesselView>) => {
+      this.vesselService.getVessels(user.id).subscribe((vessels: Array<VesselView>) => {
         this.vessels = vessels.sort((v1, v2) => {
           return (v1.name < v2.name ? -1 : 1); // ascending
         });
       },
-      (error) => {
+    (error) => {
         console.error('Failed to retrieve vessels');
         this.vessels = [];
         this.errorMessage = 'Sorry, something went wrong. Your vessels could not be retrieved at this time.';
       });
+    },
+    (error) => {
+      console.error('Failed to retrieve user profile and hence vessels');
+      this.errorMessage = 'Sorry, something went wrong. Your vessels could not be retrieved at this time.';
+    });
 
+    /*
     this.licenceService.getStatusesOfSubmissions().subscribe(submissions => {
         this.submissions = submissions;
       },
@@ -91,7 +92,7 @@ export class VesselsComponent implements OnInit {
         console.error('Failed to retrieve notifications');
         this.notifications = [];
       });
-
+    */
   }
 
   public getVesselNotificationsBadge(vessel: VesselView): number {
