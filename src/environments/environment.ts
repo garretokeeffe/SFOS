@@ -30,7 +30,7 @@ export const environment: any = {
   production: false,
   name: 'DEV',
   version: '1.0.0', // require('../../package.json').version.replace(/-SNAPSHOT|trunk-/gi, ''),
-  keycloakConfig: kcConfigLocal,
+  keycloakConfig: kcConfig,
   authenticationURL: 'http://localhost:8080/ws/login',
   getVersionURL: 'assets/demo/version',
   getUserProfileURL: 'assets/demo/userprofile',

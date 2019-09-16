@@ -36,7 +36,7 @@ import {NotificationsComponent} from './pages/notifications/notifications.compon
 import {HelpComponent} from './pages/help/help.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent }, /* no authentication required to reach login page */
+  { path: 'login', component: LoginComponent, canActivate: [AuthenticationService]}, /* no authentication required to reach login page */
   { path: 'home-vessel-owner', component: HomeVesselOwnerComponent, canActivate: [AuthenticationService] },
   { path: 'noaccess', component: NoAccessComponent, canActivate: [AuthenticationService] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthenticationService] },
