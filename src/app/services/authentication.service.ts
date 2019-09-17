@@ -15,7 +15,7 @@ export class IFISRoles {
 }
 
 @Injectable()
-export class AuthenticationService extends KeycloakAuthGuard  implements CanActivate {
+export class AuthenticationService extends KeycloakAuthGuard {
 
   private static requiredRoles: Array<string> = [
     'sfos_vessel_owner',
@@ -64,6 +64,7 @@ export class AuthenticationService extends KeycloakAuthGuard  implements CanActi
   public isUsingKeycloak(): boolean {
     return !this.globals.demo;
   }
+  
   public getKeycloakRoles(): Array<string> {
     if (this.isUsingKeycloak) {
       return this.keycloakService.getUserRoles();
