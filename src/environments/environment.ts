@@ -33,7 +33,7 @@ export const environment: any = {
   keycloakConfig: kcConfigLocal,
   authenticationURL: 'http://localhost:8080/ws/login',
   getVersionURL: 'assets/demo/version',
-  getUserProfileURL: 'assets/demo/userprofile',
+  getUserProfileURL: 'https://api-3scale-apicast-staging.apps.rhos.agriculture.gov.ie:443/sfos/users/ccs',
   getUsersURL: 'assets/demo/users',
   getApplicationsURL: 'assets/demo/applications',
   getNotificationCategoriesURL: 'assets/demo/notification-categories',
