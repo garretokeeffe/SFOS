@@ -120,7 +120,8 @@ export class UserService {
 
   public getUserByUserId(userId?: number): Observable<UserView> {
     console.log('getUserByUserId:' + userId);
-    let url: string = environment.getUserProfileURL;
+    // let url: string = environment.getUserProfileURL;
+    let url: string = this.globals.demo ? this.demoService.getUserProfileURL : environment.getUserProfileURL;
     if (userId) {
       url += '/' + userId;
     }

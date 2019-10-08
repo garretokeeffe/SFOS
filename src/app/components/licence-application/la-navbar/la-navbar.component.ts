@@ -23,35 +23,35 @@ import {ConfirmationDialogComponent} from '../../confirmation-dialog/confirmatio
 })
 export class LaNavbarComponent implements OnInit, OnChanges {
 
-  @Input() licenceApplication: LicenceApplicationView = new LicenceApplicationView();
-  @Input() user: UserView = new UserView();
+  @Input() public licenceApplication: LicenceApplicationView = new LicenceApplicationView();
+  @Input() public user: UserView = new UserView();
 
-  @Output() refId = new EventEmitter();
+  @Output() public refId: any = new EventEmitter();
 
   @ViewChild(WizardComponent)
   public wizard: WizardComponent;
 
-  public currentStepIndex = 0;
+  public currentStepIndex: number = 0;
 
   public advancingToLetterOfOffer: boolean = false;
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
+  public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
   .pipe(
-    map(result => result.matches)
+    map((result) => result.matches),
   );
 
   constructor(private breakpointObserver: BreakpointObserver,
               public dialog: MatDialog) { }
 
-  ngOnInit() { }
+  public ngOnInit(): void { }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['userprofile'].currentValue) {
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['userprofile'] && changes['userprofile'].currentValue) {
       this.licenceApplication.setActiveApplicant(changes['userprofile'].currentValue.userReferenceNumber);
     }
   }
 
-  public setActiveView(component, direction: MovingDirection): void {
+  public setActiveView(component: any, direction: MovingDirection): void {
     // this.advancingToLetterOfOffer = direction === MovingDirection.Forwards
     //  && (this.licenceApplication.refId && component.wizard.model.currentStepIndex === 0
     //  || !this.licenceApplication.refId && component.wizard.model.currentStepIndex === 1);
@@ -72,12 +72,12 @@ export class LaNavbarComponent implements OnInit, OnChanges {
     }
     const confirmationInfo: ConfirmationInfo = new ConfirmationInfo('Reject Terms', text);
 
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+    const dialogRef: any = this.dialog.open(ConfirmationDialogComponent, {
       width: '300px',
       data: confirmationInfo
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log(`Confirmation result: ${result}`);
       if (result) {
         // userprofile confirmed rejection

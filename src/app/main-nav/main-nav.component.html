@@ -58,10 +58,8 @@
         <a mat-list-item routerLink="/vessels" [state]="{title: 'My Vessels'}"><mat-icon matListIcon>directions_boat</mat-icon><span class="color-primary">My Vessels</span></a><!-- submenu to include Registration History -->
         <mat-divider></mat-divider>
         <a mat-list-item routerLink="/capacity" [state]="{title: 'My Capacity'}"><mat-icon matListIcon>toys</mat-icon><span class="color-primary">My Capacity</span></a>
-        <div *ngIf="globals.prototype">
-          <mat-divider></mat-divider>
-          <a mat-list-item routerLink="/licences" [state]="{title: 'My Applications'}"><mat-icon matListIcon>chrome_reader_mode</mat-icon><span class="color-primary">My Applications</span></a>
-        </div>
+        <mat-divider></mat-divider>
+        <a mat-list-item routerLink="/licences" [state]="{title: 'My Applications'}"><mat-icon matListIcon>chrome_reader_mode</mat-icon><span class="color-primary">My Applications</span></a>
       </div>
     </mat-nav-list>
 

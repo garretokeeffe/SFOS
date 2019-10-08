@@ -11,16 +11,16 @@
     <button mat-raised-button (click)="register()" routerLink="/register">REGISTER</button>
   </div>
 
-  <div *ngIf="globals.prototype" fxFill class="margin-vertical">
+  <div fxFill class="margin-vertical">
     <!--<mat-divider></mat-divider>-->
     <app-divider></app-divider>
   </div>
 
-  <div *ngIf="globals.prototype" class="margin light-grey-background padding-left padding-right padding-bottom-double" [class.padding-horizontal-double]="!(isHandset$ | async)">
+  <div class="margin light-grey-background padding-left padding-right padding-bottom" [class.padding-horizontal-double]="!(isHandset$ | async)">
     <div class="wizard-label margin-top margin-bottom-double centered-content">PUBLIC SERVICES</div>
     <div fxLayout="{{ (isAtLeastMedium$ | async) ? 'row' : 'column' }}" fxLayoutAlign="center center" fxLayoutGap="{{ (isAtLeastMedium$ | async) ? '16px' : '' }}">
 
-      <mat-card>
+      <mat-card routerLink="/licences">
         <mat-card-header fxLayoutAlign="center center">
           <mat-card-title>
             <div>
@@ -32,7 +32,7 @@
           </mat-card-title>
           <mat-card-subtitle></mat-card-subtitle>
         </mat-card-header>
-        <mat-card-content>
+        <mat-card-content class="padding-bottom">
           Initiate a preliminary application and determine the conditions that must be satisfied. Fulfillment of the conditions will require <a (click)="register()" routerLink="/register">registration</a>.
         </mat-card-content>
       </mat-card>
