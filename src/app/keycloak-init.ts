@@ -46,8 +46,13 @@ export function keycloakInitializer(keycloak: KeycloakService, globals: Globals)
               onLoad: 'check-sso',
               checkLoginIframe: false,
             },
-            enableBearerInterceptor: true,
-            bearerExcludedUrls: ['assets/demo/'],
+            enableBearerInterceptor: false,
+              bearerExcludedUrls: [
+              'assets/demo',
+              'MaterialIcons-Regular.woff2',
+              'main.js',
+              'assets/images',
+             ],
           });
           resolve();
         } catch (error) {

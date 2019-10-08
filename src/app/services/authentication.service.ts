@@ -62,14 +62,9 @@ export class AuthenticationService extends KeycloakAuthGuard {
   }
 
   public isUsingKeycloak(): boolean {
-    try {
-      const roles: Array<string> = this.keycloakService.getUserRoles();
-      return roles.length > 0 ? true : false;
-    }
-    catch (err) {
-      return false;
-    }
+    return !this.globals.demo;
   }
+  
   public getKeycloakRoles(): Array<string> {
     if (this.isUsingKeycloak) {
       return this.keycloakService.getUserRoles();
