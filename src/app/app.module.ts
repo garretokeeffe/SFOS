@@ -57,6 +57,8 @@ import { AppComponent } from './app.component';
 import { IfisSimulatorComponent } from './components/ifis-simulator/ifis-simulator.component';
 import { UnderConstructionComponent } from './components/under-construction/under-construction.component';
 import { LoginComponent } from './pages/login/login.component';
+import { LicenceApplicationLanding } from './pages/licence-application/licenceApplicationLanding';
+
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -93,6 +95,7 @@ import { LaVesselInfoComponent } from './components/licence-application/la-vesse
 import { LaDocumentationComponent } from './components/licence-application/la-documentation/la-documentation.component';
 import { ArchwizardModule } from 'angular-archwizard';
 import { LaPreliminaryInfoComponent } from './components/licence-application/la-preliminary-info/la-preliminary-info.component';
+import { LaApplicationComponent } from './components/licence-application/la-application/la-application.component';
 import { LaLetterOfOfferComponent } from './components/licence-application/la-letter-of-offer/la-letter-of-offer.component';
 import { LaCapacityComponent } from './components/licence-application/la-capacity/la-capacity.component';
 import { PwaTestComponent } from './pwa-test/pwa-test.component';
@@ -150,6 +153,7 @@ import { VesselCapacityCardComponent } from './components/capacity/vessel-capaci
     ParallaxDirective,
     IfisSimulatorComponent,
     LoginComponent,
+    LicenceApplicationLanding,
     MainNavComponent,
     VesselsComponent,
     HomeVesselOwnerComponent,
@@ -173,6 +177,7 @@ import { VesselCapacityCardComponent } from './components/capacity/vessel-capaci
     LaVesselInfoComponent,
     LaDocumentationComponent,
     LaPreliminaryInfoComponent,
+    LaApplicationComponent,
     LaLetterOfOfferComponent,
     LaCapacityComponent,
     PwaTestComponent,

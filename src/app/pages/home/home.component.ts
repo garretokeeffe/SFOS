@@ -53,8 +53,11 @@ export class HomeComponent implements OnInit {
 
   public login(): void {
     // EmitterService.get(Emitters[Emitters.LOGIN]).emit(true);
- 
     this.router.navigate(['/login']).then((e) => {});
+  }
+
+  public newLicenceApplication(): void {
+    this.router.navigate(['/newlicenceapplication']).then((e) => {});
   }
 
   public register(): void {

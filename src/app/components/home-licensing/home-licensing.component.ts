@@ -7,7 +7,7 @@ import {AppComponent} from '../../app.component';
 @Component({
   selector: 'app-home-licensing',
   templateUrl: './home-licensing.component.html',
-  styleUrls: ['./home-licensing.component.css']
+  styleUrls: ['./home-licensing.component.css'],
 })
 export class HomeLicensingComponent implements OnInit {
 
@@ -16,12 +16,12 @@ export class HomeLicensingComponent implements OnInit {
   constructor(public appComponent: AppComponent,
               public notificationService: NotificationService) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
 
-    this.notificationService.getNotifications().subscribe(notifications => {
+    this.notificationService.getNotifications().subscribe((notifications) => {
       this.notifications = notifications;
     },
-    error => {
+      (error) => {
       console.error('Failed to retrieve notifications');
       this.notifications = [];
     });

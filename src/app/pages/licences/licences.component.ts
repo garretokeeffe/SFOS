@@ -17,16 +17,16 @@ import {ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-licences',
   templateUrl: './licences.component.html',
-  styleUrls: ['./licences.component.css']
+  styleUrls: ['./licences.component.css'],
 })
 export class LicencesComponent implements OnInit, DoCheck {
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
   .pipe(
-    map(result => result.matches)
+    map((result) => result.matches),
   );
 
-  title$: Observable<object> = this.title$ = this.activatedRoute.paramMap.pipe(map(() => window.history.state.title));
+  public title$: Observable<object> = this.title$ = this.activatedRoute.paramMap.pipe(map(() => window.history.state.title));
 
   public user: UserView = null;
   public vessels: Array<VesselView> = [];
@@ -36,7 +36,6 @@ export class LicencesComponent implements OnInit, DoCheck {
   public showLicenceApplication: boolean = false;
 
   public utils: Utils = Utils;
-
 
   constructor(public activatedRoute: ActivatedRoute,
               public breakpointObserver: BreakpointObserver,
@@ -50,7 +49,7 @@ export class LicencesComponent implements OnInit, DoCheck {
 
     // title$ = this.activatedRoute.paramMap.pipe(map(() => window.history.state.title));
 
-    this.userService.getUserByUserId().subscribe(user => {
+    this.userService.getUserByUserId().subscribe((user) => {
         this.user = user;
       },
       error => {
@@ -58,7 +57,7 @@ export class LicencesComponent implements OnInit, DoCheck {
         this.user = null;
       });
 
-    this.vesselService.getVessels().subscribe(vessels => {
+    this.vesselService.getVessels().subscribe((vessels) => {
         this.vessels = vessels;
       },
       error => {
@@ -66,17 +65,17 @@ export class LicencesComponent implements OnInit, DoCheck {
         this.vessels = [];
       });
 
-    this.notificationService.getNotifications().subscribe(notifications => {
+    this.notificationService.getNotifications().subscribe((notifications) => {
         this.notifications = notifications;
       },
-      error => {
+      (error) => {
         console.error('Failed to retrieve notifications');
         this.notifications = [];
       });
 
   }
 
-  public ngDoCheck() {
+  public ngDoCheck(): void {
 
   }
 
@@ -84,6 +83,5 @@ export class LicencesComponent implements OnInit, DoCheck {
     const count: number = this.notifications.filter((notification) => notification.vesselId === vessel.id).length;
     return count > 0 ? count : null;
   }
-
 
 }

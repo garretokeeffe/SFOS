@@ -34,6 +34,7 @@ import {HomeFishBuyerComponent} from './pages/home-fish-buyer/home-fish-buyer.co
 import {HomeComponent} from './pages/home/home.component';
 import {NotificationsComponent} from './pages/notifications/notifications.component';
 import {HelpComponent} from './pages/help/help.component';
+import {LicenceApplicationLanding} from './pages/licence-application/licenceApplicationLanding';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [AuthenticationService]}, /* no authentication required to reach login page */
@@ -74,6 +75,8 @@ const routes: Routes = [
   { path: 'notifications', component: NotificationsComponent, canActivate: [AuthenticationService] },
   { path: 'help', component: HelpComponent, canActivate: [AuthenticationService] },
   { path: 'home', component: HomeComponent }, /* no authentication required on public home page */
+
+  { path: 'newlicenceapplication', component: LicenceApplicationLanding }, /* no authentication required on public home page */
 
   { path: 'vessel/:id', component: VesselsComponent, canActivate: [AuthenticationService] }, /* This will link routes like /vessel/1 or /vessel/9 etc. to the VesselsComponent component. */
   // { path: '',  redirectTo: '/login', pathMatch: 'full' },

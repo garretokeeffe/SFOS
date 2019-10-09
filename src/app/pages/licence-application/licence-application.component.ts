@@ -16,7 +16,7 @@ import {UserGroup} from '../../types/ifisauthentication';
   selector: 'app-licence-application',
   templateUrl: './licence-application.component.html',
   styleUrls: ['./licence-application.component.css'],
-  animations: animations
+  animations: animations,
 })
 export class LicenceApplicationComponent implements OnInit, AfterViewChecked {
 
@@ -24,9 +24,9 @@ export class LicenceApplicationComponent implements OnInit, AfterViewChecked {
   public licenceApplication: LicenceApplicationView = new LicenceApplicationView();
   public UserGroup: typeof UserGroup = UserGroup;
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
+  public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
   .pipe(
-    map(result => result.matches)
+    map((result) => result.matches),
   );
 
   constructor(public authentication: AuthenticationService,
@@ -34,7 +34,7 @@ export class LicenceApplicationComponent implements OnInit, AfterViewChecked {
               private breakpointObserver: BreakpointObserver,
               public userService: UserService) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.userService.getUserByUserId().subscribe((user: UserView) => {
       this.user = user;
 
@@ -44,7 +44,7 @@ export class LicenceApplicationComponent implements OnInit, AfterViewChecked {
         this.licenceApplication.applicants.push(firstApplicant);
       // }
     },
-    error => {
+      (error) => {
       console.error('Failed to retrieve userprofile');
       this.user = null;
     });

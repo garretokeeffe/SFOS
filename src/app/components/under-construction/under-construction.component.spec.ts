@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UnderConstructionComponent } from './underconstruction.component';
+import { UnderConstructionComponent } from './under-construction.component';
 
 describe('UnderConstructionComponent', () => {
   let component: UnderConstructionComponent;

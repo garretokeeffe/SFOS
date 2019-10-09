@@ -86,9 +86,11 @@ export class MainNavComponent implements OnInit, OnChanges, AfterViewChecked {
     this.getUserProfile();
 
     EmitterService.get(Emitters[Emitters.RETURN_TO_DASHBOARD]).subscribe((returnToDashboard: boolean) => {
+      console.log('calling navigateToDashboard() following emitter request');
       this.navigateToDashboard();
     });
 
+    console.log('calling navigateToDashboard() following in main-nav ngOnInit()');
     this.navigateToDashboard();
   }
 
