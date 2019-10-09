@@ -1,0 +1,36 @@
+th.mat-header-cell:first-of-type {
+  padding-left: 0px;
+}
+
+table.shareAllocationTable {
+  max-width: 600px;
+}
+
+.mat-column-name,
+.mat-column-name mat-form-field {
+  max-width: 250px;
+  width: 250px;
+}
+.mat-column-name mat-form-field.userReferenceNumber {
+  max-width: 115px;
+  width: 115px;
+}
+
+
+@media screen and (max-width: 720px) {
+  .mat-column-name,
+  .mat-column-name mat-form-field {
+    max-width: 200px;
+    width: 200px;
+  }
+  .mat-column-name mat-form-field.userReferenceNumber {
+    max-width: 115px;
+    width: 115px;
+  }
+}
+
+.mat-column-numberOfShares,
+.mat-column-numberOfShares mat-form-field {
+  max-width: 60px;
+  width: 60px;
+}
