@@ -1,4 +1,4 @@
-<div *ngFor="let i = index; let detail of capacity.details | orderBy : ['capacityType']" class="centered-content fullWidth margin-bottom capacityDetails">
+<div *ngFor="let i = index; let detail of capacity.blocks | orderBy : ['capacityType']" class="centered-content fullWidth margin-bottom capacityBlocks">
 
   <div *ngIf="showQuotaEligibility">
     <!-- Capacity has track record with quota eligibility -->

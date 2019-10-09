@@ -68,19 +68,19 @@
           <mat-panel-title><div style="width: 100%; text-align: center">DETAILS</div></mat-panel-title>
         </mat-expansion-panel-header>
         <div fxLayout="column"  fxLayoutAlign="start stretch" xfxLayoutGap="16px" class="mat-card-group">
-          <div *ngFor="let detail of capacity.details | orderBy : ['capacityType']" class="capacityDetails" [class.fullWidth]="(isHandset$ | async)">
+          <div *ngFor="let block of capacity.blocks | orderBy : ['capacityType']" class="capacityBlocks" [class.fullWidth]="(isHandset$ | async)">
             <mat-card #card class="margin-bottom innerCard" [@fadeInOut]="'fadeIn'" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)">
               <mat-card-header>
                 <mat-card-title>
                   <div fxFill fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="16px">
-                    <mat-icon>{{ detail.capacityType.toUpperCase() === 'KW' ? 'speed' : 'gradient'}}</mat-icon>
-                    <div>{{ detail.capacityAmount }}&nbsp;<span style="text-transform: none">{{ detail.capacityType }}</span></div>
+                    <mat-icon>{{ block.capacityType.toUpperCase() === 'KW' ? 'speed' : 'gradient'}}</mat-icon>
+                    <div>{{ block.capacityAmount }}&nbsp;<span style="text-transform: none">{{ block.capacityType }}</span></div>
                   </div>
                 </mat-card-title>
                 <mat-card-subtitle></mat-card-subtitle>
               </mat-card-header>
               <mat-card-content>
-                <app-capacity-detail [detail]="detail" [showQuotaEligibility]="capacity.hasQuotaEligibility()" [pointsEnabled]="pointsEnabled" [innerCard]="true"></app-capacity-detail>
+                <app-capacity-block [block]="block" [showQuotaEligibility]="capacity.hasQuotaEligibility()" [pointsEnabled]="pointsEnabled" [innerCard]="true"></app-capacity-block>
               </mat-card-content>
             </mat-card>
           </div>

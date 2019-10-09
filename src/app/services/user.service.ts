@@ -80,6 +80,7 @@ export class UserService {
 
   private getUserProfileByCcsId(ccsId: string): Observable<UserView> {
     console.log('getUserProfileByCcsId: ' + ccsId);
+
     let url: string = this.globals.demo ? this.demoService.getUserProfileURL : environment.getUserProfileURL;
 
     // don't append the ccsId in demo mode

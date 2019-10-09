@@ -1,6 +1,6 @@
 import { VesselSummary, VesselView } from './vessel';
 import { TrackRecord, TrackRecordView } from './trackRecord';
-import {PenaltyPoints} from './points';
+import { PenaltyPoints } from './points';
 import { FleetSegment, FleetSegmentManager, FleetSubSegment } from './fleet-segment';
 
 export class AllCapacity {
@@ -60,7 +60,7 @@ export class AllCapacityView extends AllCapacity {
 }
 
 export class Capacity {
-  public id: number = null; // currently not required by the ui,
+  public capAccountId: number = null; // currently not required by the ui,
                             // but may be required for update capacity functionality
 
   public ownerId: number = null; // CCS User Id
@@ -70,19 +70,19 @@ export class Capacity {
   public gt: number = null; // this may be a subset of the entire capacity of the vessel
   public kw: number = null; // this may be a subset of the entire capacity of the vessel
 
-  public details: Array<CapacityDetail> = [];
+  public blocks: Array<CapacityBlock> = [];
 
   // capacity-card attributes
   public vessel: VesselSummary | VesselView = null;
   public penaltyPoints: Array<PenaltyPoints> = []; // Overall points not applicable at top-level for off-register capacity which is not
-                                                   // proposed. For off-register, broken down points in CapacityDetail model are used.
+                                                   // proposed. For off-register, broken down points in CapacityBlock model are used.
   // off-register only attributes
   public proposed: boolean = null; // true if capacity is off-register and proposed, otherwise false
 
   constructor(capacity?: Capacity | any) { // DMcD: added any option to permit unit testing with incomplete mock data
     if (capacity) {
       // copy constructor
-      this.id = capacity.id;
+      this.capAccountId = capacity.capAccountId;
       this.ownerId = capacity.userId;
       this.offRegister = capacity.offRegister;
       this.proposed = capacity.proposed;
@@ -94,14 +94,14 @@ export class Capacity {
       // this.offRegisterDate = capacity.offRegisterDate ? capacity.offRegisterDate : '';
       // this.offRegisterExpiryDate = capacity.offRegisterExpiryDate ? capacity.offRegisterExpiryDate : '';
 
-      const details: Array<CapacityDetail> = [];
-      if (capacity.details) {
-        capacity.details.forEach((capacityDetail: CapacityDetail) => {
-          details.push(new CapacityDetail(capacityDetail));
+      const blocks: Array<CapacityBlock> = [];
+      if (capacity.blocks) {
+        capacity.blocks.forEach((capacityBlock: CapacityBlock) => {
+          blocks.push(new CapacityBlock(capacityBlock));
         });
-        this.details = details;
+        this.blocks = blocks;
       } else {
-        this.details = [];
+        this.blocks = [];
       }
 
       this.penaltyPoints = capacity.penaltyPoints; // reference copy
@@ -120,10 +120,10 @@ export class CapacityView extends Capacity {
 
   public hasQuotaEligibility(): boolean {
     let qe: boolean = false;
-    if (this.details) {
-      this.details.forEach((capacityDetail: CapacityDetail) => {
-        if (capacityDetail.trackRecord) {
-          capacityDetail.trackRecord.forEach((trackRecord: TrackRecord) => {
+    if (this.blocks) {
+      this.blocks.forEach((capacityBlock: CapacityBlock) => {
+        if (capacityBlock.trackRecord) {
+          capacityBlock.trackRecord.forEach((trackRecord: TrackRecord) => {
             if (trackRecord.quotaEligibility) {
               qe = true;
             }
@@ -136,7 +136,7 @@ export class CapacityView extends Capacity {
 
   public getTrackRecordWithQuotaEligibility(): Array<string> {
     const tr: Array<string> = [];
-    this.details.forEach((capacityDetail: CapacityDetail) => {
+    this.blocks.forEach((capacityDetail: CapacityBlock) => {
       capacityDetail.trackRecord.forEach((trackRecord: TrackRecordView) => {
         if (trackRecord.quotaEligibility) {
           // don't return duplicates (qe may be on both GT and kW)
@@ -152,9 +152,9 @@ export class CapacityView extends Capacity {
 
   public hasTrackRecord(): boolean {
     let tr: boolean = false;
-    if (this.details) {
-      this.details.forEach((capacityDetail: CapacityDetail) => {
-        if (capacityDetail.trackRecord && capacityDetail.trackRecord.length > 0) {
+    if (this.blocks) {
+      this.blocks.forEach((capacityBlock: CapacityBlock) => {
+        if (capacityBlock.trackRecord && capacityBlock.trackRecord.length > 0) {
           tr = true;
         }
       });
@@ -204,7 +204,9 @@ export class CapacityView extends Capacity {
 
 }
 
-export class CapacityDetail {
+export class CapacityBlock {
+  public capBlockId: number = null; // currently not required by the ui,
+                                    // but may be required for update capacity functionality
   public capacityAmount: number = null; // GT or kW amount
   public capacityType: string = null; // 'GT' | 'kW'
   public trackRecord: Array<TrackRecord | TrackRecordView> = [];
@@ -216,27 +218,28 @@ export class CapacityDetail {
   public sourceVesselName: string = '';
   public sourceVesselId: string = ''; // future-proof, in case we need to do searches on the source vessel
 
-  constructor(capacityDetail?: CapacityDetail | any) { // DMcD: added any option to permit unit testing with incomplete mock data
-    if (capacityDetail) {
+  constructor(capacityBlock?: CapacityBlock | any) { // DMcD: added any option to permit unit testing with incomplete mock data
+    if (capacityBlock) {
       // copy constructor
-      this.capacityAmount = capacityDetail.capacityAmount;
-      this.capacityType = capacityDetail.capacityType;
-      this.trackRecord = capacityDetail.trackRecord ? capacityDetail.trackRecord : this.trackRecord; // reference copy
-      if (capacityDetail.trackRecord) {
+      this.capBlockId = capacityBlock.capBlockId;
+      this.capacityAmount = capacityBlock.capacityAmount;
+      this.capacityType = capacityBlock.capacityType;
+      this.trackRecord = capacityBlock.trackRecord ? capacityBlock.trackRecord : this.trackRecord; // reference copy
+      if (capacityBlock.trackRecord) {
         const tr: Array<TrackRecordView> = [];
-        capacityDetail.trackRecord.forEach ((trackRecord: TrackRecord | TrackRecordView) => {
+        capacityBlock.trackRecord.forEach ((trackRecord: TrackRecord | TrackRecordView) => {
           tr.push(new TrackRecordView(trackRecord));
         });
         this.trackRecord = tr;
       } else {
         this.trackRecord = [];
       }
-      this.penaltyPoints = capacityDetail.penaltyPoints; // reference copy
+      this.penaltyPoints = capacityBlock.penaltyPoints; // reference copy
 
       // attributes only applicable to off-register capacity
-      this.offRegisterDate = capacityDetail.offRegisterDate ? capacityDetail.offRegisterDate : this.offRegisterDate;
-      this.expiryDate = capacityDetail.expiryDate ? capacityDetail.expiryDate : this.expiryDate;
-      this.sourceVesselName = capacityDetail.sourceVesselName ? capacityDetail.sourceVesselName : this.sourceVesselName;
+      this.offRegisterDate = capacityBlock.offRegisterDate ? capacityBlock.offRegisterDate : this.offRegisterDate;
+      this.expiryDate = capacityBlock.expiryDate ? capacityBlock.expiryDate : this.expiryDate;
+      this.sourceVesselName = capacityBlock.sourceVesselName ? capacityBlock.sourceVesselName : this.sourceVesselName;
     }
   }
 }

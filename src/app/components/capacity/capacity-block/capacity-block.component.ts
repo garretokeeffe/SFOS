@@ -1,18 +1,18 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CapacityDetail } from '../../../types/capacity';
+import { CapacityBlock } from '../../../types/capacity';
 import { PenaltyPoints } from '../../../types/points';
-import * as moment from 'moment';
 import { Duration } from 'moment';
 import { Globals } from '../../../globals';
+import * as moment from 'moment';
 
 @Component({
-  selector: 'app-capacity-detail',
-  templateUrl: './capacity-detail.component.html',
-  styleUrls: ['./capacity-detail.component.css']
+  selector: 'app-capacity-block',
+  templateUrl: './capacity-block.component.html',
+  styleUrls: ['./capacity-block.component.css'],
 })
-export class CapacityDetailComponent implements OnInit {
+export class CapacityBlockComponent implements OnInit {
 
-  @Input() public detail: CapacityDetail = null;
+  @Input() public block: CapacityBlock = null;
   @Input() public showQuotaEligibility: boolean = false;
   @Input() public pointsEnabled: boolean = false;
   @Input() public innerCard: boolean = false; /* for styling */
@@ -24,7 +24,7 @@ export class CapacityDetailComponent implements OnInit {
 
   public getTotalPenaltyPoints(): number {
     let total: number = 0;
-    this.detail.penaltyPoints.forEach( (penaltyPoints: PenaltyPoints ) => {
+    this.block.penaltyPoints.forEach( (penaltyPoints: PenaltyPoints ) => {
       total = total + penaltyPoints.numberOfPoints;
     });
     return total;
@@ -32,10 +32,10 @@ export class CapacityDetailComponent implements OnInit {
 
   public isExpiringSoon(): boolean {
     let expiringSoon: boolean = false;
-    if (this.detail && this.detail.expiryDate) {
+    if (this.block && this.block.expiryDate) {
 
       const now: any = moment.utc(new Date()); // today's date
-      const expiryDate: any = moment(this.detail.expiryDate, 'DD/MM/YYYY'); // expiryDate should already be in utc
+      const expiryDate: any = moment(this.block.expiryDate, 'DD/MM/YYYY'); // expiryDate should already be in utc
       const difference: Duration = moment.duration(expiryDate.diff(now));
       const daysToExpiry: number = difference.asDays();
       // console.log('Days to expiry: ' + daysToExpiry);

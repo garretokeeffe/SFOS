@@ -136,7 +136,7 @@ import { Contain } from './pipes/contain.pipe';
 import { FleetSegmentComponent } from './components/capacity/fleet-segment/fleet-segment.component';
 import { TrackRecordComponent } from './components/capacity/track-record/track-record.component';
 import { OrderBy } from './pipes/orderBy.pipe';
-import { CapacityDetailComponent } from './components/capacity/capacity-detail/capacity-detail.component';
+import { CapacityBlockComponent } from './components/capacity/capacity-block/capacity-block.component';
 import { VesselCapacityCardComponent } from './components/capacity/vessel-capacity-card/vessel-capacity-card.component';
 
 @NgModule({
@@ -203,7 +203,7 @@ import { VesselCapacityCardComponent } from './components/capacity/vessel-capaci
     CapacityCardComponent,
     FleetSegmentComponent,
     TrackRecordComponent,
-    CapacityDetailComponent,
+    CapacityBlockComponent,
     VesselCapacityCardComponent,
   ],
   imports: [

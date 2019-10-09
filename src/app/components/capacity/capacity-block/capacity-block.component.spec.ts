@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CapacityDetailComponent } from './capacity-detail.component';
+import { CapacityBlockComponent } from './capacity-block.component';
 
-describe('CapacityDetailComponent', () => {
-  let component: CapacityDetailComponent;
-  let fixture: ComponentFixture<CapacityDetailComponent>;
+describe('CapacityBlockComponent', () => {
+  let component: CapacityBlockComponent;
+  let fixture: ComponentFixture<CapacityBlockComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CapacityDetailComponent ]
+      declarations: [ CapacityBlockComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CapacityDetailComponent);
+    fixture = TestBed.createComponent(CapacityBlockComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

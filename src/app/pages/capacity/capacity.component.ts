@@ -6,7 +6,7 @@ import { ActivatedRoute} from '@angular/router';
 import { UserView} from '../../types/user';
 import { UserService} from '../../services/user.service';
 import { CapacityService} from '../../services/capacity.service';
-import { AllCapacity, AllCapacityView, CapacityDetail, CapacityView } from '../../types/capacity';
+import { AllCapacity, AllCapacityView, CapacityBlock, CapacityView } from '../../types/capacity';
 import { FleetSegment, FleetSegmentManager, FleetSubSegment } from '../../types/fleet-segment';
 import { Globals} from '../../globals';
 import { MatButtonToggleGroup, MatSelect, MatTabGroup} from '@angular/material';
@@ -106,7 +106,7 @@ export class CapacityComponent implements OnInit, AfterViewChecked {
   }
 
   public resizeCards(): void {
-    return; // TODO: re-enable this after solving problem of resizing after showing proposed vessel details
+    return; // TODO: re-enable this after solving problem of resizing after showing proposed vessel blocks
     // make all cards the same size
     let cards: HTMLCollection = this.document.getElementsByTagName('mat-card');
     let largestHeight: number = 0;
@@ -153,7 +153,7 @@ export class CapacityComponent implements OnInit, AfterViewChecked {
     let expiringSoon: boolean = false;
     if (this.allCapacity && this.allCapacity.offRegister && this.allCapacity.offRegister) {
       this.allCapacity.offRegister.forEach( (capacity: CapacityView) => {
-        capacity.details.forEach( (detail: CapacityDetail) => {
+        capacity.blocks.forEach( (detail: CapacityBlock) => {
           if (detail.expiryDate) {
 
             const now: any = moment.utc(new Date()); // today's date

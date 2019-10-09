@@ -3,7 +3,7 @@
   "onRegister":
   [
     {
-      "id": 1,
+      "capAccountId": 1,
       "ownerId": 1,
       "offRegister": false,
       "proposed": false,
@@ -11,9 +11,10 @@
       "fleetSubSegment": 1942697,
       "gt": 50,
       "kw": 150,
-      "details":
+      "blocks":
       [
         {
+          "capBlockId": 1,
           "capacityAmount": 160,
           "capacityType": "GT",
           "trackRecord":
@@ -30,6 +31,7 @@
           "penaltyPoints": null
         },
         {
+          "capBlockId": 2,
           "capacityAmount": 20,
           "capacityType": "GT",
           "trackRecord":
@@ -42,6 +44,7 @@
           "penaltyPoints": null
         },
         {
+          "capBlockId": 3,
           "capacityAmount": 20,
           "capacityType": "GT",
           "trackRecord":
@@ -54,6 +57,7 @@
           "penaltyPoints": null
         },
         {
+          "capBlockId": 4,
           "capacityAmount": 500,
           "capacityType": "kW",
           "trackRecord":
@@ -85,7 +89,7 @@
     },
 
     {
-      "id": 2,
+      "capAccountId": 2,
       "ownerId": 1,
       "offRegister": false,
       "proposed": false,
@@ -93,9 +97,10 @@
       "fleetSubSegment": 1942697,
       "gt": 75,
       "kw": 130,
-      "details":
+      "blocks":
       [
         {
+          "capBlockId": 1,
           "capacityAmount": 25,
           "capacityType": "GT",
           "trackRecord":
@@ -112,6 +117,7 @@
           "penaltyPoints": null
         },
         {
+          "capBlockId": 2,
           "capacityAmount": 25,
           "capacityType": "GT",
           "trackRecord":
@@ -124,6 +130,7 @@
           "penaltyPoints": null
         },
         {
+          "capBlockId": 3,
           "capacityAmount": 25,
           "capacityType": "GT",
           "trackRecord":
@@ -136,6 +143,7 @@
           "penaltyPoints": null
         },
         {
+          "capBlockId": 4,
           "capacityAmount": 130,
           "capacityType": "kW",
           "trackRecord":
@@ -167,7 +175,7 @@
     },
 
     {
-      "id": 3,
+      "capAccountId": 3,
       "ownerId": 1,
       "offRegister": false,
       "proposed": false,
@@ -175,15 +183,17 @@
       "fleetSubSegment": 338360921,
       "gt": 195,
       "kw": 305,
-      "details":
+      "blocks":
       [
         {
+          "capBlockId": 1,
           "capacityAmount": 195,
           "capacityType": "GT",
           "trackRecord": null,
           "penaltyPoints": null
         },
         {
+          "capBlockId": 2,
           "capacityAmount": 305,
           "capacityType": "kW",
           "trackRecord": null,
@@ -203,7 +213,7 @@
     },
 
     {
-      "id": 4,
+      "capAccountId": 4,
       "ownerId": 1,
       "offRegister": false,
       "proposed": false,
@@ -211,15 +221,17 @@
       "fleetSubSegment": 1807585,
       "gt": 120,
       "kw": 290,
-      "details":
+      "blocks":
       [
         {
+          "capBlockId": 2,
           "capacityAmount": 120,
           "capacityType": "GT",
           "trackRecord": null,
           "penaltyPoints": null
         },
         {
+          "capBlockId": 2,
           "capacityAmount": 290,
           "capacityType": "kW",
           "trackRecord": null,
@@ -239,7 +251,7 @@
     },
 
     {
-      "id": 5,
+      "capAccountId": 5,
       "ownerId": 1,
       "offRegister": false,
       "proposed": false,
@@ -247,9 +259,10 @@
       "fleetSubSegment": 338360923,
       "gt": 100,
       "kw": 200,
-      "details":
+      "blocks":
       [
         {
+          "capBlockId": 1,
           "capacityAmount": 100,
           "capacityType": "GT",
           "trackRecord": null,
@@ -278,7 +291,7 @@
   "offRegister":
   [
     {
-      "id": 100,
+      "capAccountId": 100,
       "ownerId": 1,
       "offRegister": true,
       "proposed": false,
@@ -286,9 +299,10 @@
       "fleetSubSegment": 1942697,
       "gt": 200,
       "kw": 500,
-      "details":
+      "blocks":
       [
         {
+          "capBlockId": 1,
           "capacityAmount": 160,
           "capacityType": "GT",
           "trackRecord":
@@ -315,6 +329,7 @@
           ]
         },
         {
+          "capBlockId": 2,
           "capacityAmount": 20,
           "capacityType": "GT",
           "trackRecord": null,
@@ -347,6 +362,7 @@
           "penaltyPoints": null
         },
         {
+          "capBlockId": 3,
           "capacityAmount": 500,
           "capacityType": "kW",
           "trackRecord": null,
@@ -362,7 +378,7 @@
     },
 
     {
-      "id": 101,
+      "capAccountId": 101,
       "ownerId": 1,
       "offRegister": true,
       "proposed": true,
@@ -370,9 +386,10 @@
       "fleetSubSegment": 1942697,
       "gt": 300,
       "kw": 600,
-      "details":
+      "blocks":
       [
         {
+          "capBlockId": 1,
           "capacityAmount": 160,
           "capacityType": "GT",
           "trackRecord":
@@ -399,6 +416,7 @@
           ]
         },
         {
+          "capBlockId": 2,
           "capacityAmount": 20,
           "capacityType": "GT",
           "trackRecord":
@@ -421,6 +439,7 @@
           ]
         },
         {
+          "capBlockId": 1,
           "capacityAmount": 100,
           "capacityType": "GT",
           "trackRecord":
@@ -442,6 +461,7 @@
            ]
         },
         {
+          "capBlockId": 2,
           "capacityAmount": 20,
           "capacityType": "GT",
           "trackRecord":
@@ -463,6 +483,7 @@
           ]
         },
         {
+          "capBlockId": 3,
           "capacityAmount": 500,
           "capacityType": "kW",
           "trackRecord":
@@ -484,6 +505,7 @@
           ]
         },
         {
+          "capBlockId": 4,
           "capacityAmount": 100,
           "capacityType": "kW",
           "trackRecord":
@@ -523,7 +545,7 @@
     },
 
     {
-      "id": 102,
+      "capAccountId": 102,
       "ownerId": 1,
       "offRegister": true,
       "proposed": false,
@@ -531,9 +553,10 @@
       "fleetSubSegment": 1807585,
       "gt": 500,
       "kw": 300,
-      "details":
+      "blocks":
       [
         {
+          "capBlockId": 1,
           "capacityAmount": 500,
           "capacityType": "GT",
           "trackRecord":
@@ -560,6 +583,7 @@
           ]
         },
         {
+          "capBlockId": 2,
           "capacityAmount": 300,
           "capacityType": "kW",
           "trackRecord":
