@@ -27,7 +27,7 @@
           <div>{{ vessel.gt }}&nbsp;GT&nbsp;&nbsp;{{ vessel.kw}}&nbsp;kW</div>
         </div>
         <div class="left">
-          <div class="text-x-small card-data-header">LOA</div>
+          <div class="text-x-small card-data-header" title="Length Overall">LOA</div>
           <div>{{ vessel.loa }}m</div>
         </div>
       </div>
@@ -35,11 +35,11 @@
     <mat-card-subtitle xstyle="margin-left: 72px; margin-right: 72px">
       <div fxFill fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="8px">
         <div fxFlexAlign="start">
-          <div class="text-x-small left card-data-header">CFR</div>
+          <div class="text-x-small left card-data-header" title="Community Fleet Register">CFR</div>
           <div>{{ vessel.cfr }}</div>
         </div>
         <div class="left">
-          <div class="text-x-small card-data-header">Port&nbsp;Reg&nbsp;No.</div>
+          <div class="text-x-small card-data-header" title="Port Registration Number">Port&nbsp;Reg&nbsp;No.</div>
           <div>{{ vessel.prn }}</div>
         </div>
         <div class="left">
@@ -307,11 +307,11 @@
               <div class="padding-horizontal padding-bottom">
                 <div fxFill fxLayout="row" fxLayoutAlign="space-around start" fxLayoutGap="16px">
                   <div fxFlexAlign="start" fxFlex="50">
-                    <div class="text-x-small left card-data-header">CFR</div>
+                    <div class="text-x-small left card-data-header" title="Community Fleet Register">CFR</div>
                     <div class="card-data">{{ vessel.cfr }}</div>
                   </div>
                   <div fxFlexAlign="start">
-                    <div class="text-x-small left card-data-header">IRCS</div>
+                    <div class="text-x-small left card-data-header" title="International Radio Call Sign">IRCS</div>
                     <div class="card-data">{{ vessel.ircs }}</div>
                   </div>
                 </div>
@@ -319,15 +319,15 @@
               <div class="padding-horizontal padding-bottom">
                 <div fxFill fxLayout="row" fxLayoutAlign="space-around start" fxLayoutGap="16px">
                   <div class="left">
-                    <div class="text-x-small card-data-header">Port Reg No.</div>
+                    <div class="text-x-small card-data-header" title="Port Registration Number">Port Reg No.</div>
                     <div class="card-data">{{ vessel.prn }}</div>
                   </div>
                   <div fxFlexAlign="start">
-                    <div class="text-x-small left card-data-header">UVI</div>
+                    <div class="text-x-small left card-data-header" title="Unique Vessel Identifier">UVI</div>
                     <div class="card-data">{{ vessel.uvi }}</div>
                   </div>
                   <div class="left">
-                    <div class="text-x-small card-data-header">MMSI</div>
+                    <div class="text-x-small card-data-header" title="Maritime Mobile Service Identifier">MMSI</div>
                     <div class="card-data">{{ vessel.mmsi }}</div>
                   </div>
                 </div>
@@ -335,17 +335,17 @@
               <div class="padding-horizontal padding-bottom">
                 <div fxFill fxLayout="row" fxLayoutAlign="space-around start" fxLayoutGap="16px">
                   <div>
-                    <div class="text-x-small left card-data-header">VMS</div>
+                    <div class="text-x-small left card-data-header" title="Vessel Monitoring System">VMS</div>
                     <!-- DMcD: Deliberately using == (rather than ===) to check for null or not present -->
                     <div class="card-data" [class.italic]="vessel.vms == null">{{ vessel.vms === true ? '&#10004;' : vessel.vms === false ? '&#10060;' : '?' }}</div>
                   </div>
                   <div>
-                    <div class="text-x-small card-data-header">ERS</div>
+                    <div class="text-x-small card-data-header" title="Electronic Recording System">ERS</div>
                     <!-- DMcD: Deliberately using == (rather than ===) to check for null or not present -->
                     <div class="card-data" [class.italic]="vessel.ers == null">{{ vessel.ers === true ? '&#10004;' : vessel.ers === false ? '&#10060;' : '?' }}</div>
                   </div>
                   <div>
-                    <div class="text-x-small card-data-header">AIS</div>
+                    <div class="text-x-small card-data-header" title="Automatic Identification System">AIS</div>
                     <!-- DMcD: Deliberately using == (rather than ===) to check for null or not present -->
                     <div class="card-data" [class.italic]="vessel.ais == null">{{ vessel.ais === true ? '&#10004;' : vessel.ais === false ? '&#10060;' : '?' }}</div>
                   </div>
@@ -368,13 +368,13 @@
                     <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
                       <div>
                         <div class="text-x-small card-data-header">
-                          <span *ngIf="(isXSmall$ | async)">Reg&nbsp;Length</span>
+                          <span *ngIf="(isXSmall$ | async)" title="Registered Length">Reg&nbsp;Length</span>
                           <span *ngIf="!(isXSmall$ | async)">Registered&nbsp;Length</span>
                         </div>
                         <div class="card-data">{{ vessel.registeredLength }}<span *ngIf="vessel.registeredLength">m</span></div>
                       </div>
                       <div>
-                        <div class="text-x-small card-data-header">LOA</div>
+                        <div class="text-x-small card-data-header" title="Length Overall">LOA</div>
                         <div class="card-data">{{ vessel.loa }}<span *ngIf="vessel.loa">m</span></div>
                       </div>
                       <!--

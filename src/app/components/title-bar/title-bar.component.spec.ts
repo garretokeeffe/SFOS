@@ -6,6 +6,7 @@ describe('TitleBarComponent', () => {
   let component: TitleBarComponent;
   let httpSpy: any, versionSpy: any, userSpy: any;
 
+  /*
   beforeEach(() => {
     component = new TitleBarComponent(
       userSpy = jasmine.createSpyObj('authenticationService', ['authenticate', 'setSimulatorUser', 'simulateAuthentication']),
@@ -13,6 +14,7 @@ describe('TitleBarComponent', () => {
       httpSpy = jasmine.createSpyObj('httpSpy', ['get'])
     );
   });
+  */
 
   it('Slideshow images should be pre-loaded', async(() => {
     const preloadImages: any = spyOn(component, 'preloadImages');
