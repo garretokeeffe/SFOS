@@ -8,6 +8,7 @@
         <span class="wizard-label">{{ licenceApplication.refId }}</span>
       </h2>
     </div>
+    <!--
     <div *ngIf="authentication.access.userGroup === UserGroup['REPRESENTATIVE']" style="position: relative; top: -4px">
       <button mat-raised-button routerLink="/licencesinternal" [state]="{title: 'Applications'}">
         <span >APPLICATIONS LIST</span>
@@ -18,6 +19,7 @@
         <span>MY APPLICATIONS</span>
       </button>
     </div>
+    -->
   </div>
 
   <app-la-navbar [user]="user" [licenceApplication]="licenceApplication"></app-la-navbar>

@@ -3,6 +3,23 @@
 
   <!-- *ngIf="!licenceApplication.refId" [canEnter]="!licenceApplication.refId" -->
   <aw-wizard-step
+    [stepTitle]="!(isHandset$ | async) ? 'New Application' : ''" [navigationSymbol]="{ symbol: '&#xf011;', fontFamily: 'FontAwesome' }">
+    <div class="centered-content">
+      <app-la-application [licenceApplication]="licenceApplication"></app-la-application>
+      <div class="margin-top-double">
+        <mat-divider></mat-divider>
+        <mat-card-actions class="margin-top">
+          <button mat-raised-button awNextStep *ngIf="licenceApplication.letterOfOfferIssued && !licenceApplication.activeApplicant.letterOfOfferTermsAcceptedDate && !licenceApplication.activeApplicant.hasRejectedLetterOfOfferTerms"
+                  [disabled]="!licenceApplication.activeApplicant.hasAcceptedLetterOfOfferTerms" (click)="setLetterOfOfferTermsAcceptedDate()">
+            Submit Application
+          </button>
+          <button mat-raised-button awNextStep *ngIf="licenceApplication.refId">NEXT</button>
+        </mat-card-actions>
+      </div>
+    </div>
+  </aw-wizard-step>
+
+  <aw-wizard-step
                   [stepTitle]="!(isHandset$ | async) ? 'Preliminary Information' : ''" [navigationSymbol]="{ symbol: '&#xf011;', fontFamily: 'FontAwesome' }">
     <div class="centered-content">
       <app-la-preliminary-info [licenceApplication]="licenceApplication"></app-la-preliminary-info>

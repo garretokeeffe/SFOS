@@ -21,7 +21,7 @@ export class CapacityService {
     // ownerId = CCS Id from keycloak profile
     // sample ownerId for hard-coding = VA100131F
 
-    const url: string = this.globals.demo ? this.demoService.getCapacityURL : environment.getCapacityURL + '/' + ownerId;
+    const url: string = this.globals.demo ? this.demoService.getCapacityURL : environment.getCapacityURL; // + '/' + ownerId;
 
     return Observable.create( (observer) => {
       this.http.get(url, {
