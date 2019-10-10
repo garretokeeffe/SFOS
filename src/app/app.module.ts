@@ -88,7 +88,7 @@ import { environment } from '../environments/environment';
 import { routingModule } from './app.routing';
 import { Globals } from './globals';
 import { ProgressComponent } from './components/progress/progress.component';
-import { VesselComponent } from './components/vessel/vessel.component';
+import { GlossaryVesselIdentifiersBottomSheet, VesselComponent } from './components/vessel/vessel.component';
 import { LicenceApplicationComponent } from './pages/licence-application/licence-application.component';
 import { LaNavbarComponent } from './components/licence-application/la-navbar/la-navbar.component';
 import { LaVesselInfoComponent } from './components/licence-application/la-vessel-info/la-vessel-info.component';
@@ -210,6 +210,7 @@ import { VesselCapacityCardComponent } from './components/capacity/vessel-capaci
     TrackRecordComponent,
     CapacityBlockComponent,
     VesselCapacityCardComponent,
+    GlossaryVesselIdentifiersBottomSheet,
   ],
   imports: [
     routingModule,
@@ -267,6 +268,7 @@ import { VesselCapacityCardComponent } from './components/capacity/vessel-capaci
   entryComponents: [
     InfoDialogComponent,
     ConfirmationDialogComponent,
+    GlossaryVesselIdentifiersBottomSheet,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'en-GB' },

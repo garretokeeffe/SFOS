@@ -215,7 +215,7 @@ select:active {
   color:#5d9e5e;
 }
 .italic {
-  font-style:italic;
+  font-style: italic;
 }
 .normal {
   font-style:normal;
@@ -290,10 +290,16 @@ input[type="number"] {
 }
 
 .helpCursor:hover {
-  cursor:help;
+  cursor: help;
 }
 .waitCursor:hover {
   cursor:wait;
+}
+.helpLink {
+  cursor: help;
+  font-size: small;
+  border-bottom: 1px dotted;
+  color: rgba(50, 112, 104, 1); /* DAFM green theme */
 }
 
 .br {

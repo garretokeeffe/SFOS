@@ -252,6 +252,10 @@ progress-bar .progress-inner {
   color: rgba(0,0,0,.54) !important;
   font-size: 14px;
 }
+.green .card-data,
+.green .card-data-header {
+  color: rgba(50, 112, 104, 1) !important;
+}
 
 .mat-tab-group.mat-primary .mat-ink-bar,
 .mat-tab-nav-bar.mat-primary .mat-ink-bar {
@@ -282,6 +286,15 @@ progress-bar .progress-inner {
 }
 
 .mat-menu-item {
+  color: rgba(50, 112, 104, 1) !important;
+}
+
+.light-green-background {
+  background: rgba(50, 112, 104, .05) !important;
+}
+
+.mat-bottom-sheet-container {
+  padding: 0 !important;
   color: rgba(50, 112, 104, 1) !important;
 }
 

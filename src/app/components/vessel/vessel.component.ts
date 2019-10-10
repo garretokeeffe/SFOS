@@ -5,7 +5,8 @@ import { map } from 'rxjs/operators';
 import { VesselView } from 'src/app/types/vessel';
 import { VesselCardInfo } from 'src/app/types/vesselCardInfo';
 import { animations } from '../../animations';
-import {Globals} from '../../globals';
+import { Globals } from '../../globals';
+import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 
 @Component({
   selector: 'app-vessel',
@@ -32,8 +33,25 @@ export class VesselComponent implements OnInit {
   public showAllAdditionalVessionDetails: boolean = false;
 
   constructor(public globals: Globals,
-              private breakpointObserver: BreakpointObserver) { }
+              private breakpointObserver: BreakpointObserver,
+              private _bottomSheet: MatBottomSheet) { }
 
   public ngOnInit(): void { }
 
+  public openBottomSheet(): void {
+    this._bottomSheet.open(GlossaryVesselIdentifiersBottomSheet);
+  }
+}
+
+@Component({
+  selector: 'app-glossary-vessel-identifiers',
+  templateUrl: '../glossary/glossary-vessel-identifiers.html',
+})
+export class GlossaryVesselIdentifiersBottomSheet {
+  constructor(private _bottomSheetRef: MatBottomSheetRef<GlossaryVesselIdentifiersBottomSheet>) {}
+
+  public openLink(event: MouseEvent): void {
+    this._bottomSheetRef.dismiss();
+    event.preventDefault();
+  }
 }
