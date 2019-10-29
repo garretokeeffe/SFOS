@@ -8,9 +8,34 @@
 
       <div *ngIf="standAlonePage" class="wizard-label margin-bottom">SUBMIT APPLICATION</div>
       <div class="margin-bottom">
-        Before submitting your application, please ensure that you have fully complied with the terms of your Letter of Offer for the <span class="bold">Sea Fishing Boat Licence Application</span>.
+        Before submitting your application, please ensure that you have fully complied with the terms of your Letter of Offer
+        and provided all necessary documentation for your <span class="bold">Sea Fishing Boat Licence Application</span>.
         Failure to do so could result in a delay processing your application.
       </div>
+
+      <div class="wizard-label margin-top-double margin-bottom">CHECKLIST</div>
+
+      <div class="page" [@fadeInOut]="'fadeIn'">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <div fxLayout="column" fxLayoutAlign="space-around start" fxLayoutGap="16px" >
+            <div *ngFor="let documentRequired of licenceApplication.documentationRequired" fxLayout="row" fxLayoutGap="16px">
+              <div fxFlexAlign="start">
+                <mat-checkbox (change)="onCheckBoxChange()"></mat-checkbox>
+              </div>
+              <div fxFlexAlign="start" class="left">{{documentRequired.title}}</div>
+            </div>
+          </div>
+          <div *ngIf="checkListComplete" [@fadeInOut]="'fadeIn'" class="successBanner margin-top-double" fxLayoutAlign="start center">
+            <mat-icon class="info-icon">check_circle_outline</mat-icon>
+            <div>You are ready to submit your application</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="margin-vertical">
+        <mat-divider [inset]="false"></mat-divider>
+      </div>
+
       <div class="margin-bottom">
         Completed forms should be returned by registered post to:
         <address class="margin-top">
@@ -42,7 +67,8 @@
                     (click)="back.emit(licenceApplication)">
               BACK
             </button>
-            <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" [disabled]="true"
+            <!-- hidden button just to fill/align the space -->
+            <button class="hidden" mat-raised-button [class.fullWidth]="(isHandset$ | async)" [disabled]="!this.checkListComplete"
                     (click)="next.emit(licenceApplication)">
               NEXT
             </button>
@@ -52,5 +78,7 @@
 
     </div>
   </div>
+
+  <div id="bottomOfPage"></div>
 
 </div>

@@ -2,6 +2,7 @@ import * as moment from 'moment';
 import { FleetSubSegment } from './fleet-segment';
 import { User } from './user';
 import { Vessel, VesselView } from './vessel';
+import { DocumentationRequired } from './documentation-required';
 
 export enum ApplicantType {
   NONE = 0,
@@ -126,6 +127,7 @@ export class LicenceApplication {
   public preliminaryInformation: PreliminaryInformation = new PreliminaryInformation();
   public arn: string = '';
   public letterOfOffer: LetterOfOffer | LetterOfOfferView = new LetterOfOfferView();
+  public documentationRequired: Array<DocumentationRequired> = [];
 
   public vessel: Vessel | VesselView; // May not be required
 
@@ -137,6 +139,12 @@ export class LicenceApplication {
       this.preliminaryInformation = new PreliminaryInformation(licenceApplication.preliminaryInformation);
       this.arn = licenceApplication.arn;
       this.letterOfOffer = new LetterOfOfferView(licenceApplication.letterOfOffer);
+      this.documentationRequired = [];
+      if (licenceApplication.documentationRequired) {
+        licenceApplication.documentationRequired.forEach((downloadLink: DocumentationRequired) => {
+          this.documentationRequired.push(new DocumentationRequired((downloadLink)));
+        });
+      }
 
       this.vessel = new VesselView(licenceApplication.vessel); // May not be required
     }

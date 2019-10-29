@@ -13,8 +13,28 @@
       </div>
       -->
       <div class="margin-bottom">
-        To comply with the terms of your Letter of Offer for the <span class="bold">Sea Fishing Boat Licence Application</span> you need to download and complete the forms below.
+        To comply with the terms of your Letter of Offer for your <span class="bold">Sea Fishing Boat Licence Application</span> you need to download and complete the forms below.
       </div>
+
+      <div *ngIf="licenceApplication.documentationRequired && licenceApplication.documentationRequired | notFilter : 'url' : ''" class="margin-top" [class.margin-bottom]="!(isHandset$ | async)">
+        <mat-divider [inset]="false"></mat-divider>
+      </div>
+
+      <div [@fadeInOut]="'fadeIn'">
+        <div class="page" >
+          <div fxLayout="column" fxLayoutAlign="center center">
+            <div fxLayout="column" fxLayoutAlign="space-around start" fxLayoutGap="16px" >
+              <div *ngFor="let documentRequired of (licenceApplication.documentationRequired | notFilter : 'url' : '')" fxLayout="row" fxLayoutGap="16px">
+                <div fxFlexAlign="start">
+                  <mat-icon matListIcon alt="download">cloud_download</mat-icon>
+                </div>
+                <div fxFlexAlign="start" class="left">{{documentRequired.title}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!--
       <div class="margin-bottom">
         Completed forms should be returned by registered post to:
@@ -38,7 +58,6 @@
 
       <div id="forms" class="margin-top-double wizard-label">FORMS</div>
       -->
-      <div class="margin-top">[Only links to forms that are relevant to this licence application will be listed here]</div>
 
       <div *ngIf="!embedded" class="margin-bottom-double">
         <div class="margin-top">

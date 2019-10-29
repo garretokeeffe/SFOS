@@ -136,7 +136,7 @@ export class LaRetrievePreliminaryApplicationComponent implements OnInit, OnDest
   }
 
   // TODO: move this to utils - its a common method
-  // method duplicated in la-download-forms component
+  // method duplicated in la-download-forms and la-submit-manually components
   public scroll(id: string): void {
     const el: HTMLElement = document.getElementById(id);
     if (el) {

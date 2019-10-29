@@ -36,7 +36,7 @@
 
     <aw-wizard-step [stepId]="'DOWNLOAD_FORMS'" [stepTitle]="'Download Forms'" [navigationSymbol]="{ symbol: '&#xf0ed;', fontFamily: 'FontAwesome' }">
       <div [class.margin-top]="!(isHandset$ | async)">
-        <app-la-download-forms [user]="user" [licenceApplication]="licenceApplication" (next)="nextStep($event)"  (back)="previousStep($event)"></app-la-download-forms>
+        <app-la-download-forms [user]="user" [licenceApplication]="licenceApplication" (next)="nextStep($event);"  (back)="previousStep($event)"></app-la-download-forms>
       </div>
     </aw-wizard-step>
 

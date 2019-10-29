@@ -134,6 +134,7 @@ import { TokenInterceptor } from './services/token.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CapacityCardComponent } from './components/capacity/capacity-card/capacity-card.component';
 import { Filter } from './pipes/filter.pipe';
+import { NotFilter } from './pipes/notFilter.pipe';
 import { Unique } from './pipes/unique.pipe';
 import { Contain } from './pipes/contain.pipe';
 import { FleetSegmentComponent } from './components/capacity/fleet-segment/fleet-segment.component';
@@ -147,7 +148,7 @@ import { LaHeaderComponent } from './components/licence-application/la-header/la
 import { LaRetrievePreliminaryApplicationWizardComponent } from './components/licence-application/la-retrieve-preliminary-application-wizard/la-retrieve-preliminary-application-wizard.component';
 import {
   LaPreliminaryInfoBottomSheet,
-  LaPreliminaryInfoComponent
+  LaPreliminaryInfoComponent,
 } from './components/licence-application/la-preliminary-info/la-preliminary-info.component';
 import { LaLetterOfOfferComponent } from './components/licence-application/la-letter-of-offer/la-letter-of-offer.component';
 import { LaDownloadFormsComponent } from './components/licence-application/la-download-forms/la-download-forms.component';
@@ -158,6 +159,7 @@ import { LaSubmitManuallyComponent } from './components/licence-application/la-s
     AppComponent,
     SafePipe,
     Filter,
+    NotFilter,
     Contain,
     Unique,
     OrderBy,

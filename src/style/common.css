@@ -654,6 +654,13 @@ mat-form-field.multiline {
   border-top: darkgrey solid 1px;
 }
 
+.successBanner {
+  color: whitesmoke;
+  background-color: rgba(50, 112, 104, 1); /* dafm green */
+  /*width: calc(100% - 16px);*/
+  width: 100%;
+  padding: .75em;
+}
 .errorBanner {
   color: whitesmoke;
   background-color: indianred; /* #ae2833; */

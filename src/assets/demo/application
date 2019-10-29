@@ -57,6 +57,74 @@
        "text": "It will be necessary to establish that the vessel will have a genuine economic link with the local coastal communities and in this context the attached questionnaire should be completed"
       }
     ]
-  }
+  },
+  "documentationRequired": [
+    {
+      "url": "",
+      "title": "2 Photographs of Vessel",
+      "category": 1,
+      "letterOfOfferTermId": 1926062
+    },
+    {
+      "url": "someurl",
+      "title": "Application Form",
+      "category": 0,
+      "letterOfOfferTermId": 1947298
+    },
+    {
+      "url": "someurl",
+      "title": "Assignment Note",
+      "category": 3,
+      "letterOfOfferTermId": 1947281
+    },
+    {
+      "url": "someurl",
+      "title": "Bill of Sale",
+      "category": 3,
+      "letterOfOfferTermId": 1947275
+    },
+    {
+      "url": "someurl",
+      "title": "Builder's Certificate",
+      "category": 3,
+      "letterOfOfferTermId": 1947276
+    },
+    {
+       "url": "someurl",
+       "title": "Certificate of Compliance",
+       "category": 3,
+       "letterOfOfferTermId": 8466217
+    },
+    {
+       "url": "someurl",
+       "title": "Certificate of Measurement",
+       "category": 3,
+       "letterOfOfferTermId": 8466221
+    },
+    {
+       "url": "someurl",
+       "title": "Engine Details",
+       "category": 3,
+       "letterOfOfferTermId": 8466223
+    },
+    {
+       "url": "someurl",
+       "title": "Safety Certificate",
+       "category": 3,
+       "letterOfOfferTermId": 200000437
+    },
+    {
+       "url": "",
+       "title": "PPS Number(s)",
+       "category": 2,
+       "letterOfOfferTermId": 8466215
+    },
+    {
+       "url": "someurl",
+       "title": "Share Register",
+       "category": 3,
+       "letterOfOfferTermId": 1947286
+    }
+  ]
 }
 

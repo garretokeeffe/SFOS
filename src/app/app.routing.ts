@@ -87,4 +87,4 @@ const routes: Routes = [
   { path: '',  redirectTo: '/home', pathMatch: 'full' },
 ];
 
-export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
+export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' });

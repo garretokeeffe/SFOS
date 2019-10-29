@@ -1,4 +1,4 @@
-<div [class.page]="standAlonePage" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)">
+<div id='top' [class.page]="standAlonePage" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)">
 
   <app-la-header *ngIf="standAlonePage"></app-la-header>
 
@@ -74,9 +74,9 @@
       <div class="margin-vertical">
           <span>
             <!-- TODO: if the acceptor is the logged in your, say 'You accepted the terms...' rather than 'John Murphy accepted the terms...' -->
-            {{ licenceApplication.letterOfOffer.acceptedBy.firstName }} {{ licenceApplication.letterOfOffer.acceptedBy.lastName }}
-            <span [class.br]="(isHandset$ | async)">accepted the Terms of the Letter of Offer </span>
-            <span [class.br]="(isHandset$ | async)">for the <span class="bold">Sea Fishing Boat Licence Application</span></span>
+            <!--{{ licenceApplication.letterOfOffer.acceptedBy.firstName }} {{ licenceApplication.letterOfOffer.acceptedBy.lastName }}-->
+            <span [class.br]="(isHandset$ | async)">You accepted the Terms of the Letter of Offer </span>
+            <span [class.br]="(isHandset$ | async)">for your <div [class.inline]="(isHandset$ | async)" class="bold">Sea Fishing Boat Licence Application </div></span>
             <span [class.br]="(isHandset$ | async)">on {{ licenceApplication.letterOfOffer.acceptedDate }}</span>
           </span>
       </div>
