@@ -1,18 +1,70 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Optional } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Vessel, VesselView} from '../types/vessel';
 import {environment} from '../../environments/environment';
 import {Submission, SubmissionView} from '../types/submission';
-import {LetterOfOfferTerm} from '../types/licence-application';
+import { LetterOfOfferTerm, LicenceApplication, LicenceApplicationView } from '../types/licence-application';
 import {Applicant} from '../types/applicant';
+import { Globals } from '../globals';
+import { DemoService } from './demo.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LicenceService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private globals: Globals,
+              @Optional() private demoService: DemoService) { }
+
+  public getApplication(ownerId?: string, arn?: string, pin?: string): Observable<LicenceApplicationView> {
+
+    // ownerId = CCS Id from keycloak profile
+    // sample ownerId for hard-coding = VA100131F
+
+    let url: string = '';
+
+    if (this.globals.demo) {
+      url = this.demoService.getApplicationURL;
+    } else {
+      url = environment.getApplicationURL;
+      if (ownerId) {
+        url += '/' + ownerId;
+      }
+      if (arn) {
+        url += '/' + arn;
+      }
+      if (pin) {
+        url += '/' + pin;
+      }
+    }
+
+    return Observable.create((observer) => {
+      this.http.get(url, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache, no-store, must-revalidate', // HTTP 1.1
+          'Pragma': 'no-cache', // HTTP 1.0
+          'Expires': '0' // Proxies
+        }),
+        observe: 'body'
+      })
+      .subscribe(
+        (res: LicenceApplication) => {
+          res = res ? new LicenceApplicationView(res) : null;
+          observer.next(res);
+          observer.complete();
+
+        },
+        (error) => {
+          // logger.error(JSON.stringify(error));
+          console.log(JSON.stringify(error));
+          observer.error(error);
+          observer.complete();
+        });
+    });
+  }
 
   public getStatusesOfSubmissions(applicantId?: string): Observable<Array<SubmissionView>> {
 
@@ -62,38 +114,6 @@ export class LicenceService {
     });
   }
 
-  public getLetterOfOfferTerms(licenceApplicationRefNo?: string): Observable<Array<LetterOfOfferTerm>> {
-
-    let url: string = environment.getLetterOfOfferTermsURL;
-    if (licenceApplicationRefNo) {
-      url += '/' + licenceApplicationRefNo;
-    }
-
-    return Observable.create(observer => {
-      this.http.get(url, {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-          'Cache-Control': 'no-cache, no-store, must-revalidate', // HTTP 1.1
-          'Pragma': 'no-cache', // HTTP 1.0
-          'Expires': '0' // Proxies
-        }),
-        observe: 'body'
-      })
-      .subscribe(
-        (res: Array<LetterOfOfferTerm>) => {
-          res = res ? res : [];
-          observer.next(res);
-          observer.complete();
-
-        },
-        (error) => {
-          // logger.error(JSON.stringify(error));
-          console.log(JSON.stringify(error));
-          observer.error(error);
-          observer.complete();
-        });
-    });
-  }
 
   public getSubmissions(loadAllSubmissions: boolean = false): Observable<Array<SubmissionView>> {
 

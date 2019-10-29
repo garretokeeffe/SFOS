@@ -1,25 +1,25 @@
-import {AfterViewChecked, AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {LicenceApplicationView} from '../../../types/licence-application';
-import {MatDialog, MatTable, MatTableDataSource} from '@angular/material';
-import {Applicant, ApplicantView} from '../../../types/applicant';
-import {animations} from '../../../animations';
-import {UserService} from '../../../services/user.service';
-import {UserView} from '../../../types/user';
-import {InfoDialogComponent} from '../../info-dialog/info-dialog.component';
-
-export interface OptionItem {
-  value: string;
-  viewValue: string;
-}
-export interface SegmentGroup {
-  disabled?: boolean;
-  name: string;
-  segment: OptionItem[];
-}
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Optional,
+  Output,
+  SimpleChanges
+} from '@angular/core';
+import { ApplicantType, LetterOfOfferTerm, LicenceApplicationView } from '../../../types/licence-application';
+import { Observable } from 'rxjs';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { map } from 'rxjs/operators';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { animations } from '../../../animations';
+import { UserView } from '../../../types/user';
+import { FleetSegmentManager, FleetSubSegment } from '../../../types/fleet-segment';
+import { LetterOfOfferStatus } from '../../../types/licence-application';
+import { GlossaryVesselIdentifiersBottomSheet } from '../../vessel/vessel.component';
+import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 
 @Component({
   selector: 'app-la-preliminary-info',
@@ -27,142 +27,98 @@ export interface SegmentGroup {
   styleUrls: ['./la-preliminary-info.component.css'],
   animations: animations
 })
-export class LaPreliminaryInfoComponent implements OnInit, AfterViewChecked {
+export class LaPreliminaryInfoComponent implements OnInit, OnChanges {
 
-  @Input() licenceApplication: LicenceApplicationView;
-  @ViewChild(MatTable) applicantTable: MatTable<ApplicantView>;
+  public displayHelpText: boolean = false;
 
-  public dataSource: MatTableDataSource<ApplicantView>; // DMcD: public for testing
-  public displayedColumns: Array<string> = ['name', 'numberOfShares', 'commands'];
+  @Input() public standAlonePage: boolean = false;
+  @Input() public embedded: boolean = false;
+  @Input() public readonly: boolean = false;
+  @Input() public user: UserView = null;
+  @Input() public licenceApplication: LicenceApplicationView = new LicenceApplicationView();
 
-  segmentControl = new FormControl();
-  segmentGroups: SegmentGroup[] = [
-    {
-      name: 'RSW Pelagic',
-      segment: [
-        {value: 'rsw-pelagic', viewValue: 'RSW Pelagic'}
-      ]
-    },
-    {
-      name: 'Beam Trawler',
-      segment: [
-        {value: 'beam-trawler', viewValue: 'Beam Trawler'}
-      ]
-    },
-    {
-      name: 'Aquaculture',
-      segment: [
-        {value: 'aquaculture', viewValue: 'Aquaculture'}
-      ]
-    },
-    {
-      name: 'Polyvalent',
-      disabled: false,
-      segment: [
-        {value: 'polyvalent-lt-18', viewValue: 'Polyvalent < 18m LOA'},
-        {value: 'polyvalent-gte-18', viewValue: 'Polyvalent >= 18m LOA'},
-        {value: 'polyvalent-scallops', viewValue: 'Polyvalent Scallops'}
-      ]
-    },
-    {
-      name: 'Specific',
-      segment: [
-        {value: 'specific-scallops-gte-10', viewValue: 'Specific Scallops >= 10m LOA'},
-        {value: 'specific-general', viewValue: 'Specific General'},
-      ]
-    }
-  ];
-  loaControl = new FormControl();
-  loas: OptionItem[] = [
-    {value: 'gte_24', viewValue: 'LOA >= 24m'},
-    {value: 'gte_15_lt_24', viewValue: 'LOA >= 15m && < 24m'},
-    {value: 'lt_15', viewValue: 'LOA < 15m'},
-  ];
+  @Output() public back: EventEmitter<LicenceApplicationView> = new EventEmitter<LicenceApplicationView>();
+  @Output() public next: EventEmitter<LicenceApplicationView> = new EventEmitter<LicenceApplicationView>();
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
+  public form: FormGroup;
+  public errorMessage: string = null;
+
+  public FleetSubSegment: any = FleetSubSegment;
+  public ApplicantType: any = ApplicantType;
+  public LetterOfOfferStatus: any = LetterOfOfferStatus;
+  public FleetSegmentManager: any = FleetSegmentManager; // access to static methods
+
+  public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
   .pipe(
-    map(result => result.matches)
+    map((result) => result.matches),
+  );
+  public isAtLeastMedium$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.Medium, Breakpoints.Large, Breakpoints.XLarge])
+  .pipe(
+    map((result) => result.matches),
+  );
+  public isAtLeastLarge$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.Large, Breakpoints.XLarge])
+  .pipe(
+    map((result) => result.matches),
   );
 
   constructor(private breakpointObserver: BreakpointObserver,
-              public dialog: MatDialog,
-              public userService: UserService) { }
-
-  ngOnInit() {
-    // this.dataSource.data = this.licenceApplication.applicants;
-    this.licenceApplication.applicants.forEach((applicant: ApplicantView) => {
-      console.log(applicant.fullName);
+              private fb: FormBuilder,
+              private _bottomSheet: MatBottomSheet,
+              @Optional() public cdRef: ChangeDetectorRef) {
+    this.form = fb.group({
+      fleetSegment: ['', [Validators.required]],
+      loa: ['', [Validators.required]],
+      registeredLength: ['', [Validators.required]],
+      applicantType: ['', [Validators.required]],
+      partnershipName: ['', [Validators.required]],
+      companyName: ['', [Validators.required]],
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      email: ['', [Validators.required]],
     });
   }
 
-  ngAfterViewChecked() {
-    // *ngIf="this.licenceApplication.applicants.length > 0"
-    this.applicantTable.renderRows();
+  public ngOnInit(): void {
   }
 
-  get readonly(): boolean {
-    if (this.licenceApplication.refId) {
-      return true;
-    } else {
-      return false;
+  public ngAfterViewChecked(): void {
+    // detect changes after view checked to avoid "expression has changed after it was checked" exceptions
+    this.cdRef.detectChanges();
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['licenceApplication'] && changes['licenceApplication'].currentValue) {
+      this.form.controls['fleetSegment'].setValue(changes['licenceApplication'].currentValue['preliminaryInformation']['fleetSegment']);
+      this.form.controls['loa'].setValue((this.readonly ? changes['licenceApplication'].currentValue['preliminaryInformation']['loa'] + 'm' : changes['licenceApplication'].currentValue['preliminaryInformation']['loa']));
+      this.form.controls['registeredLength'].setValue((this.readonly ? changes['licenceApplication'].currentValue['preliminaryInformation']['registeredLength'] + 'm' : changes['licenceApplication'].currentValue['preliminaryInformation']['registeredLength']));
+      this.form.controls['applicantType'].setValue(changes['licenceApplication'].currentValue['preliminaryInformation']['applicantType']);
+      this.form.controls['partnershipName'].setValue(changes['licenceApplication'].currentValue['preliminaryInformation']['partnershipName']);
+      this.form.controls['companyName'].setValue(changes['licenceApplication'].currentValue['preliminaryInformation']['companyName']);
+      this.form.controls['firstName'].setValue(changes['licenceApplication'].currentValue['preliminaryInformation']['primaryApplicant']['firstName']);
+      this.form.controls['lastName'].setValue(changes['licenceApplication'].currentValue['preliminaryInformation']['primaryApplicant']['lastName']);
+      this.form.controls['email'].setValue(changes['licenceApplication'].currentValue['preliminaryInformation']['primaryApplicant']['email']);
     }
   }
 
-  public countSharesAllocated(): number {
-    let count: number = 0;
-    this.licenceApplication.applicants.forEach( (applicant: ApplicantView) => {
-      if (applicant.numberOfShares) {
-        count += applicant.numberOfShares;
-      }
-    });
-    return count;
+  public ngOnDestroy(): void {
+    this.errorMessage = '';
   }
 
-  public addApplicant(): void {
-    this.licenceApplication.applicants.push(new ApplicantView());
-    this.applicantTable.renderRows();
-  }
-
-  public findApplicant(userRefNo: string, index: number): void {
-    this.userService.getUserByUserReferenceNumber(userRefNo).subscribe((user: UserView) => {
-      if (user) {
-        // this.licenceApplication.applicants[index] = new ApplicantView(userprofile);
-        this.licenceApplication.applicants[index].id = user.id;
-        this.licenceApplication.applicants[index].userReferenceNumber = user.userReferenceNumber;
-        this.licenceApplication.applicants[index].firstName = user.firstName;
-        this.licenceApplication.applicants[index].lastName = user.lastName;
-        this.licenceApplication.applicants[index].email = user.email;
-        this.licenceApplication.applicants[index].numberOfShares = 0;
-        this.licenceApplication.applicants[index].notFound = false;
-
-        this.applicantTable.renderRows();
-      } else {
-        this.licenceApplication.applicants[index].notFound = true;
-      }
-    },
-    error => {
-      console.error('Failed to retrieve userprofile by userprofile ref no');
-      this.licenceApplication.applicants[index].notFound = true;
-    });
-  }
-
-  public deleteApplicant(index: number): void {
-    this.licenceApplication.applicants.splice(index, 1);
-    this.applicantTable.renderRows();
-  }
-
-  public openApplicantDetails(applicant: ApplicantView): void {
-
-  }
-
-  public popupApplicantInfo(applicant: ApplicantView): void {
-    const dialogRef = this.dialog.open(InfoDialogComponent, {
-      width: '300px',
-      data: applicant.popupInfo()
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The applicant info dialog was closed');
-    });
+  public openBottomSheet(): void {
+    this._bottomSheet.open(LaPreliminaryInfoBottomSheet);
   }
 }
+
+@Component({
+  selector: 'app-la-preliminary-info-bottom-cheet',
+  templateUrl: 'la-preliminary-info.bottomsheet.html',
+})
+export class LaPreliminaryInfoBottomSheet {
+  constructor(private _bottomSheetRef: MatBottomSheetRef<LaPreliminaryInfoBottomSheet>) {}
+
+  public openLink(event: MouseEvent): void {
+    this._bottomSheetRef.dismiss();
+    event.preventDefault();
+  }
+}
+

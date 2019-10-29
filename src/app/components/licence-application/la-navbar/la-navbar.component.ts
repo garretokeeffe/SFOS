@@ -6,7 +6,7 @@ import {LetterOfOfferTerm, LicenceApplicationView} from '../../../types/licence-
 import {EmitterService} from '../../../services/emitter.service';
 import {Emitters} from '../../../types/emitters';
 import {MovingDirection, WizardComponent} from 'angular-archwizard';
-import {LaPreliminaryInfoComponent} from '../la-preliminary-info/la-preliminary-info.component';
+import {LaPreliminaryInfoComponent0} from '../la-preliminary-info0/la-preliminary-info-component0.component';
 import * as moment from 'moment';
 import {UserView} from '../../../types/user';
 import {ApplicantView, LetterOfOfferTermsAcceptanceStatus} from '../../../types/applicant';

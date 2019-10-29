@@ -18,6 +18,7 @@ export class DemoService {
   public getVersionURL: string = 'assets/demo/version';
   public getKeycloakProfileURL: string = 'assets/demo/keycloakuserprofile';
   public getUserProfileURL: string = 'assets/demo/userprofile';
+  public getApplicationURL: string = 'assets/demo/application';
   public getUsersURL: string = 'assets/demo/users';
   public getApplicationsURL: string = 'assets/demo/applications';
   public getNotificationCategoriesURL: string = 'assets/demo/notification-categories';

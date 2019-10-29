@@ -22,7 +22,7 @@
   <aw-wizard-step
                   [stepTitle]="!(isHandset$ | async) ? 'Preliminary Information' : ''" [navigationSymbol]="{ symbol: '&#xf011;', fontFamily: 'FontAwesome' }">
     <div class="centered-content">
-      <app-la-preliminary-info [licenceApplication]="licenceApplication"></app-la-preliminary-info>
+      <app-la-preliminary-info0 [licenceApplication]="licenceApplication"></app-la-preliminary-info0>
       <div class="margin-top-double">
         <mat-divider></mat-divider>
         <mat-card-actions class="margin-top">
@@ -36,7 +36,7 @@
   <aw-wizard-step [stepTitle]="!(isHandset$ | async) ? 'Letter of Offer' : ''" [navigationSymbol]="{ symbol: '&#xf016;', fontFamily: 'FontAwesome' }"
                   (stepEnter)="setActiveView(this, $event)">
     <div class="centered-content">
-      <app-la-letter-of-offer [licenceApplication]="licenceApplication" [isActiveView]="advancingToLetterOfOffer"></app-la-letter-of-offer>
+      <app-la-letter-of-offer0 [licenceApplication]="licenceApplication" [isActiveView]="advancingToLetterOfOffer"></app-la-letter-of-offer0>
       <div class="margin-top-double">
         <mat-divider></mat-divider>
         <mat-card-actions class="margin-top">

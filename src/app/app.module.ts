@@ -66,7 +66,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { VesselsComponent } from './components/vessels/vessels.component';
 import { HomeVesselOwnerComponent } from './pages/home-vessel-owner/home-vessel-owner.component';
 import { NoAccessComponent } from './components/noaccess/noaccess.component';
-import { HomeLicensingComponent } from './components/home-licensing/home-licensing.component';
+import { HomeLicensingComponent } from './pages/home-licensing/home-licensing.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { CapacityComponent } from './pages/capacity/capacity.component';
 import { LicencesComponent } from './pages/licences/licences.component';
@@ -94,9 +94,9 @@ import { LaNavbarComponent } from './components/licence-application/la-navbar/la
 import { LaVesselInfoComponent } from './components/licence-application/la-vessel-info/la-vessel-info.component';
 import { LaDocumentationComponent } from './components/licence-application/la-documentation/la-documentation.component';
 import { ArchwizardModule } from 'angular-archwizard';
-import { LaPreliminaryInfoComponent } from './components/licence-application/la-preliminary-info/la-preliminary-info.component';
+import { LaPreliminaryInfoComponent0 } from './components/licence-application/la-preliminary-info0/la-preliminary-info-component0.component';
 import { LaApplicationComponent } from './components/licence-application/la-application/la-application.component';
-import { LaLetterOfOfferComponent } from './components/licence-application/la-letter-of-offer/la-letter-of-offer.component';
+import { LaLetterOfOfferComponent0 } from './components/licence-application/la-letter-of-offer0/la-letter-of-offer-component0.component';
 import { LaCapacityComponent } from './components/licence-application/la-capacity/la-capacity.component';
 import { PwaTestComponent } from './pwa-test/pwa-test.component';
 import { LaPhotosComponent } from './components/licence-application/la-documentation/la-photos/la-photos.component';
@@ -141,6 +141,17 @@ import { TrackRecordComponent } from './components/capacity/track-record/track-r
 import { OrderBy } from './pipes/orderBy.pipe';
 import { CapacityBlockComponent } from './components/capacity/capacity-block/capacity-block.component';
 import { VesselCapacityCardComponent } from './components/capacity/vessel-capacity-card/vessel-capacity-card.component';
+import { LaRetrievePreliminaryApplicationComponent } from './components/licence-application/la-retrieve-preliminary-application/la-retrieve-preliminary-application.component';
+import { NumberDirective } from './directives/number/number.directive';
+import { LaHeaderComponent } from './components/licence-application/la-header/la-header.component';
+import { LaRetrievePreliminaryApplicationWizardComponent } from './components/licence-application/la-retrieve-preliminary-application-wizard/la-retrieve-preliminary-application-wizard.component';
+import {
+  LaPreliminaryInfoBottomSheet,
+  LaPreliminaryInfoComponent
+} from './components/licence-application/la-preliminary-info/la-preliminary-info.component';
+import { LaLetterOfOfferComponent } from './components/licence-application/la-letter-of-offer/la-letter-of-offer.component';
+import { LaDownloadFormsComponent } from './components/licence-application/la-download-forms/la-download-forms.component';
+import { LaSubmitManuallyComponent } from './components/licence-application/la-submit-manually/la-submit-manually.component';
 
 @NgModule({
   declarations: [
@@ -176,9 +187,9 @@ import { VesselCapacityCardComponent } from './components/capacity/vessel-capaci
     LaNavbarComponent,
     LaVesselInfoComponent,
     LaDocumentationComponent,
-    LaPreliminaryInfoComponent,
+    LaPreliminaryInfoComponent0,
     LaApplicationComponent,
-    LaLetterOfOfferComponent,
+    LaLetterOfOfferComponent0,
     LaCapacityComponent,
     PwaTestComponent,
     LaPhotosComponent,
@@ -211,6 +222,15 @@ import { VesselCapacityCardComponent } from './components/capacity/vessel-capaci
     CapacityBlockComponent,
     VesselCapacityCardComponent,
     GlossaryVesselIdentifiersBottomSheet,
+    LaRetrievePreliminaryApplicationComponent,
+    NumberDirective,
+    LaHeaderComponent,
+    LaRetrievePreliminaryApplicationWizardComponent,
+    LaPreliminaryInfoComponent,
+    LaPreliminaryInfoBottomSheet,
+    LaLetterOfOfferComponent,
+    LaDownloadFormsComponent,
+    LaSubmitManuallyComponent,
   ],
   imports: [
     routingModule,
@@ -269,6 +289,7 @@ import { VesselCapacityCardComponent } from './components/capacity/vessel-capaci
     InfoDialogComponent,
     ConfirmationDialogComponent,
     GlossaryVesselIdentifiersBottomSheet,
+    LaPreliminaryInfoBottomSheet,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'en-GB' },

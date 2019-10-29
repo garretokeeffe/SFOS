@@ -1,0 +1,34 @@
+<div fxFill fxLayout="row" fxLayoutAlign="space-between start">
+  <h2>
+    <mat-icon matListIcon alt="Licence Application" style="position: relative; top: 4px; margin-right: 8px;">directions_boat</mat-icon><!--chrome_reader_mode-->
+    <span>Licence Application</span>
+    <div *ngIf="(isAtLeastMedium$ | async) && (arn || fleetSegment)" class="wizard-label"
+         [class.displayBelowHeader]="!(isAtLeastMedium$ | async)"
+         [class.padding-left]="(isAtLeastMedium$ | async)"
+         [class.inline]="(isAtLeastMedium$ | async)"
+         [@flyInOut]="'in'">
+      <span *ngIf="arn" title="Application Reference Number">ARN: {{ arn }}</span>
+      <span *ngIf="fleetSegment" class="padding-left" title="Fleet Segment">{{ FleetSegmentManager.displayFleetSubSegment(fleetSegment) }}</span>
+    </div>
+  </h2>
+  <!-- ARN and Segment is not quite centered using the below but it works for mobile -->
+  <div *ngIf="!(isAtLeastMedium$ | async) && (arn || fleetSegment)" class="wizard-label"
+       [class.displayBelowHeader]="!(isAtLeastMedium$ | async)"
+       [class.centered-content]="(isAtLeastMedium$ | async)"
+       [class.shiftUp]="(isAtLeastMedium$ | async)"
+       [@flyInOut]="'in'">
+    <span *ngIf="fleetSegment" title="Fleet Segment">{{ FleetSegmentManager.displayFleetSubSegment(fleetSegment) }}</span>
+    <span *ngIf="arn" [class.padding-left]="fleetSegment" title="Application Reference Number">ARN: {{ arn }}</span>
+  </div>
+
+  <div [@fadeInOut]="'fadeIn'">
+    <button *ngIf="!(isAtLeastMedium$ | async)" mat-raised-button mat-icon-button routerLink="/licences">
+      <mat-icon matListIcon alt="My Applications">library_books</mat-icon>
+    </button>
+    <button *ngIf="(isAtLeastMedium$ | async)" mat-raised-button routerLink="/licences">
+      <mat-icon matListIcon alt="My Applications" class="chevron_horz">chevron_left</mat-icon>
+      My Applications
+    </button>
+  </div>
+</div>
+

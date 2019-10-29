@@ -5,7 +5,7 @@
   <div mat-dialog-content>
     <div class="centered-content">
       <ng-template ngFor let-nvp [ngForOf]="popupInfo.data" let-i="index">
-        <mat-icon *ngIf="popupInfo.icons" matListIcon fxlayoutalign="space-between start" alt="Name">{{nvp.icon}}}</mat-icon>
+        <mat-icon *ngIf="popupInfo.icons" matListIcon fxLayoutAlign="space-between start" alt="Name">{{nvp.icon}}}</mat-icon>
         <mat-form-field>
           <input matInput placeholder="{{nvp.name}}" value="{{nvp.value ? nvp.value : ' '}}" readonly>
         </mat-form-field>

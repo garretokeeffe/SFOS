@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {LicenceApplicationView} from '../../../types/licence-application';
 import {FormControl} from '@angular/forms';
-import {OptionItem, SegmentGroup} from '../la-preliminary-info/la-preliminary-info.component';
+import {OptionItem, SegmentGroup} from '../la-preliminary-info0/la-preliminary-info-component0.component';
 import {VesselService} from '../../../services/vessel.service';
 import {VesselView} from '../../../types/vessel';
 import {EmitterService} from '../../../services/emitter.service';

@@ -3,12 +3,8 @@
   <h1 mat-dialog-title>{{confirmationInfo.title}}</h1>
 
   <div mat-dialog-content>
-    <div *ngIf="confirmationInfo.text" class="centered-content">
-      {{confirmationInfo.text}}
-    </div>
-    <div *ngIf="confirmationInfo.prompt" class="centered-content" [class.margin-top]="confirmationInfo.text !== ''">
-      {{confirmationInfo.prompt}}
-    </div>
+    <div *ngIf="confirmationInfo.text" class="centered-content" [innerHTML]="confirmationInfo.text | safe: 'html'"></div>
+    <div *ngIf="confirmationInfo.prompt" class="centered-content" [class.margin-top]="confirmationInfo.text !== ''" [innerHTML]="confirmationInfo.prompt | safe: 'html'"></div>
     <div class="margin-top-double">
       <mat-divider [inset]="false"></mat-divider>
     </div>

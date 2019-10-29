@@ -1,0 +1,73 @@
+<div class="page" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)">
+
+  <app-la-header [arn]="licenceApplication.arn" [fleetSegment]="licenceApplication.preliminaryInformation.fleetSegment"></app-la-header>
+
+  <!-- RETRIEVE PRELIMINARY APPLICATION UP TO ACCEPT TERMS OF LETTER OF OFFER -->
+  <aw-wizard *ngIf="!applicationActivated" #wizard [navBarLayout]="(isHandset$ | async) ? 'large-empty-symbols' : 'large-empty-symbols'" [navBarLocation]="'top'" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)">
+
+    <aw-wizard-step [stepId]="'RETRIEVE'" [stepTitle]="'Retrieve Preliminary Application'" [navigationSymbol]="{ symbol: '&#xf002;', fontFamily: 'FontAwesome' }">
+      <div [class.margin-top]="!(isHandset$ | async)">
+        <app-la-retrieve-preliminary-application [user]="user" (next)="nextStep($event)"></app-la-retrieve-preliminary-application>
+      </div>
+    </aw-wizard-step>
+
+    <aw-wizard-step [stepId]="'PRELIMINARY_INFO'" [stepTitle]="'Review Preliminary Information'" [navigationSymbol]="{ symbol: '&#xf0f6;', fontFamily: 'FontAwesome' }">
+      <div [class.margin-top]="!(isHandset$ | async)">
+        <app-la-preliminary-info [user]="user" [readonly]="true" [licenceApplication]="licenceApplication" (next)="nextStep($event)" (back)="previousStep($event)"></app-la-preliminary-info>
+      </div>
+    </aw-wizard-step>
+
+    <aw-wizard-step [stepId]="'LETTER_OF_OFFER'" [stepTitle]="'Accept Letter of Offer and Activate Application'" [navigationSymbol]="{ symbol: '&#xf00c;', fontFamily: 'FontAwesome' }">
+      <div [class.margin-top]="!(isHandset$ | async)">
+        <app-la-letter-of-offer [user]="user" [licenceApplication]="licenceApplication" (submit)="onAcceptTerms($event)" (reject)="onRejectTerms($event)" (next)="nextStep($event)"  (back)="previousStep($event)"></app-la-letter-of-offer>
+      </div>
+    </aw-wizard-step>
+
+  </aw-wizard>
+
+  <!-- PRELIMINARY INFORMATION TO DOCUMENT UPLOAD (FINAL SUBMISSION) -->
+  <aw-wizard *ngIf="applicationActivated" #wizard [navBarLayout]="(isHandset$ | async) ? 'large-empty-symbols' : 'large-empty-symbols'" [navBarLocation]="'top'" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)" [@flyInOut]="'in'">
+
+    <aw-wizard-step [stepId]="'LETTER_OF_OFFER'" [stepTitle]="'Letter of Offer'" [navigationSymbol]="{ symbol: '&#xf03a;', fontFamily: 'FontAwesome' }">
+      <div [class.margin-top]="!(isHandset$ | async)">
+        <app-la-letter-of-offer [user]="user" [licenceApplication]="licenceApplication" (next)="nextStep($event)"  (back)="previousStep($event)"></app-la-letter-of-offer>
+      </div>
+    </aw-wizard-step>
+
+    <aw-wizard-step [stepId]="'DOWNLOAD_FORMS'" [stepTitle]="'Download Forms'" [navigationSymbol]="{ symbol: '&#xf0ed;', fontFamily: 'FontAwesome' }">
+      <div [class.margin-top]="!(isHandset$ | async)">
+        <app-la-download-forms [user]="user" [licenceApplication]="licenceApplication" (next)="nextStep($event)"  (back)="previousStep($event)"></app-la-download-forms>
+      </div>
+    </aw-wizard-step>
+
+    <aw-wizard-step [stepId]="'SUBMIT_MANUALLY'" [stepTitle]="'Submit Application'" [navigationSymbol]="{ symbol: '&#xf00c;', fontFamily: 'FontAwesome' }">
+      <div [class.margin-top]="!(isHandset$ | async)">
+        <app-la-submit-manually [user]="user" [licenceApplication]="licenceApplication" (next)="nextStep($event)"  (back)="previousStep($event)"></app-la-submit-manually>
+      </div>
+    </aw-wizard-step>
+
+    <!--
+    <aw-wizard-step [stepId]="'SUBMIT_DOCUMENTATION'" [stepTitle]="'Upload Forms'" [navigationSymbol]="{ symbol: '&#xf03a;', fontFamily: 'FontAwesome' }">
+      <div class="centered-content">
+        <app-la-documentation [licenceApplication]="licenceApplication"></app-la-documentation>
+      </div>
+    </aw-wizard-step>
+
+    <aw-wizard-step [stepTitle]="'Assign Capacity'" [navigationSymbol]="{ symbol: '&#xf21a;', fontFamily: 'FontAwesome' }">
+      <div class="centered-content">
+        <app-la-capacity [licenceApplication]="licenceApplication"></app-la-capacity>
+      </div>
+    </aw-wizard-step>
+
+    <aw-wizard-step [stepTitle]="'Submit'" [navigationSymbol]="{ symbol: '&#xf00c;', fontFamily: 'FontAwesome' }">
+      <div class="centered-content page">
+        <div class="page">
+          Registration
+        </div>
+      </div>
+    </aw-wizard-step>
+    -->
+
+  </aw-wizard>
+
+</div>

@@ -50,11 +50,11 @@ export class LaDocumentationComponent implements OnInit {
   }
 
   public getFlexLabelWidth(): number {
-    console.log('label width: ', this.isTablet$ ? '25' : '45'); // REMOVEME
+    // console.log('label width: ', this.isTablet$ ? '25' : '45'); // REMOVEME
     return this.isTablet$ ? 25 : 45;
   }
   public getFlexProgressWidth(): number {
-    console.log('progress width: ', this.isTablet$ ? '65' : '45'); // REMOVEME
+    // console.log('progress width: ', this.isTablet$ ? '65' : '45'); // REMOVEME
     return this.isTablet$ ? 65 : 45;
   }
   public progressColour(): object {

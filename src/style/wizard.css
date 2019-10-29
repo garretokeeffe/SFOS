@@ -1,0 +1,7 @@
+aw-wizard-navigation-bar.horizontal ul.steps-indicator li.default a .label {
+  color: lightgrey !important;
+}
+
+aw-wizard-navigation-bar.horizontal ul.steps-indicator li.done a .label {
+  color: lightgrey !important; /* colour of previous step label */
+}

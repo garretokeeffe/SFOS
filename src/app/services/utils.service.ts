@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { formatNumber } from '@angular/common';
+import { EnumValue } from '@angular/compiler-cli/src/ngtsc/metadata';
+import { FleetSubSegment } from '../types/fleet-segment';
+import { LicenceStatus } from '../types/licence';
 
 @Injectable()
 export class Utils {
@@ -62,5 +65,21 @@ export class Utils {
       this.utils = new Utils();
     }
     return this.utils;
+  }
+
+  public static displayEnumText(enumValue: number, enumType: string): string {
+    let text: string = '';
+
+    if (enumType[enumValue]) {
+      text = enumType[enumValue].replace(/_/g, ' ');
+
+      if (enumType === 'FleetSubSegment')  {
+
+      }
+    } else {
+      text = String(enumValue);
+    }
+
+    return text;
   }
 }

@@ -43,6 +43,7 @@ export const environment: any = {
   getVesselsURL: 'https://api-3scale-apicast-staging.apps.rhos.agriculture.gov.ie:443/sfos/vessels/users/ccs',
   garret_getVesselsURL: 'http://WKEBNFS23452:9001/vessels/ifis/74',
   getVesselURL: 'assets/demo/vessel',
+  getApplicationURL: 'assets/demo/application',
   getLetterOfOfferTermsURL: 'assets/demo/letter-of-offer-terms',
   getSubmissionsAllURL: 'assets/demo/submissions-all',
   getSubmissionsInProgressURL: 'assets/demo/submissions-in-progress',

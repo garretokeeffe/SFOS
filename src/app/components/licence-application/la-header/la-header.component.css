@@ -1,0 +1,10 @@
+.shiftUp {
+  position: relative;
+  top: -4px;
+}
+.displayBelowHeader {
+  margin-left: 32px;
+  position: absolute;
+  padding-top: 44px;
+}
+

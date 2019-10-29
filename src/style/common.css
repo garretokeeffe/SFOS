@@ -238,10 +238,18 @@ select:active {
 .green {
   color: darkgreen;
 }
+.dafm-green {
+  color: rgba(50, 112, 104, 1);
+}
 
 .fullWidth {
   width:100%;
   min-width:100%;
+}
+
+.centered-content {
+  margin: auto;
+  text-align: center !important;
 }
 
 .indent5 {
@@ -303,8 +311,8 @@ input[type="number"] {
 }
 
 .br {
-  display:inline-block;
-  margin-top: 1em;
+  display: block;
+  xmargin-top: 1em;
 }
 
 .inline {
@@ -600,9 +608,11 @@ th mat-checkbox {
 }
 
 .form-field-icons mat-icon {
+  margin-right: 12px;
+}
+.readonly.form-field-icons mat-icon {
   position: relative;
   top: -12px;
-  margin-right: 12px;
 }
 
 mat-form-field.multiline {

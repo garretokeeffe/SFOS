@@ -13,7 +13,7 @@ import {LicenceService} from '../../services/licence.service';
 import {ConfirmationInfo} from '../../types/dialog-info';
 import {ConfirmationDialogComponent} from '../../components/confirmation-dialog/confirmation-dialog.component';
 import {FormControl} from '@angular/forms';
-import {SegmentGroup} from '../../components/licence-application/la-preliminary-info/la-preliminary-info.component';
+import {SegmentGroup} from '../../components/licence-application/la-preliminary-info0/la-preliminary-info-component0.component';
 import {NotificationCategory, NotificationCategoryView, NotificationView} from '../../types/notification';
 import {animations} from '../../animations';
 import {NotificationService} from '../../services/notification.service';
