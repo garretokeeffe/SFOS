@@ -9,10 +9,8 @@ import {animations} from '../../animations';
 import {Utils} from '../../services/utils.service';
 import {User, UserView} from '../../types/user';
 import {AuthenticationService} from '../../services/authentication.service';
-import {ApplicantView, LetterOfOfferTermsAcceptanceStatus} from '../../types/applicant';
 import {ConfirmationInfo} from '../../types/dialog-info';
 import {ConfirmationDialogComponent} from '../confirmation-dialog/confirmation-dialog.component';
-import * as moment from '../licence-application/la-navbar/la-navbar.component';
 import {Router} from '@angular/router';
 import {UserGroup} from '../../types/ifisauthentication';
 
@@ -20,7 +18,7 @@ import {UserGroup} from '../../types/ifisauthentication';
   selector: 'app-la-applications-list',
   templateUrl: './la-applications-list.component.html',
   styleUrls: ['./la-applications-list.component.css'],
-  animations: animations
+  animations: animations,
 })
 export class LaApplicationsListComponent implements OnInit, AfterViewInit {
 

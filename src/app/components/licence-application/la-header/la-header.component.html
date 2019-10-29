@@ -17,8 +17,8 @@
        [class.centered-content]="(isAtLeastMedium$ | async)"
        [class.shiftUp]="(isAtLeastMedium$ | async)"
        [@flyInOut]="'in'">
-    <span *ngIf="fleetSegment" title="Fleet Segment">{{ FleetSegmentManager.displayFleetSubSegment(fleetSegment) }}</span>
-    <span *ngIf="arn" [class.padding-left]="fleetSegment" title="Application Reference Number">ARN: {{ arn }}</span>
+    <span *ngIf="arn" title="Application Reference Number">ARN: {{ arn }}</span>
+    <span *ngIf="fleetSegment" [class.padding-left]="arn" title="Fleet Segment">{{ FleetSegmentManager.displayFleetSubSegment(fleetSegment) }}</span>
   </div>
 
   <div [@fadeInOut]="'fadeIn'">

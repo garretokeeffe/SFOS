@@ -37,21 +37,10 @@ export class LicenceApplicationComponent implements OnInit, AfterViewChecked {
   public ngOnInit(): void {
     this.userService.getUserByUserId().subscribe((user: UserView) => {
       this.user = user;
-
-      // if (!this.licenceApplication.applicants.length) {
-        const firstApplicant: ApplicantView = new ApplicantView(this.user);
-        firstApplicant.numberOfShares = 64; // Max allocation of vessel shares
-        this.licenceApplication.applicants.push(firstApplicant);
-      // }
     },
       (error) => {
       console.error('Failed to retrieve userprofile');
       this.user = null;
-    });
-
-    EmitterService.get(Emitters[Emitters.LICENCE_APPLICATION_UPDATE]).subscribe((licenceApplication: LicenceApplicationView) => {
-      this.licenceApplication = licenceApplication;
-      this.licenceApplication.changed = !this.licenceApplication.changed;
     });
   }
 

@@ -9,12 +9,12 @@ import { UserService } from '../../../services/user.service';
 import { animations } from '../../../animations';
 
 @Component({
-  selector: 'app-la-retrieve-preliminary-information-wizard',
-  templateUrl: './la-retrieve-preliminary-application-wizard.component.html',
-  styleUrls: ['./la-retrieve-preliminary-application-wizard.component.css'],
+  selector: 'app-la-licence-application-wizard',
+  templateUrl: './la-licence-application-wizard.component.html',
+  styleUrls: ['./la-licence-application-wizard.component.css'],
   animations: animations,
 })
-export class LaRetrievePreliminaryApplicationWizardComponent implements OnInit {
+export class LaLicenceApplicationWizardComponent implements OnInit {
 
   public applicationActivated: boolean = false;
 

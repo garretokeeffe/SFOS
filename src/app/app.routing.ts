@@ -36,7 +36,7 @@ import {NotificationsComponent} from './pages/notifications/notifications.compon
 import {HelpComponent} from './pages/help/help.component';
 import {LicenceApplicationLanding} from './pages/licence-application/licenceApplicationLanding';
 import { LaRetrievePreliminaryApplicationComponent } from './components/licence-application/la-retrieve-preliminary-application/la-retrieve-preliminary-application.component';
-import { LaRetrievePreliminaryApplicationWizardComponent } from './components/licence-application/la-retrieve-preliminary-application-wizard/la-retrieve-preliminary-application-wizard.component';
+import { LaLicenceApplicationWizardComponent } from './components/licence-application/la-licence-application-wizard/la-licence-application-wizard.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [AuthenticationService]}, /* no authentication required to reach login page */
@@ -80,7 +80,7 @@ const routes: Routes = [
 
   { path: 'newlicenceapplication', component: LicenceApplicationLanding }, /* no authentication required on public home page */
   { path: 'licences', component: LicencesComponent, canActivate: [AuthenticationService] },
-  { path: 'retrieve-preliminary-licence-application', component: LaRetrievePreliminaryApplicationWizardComponent, canActivate: [AuthenticationService] },
+  { path: 'retrieve-preliminary-licence-application', component: LaLicenceApplicationWizardComponent, canActivate: [AuthenticationService] },
 
   { path: 'vessel/:id', component: VesselsComponent, canActivate: [AuthenticationService] }, /* This will link routes like /vessel/1 or /vessel/9 etc. to the VesselsComponent component. */
   // { path: '',  redirectTo: '/login', pathMatch: 'full' },

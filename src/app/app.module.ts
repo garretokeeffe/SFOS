@@ -90,13 +90,8 @@ import { Globals } from './globals';
 import { ProgressComponent } from './components/progress/progress.component';
 import { GlossaryVesselIdentifiersBottomSheet, VesselComponent } from './components/vessel/vessel.component';
 import { LicenceApplicationComponent } from './pages/licence-application/licence-application.component';
-import { LaNavbarComponent } from './components/licence-application/la-navbar/la-navbar.component';
-import { LaVesselInfoComponent } from './components/licence-application/la-vessel-info/la-vessel-info.component';
 import { LaDocumentationComponent } from './components/licence-application/la-documentation/la-documentation.component';
 import { ArchwizardModule } from 'angular-archwizard';
-import { LaPreliminaryInfoComponent0 } from './components/licence-application/la-preliminary-info0/la-preliminary-info-component0.component';
-import { LaApplicationComponent } from './components/licence-application/la-application/la-application.component';
-import { LaLetterOfOfferComponent0 } from './components/licence-application/la-letter-of-offer0/la-letter-of-offer-component0.component';
 import { LaCapacityComponent } from './components/licence-application/la-capacity/la-capacity.component';
 import { PwaTestComponent } from './pwa-test/pwa-test.component';
 import { LaPhotosComponent } from './components/licence-application/la-documentation/la-photos/la-photos.component';
@@ -145,7 +140,7 @@ import { VesselCapacityCardComponent } from './components/capacity/vessel-capaci
 import { LaRetrievePreliminaryApplicationComponent } from './components/licence-application/la-retrieve-preliminary-application/la-retrieve-preliminary-application.component';
 import { NumberDirective } from './directives/number/number.directive';
 import { LaHeaderComponent } from './components/licence-application/la-header/la-header.component';
-import { LaRetrievePreliminaryApplicationWizardComponent } from './components/licence-application/la-retrieve-preliminary-application-wizard/la-retrieve-preliminary-application-wizard.component';
+import { LaLicenceApplicationWizardComponent } from './components/licence-application/la-licence-application-wizard/la-licence-application-wizard.component';
 import {
   LaPreliminaryInfoBottomSheet,
   LaPreliminaryInfoComponent,
@@ -186,12 +181,7 @@ import { LaSubmitManuallyComponent } from './components/licence-application/la-s
     ProgressComponent,
     VesselComponent,
     LicenceApplicationComponent,
-    LaNavbarComponent,
-    LaVesselInfoComponent,
     LaDocumentationComponent,
-    LaPreliminaryInfoComponent0,
-    LaApplicationComponent,
-    LaLetterOfOfferComponent0,
     LaCapacityComponent,
     PwaTestComponent,
     LaPhotosComponent,
@@ -227,7 +217,7 @@ import { LaSubmitManuallyComponent } from './components/licence-application/la-s
     LaRetrievePreliminaryApplicationComponent,
     NumberDirective,
     LaHeaderComponent,
-    LaRetrievePreliminaryApplicationWizardComponent,
+    LaLicenceApplicationWizardComponent,
     LaPreliminaryInfoComponent,
     LaPreliminaryInfoBottomSheet,
     LaLetterOfOfferComponent,

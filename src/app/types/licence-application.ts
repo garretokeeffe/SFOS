@@ -107,13 +107,13 @@ export class LetterOfOfferView extends LetterOfOffer {
     super(letterOfOffer);
   }
 
-  public setAccepted(applicant: Applicant): boolean {
+  public setAccepted(applicant: Applicant): void {
     this.acceptedBy = applicant;
     this.acceptedDate = moment.utc(new Date()).format('DD/MM/YYYY');
     this.rejectedBy = null;
     this.rejectedDate = '';
   }
-  public setRejected(applicant: Applicant): boolean {
+  public setRejected(applicant: Applicant): void {
     this.rejectedBy = applicant;
     this.rejectedDate = moment.utc(new Date()).format('DD/MM/YYYY');
     this.acceptedBy = null;
