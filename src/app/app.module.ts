@@ -90,14 +90,8 @@ import { Globals } from './globals';
 import { ProgressComponent } from './components/progress/progress.component';
 import { GlossaryVesselIdentifiersBottomSheet, VesselComponent } from './components/vessel/vessel.component';
 import { LicenceApplicationComponent } from './pages/licence-application/licence-application.component';
-import { LaDocumentationComponent } from './components/licence-application/la-documentation/la-documentation.component';
 import { ArchwizardModule } from 'angular-archwizard';
-import { LaCapacityComponent } from './components/licence-application/la-capacity/la-capacity.component';
 import { PwaTestComponent } from './pwa-test/pwa-test.component';
-import { LaPhotosComponent } from './components/licence-application/la-documentation/la-photos/la-photos.component';
-import { LaShippingRegisterComponent } from './components/licence-application/la-documentation/la-shipping-register/la-shipping-register.component';
-import { LaComplianceComponent } from './components/licence-application/la-documentation/la-compliance/la-compliance.component';
-import { LaEngineComponent } from './components/licence-application/la-documentation/la-engine/la-engine.component';
 import { LaApplicationsListComponent } from './components/la-applications-list/la-applications-list.component';
 import { NgxTypeaheadModule } from 'ngx-typeahead';
 import { InfoDialogComponent } from './components/info-dialog/info-dialog.component';
@@ -137,17 +131,28 @@ import { TrackRecordComponent } from './components/capacity/track-record/track-r
 import { OrderBy } from './pipes/orderBy.pipe';
 import { CapacityBlockComponent } from './components/capacity/capacity-block/capacity-block.component';
 import { VesselCapacityCardComponent } from './components/capacity/vessel-capacity-card/vessel-capacity-card.component';
-import { LaRetrievePreliminaryApplicationComponent } from './components/licence-application/la-retrieve-preliminary-application/la-retrieve-preliminary-application.component';
+import {
+  LaRetrievePreliminaryApplicationBottomSheet,
+  LaRetrievePreliminaryApplicationComponent,
+} from './components/licence-application/la-retrieve-preliminary-application/la-retrieve-preliminary-application.component';
 import { NumberDirective } from './directives/number/number.directive';
 import { LaHeaderComponent } from './components/licence-application/la-header/la-header.component';
-import { LaLicenceApplicationWizardComponent } from './components/licence-application/la-licence-application-wizard/la-licence-application-wizard.component';
+import { LaWizardComponent } from './components/licence-application/la-wizard/la-wizard.component';
 import {
-  LaPreliminaryInfoBottomSheet,
-  LaPreliminaryInfoComponent,
+  LaFleetSegmentBottomSheet,
+  LaReviewPreliminaryInfoBottomSheet,
+  LaPreliminaryInfoComponent, LaVesselLengthBottomSheet,
 } from './components/licence-application/la-preliminary-info/la-preliminary-info.component';
-import { LaLetterOfOfferComponent } from './components/licence-application/la-letter-of-offer/la-letter-of-offer.component';
+import {
+  LaActivateApplicationBottomSheet,
+  LaLetterOfOfferComponent
+} from './components/licence-application/la-letter-of-offer/la-letter-of-offer.component';
 import { LaDownloadFormsComponent } from './components/licence-application/la-download-forms/la-download-forms.component';
 import { LaSubmitManuallyComponent } from './components/licence-application/la-submit-manually/la-submit-manually.component';
+import {
+  LaLicenceApplicationProcessExplanationBottomSheet,
+  LaConfirmQualifyingStatusComponent, LaConfirmQualifyingStatusBottomSheet
+} from './components/licence-application/la-confirm-qualifying-status/la-confirm-qualifying-status.component';
 
 @NgModule({
   declarations: [
@@ -181,13 +186,7 @@ import { LaSubmitManuallyComponent } from './components/licence-application/la-s
     ProgressComponent,
     VesselComponent,
     LicenceApplicationComponent,
-    LaDocumentationComponent,
-    LaCapacityComponent,
     PwaTestComponent,
-    LaPhotosComponent,
-    LaShippingRegisterComponent,
-    LaComplianceComponent,
-    LaEngineComponent,
     LaApplicationsListComponent,
     InfoDialogComponent,
     ConfirmationDialogComponent,
@@ -215,14 +214,21 @@ import { LaSubmitManuallyComponent } from './components/licence-application/la-s
     VesselCapacityCardComponent,
     GlossaryVesselIdentifiersBottomSheet,
     LaRetrievePreliminaryApplicationComponent,
+    LaRetrievePreliminaryApplicationBottomSheet,
     NumberDirective,
     LaHeaderComponent,
-    LaLicenceApplicationWizardComponent,
+    LaWizardComponent,
     LaPreliminaryInfoComponent,
-    LaPreliminaryInfoBottomSheet,
+    LaReviewPreliminaryInfoBottomSheet,
+    LaVesselLengthBottomSheet,
+    LaFleetSegmentBottomSheet,
     LaLetterOfOfferComponent,
     LaDownloadFormsComponent,
     LaSubmitManuallyComponent,
+    LaConfirmQualifyingStatusComponent,
+    LaLicenceApplicationProcessExplanationBottomSheet,
+    LaConfirmQualifyingStatusBottomSheet,
+    LaActivateApplicationBottomSheet,
   ],
   imports: [
     routingModule,
@@ -281,7 +287,13 @@ import { LaSubmitManuallyComponent } from './components/licence-application/la-s
     InfoDialogComponent,
     ConfirmationDialogComponent,
     GlossaryVesselIdentifiersBottomSheet,
-    LaPreliminaryInfoBottomSheet,
+    LaRetrievePreliminaryApplicationBottomSheet,
+    LaReviewPreliminaryInfoBottomSheet,
+    LaVesselLengthBottomSheet,
+    LaFleetSegmentBottomSheet,
+    LaLicenceApplicationProcessExplanationBottomSheet,
+    LaConfirmQualifyingStatusBottomSheet,
+    LaActivateApplicationBottomSheet,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'en-GB' },

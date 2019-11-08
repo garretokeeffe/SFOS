@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { Keycloak } from 'keycloak-angular/lib/core/services/keycloak.service';
 import { UserView } from '../types/user';
 import { Capacity, CapacityView } from '../types/capacity';
+import { LicenceApplication, LicenceApplicationView } from '../types/licence-application';
 
 /* istanbul ignore next */
 @Injectable({
@@ -18,7 +19,7 @@ export class DemoService {
   public getVersionURL: string = 'assets/demo/version';
   public getKeycloakProfileURL: string = 'assets/demo/keycloakuserprofile';
   public getUserProfileURL: string = 'assets/demo/userprofile';
-  public getApplicationURL: string = 'assets/demo/application';
+  public getLicenceApplicationURL: string = 'assets/demo/licence-application';
   public getUsersURL: string = 'assets/demo/users';
   public getApplicationsURL: string = 'assets/demo/applications';
   public getNotificationCategoriesURL: string = 'assets/demo/notification-categories';
@@ -68,6 +69,42 @@ export class DemoService {
       .subscribe(
         (keycloakProfile: Keycloak.KeycloakProfile) => {
           observer.next(keycloakProfile);
+          observer.complete();
+
+        },
+        (error) => {
+          // logger.error(JSON.stringify(error));
+          console.log(JSON.stringify(error));
+          observer.error(error);
+          observer.complete();
+        });
+    });
+  }
+
+  public submitPreliminaryLicenceApplication(licenceApplication: LicenceApplicationView): Observable<LicenceApplicationView> {
+
+    const url: string = this.getLicenceApplicationURL;
+
+    return Observable.create((observer) => {
+      this.http.get(url, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache, no-store, must-revalidate', // HTTP 1.1
+          'Pragma': 'no-cache', // HTTP 1.0
+          'Expires': '0', // Proxies
+        }),
+        observe: 'body',
+      })
+      .subscribe(
+        (res: LicenceApplication) => {
+          res = res ? new LicenceApplicationView(res) : null;
+
+          // Replace the preliminary information section of the demo response with the inputted values
+          if (res) {
+            res.preliminaryInformation = licenceApplication.preliminaryInformation;
+          }
+
+          observer.next(res);
           observer.complete();
 
         },

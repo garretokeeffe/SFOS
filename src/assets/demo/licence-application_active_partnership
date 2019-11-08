@@ -1,27 +1,45 @@
 {
   "arn": "12345",
-  "status": 1,
-  "expiryDate": "",
+  "pin": "9876",
+  "status": 3,
+  "expiryDate": "07/11/2019",
   "preliminaryInformation": {
-    "applicantType": 1,
+    "applicantType": 3,
     "primaryApplicant": {
       "firstName": "John",
       "lastName": "Murphy",
       "email": "john.murphy@demo.com"
     },
-    "otherApplicants": [],
-    "partnershipName": "",
+    "otherApplicants": [
+      {
+        "firstName": "Mary",
+        "lastName": "Murphy",
+        "email": "mary.murphy@demo.com"
+      },
+      {
+        "firstName": "Thomas",
+        "lastName": "Murphy",
+        "email": "Thomas.murphy@demo.com"
+      }
+    ],
+    "partnershipName": "Murphy Bros",
     "companyName": "",
     "fleetSegment": 338360921,
     "loa": 23,
     "registeredLength": 24.5
   },
   "letterOfOffer": {
-    "status": 1,
+    "status": 2,
+    "issueDate": "24/10/2019",
     "expiryDate": "23/11/2019",
-    "acceptedBy": "",
-    "acceptedDate": "",
-    "rejectedBy": "",
+    "acceptedBy": {
+      "id": 2323,
+      "firstName": "John",
+      "lastName": "Murphy",
+      "email": "john.murphy@demo.com"
+    },
+    "acceptedDate": "07/11/2020",
+    "rejectedBy": null,
     "rejectedDate": "",
     "terms": [
       {
@@ -118,13 +136,6 @@
        "title": "PPS Number(s)",
        "category": 2,
        "letterOfOfferTermId": 8466215
-    },
-    {
-       "url": "someurl",
-       "title": "Share Register",
-       "category": 3,
-       "letterOfOfferTermId": 1947286
     }
   ]
 }
-

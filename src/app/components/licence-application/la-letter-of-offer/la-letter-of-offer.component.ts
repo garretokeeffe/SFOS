@@ -1,13 +1,14 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Optional, Output } from '@angular/core';
 import {
   Applicant,
+  ApplicantType,
   LetterOfOfferStatus,
   LetterOfOfferTerm,
   LicenceApplicationView,
 } from '../../../types/licence-application';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatBottomSheet, MatBottomSheetRef, MatDialog, MatSnackBar } from '@angular/material';
 import { LicenceService } from '../../../services/licence.service';
 import { Observable } from 'rxjs';
 import { ConfirmationInfo } from '../../../types/dialog-info';
@@ -17,6 +18,11 @@ import { animations } from '../../../animations';
 import { UserView } from '../../../types/user';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import {
+  LaFleetSegmentBottomSheet,
+  LaVesselLengthBottomSheet
+} from '../la-preliminary-info/la-preliminary-info.component';
+import { FleetSegmentManager } from '../../../types/fleet-segment';
 
 @Component({
   selector: 'app-la-letter-of-offer',
@@ -27,7 +33,11 @@ import * as moment from 'moment';
 export class LaLetterOfOfferComponent implements OnInit, OnDestroy {
 
   public enableDisplayOfPreliminaryInformation: boolean = false; // Configuration Option
+  public showPreliminaryInformation: boolean = false;
 
+  public userLoggedIn: boolean = false; // TODO, replace this with code which checks if the user is logged in or not
+
+  @Input() public continueApplicationFlow: boolean = false; // true = continue live application, false = retrieve with pin or select from my applications list
   @Input() public standAlonePage: boolean = false;
   @Input() public user: UserView = null;
   @Input() public licenceApplication: LicenceApplicationView = new LicenceApplicationView();
@@ -41,10 +51,11 @@ export class LaLetterOfOfferComponent implements OnInit, OnDestroy {
   public errorMessage: string = null;
 
   public showTerms: boolean = false;
-  public showPreliminaryInformation: boolean = false;
   public termsAccepted: boolean = false;
 
+  public FleetSegmentManager: any = FleetSegmentManager; // access to static methods
   public LetterOfOfferStatus: any = LetterOfOfferStatus;
+  public ApplicantType: any = ApplicantType;
 
   public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
   .pipe(
@@ -63,6 +74,7 @@ export class LaLetterOfOfferComponent implements OnInit, OnDestroy {
               private dialog: MatDialog,
               private snackBar: MatSnackBar,
               private router: Router,
+              private _bottomSheet: MatBottomSheet,
               @Optional() public cdRef: ChangeDetectorRef,
               private licenceService: LicenceService) {  }
 
@@ -132,4 +144,30 @@ export class LaLetterOfOfferComponent implements OnInit, OnDestroy {
     });
   }
 
+  public login(): void {
+
+  }
+
+  public openVesselLengthBottomSheet(): void {
+    this._bottomSheet.open(LaVesselLengthBottomSheet);
+  }
+  public openFleetSegmentBottomSheet(): void {
+    this._bottomSheet.open(LaFleetSegmentBottomSheet);
+  }
+  public openActivateApplicationBottomSheet(): void {
+    this._bottomSheet.open(LaActivateApplicationBottomSheet);
+  }
+}
+
+@Component({
+  selector: 'app-la-activate-application-bottomsheet',
+  templateUrl: 'la-activate-application.bottomsheet.html',
+})
+export class LaActivateApplicationBottomSheet {
+  constructor(private _bottomSheetRef: MatBottomSheetRef<LaActivateApplicationBottomSheet>) {}
+
+  public openLink(event: MouseEvent): void {
+    this._bottomSheetRef.dismiss();
+    event.preventDefault();
+  }
 }

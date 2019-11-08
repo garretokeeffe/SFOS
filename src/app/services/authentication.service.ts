@@ -172,7 +172,7 @@ export class AuthenticationService extends KeycloakAuthGuard {
   private simulateAuthentication(userRoles?: Array<string>): IFISAuthentication {
 
     if (this.globals.demo && !this.demoModeAuthenticated) {
-      this.router.navigate(['/home']).then((e) => { });
+      // this.router.navigate(['/home']).then((e) => { });
     } else {
       if (!environment.production && AuthenticationService.countAuthenticationCalls === 1) {
         this.access = new IFISAuthentication(userRoles);

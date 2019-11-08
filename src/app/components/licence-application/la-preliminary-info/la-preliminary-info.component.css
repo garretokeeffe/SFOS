@@ -9,3 +9,34 @@
 .handset .inline .mat-form-field {
   display: inline-flex;
 }
+
+::ng-deep mat-form-field.loa {
+  width: 50px !important;
+}
+::ng-deep mat-form-field.loa .mat-form-field-flex {
+  width: 50px !important;
+}
+::ng-deep mat-form-field.registeredLength {
+  width: 150px !important;
+}
+::ng-deep mat-form-field.registeredLength .mat-form-field-flex {
+  width: 150px !important;
+}
+
+button.doneButton.mat-icon-button {
+  xposition: absolute;
+  xleft: inherit;
+  xtop: inherit;
+  xmargin-top: 24px;
+
+  width: 24px;
+  height: 24px;
+  margin-left: 16px;
+  vertical-align: middle !important;
+}
+::ng-deep button.doneButton mat-icon {
+  vertical-align: baseline !important;
+}
+::ng-deep button.doneButton[disabled] mat-icon {
+  color: darkgrey;
+}

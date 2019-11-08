@@ -53,7 +53,7 @@ export class VesselsComponent implements OnInit {
               public notificationService: NotificationService,
               public vesselService: VesselService) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.title$ = this.activatedRoute.paramMap.pipe(map(() => window.history.state.title));
     this.errorMessage = '';
 

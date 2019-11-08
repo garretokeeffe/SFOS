@@ -4,14 +4,15 @@ import { Observable } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
 import { animations } from '../../../animations';
-import { SubmissionView } from '../../../types/submission';
 import { ConfirmationInfo } from '../../../types/dialog-info';
 import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatBottomSheet, MatBottomSheetRef, MatDialog, MatSnackBar } from '@angular/material';
 import { LetterOfOfferTerm, LicenceApplicationView } from '../../../types/licence-application';
 import { LicenceService } from '../../../services/licence.service';
 import { UserView } from '../../../types/user';
 import { Globals } from '../../../globals';
+import { VesselView } from '../../../types/vessel';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-la-retrieve-preliminary-application',
@@ -33,13 +34,6 @@ export class LaRetrievePreliminaryApplicationComponent implements OnInit, OnDest
   public form: FormGroup;
   public errorMessage: string = null;
 
-  public letterOfOfferTerms: Array<LetterOfOfferTerm> = [];
-
-  public letterOfOfferIssued_showPreliminaryInfo: boolean = true;
-  public showingLetterOfOffer: boolean = false;
-  public showingLetterOfOfferCompressed: boolean = true;
-  public termsAccepted: boolean = false;
-
   public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
   .pipe(
     map((result) => result.matches),
@@ -57,7 +51,9 @@ export class LaRetrievePreliminaryApplicationComponent implements OnInit, OnDest
               private fb: FormBuilder,
               private dialog: MatDialog,
               private snackBar: MatSnackBar,
+              private userService: UserService,
               private licenceService: LicenceService,
+              private _bottomSheet: MatBottomSheet,
               private globals: Globals) {
     this.form = fb.group({
       arn: ['', [Validators.required, Validators.pattern(/[0-9]+/g)]],
@@ -65,7 +61,16 @@ export class LaRetrievePreliminaryApplicationComponent implements OnInit, OnDest
     });
   }
 
-  public ngOnInit(): void { }
+  public ngOnInit(): void {
+    this.userService.getUserProfile().subscribe((user: UserView) => {
+        this.user = user;
+      },
+      (error) => {
+        console.error('Failed to retrieve user profile');
+        this.errorMessage = 'Sorry, something went wrong. Your user profile could not be retrieved at this time.';
+      },
+    );
+  }
 
   public ngOnDestroy(): void {
     this.errorMessage = '';
@@ -84,14 +89,20 @@ export class LaRetrievePreliminaryApplicationComponent implements OnInit, OnDest
       this.errorMessage = 'No Match Found';
       this.scroll('bottomOfPage');
     } else {
-      this.licenceService.getApplication(this.form.controls.arn.value, this.form.controls.pin.value).subscribe( (licenceApplication: LicenceApplicationView) => {
-        this.licenceApplication = licenceApplication;
-        this.letterOfOfferTerms = this.licenceApplication.letterOfOffer.terms;
-        // this.letterOfOfferIssued = true;
-
-        // TODO populate licenceApplication
-
-        this.next.emit(this.licenceApplication);
+      this.licenceService.getLicenceApplication(
+        this.user.id,
+        this.form.controls.arn.value,
+        this.form.controls.pin.value)
+      .subscribe( (licenceApplication: LicenceApplicationView) => {
+        if (licenceApplication === null) {
+          this.errorMessage = 'No Match Found';
+          this.scroll('bottomOfPage');
+        } else {
+          this.licenceApplication = licenceApplication;
+          this.next.emit(this.licenceApplication);
+        }
+      }, (error) => {
+          this.errorMessage = 'Sorry, something went wrong. Looks like the system is unavailable at the moment.';
       });
     }
   }
@@ -148,4 +159,20 @@ export class LaRetrievePreliminaryApplicationComponent implements OnInit, OnDest
     }
   }
 
+  public openBottomSheet(): void {
+    this._bottomSheet.open(LaRetrievePreliminaryApplicationBottomSheet);
+  }
+}
+
+@Component({
+  selector: 'app-la-retrieve-preliminary-application-bottomsheet',
+  templateUrl: 'la-retrieve-preliminary-application.bottomsheet.html',
+})
+export class LaRetrievePreliminaryApplicationBottomSheet {
+  constructor(private _bottomSheetRef: MatBottomSheetRef<LaRetrievePreliminaryApplicationBottomSheet>) {}
+
+  public openLink(event: MouseEvent): void {
+    this._bottomSheetRef.dismiss();
+    event.preventDefault();
+  }
 }

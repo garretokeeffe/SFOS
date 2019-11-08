@@ -20,13 +20,13 @@
     <div class="wizard-label margin-top margin-bottom-double centered-content">PUBLIC SERVICES</div>
     <div fxLayout="{{ (isAtLeastMedium$ | async) ? 'row' : 'column' }}" fxLayoutAlign="center center" fxLayoutGap="{{ (isAtLeastMedium$ | async) ? '16px' : '' }}">
 
-      <mat-card (click)="newLicenceApplication()" class="hoverable">
+      <mat-card class="hoverable">
         <mat-card-header fxLayoutAlign="center center">
           <mat-card-title>
             <div>
               <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="16px">
                 <mat-icon>directions_boat</mat-icon>
-                <div>Apply for a Sea Fishing Vessel Licence</div>
+                <div>Apply for a Sea Fishing Boat Licence</div>
               </div>
             </div>
           </mat-card-title>
@@ -35,6 +35,11 @@
         <mat-card-content class="padding-bottom">
           Initiate a preliminary application and determine the conditions that must be satisfied. Fulfillment of the conditions will require registration.
         </mat-card-content>
+        <mat-actions fxLayoutAlign="center center">
+          <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="newLicenceApplication()">
+            APPLY NOW
+          </button>
+        </mat-actions>
       </mat-card>
 
       <!--

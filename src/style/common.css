@@ -241,6 +241,14 @@ select:active {
 .dafm-green {
   color: rgba(50, 112, 104, 1);
 }
+.lightgrey,
+.lightgray {
+  color: lightgrey;
+}
+.grey,
+.gray {
+  color: grey;
+}
 
 .fullWidth {
   width:100%;
@@ -308,6 +316,10 @@ input[type="number"] {
   font-size: small;
   border-bottom: 1px dotted;
   color: rgba(50, 112, 104, 1); /* DAFM green theme */
+}
+.helpLinkWithinText {
+  cursor: help;
+  border-bottom: 1px dotted;
 }
 
 .br {

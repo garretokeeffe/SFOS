@@ -34,7 +34,8 @@
   <!-- *ngIf="(isHandset$ | async)" -->
   <div style="position: relative; top: -4px" class="margin-bottom-double fullWidth" *ngIf="!showRetrieveLetterOfOfferControls">
     <div fxLayout="{{ (isAtLeastMedium$ | async) ? 'row' : 'column' }}" fxLayoutAlign="start start" fxLayoutGap="16px">
-      <button mat-raised-button [class.fullWidth]="!(isAtLeastMedium$ | async)" routerLink="/newlicenceapplication" [@fadeInOut]="'fadeIn'">
+      <button mat-raised-button [class.fullWidth]="!(isAtLeastMedium$ | async)" [@fadeInOut]="'fadeIn'"
+              [routerLink]="['/licence-application-wizard', LaWizardMode['NEW']]"> <!-- routerLink="/newlicenceapplication" -->
         NEW LICENCE APPLICATION
       </button>
       <!--
@@ -50,7 +51,7 @@
                     [@fadeInOut]="'fadeIn'"
                     [class.fullWidth]="!(isAtLeastMedium$ | async)"
                     [disabled]="showRetrieveLetterOfOfferControls ? true : null"
-                    routerLink="/retrieve-preliminary-licence-application">
+                    [routerLink]="['/licence-application-wizard', LaWizardMode['RETRIEVE']]">
               RETRIEVE PRELIMINARY APPLICATION
             </button>
     </div>

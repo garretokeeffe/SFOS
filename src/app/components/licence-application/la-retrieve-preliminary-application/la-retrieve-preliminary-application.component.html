@@ -13,6 +13,11 @@
           successfully submitted your Preliminary Information, you should have received an email containing your
           Application Reference Number (ARN) and PIN. Enter these below to retrieve your Preliminary Application.
         </div>
+        <div class="helpCursor" [class.margin-bottom-half]="(isHandset$ | async)" [class.margin-bottom]="!(isHandset$ | async)">
+          <div fxFill fxLayout="row" fxLayoutAlign="space-around center">
+            <div class="helpLink" (click)="openBottomSheet()">Looking for a Company Application?</div>
+          </div>
+        </div>
 
         <!-- fxLayoutAlign="{{(isHandset$ | async) ? 'start center' : null}}" -->
         <div fxLayout="column" fxLayoutAlign="start center" class="form-field-icons">
@@ -47,12 +52,12 @@
       </div>
       <div class="fullWidth" [class.margin-top-double]="standAlonePage" [class.margin-top]="!standAlonePage">
         <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px"><!-- fxLayoutAlign="start start" -->
+          <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" routerLink="/licences">
+            CANCEL
+          </button>
           <button mat-raised-button [class.fullWidth]="(isHandset$ | async)"
                   [disabled]="!form.valid ? true : null" (click)="getApplication()">
             RETRIEVE
-          </button>
-          <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" routerLink="/licences">
-            CANCEL
           </button>
         </div>
       </div>

@@ -12,7 +12,7 @@
     <div *ngIf="authentication.access.userGroup === UserGroup['REPRESENTATIVE']" style="position: relative; top: -4px">
       <button mat-raised-button routerLink="/licencesinternal" [state]="{title: 'Applications'}">
         <span >APPLICATIONS LIST</span>
-      </button>
+      </button>k
     </div>
     <div *ngIf="authentication.access.userGroup !== UserGroup['REPRESENTATIVE']" style="position: relative; top: -4px">
       <button mat-raised-button routerLink="/licences" [state]="{title: 'My Applications'}">

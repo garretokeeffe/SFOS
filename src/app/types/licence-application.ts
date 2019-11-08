@@ -3,23 +3,29 @@ import { FleetSubSegment } from './fleet-segment';
 import { User } from './user';
 import { Vessel, VesselView } from './vessel';
 import { DocumentationRequired } from './documentation-required';
+import { ApplicantView } from './applicant';
 
 export enum ApplicantType {
   NONE = 0,
   INDIVIDUAL = 1,
-  PARTNERSHIP = 2,
-  COMPANY = 3,
+  COMPANY = 2,
+  PARTNERSHIP = 3,
 }
 export enum LetterOfOfferStatus {
   NONE = 0,
   PENDING = 1,
   ACCEPTED = 2,
   REJECTED = 3,
+  REVOKED = 4,
 }
 export enum LicenceApplicationStatus {
   NONE = 0,
-  PENDING = 1,
-  ISSUED = 2,
+  PENDING_ACCEPTANCE_OF_LETTER_OF_OFFER = 1,
+  REVOKED = 2,
+  PENDING_COMPLIANCE = 3,
+  PROCESSING_APPLICATION = 4,
+  ISSUED = 5,
+  REJECTED = 6,
 }
 
 export class Applicant {
@@ -56,12 +62,19 @@ export class PreliminaryInformation {
       // copy constructor
       this.applicantType = preliminaryInformation.applicantType;
       this.primaryApplicant = new Applicant(preliminaryInformation.primaryApplicant);
-      this.otherApplicants = preliminaryInformation.otherApplicants; // reference copy
+      this.otherApplicants = preliminaryInformation.otherApplicants ? preliminaryInformation.otherApplicants : []; // reference copy
       this.partnershipName = preliminaryInformation.partnershipName ? preliminaryInformation.partnershipName : '';
       this.companyName = preliminaryInformation.companyName ? preliminaryInformation.companyName : '';
       this.fleetSegment = preliminaryInformation.fleetSegment;
       this.loa = preliminaryInformation.loa;
       this.registeredLength = preliminaryInformation.registeredLength;
+
+      // If there are no otherApplicants, add a blank one so that the second applicant input fields
+      // will automatically appear if the user selects applicantType = PARTNERSHIP
+      // This blank item can be removed prior to being saved
+      if (this.otherApplicants.length === 0) {
+        this.otherApplicants.push(new Applicant());
+      }
     }
   }
 }
@@ -81,23 +94,25 @@ export class LetterOfOfferTerm {
 export class LetterOfOffer {
   public status: number = LetterOfOfferStatus.NONE;
   public terms: Array<LetterOfOfferTerm> = [];
+  public issueDate: string = '';
   public expiryDate: string = ''; // 30 days after being issued
   public acceptedBy: Applicant = null;
   public acceptedDate: string = '';
   public rejectedBy: Applicant = null;
   public rejectedDate: string = '';
-  public downloadURL: string = '';
+  // public downloadURL: string = '';
 
   constructor(letterOfOffer?: LetterOfOffer | any) {
     if (letterOfOffer) {
       this.status = letterOfOffer.status ? letterOfOffer.status : LetterOfOfferStatus.NONE;
       this.terms = letterOfOffer.terms; // reference copy
+      this.issueDate = letterOfOffer.issueDate;
       this.expiryDate = letterOfOffer.expiryDate;
       this.acceptedBy = letterOfOffer.acceptedBy;
       this.acceptedDate = letterOfOffer.acceptedDate;
       this.rejectedBy = letterOfOffer.rejectedBy;
       this.rejectedDate = letterOfOffer.rejectedDate;
-      this.downloadURL = letterOfOffer.downloadURL;
+      // this.downloadURL = letterOfOffer.downloadURL;
     }
   }
 }
@@ -126,6 +141,7 @@ export class LicenceApplication {
   public expiryDate: string = ''; // one year after letter of offer has been accepted
   public preliminaryInformation: PreliminaryInformation = new PreliminaryInformation();
   public arn: string = '';
+  public pin: string = '';
   public letterOfOffer: LetterOfOffer | LetterOfOfferView = new LetterOfOfferView();
   public documentationRequired: Array<DocumentationRequired> = [];
 
@@ -138,6 +154,7 @@ export class LicenceApplication {
       this.expiryDate = licenceApplication.expiryDate;
       this.preliminaryInformation = new PreliminaryInformation(licenceApplication.preliminaryInformation);
       this.arn = licenceApplication.arn;
+      this.pin = licenceApplication.pin;
       this.letterOfOffer = new LetterOfOfferView(licenceApplication.letterOfOffer);
       this.documentationRequired = [];
       if (licenceApplication.documentationRequired) {

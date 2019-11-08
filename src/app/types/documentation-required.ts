@@ -4,13 +4,15 @@ export enum DocumentationRequiredCategory {
   PERSONAL = 2,
   VESSEL = 3,
   CAPACITY = 4,
+  COMPANY = 5,
+  PARTNERSHIP = 6,
 }
 
 export class DocumentationRequired {
   public url: string = '';
   public title: string = '';
   public category: number = DocumentationRequiredCategory.GENERAL; // corresponds to DocumentationRequiredCategory enum
-  public letterOfOfferTermId: number = null; // join to condition in letter of offer
+  public letterOfOfferTermId: number = null; // id of term in letter of offer
 
   constructor(documentationRequired?: DocumentationRequired | any) { // DMcD: added any option to permit unit testing with incomplete mock data
     if (documentationRequired) {

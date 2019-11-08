@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, Optional, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, Optional, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
@@ -7,16 +7,26 @@ import { WizardComponent } from 'angular-archwizard';
 import { UserView } from '../../../types/user';
 import { UserService } from '../../../services/user.service';
 import { animations } from '../../../animations';
+import { ActivatedRoute } from '@angular/router';
+
+export enum LaWizardMode {
+  NONE = 0,
+  NEW = 1,
+  RETRIEVE = 2,
+  ACTIVE = 3,
+}
 
 @Component({
-  selector: 'app-la-licence-application-wizard',
-  templateUrl: './la-licence-application-wizard.component.html',
-  styleUrls: ['./la-licence-application-wizard.component.css'],
+  selector: 'app-la-wizard',
+  templateUrl: './la-wizard.component.html',
+  styleUrls: ['./la-wizard.component.css'],
   animations: animations,
 })
-export class LaLicenceApplicationWizardComponent implements OnInit {
+export class LaWizardComponent implements OnInit {
 
-  public applicationActivated: boolean = false;
+  @Input() public mode: number = LaWizardMode.NONE;
+
+  public LaWizardMode: any = LaWizardMode; // html access to enum
 
   @ViewChild(WizardComponent)
   public wizard: WizardComponent;
@@ -31,9 +41,13 @@ export class LaLicenceApplicationWizardComponent implements OnInit {
 
   constructor(private breakpointObserver: BreakpointObserver,
               @Optional() public cdRef: ChangeDetectorRef,
+              private route: ActivatedRoute,
               private userService: UserService) { }
 
   public ngOnInit(): void {
+    this.mode = this.route.snapshot.params.id ? this.route.snapshot.params.id : LaWizardMode.NONE;
+    console.log('wizard mode = ' + LaWizardMode[this.mode]);
+
     this.userService.getUserProfile().subscribe((user: UserView) => {
         this.user = user;
       },
@@ -59,28 +73,14 @@ export class LaLicenceApplicationWizardComponent implements OnInit {
     if (licenceApplication) {
       this.licenceApplication = licenceApplication;
     }
-    this.applicationActivated = true;
+    this.mode = LaWizardMode['ACTIVE'];
+    console.log('wizard mode = ' + LaWizardMode[this.mode]);
   }
 
   public onRejectTerms(licenceApplication: LicenceApplicationView): void {
     if (licenceApplication) {
       this.licenceApplication = licenceApplication;
     }
-    this.applicationActivated = false;
-  }
-
-  public goToSubmitDocumentationStep(licenceApplication?: LicenceApplicationView): void {
-
-    if (licenceApplication) {
-      this.licenceApplication = licenceApplication;
-    }
-    this.applicationActivated = true;
-    setTimeout( () => {
-      setTimeout( () => {
-        this.wizard.model.navigationMode.goToNextStep();
-      }, 50);
-      this.wizard.model.navigationMode.goToNextStep();
-    }, 50);
   }
 
   public nextStep(licenceApplication?: LicenceApplicationView): void {

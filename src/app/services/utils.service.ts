@@ -3,6 +3,7 @@ import { formatNumber } from '@angular/common';
 import { EnumValue } from '@angular/compiler-cli/src/ngtsc/metadata';
 import { FleetSubSegment } from '../types/fleet-segment';
 import { LicenceStatus } from '../types/licence';
+import { ApplicantType } from '../types/licence-application';
 
 @Injectable()
 export class Utils {
@@ -60,21 +61,29 @@ export class Utils {
   constructor() { }
 
   // provide access to static member functions in html
-  static getInstance(): Utils {
+  public static getInstance(): Utils {
     if (!this.utils) {
       this.utils = new Utils();
     }
     return this.utils;
   }
 
-  public static displayEnumText(enumValue: number, enumType: string): string {
+  public static displayEnumText(enumValue: number, enumType: any): string {
     let text: string = '';
+    enumValue = Number(enumValue); // ensure it's a number
 
     if (enumType[enumValue]) {
       text = enumType[enumValue].replace(/_/g, ' ');
 
-      if (enumType === 'FleetSubSegment')  {
-
+      if (enumType === ApplicantType) {
+        text = text.toLowerCase();
+        if (text) {
+          text = text.charAt(0).toUpperCase() + text.slice(1); // capitalise first letter
+          text = 'A ' + text;
+        }
+        if (enumValue === ApplicantType['INDIVIDUAL']) {
+          text = 'An Individual (Myself)';
+        }
       }
     } else {
       text = String(enumValue);

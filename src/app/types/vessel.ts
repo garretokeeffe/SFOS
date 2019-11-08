@@ -55,7 +55,7 @@ export class Vessel {
   public cfr: string = '';
   public prn: string = ''; // port reg number
   public ircs: string = ''; // international radio call sign
-  public uvi: string = ''; // should be a numeric value but keep as string just in case
+  public uvi: string = ''; // IMO1234567 - uvi is the internal term for the IMO No.
   public mmsi: string = '';
 
   // Systems

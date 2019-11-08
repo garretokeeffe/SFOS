@@ -14,6 +14,7 @@ import {UserView} from '../../types/user';
 import {Utils} from '../../services/utils.service';
 import {ActivatedRoute} from '@angular/router';
 import { animations } from '../../animations';
+import { LaWizardMode } from '../../components/licence-application/la-wizard/la-wizard.component';
 
 @Component({
   selector: 'app-licences',
@@ -42,6 +43,7 @@ export class LicencesComponent implements OnInit, DoCheck {
   public vessels: Array<VesselView> = [];
   public notifications: Array<NotificationView> = [];
   public submissions: Array<SubmissionView> = [];
+  public LaWizardMode: any = LaWizardMode; // html access to enum
 
   public showLicenceApplication: boolean = false;
 

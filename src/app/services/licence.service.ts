@@ -16,9 +16,50 @@ export class LicenceService {
 
   constructor(private http: HttpClient,
               private globals: Globals,
-              @Optional() private demoService: DemoService) { }
+              @Optional() private demoService: DemoService)
+  {
 
-  public getApplication(ownerId?: string, arn?: string, pin?: string): Observable<LicenceApplicationView> {
+  }
+
+  public submitPreliminaryLicenceApplication(licenceApplication: LicenceApplication | LicenceApplicationView): Observable<LicenceApplicationView> {
+
+    // for now always return the demo data
+    if (true || this.globals.demo) {
+      return this.demoService.submitPreliminaryLicenceApplication(licenceApplication);
+    }
+
+    /*
+        return Observable.create(observer => {
+          this.http.patch<Array<number>>(url, landingPatch, httpOptions)
+          .subscribe(
+            (response) => {
+              observer.next(landing); // return the landing (with updated status)
+              observer.complete();
+
+            },
+            (error) => {
+              console.log(JSON.stringify(error));
+              observer.error(error);
+              server.complete();
+            });
+        });
+
+
+
+        /*
+        const body: any = JSON.stringify(licenceApplication);
+        const headers: Headers = new Headers({'Content-Type': 'application/json'});
+        const options: RequestOptions = new RequestOptions({headers: headers});
+        return this.http.post(this.url + "quota", body, options).map(this.extractAddResponse).catch(this.handleError);
+
+        return new Observable<LicenceApplicationView>((observer) => {
+          observer.next(licenceApplication);
+          observer.complete();
+        });
+        */
+  }
+
+  public getLicenceApplication(userId?: string, arn?: string, pin?: string): Observable<LicenceApplicationView> {
 
     // ownerId = CCS Id from keycloak profile
     // sample ownerId for hard-coding = VA100131F
@@ -26,11 +67,11 @@ export class LicenceService {
     let url: string = '';
 
     if (this.globals.demo) {
-      url = this.demoService.getApplicationURL;
+      url = this.demoService.getLicenceApplicationURL;
     } else {
-      url = environment.getApplicationURL;
-      if (ownerId) {
-        url += '/' + ownerId;
+      url = environment.getLicenceApplicationURL;
+      if (userId) {
+        url += '/' + userId;
       }
       if (arn) {
         url += '/' + arn;
@@ -46,9 +87,9 @@ export class LicenceService {
           'Content-Type': 'application/json',
           'Cache-Control': 'no-cache, no-store, must-revalidate', // HTTP 1.1
           'Pragma': 'no-cache', // HTTP 1.0
-          'Expires': '0' // Proxies
+          'Expires': '0', // Proxies
         }),
-        observe: 'body'
+        observe: 'body',
       })
       .subscribe(
         (res: LicenceApplication) => {
@@ -114,12 +155,11 @@ export class LicenceService {
     });
   }
 
-
   public getSubmissions(loadAllSubmissions: boolean = false): Observable<Array<SubmissionView>> {
 
     const url: string = loadAllSubmissions ? environment.getSubmissionsAllURL  : environment.getSubmissionsInProgressURL;
 
-    return Observable.create(observer => {
+    return Observable.create((observer) => {
       this.http.get(url, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
