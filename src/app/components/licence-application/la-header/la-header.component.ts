@@ -18,6 +18,7 @@ export class LaHeaderComponent implements OnInit {
   @Input() public fleetSegment: number = null;
 
   public FleetSegmentManager: any = FleetSegmentManager; // access to static methods
+  public FleetSubSegment: any = FleetSubSegment;
 
   public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
   .pipe(
@@ -36,6 +37,10 @@ export class LaHeaderComponent implements OnInit {
               public utils: Utils) { }
 
   public ngOnInit(): void {
+  }
+
+  public isScallops(): boolean {
+    return [FleetSubSegment['POLYVALENT_SCALLOPS_GTE_10M_LOA'], FleetSubSegment['SPECIFIC_SCALLOPS_GTE_10M_LOA']].includes(Number(this.fleetSegment));
   }
 
 }

@@ -20,9 +20,11 @@ import { Router } from '@angular/router';
 import * as moment from 'moment';
 import {
   LaFleetSegmentBottomSheet,
-  LaVesselLengthBottomSheet
+  LaVesselLengthBottomSheet,
 } from '../la-preliminary-info/la-preliminary-info.component';
 import { FleetSegmentManager } from '../../../types/fleet-segment';
+import { Utils } from '../../../services/utils.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-la-letter-of-offer',
@@ -56,6 +58,10 @@ export class LaLetterOfOfferComponent implements OnInit, OnDestroy {
   public FleetSegmentManager: any = FleetSegmentManager; // access to static methods
   public LetterOfOfferStatus: any = LetterOfOfferStatus;
   public ApplicantType: any = ApplicantType;
+  public utils: Utils = Utils;
+
+  // request status
+  public submissionInProgress: boolean = false;
 
   public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
   .pipe(
@@ -76,9 +82,17 @@ export class LaLetterOfOfferComponent implements OnInit, OnDestroy {
               private router: Router,
               private _bottomSheet: MatBottomSheet,
               @Optional() public cdRef: ChangeDetectorRef,
+              private userService: UserService,
               private licenceService: LicenceService) {  }
 
-  public ngOnInit(): void { }
+  public ngOnInit(): void {
+    // If user details have not been passed in, retrieve them now.
+    if (!this.user) {
+      this.userService.getUserProfile().subscribe((user: UserView) => {
+        this.user = user;
+      });
+    }
+  }
 
   public ngAfterViewChecked(): void {
     // detect changes after view checked to avoid "expression has changed after it was checked" exceptions
@@ -90,22 +104,22 @@ export class LaLetterOfOfferComponent implements OnInit, OnDestroy {
   }
 
   public acceptLetterOfOffer(): void {
+    this.errorMessage = '';
+    this.progressPreliminaryLicenceApplication(LetterOfOfferStatus['ACCEPTED']).subscribe(
+      (success: boolean) => {
+        this.snackBar.open(`Licence Application (ARN: ${this.licenceApplication.arn}) has been activated`, null, {
+          duration: 2500,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+          panelClass: 'snackBarConfig',
+        });
 
-    // TODO: http post - the response will contain the LicenceApplication.expiryDate
-    // simulate for now
-    this.licenceApplication.letterOfOffer.status = LetterOfOfferStatus['ACCEPTED'];
-    this.licenceApplication.letterOfOffer.acceptedBy = new Applicant(this.user); // populates ccs id
-    this.licenceApplication.letterOfOffer.acceptedDate = moment.utc(new Date()).format('DD/MM/YYYY');
-    this.licenceApplication.expiryDate = moment.utc(new Date()).add(1, 'year').format('DD/MM/YYYY');
-
-    this.snackBar.open(`Licence Application (ARN: ${this.licenceApplication.arn}) has been activated`, null, {
-      duration: 2500,
-      horizontalPosition: 'center',
-      verticalPosition: 'bottom',
-      panelClass: 'snackBarConfig',
-    });
-
-    this.submit.emit(this.licenceApplication);
+        this.submit.emit(this.licenceApplication);
+      },
+      (error) => {
+        this.errorMessage = 'Sorry, something went wrong. We coould not process your request at this time';
+      },
+    );
   }
 
   public rejectLetterOfOffer(): void {
@@ -141,6 +155,28 @@ export class LaLetterOfOfferComponent implements OnInit, OnDestroy {
         observer.complete();
       });
 
+    });
+  }
+
+  public progressPreliminaryLicenceApplication(moveToStatus: number): Observable<boolean> {
+
+    const applicant: Applicant = new Applicant(this.user);
+
+    return new Observable((observer) => {
+      this.licenceService.progressPreliminaryLicenceApplication(this.licenceApplication, moveToStatus, applicant).subscribe(
+        (response: LicenceApplicationView) => {
+          this.submissionInProgress = false;
+          this.licenceApplication = response;
+          observer.next(true);
+          observer.complete();
+          this.next.emit(this.licenceApplication);
+        },
+        (error) => {
+          this.submissionInProgress = false;
+          observer.error(false);
+          observer.complete();
+        },
+      );
     });
   }
 

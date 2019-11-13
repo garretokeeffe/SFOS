@@ -1,6 +1,6 @@
 import * as moment from 'moment';
 import { FleetSubSegment } from './fleet-segment';
-import { User } from './user';
+import { User, UserView } from './user';
 import { Vessel, VesselView } from './vessel';
 import { DocumentationRequired } from './documentation-required';
 import { ApplicantView } from './applicant';
@@ -18,6 +18,11 @@ export enum LetterOfOfferStatus {
   REJECTED = 3,
   REVOKED = 4,
 }
+export enum LetterOfOfferTermType {
+  NONE = 0,
+  CONDITION = 1, // Relate to provision of documentation (Vary depending on Preliminary Info LOA)
+  RULE = 2, // Rules relating to permissible fishing (vary depending on preliminary Info Segment) and Vessel Systems and modifications
+}
 export enum LicenceApplicationStatus {
   NONE = 0,
   PENDING_ACCEPTANCE_OF_LETTER_OF_OFFER = 1,
@@ -34,7 +39,7 @@ export class Applicant {
   public lastName: string = '';
   public email: string = '';
 
-  constructor(applicant?: Applicant | User | any) {
+  constructor(applicant?: Applicant | User | UserView | any) {
     if (applicant) {
       // copy constructor
       if (applicant.id) {
@@ -56,6 +61,7 @@ export class PreliminaryInformation {
   public fleetSegment: number = FleetSubSegment.NONE;
   public loa: number = null;
   public registeredLength: number = null;
+  public submittedBy: Applicant = null;
 
   constructor(preliminaryInformation?: PreliminaryInformation | any) {
     if (preliminaryInformation) {
@@ -68,7 +74,7 @@ export class PreliminaryInformation {
       this.fleetSegment = preliminaryInformation.fleetSegment;
       this.loa = preliminaryInformation.loa;
       this.registeredLength = preliminaryInformation.registeredLength;
-
+      this.submittedBy = preliminaryInformation.submittedBy ? new Applicant(preliminaryInformation.submittedBy) : null;
       // If there are no otherApplicants, add a blank one so that the second applicant input fields
       // will automatically appear if the user selects applicantType = PARTNERSHIP
       // This blank item can be removed prior to being saved
@@ -82,6 +88,7 @@ export class PreliminaryInformation {
 export class LetterOfOfferTerm {
   public id: number = null;
   public text: string = '';
+  public termType: number = LetterOfOfferTermType.NONE;
 
   constructor(letterOfOfferTerm?: LetterOfOfferTerm | any) { // DMcD: added any option to permit unit testing with incomplete mock data
     if (letterOfOfferTerm) {

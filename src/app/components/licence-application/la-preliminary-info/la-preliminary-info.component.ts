@@ -515,7 +515,7 @@ export class LaPreliminaryInfoComponent implements OnInit, OnChanges {
   public onSubmit(): void {
 
     this.submissionInProgress = true;
-    this.licenceService.submitPreliminaryLicenceApplication(this.licenceApplication).subscribe(
+    this.licenceService.createPreliminaryLicenceApplication(this.licenceApplication).subscribe(
       (response: LicenceApplicationView) => {
         this.submissionInProgress = false;
         this.licenceApplication = response;
@@ -535,7 +535,7 @@ export class LaPreliminaryInfoComponent implements OnInit, OnChanges {
 
     this.submissionInProgress = true;
     setTimeout(() => {
-      this.licenceService.submitPreliminaryLicenceApplication(this.licenceApplication).subscribe(
+      this.licenceService.createPreliminaryLicenceApplication(this.licenceApplication).subscribe(
         (licenceApplication: LicenceApplicationView) => {
           this.submissionInProgress = false;
           demoLicenceApplication.preliminaryInformation = licenceApplication.preliminaryInformation;

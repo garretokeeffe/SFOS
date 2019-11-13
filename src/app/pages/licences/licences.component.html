@@ -57,24 +57,6 @@
     </div>
   </div>
 
-  <div *ngIf="!showRetrieveLetterOfOfferControls" class="margin-top-double centered-content">Activated Applications will be listed here</div>
-
-  <div *ngIf="showRetrieveLetterOfOfferControls" [@flyInOut]="'in'">
-    <app-la-retrieve-letter-of-offer (cancelRetrieveLetterOfOffer)="hideRetrieveLetterOfOfferControls($event)"></app-la-retrieve-letter-of-offer>
-  </div>
-  <!-- List of Applications (if any) here-->
-  <!--
-  <app-progress></app-progress>
-
-  <div *ngIf="vessels.length === 0">
-    <h2>You have no applications in progress</h2>
-  </div>
-
-  <div *ngIf="vessels.length > 0">
-    <div fxLayout="(isHandset$ | async) ? 'row' : 'column'" fxLayoutAlign="space-around start" >
-      <app-vessel *ngFor="let vessel of vessels; let i = index;" [vessel]="vessel"></app-vessel>
-    </div>
-  </div>
-  -->
+  <div class="margin-top-double centered-content">Activated Applications will be listed here</div>
 
 </div>

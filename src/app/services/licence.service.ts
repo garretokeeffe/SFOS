@@ -4,10 +4,20 @@ import {Observable} from 'rxjs';
 import {Vessel, VesselView} from '../types/vessel';
 import {environment} from '../../environments/environment';
 import {Submission, SubmissionView} from '../types/submission';
-import { LetterOfOfferTerm, LicenceApplication, LicenceApplicationView } from '../types/licence-application';
-import {Applicant} from '../types/applicant';
+import {
+  LetterOfOfferStatus,
+  LetterOfOfferTerm,
+  LicenceApplication,
+  LicenceApplicationView,
+  Applicant,
+} from '../types/licence-application';
 import { Globals } from '../globals';
 import { DemoService } from './demo.service';
+
+export interface ProgressPatch {
+  acceptedBy: Applicant;
+  rejectedBy: Applicant;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -21,42 +31,101 @@ export class LicenceService {
 
   }
 
-  public submitPreliminaryLicenceApplication(licenceApplication: LicenceApplication | LicenceApplicationView): Observable<LicenceApplicationView> {
+  public createPreliminaryLicenceApplication(licenceApplication: LicenceApplication | LicenceApplicationView): Observable<LicenceApplicationView> {
 
-    // for now always return the demo data
-    if (true || this.globals.demo) {
-      return this.demoService.submitPreliminaryLicenceApplication(licenceApplication);
+    if (this.globals.demo) {
+      return this.demoService.createPreliminaryLicenceApplication(licenceApplication);
     }
+    else {
+      const url: string = environment.submitPreliminaryLicenceApplicationURL;
 
-    /*
-        return Observable.create(observer => {
-          this.http.patch<Array<number>>(url, landingPatch, httpOptions)
-          .subscribe(
-            (response) => {
-              observer.next(landing); // return the landing (with updated status)
-              observer.complete();
+      const httpOptions: any = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache, no-store, must-revalidate', // HTTP 1.1
+          'Pragma': 'no-cache', // HTTP 1.0
+          'Expires': '0', // Proxies
+        }),
+      };
 
-            },
-            (error) => {
-              console.log(JSON.stringify(error));
-              observer.error(error);
-              server.complete();
-            });
-        });
+      return new Observable((observer) => {
+        this.http.post<LicenceApplication>(url, licenceApplication, httpOptions)
+        .subscribe(
+          (response) => {
+            observer.next(new LicenceApplicationView(response)); // response contains the licence application with appended data
+            observer.complete();
 
+          },
+          (error) => {
+            console.log(JSON.stringify(error));
+            observer.error(error);
+            observer.complete();
+          });
+      });
+    }
+  }
 
+  public progressPreliminaryLicenceApplication( licenceApplication: LicenceApplication | LicenceApplicationView,
+                                                moveToStatus: number,
+                                                applicant: Applicant): Observable<LicenceApplicationView | boolean> {
 
-        /*
-        const body: any = JSON.stringify(licenceApplication);
-        const headers: Headers = new Headers({'Content-Type': 'application/json'});
-        const options: RequestOptions = new RequestOptions({headers: headers});
-        return this.http.post(this.url + "quota", body, options).map(this.extractAddResponse).catch(this.handleError);
+    const payload: ProgressPatch = {
+      acceptedBy: null,
+      rejectedBy: null,
+    };
 
-        return new Observable<LicenceApplicationView>((observer) => {
-          observer.next(licenceApplication);
+    let action: string = '';
+
+    switch (moveToStatus) {
+      case LetterOfOfferStatus['ACCEPTED']:
+        payload.acceptedBy = applicant;
+        action = 'accept';
+        break;
+      case LetterOfOfferStatus['REJECTED']:
+        payload.rejectedBy = applicant;
+        action = 'reject;';
+        break;
+      default:
+        console.error('Attempt to progress the preliminary application to an invalid status (', moveToStatus, ') aborted');
+        return new Observable((observer) => {
+          observer.error(false);
           observer.complete();
         });
-        */
+    }
+
+    // TODO remove the true below - for now always return demo data
+    if (true || this.globals.demo) {
+      return this.demoService.progressPreliminaryLicenceApplication(licenceApplication, payload);
+    }
+    else {
+      let url: string = environment.progressPreliminaryLicenceApplicationURL;
+      url += '/' + action;
+      url += '/' + licenceApplication.arn;
+
+      const httpOptions: any = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache, no-store, must-revalidate', // HTTP 1.1
+          'Pragma': 'no-cache', // HTTP 1.0
+          'Expires': '0', // Proxies
+        }),
+      };
+
+      return new Observable((observer) => {
+        this.http.patch<LicenceApplication>(url, payload, httpOptions)
+        .subscribe(
+          (response) => {
+            observer.next(new LicenceApplicationView(response)); // response contains the licence application with amended data
+            observer.complete();
+
+          },
+          (error) => {
+            console.log(JSON.stringify(error));
+            observer.error(error);
+            observer.complete();
+          });
+      });
+    }
   }
 
   public getLicenceApplication(userId?: string, arn?: string, pin?: string): Observable<LicenceApplicationView> {
@@ -66,7 +135,8 @@ export class LicenceService {
 
     let url: string = '';
 
-    if (this.globals.demo) {
+    // TODO remove the true below - for now always return demo data
+    if (true || this.globals.demo) {
       url = this.demoService.getLicenceApplicationURL;
     } else {
       url = environment.getLicenceApplicationURL;
@@ -80,6 +150,9 @@ export class LicenceService {
         url += '/' + pin;
       }
     }
+
+    // TODO: remove this hardcoded url (on Stepehen's PC) after testing
+    // url = 'http://WKEBNFS26938:8080/sfos/preliminary-licence-applications/users/ccs/300/315061143/4274';
 
     return Observable.create((observer) => {
       this.http.get(url, {

@@ -24,6 +24,8 @@ export const environment: any = {
   getStatusesOfSubmissionsURL: 'assets/demo/statuses-of-submissions',
   getVesselsURL: 'https://api-3scale-apicast-staging.apps.rhos.agriculture.gov.ie:443/sfos/vessels/users/ccs',
   getVesselURL: 'assets/demo/vessel',
+  submitPreliminaryLicenceApplicationURL: 'assets/demo/submitPreliminaryLicenceApplicationURL',
+  progressPreliminaryLicenceApplicationURL: 'assets/demo/progressPreliminaryLicenceApplicationURL',
   getLicenceApplicationURL: 'assets/demo/licence-application',
   getLetterOfOfferTermsURL: 'assets/demo/letter-of-offer-terms',
   getSubmissionsAllURL: 'assets/demo/submissions-all',

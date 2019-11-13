@@ -19,7 +19,7 @@
 
 .letterOfOfferTerms {
   max-width: 960px;
-  margin: 16px auto 32px;
+  margin: 16px auto 16px;
 }
 .letterOfOfferTerms.compressed {
   height: 200px;

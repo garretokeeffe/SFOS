@@ -4,11 +4,9 @@
 
   <div class="fullWidth" [@flyInOut]="'in'">
 
-    <!--
     <div *ngIf="continueApplicationFlow" class="margin-bottom text-small max-width-centered-content">
       <mat-checkbox [(ngModel)]="userLoggedIn">UX Option: User has already logged in?</mat-checkbox>
     </div>
-    -->
 
     <div class="margin-top max-width-centered-content">
 
@@ -60,19 +58,19 @@
           </div>
 
           <div *ngIf="showTerms" [@fadeInOut]="'fadeIn'">
-            <div class="centered-content margin-top-double wizard-label">TERMS</div>
+            <div class="centered-content margin-top-double wizard-label">YOUR LETTER OF OFFER IS SUBJECT TO THE FOLLOWING TERMS</div>
             <div class="page letterOfOfferTerms mat-elevation-z8" >
               <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="16px" >
                 <div *ngFor="let loaTerm of licenceApplication.letterOfOffer.terms" fxLayout="row" fxLayoutGap="16px">
-                  <div fxFlexAlign="start">{{loaTerm.id}})</div>
+                  <div fxFlexAlign="start">{{ utils.decimalToRoman(loaTerm.id) }})</div>
                   <div fxFlexAlign="start" class="left">{{loaTerm.text}}</div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="margin-top-double dafm-green">
-            You must accept the Terms of the Letter of Offer and thereby
+          <div class="dafm-green" [class.margin-top-double]="!showTerms" [class.margin-top]="showTerms">
+            You must accept the Terms of your Letter of Offer and thereby
             <span class="helpLinkWithinText" (click)="openActivateApplicationBottomSheet()">activate</span>
             your application on or before <span class="bold">{{ licenceApplication.letterOfOffer.expiryDate }}</span><!--{{ utils.toDate(licenceApplication.letterOfOfferTermsDeadlineDate) | date }}-->
           </div>
@@ -93,7 +91,7 @@
           </div>
 
           <div *ngIf="continueApplicationFlow && !userLoggedIn; else acceptTermsCheckBox" class="margin-top dafm-green">
-            You must <span class="helpLinkWithinText bold" (click)="login()">login</span> to accept the Terms of the Letter of Offer.
+            You must <span class="helpLinkWithinText bold" (click)="login()">login</span> to accept the Terms of your Letter of Offer.
             <span *ngIf="licenceApplication.arn && licenceApplication.pin" [class.br]="!(isHandset$ | async)">
               Alternatively, you may retrieve this application at a later time using your
               <div class="bold margin-top">Application Reference Number: {{ licenceApplication.arn }}</div>
@@ -174,28 +172,28 @@
           </div>
 
           <div *ngIf="showTerms" [@fadeInOut]="'fadeIn'">
-            <div class="centered-content margin-top-double wizard-label">TERMS</div>
+            <div class="centered-content margin-top-double wizard-label">YOUR LETTER OF OFFER IS SUBJECT TO THE FOLLOWING TERMS</div>
             <div class="page letterOfOfferTerms mat-elevation-z8" >
               <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="16px" >
                 <div *ngFor="let loaTerm of licenceApplication.letterOfOffer.terms" fxLayout="row" fxLayoutGap="16px">
-                  <div fxFlexAlign="start">{{loaTerm.id}})</div>
+                  <div fxFlexAlign="start">{{ utils.decimalToRoman(loaTerm.id) }})</div>
                   <div fxFlexAlign="start" class="left">{{loaTerm.text}}</div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="margin-top-double">
+          <div [class.margin-top-double]="!showTerms" [class.margin-top]="showTerms">
             <span>
               <!-- TODO: if the acceptor is the logged in your, say 'You accepted the terms...' rather than 'John Murphy accepted the terms...' -->
               <!--{{ licenceApplication.letterOfOffer.acceptedBy.firstName }} {{ licenceApplication.letterOfOffer.acceptedBy.lastName }}-->
-              <span [class.br]="(isHandset$ | async)">You accepted the Terms of the Letter of Offer </span>
+              <span [class.br]="(isHandset$ | async)">You accepted the Terms of your Letter of Offer </span>
               <span [class.br]="(isHandset$ | async)">on {{ licenceApplication.letterOfOffer.acceptedDate }}</span>
             </span>
           </div>
 
           <div class="margin-top margin-bottom bold dafm-green">
-            You must comply with the Terms of the Letter of Offer on or before {{ licenceApplication.expiryDate }}<!--{{ utils.toDate(licenceApplication.letterOfOfferTermsDeadlineDate) | date }}-->
+            You must comply with the Terms of your Letter of Offer on or before {{ licenceApplication.expiryDate }}<!--{{ utils.toDate(licenceApplication.letterOfOfferTermsDeadlineDate) | date }}-->
           </div>
 
           <div *ngIf="enableDisplayOfPreliminaryInformation" class="fullWidth margin-vertical">

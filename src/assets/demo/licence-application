@@ -15,7 +15,14 @@
     "companyName": "",
     "fleetSegment": 338360921,
     "loa": 23,
-    "registeredLength": 24.5
+    "registeredLength": 24.5,
+    "submittedBy":
+    {
+      "id": 1,
+      "firstName": "John",
+      "lastName": "Murphy",
+      "email": "john.murphy@demo.com"
+    }
   },
   "letterOfOffer": {
     "status": 1,
@@ -27,36 +34,114 @@
     "rejectedDate": "",
     "terms": [
       {
-        "id": 1,
-        "text": "The owner and / or master of the vessel to which this licence offer relates shall ensure that the boat and its crew shall comply with any requirements for the time being in force in relation to the safety of fishing vessels and their crews safety requirements"
+        "id": 8466215,
+        "text": "The provision of your Personal Public Service Number (PPSN)",
+        "termType": "1"
       },
       {
-        "id": 2,
-        "text": "The vessel will be precluded from fishing for herring unless it qualifies for inclusion in either the Celtic Sea Herring Polyvalent or the North West Herring Polyvalent ring-fenced portions except for  herring from the Irish Sea and the Norwegian, International"
+        "id": 1926062,
+        "text": "The provision of two colour photographs of the vessel, signed and dated by a Sea Fishery Officer of the Department or a BIM Area Officer",
+        "termType": "1"
       },
       {
-        "id": 3,
-        "text": "This vessel will be precluded from fishing for mackerel unless it has been placed in Tier 1 or Tier 2 (see replacement capacity condition)"
+        "id": 1947275,
+        "text": "The provision of satisfactory details of ownership of the vessel - Bill of Sale, Builder's Certificate or other legal contract",
+        "termType": "1"
       },
       {
-       "id": 4,
-       "text": "The vessel will be precluded from fishing for scallops.  However by way of derogation and to allow for a by-catch, a quantity of scallop that is no greater than 10% by live weight of the total quantity of all species of fish may be retained on board or landed on any"
+       "id": 8466217,
+       "text": "For vessels of 15 metres in length overall (Loa) and over but less than 24 metres in length (L):__The provision of a vessel condition survey report carried out by a marine surveyor, which confirms that the vessel is in a safe and seaworthy condition.  (The report must actually state this or else it will be returned)._The Marine Survey Office will also have to inspect the vessel to ensure compliance with relevant statutory safety requirements. You should contact the Marine Survey Office directly to arrange for the vessel inspection to be carried out (Tel: 01-6783400)._It should be noted that as of 1 October 2007, the Maritime Safety Directorate has introduced new safety regulations for new fishing vessels of 15 metres in length overall (Loa) and over but less than 24 metres in length (L) ('new vessel' means a vessel the keel of which is laid or which is at similar stage of construction on or after 1 October 2007).  The Regulations include a survey regime, which will require an initial survey, biennial and renewal surveys during a 4-year cycle. The survey regime will require the vessels to be inspected out of the water during the initial and renewal surveys._The regulation will come into effect for other vessels in this category from 1 October 2008, 1 October 2009 or 1 October 2010, depending on the age of the vessel. Further information concerning these new regulations is available from the Marine Survey Office. The relevant Marine Notice is Marine Notice No. 32 of 2007;__For vessels under 15 metres in overall length:__The provision of a declaration of compliance of the vessel with the Code of Practice in relation to the safety of fishing vessels of less than 15 metres in overall length.  The declaration must be made, following survey of the vessel, by an authorised person on the panel of marine surveyors established for this purpose by the Marine Survey Office. (Contact details for surveyors on the panel are enclosed herewith.) Where the vessel to be licensed has been the subject of a declaration of compliance with the Code of Practice in a previous owner's name it will be necessary for the applicant, as current owner, to provide a declaration of compliance issued by the surveyor in respect of the vessel in the name of the current owner",
+       "termType": "1"
       },
       {
        "id": 5,
-       "text": "Where a vessel to be licensed in the polyvalent or specific segment is equal to or greater than 10 metres in overall length it will be precluded from fishing for scallops unless the total replacement capacity required to be provided is deemed by the Licensing"
+       "text": "For vessels of 15 metres in length overall (Loa) and over but less than 24 metres in length (L):__Confirmation from the Maritime Radio Affairs Unit that the vessel complies with radio requirements, in accordance with the Fishing Vessels (Radio Installations) Regulations 1998.  You should contact the Maritime Radio Affairs Unit directly to arrange for the necessary vessel radio survey to be carried out (Tel: 01-6783400)",
+       "termType": "1"
       },
       {
        "id": 6,
-       "text": "Where a vessel to be licensed in the polyvalent or specific segment is equal to or greater than 10 metres in overall length it will be precluded from fishing for scallops unless the total replacement capacity required to be provided is deemed by the Licensing Authority to have active scallop history as defined in Ministerial Policy Directive 1 of 2006, as amended by Ministerial Policy Directive 1 of 2011.  The Licensing Authority can be contacted to confirm whether a vessel proposed to be used as replacement capacity is deemed to be 'active'"
+       "text": "The owner and / or master of the vessel to which this licence offer relates shall ensure that the boat and its crew shall comply with any requirements for the time being in force in relation to the safety of fishing vessels and their crews (safety requirements should be taken to include any requirements in relation to radio installations and equipment, and crew training), and shall maintain the vessel in a safe and seaworthy condition",
+       "termType": "1"
       },
       {
         "id": 7,
-        "text": "The boat must have on board a fully functional satellite-based position monitoring terminal and a fully functional electronic recording and reporting system in accordance with EU Regulations 1224/2009 and 404/2011 or any Regulations amending or replacing these Regulations, and shall comply with all relevant position monitoring requirements and with all relevant recording and reporting requirements for the time being in force."
+        "text": "Confirmation, if the vessel was previously entered on the register of another country, that the vessel has been removed from that register. In this respect, a Certified Transcript from the relevant National Authority will be required",
+        "termType": "1"
       },
       {
        "id": 8,
-       "text": "It will be necessary to establish that the vessel will have a genuine economic link with the local coastal communities and in this context the attached questionnaire should be completed"
+       "text": "Confirmation that no decommissioning grant will have been paid in respect of the vessel. In this respect, if the vessel was previously registered in a Member State of the European Community, written confirmation from the relevant National Authority will be required",
+       "termType": "1"
+      },
+      {
+       "id": 9,
+       "text": "The capacity of the vessel will have to be established as follows:_Gross Tonnage:_The gross tonnage of all vessels of 15 metres and over in overall length will have to be determined by the Marine Survey Office._The gross tonnage of all vessels less than 15 metres in overall length which are registered under the Mercantile Marine Act 1955 will have to be determined by the Marine Survey Office._In the case of vessels of less than 15 metres overall length and registered under the Sea-Fisheries and Maritime Jurisdiction Act 2006 only, the dimensions of the vessel will have to be confirmed on the enclosed Certificate of Measurement.  These certified dimensions will enable the gross tonnage of the vessel to be determined by the Licensing Authority. (You should retain a copy of the Certificate of Measurement as you may be required to produce it by the Local Registrar.)_Engine Power (kW):_The engine power of all vessels 15 metres and over in overall length will have to be confirmed by the Marine Survey Office._The engine power of all vessels of less than 15 metres in overall length which are registered under the Mercantile Marine Act 1955 will have to be confirmed by the Marine Survey Office._In the case of vessels under 15 metres overall length and registered under the Sea-Fisheries and Maritime Jurisdiction Act 2006 only, written confirmation of the vessel's engine power is required to be provided from the engine manufacturer or local agent / dealer / installer, a marine surveyor or shipbuilder, or other source acceptable to the Licensing Authority._Where the engine of a vessel under 15 metres overall length has been / is being de-rated, the enclosed form SUR 118 (Certificate of Particulars of Engines) must be completed",
+       "termType": "1"
+      },
+      {
+       "id": 10,
+       "text": "The provision of documentary evidence that you have provided the required replacement capacity (in terms of gross tonnage and engine power), removed from the Fishing Boat Register.  Current licensing policy requires that replacement capacity be provided on a 1:1 basis from the relevant fleet sub-segment in accordance with Ministerial Policy Directive 1/2006. An extract from the Directive is attached for your convenience. A copy of the Directive is available from www.dcmnr.ie or the Licensing Authority._Please note that capacity that is 'off-register' for two years or more is no longer available as replacement capacity",
+       "termType": "1"
+      },
+      {
+       "id": 11,
+       "text": "The vessel will be precluded from fishing for herring or mackerel",
+       "termType": "2"
+      },
+      {
+       "id": 12,
+       "text": "The vessel will be precluded from fishing for herring",
+       "termType": "2"
+      },
+      {
+       "id": 13,
+       "text": "The vessel will be precluded from fishing for mackerel",
+       "termType": "2"
+      },
+      {
+       "id": 14,
+       "text": "Where a vessel to be licensed in the Polyvalent [<18m LOA] segment is greater than 10 metres in overall length it will be precluded from fishing for scallops unless the total replacement capacity required to be provided is deemed by the Licensing Authority to have active scallop history as defined in Policy Decision 1/2006. The Licensing Authority can be contacted to confirm whether a vessel proposed to be used as replacement capacity is deemed to be 'active'",
+       "termType": "2"
+      },
+      {
+       "id": 15,
+       "text": "The vessel will be precluded from fishing for scallops (but see condition above concerning 'active scallop history')",
+       "termType": "2"
+      },
+      {
+       "id": 16,
+       "text": "The vessel to which this licence offer relates shall not be used for sea-fishing, whether within the exclusive fishery limits of the State or otherwise, unless at least 50 per cent of the members of the crew are nationals of any of the Member States of the European Communities",
+       "termType": "2"
+      },
+      {
+       "id": 17,
+       "text": "The skipper and other crew members will be duly qualified under relevant legislation in force. (Information in relation to manning requirements should be obtained from the Department’s Marine Survey Office.  Tel.: 01-8744900 / 8743325.)",
+       "termType": "2"
+      },
+      {
+       "id": 18,
+       "text": "The vessel will be precluded from fishing by means of beam trawls",
+       "termType": "2"
+      },
+      {
+       "id": 19,
+       "text": "Any proposed structural modifications to the vessel, including changes to the vessel’s engine, must be approved in advance by the Licensing Authority for Sea Fishing Boats. Such modifications can have significant implications in terms of the licensing of the vessel, including replacement capacity requirements. The vessel may be required to be re-measured and a new licence application may be required to be submitted",
+       "termType": "2"
+      },
+      {
+       "id": 20,
+       "text": "Any licence which may issue on foot of this licence offer would cease to have effect upon the sale of the vessel – the new owner would have no entitlement to a licence in respect of the vessel and would have to submit a new licence application for consideration by this Department in the light of whatever licensing policy criteria may then apply",
+       "termType": "2"
+      },
+      {
+       "id": 21,
+       "text": "The vessel must have on board a fully functional satellite-based position monitoring terminal and a fully functional electronic recording and reporting system in accordance with EU Regulations 1224/2009 and 404/2011 or any Regulations amending or replacing these Regulations, and shall comply with all relevant position monitoring requirements and with all relevant recording and reporting requirements for the time being in force",
+       "termType": "2"
+      },
+      {
+       "id": 22,
+       "text": "Written acceptance of the terms of this offer must be returned to the undersigned within one month of the date of this letter. Such acceptance will be taken as confirmation that you do not wish to appeal this licensing decision (see section below entitled Appeal Option)",
+       "termType": "2"
       }
     ]
   },

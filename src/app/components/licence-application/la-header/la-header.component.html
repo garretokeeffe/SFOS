@@ -12,7 +12,7 @@
     </div>
   </h2>
   <!-- ARN and Segment is not quite centered using the below but it works for mobile -->
-  <div *ngIf="!(isAtLeastMedium$ | async) && (arn && fleetSegment)" class="wizard-label text-x-small"
+  <div *ngIf="!(isAtLeastMedium$ | async) && (arn && fleetSegment)" class="wizard-label" [class.text-x-small]="isScallops()" [class.text-small]="!isScallops()"
        [class.displayBelowHeader]="!(isAtLeastMedium$ | async)"
        [class.centered-content]="(isAtLeastMedium$ | async)"
        [class.shiftUp]="(isAtLeastMedium$ | async)"
