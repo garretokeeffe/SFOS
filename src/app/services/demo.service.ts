@@ -88,7 +88,7 @@ export class DemoService {
     });
   }
 
-  public createPreliminaryLicenceApplication(licenceApplication: LicenceApplicationView): Observable<LicenceApplicationView> {
+  public createPreliminaryLicenceApplication(licenceApplication: LicenceApplication | LicenceApplicationView): Observable<LicenceApplicationView> {
 
     const url: string = this.getLicenceApplicationURL;
 
@@ -124,7 +124,7 @@ export class DemoService {
     });
   }
 
-  public progressPreliminaryLicenceApplication(licenceApplication: LicenceApplicationView,
+  public progressPreliminaryLicenceApplication(licenceApplication: LicenceApplication | LicenceApplicationView,
                                                payload: ProgressPatch): Observable<LicenceApplicationView> {
 
     const response: LicenceApplicationView = new LicenceApplicationView(licenceApplication);
