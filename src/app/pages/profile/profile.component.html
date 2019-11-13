@@ -13,7 +13,7 @@
 
       <div fxLayout="row" fxLayoutAlign="start center">
 
-        <mat-icon matListIcon fxlayoutalign="space-between start" alt="Name">face</mat-icon>
+        <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Name">face</mat-icon>
         <mat-form-field [style.width]="dynamicWidth(user.title, 'title')" class="margin-right-narrow">
           <input matInput placeholder="Title" value="{{ user.title }}" readonly>
         </mat-form-field>
@@ -26,27 +26,27 @@
 
         <mat-form-field [style.width]="dynamicWidth(user.lastName, 'Surname')" class="margin-right-narrow">
           <!-- TODO: Remove the ngIfs which are only there for the DEMO -->
-          <input *ngIf="(title$ | async) === 'Client Profile'" matInput placeholder="Surname" value="Mahoney" readonly>
-          <input *ngIf="(title$ | async) !== 'Client Profile'" matInput placeholder="Surname" value="{{user.lastName}}" readonly>
+          <input *ngIf="(title$ | async) === 'Client Profile'" matInput placeholder="Last Name" value="Mahoney" readonly>
+          <input *ngIf="(title$ | async) !== 'Client Profile'" matInput placeholder="Last Name" value="{{user.lastName}}" readonly>
         </mat-form-field>
       </div>
 
       <div fxLayout="row" fxLayoutAlign="start center">
-        <mat-icon matListIcon fxlayoutalign="space-between start" alt="Date of Birth">date_range</mat-icon> <!-- for some reason calendar_today renders incorrectly on the right of the text -->
+        <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Date of Birth">date_range</mat-icon> <!-- for some reason calendar_today renders incorrectly on the right of the text -->
         <mat-form-field>
           <input matInput placeholder="Date of Birth" value="{{ user.dob }}" readonly>
         </mat-form-field>
       </div>
 
       <div fxLayout="row" fxLayoutAlign="start center">
-        <mat-icon matListIcon fxlayoutalign="space-between start" alt="Nationality">flag</mat-icon>
+        <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Nationality">flag</mat-icon>
         <mat-form-field>
           <input matInput placeholder="Country of Nationality" value="{{ user.countryOfNationality }}" readonly>
         </mat-form-field>
       </div>
 
       <div fxLayout="row" fxLayoutAlign="start center">
-        <mat-icon matListIcon fxlayoutalign="space-between start" alt="PPSN">folder_shared</mat-icon>
+        <mat-icon matListIcon fxLayoutAlign="space-between start" alt="PPSN">folder_shared</mat-icon>
         <mat-form-field>
           <input matInput placeholder="PPSN" value="{{ user.ppsn }}" readonly>
         </mat-form-field>
@@ -59,7 +59,7 @@
       </div>
 
       <div fxLayout="row" fxLayoutAlign="start center" *ngIf="user.fishBuyerRegistrationNumber">
-        <mat-icon matListIcon fxlayoutalign="space-between start" alt="Name">local_offer</mat-icon>
+        <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Name">local_offer</mat-icon>
         <mat-form-field class="margin-right-narrow">
           <input matInput placeholder="Fish Buyer Registration Number" value="{{ user.fishBuyerRegistrationNumber }}" readonly>
         </mat-form-field>
@@ -68,7 +68,7 @@
       <mat-divider [inset]="false"></mat-divider>
 
       <div fxLayout="row" fxLayoutAlign="start start">
-        <mat-icon matListIcon fxlayoutalign="start start" alt="Address" class="margin-top">place</mat-icon>
+        <mat-icon matListIcon fxLayoutAlign="start start" alt="Address" class="margin-top">place</mat-icon>
         <div fxLayout="column" fxLayout.sm="column" fxLayoutAlign="start center">
           <mat-form-field class="multiline" *ngIf="user.addressLine1">
             <input matInput placeholder="Address" value="{{ user.addressLine1 }}" readonly>
@@ -92,14 +92,14 @@
       </div>
 
       <div fxLayout="row" fxLayoutAlign="start center" class="margin-top-double">
-        <mat-icon matListIcon fxlayoutalign="space-between start" alt="Date of Birth">email</mat-icon>
+        <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Date of Birth">email</mat-icon>
         <mat-form-field>
           <input matInput placeholder="Email" value="{{user.email}}" readonly>
         </mat-form-field>
       </div>
 
       <div fxLayout="row" fxLayoutAlign="start center">
-        <mat-icon matListIcon fxlayoutalign="space-between start" alt="Phone">phone</mat-icon>
+        <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Phone">phone</mat-icon>
         <mat-form-field [style.width]="dynamicWidth(user.phoneMobile, 'Mobile Phone')" class="margin-right-narrow">
           <input matInput placeholder="Mobile Phone" value="{{user.phoneMobile}}" readonly>
         </mat-form-field>
@@ -119,7 +119,7 @@
 
       <div fxLayout="row" fxLayoutAlign="start center">
 
-        <mat-icon matListIcon fxlayoutalign="space-between start" alt="Name">face</mat-icon>
+        <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Name">face</mat-icon>
         <mat-form-field [style.width]="dynamicWidth(user.title, 'title')" class="margin-right-narrow">
           <input matInput placeholder="Title" value="{{ user.title }}" readonly>
         </mat-form-field>
@@ -140,7 +140,7 @@
       <mat-divider [inset]="false"></mat-divider>
 
       <div fxLayout="row" fxLayoutAlign="start center">
-        <mat-icon matListIcon fxlayoutalign="space-between start" alt="Phone">business</mat-icon>
+        <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Phone">business</mat-icon>
         <mat-form-field [style.width]="dynamicWidth(user.companyName, 'Company Name')" class="margin-right-narrow">
           <input matInput placeholder="Company Name" value="{{user.companyName}}" readonly>
         </mat-form-field>
@@ -156,7 +156,7 @@
       </div>
 
       <div fxLayout="row" fxLayoutAlign="start center" *ngIf="!(isAtLeastLarge$ | async)">
-        <mat-icon matListIcon fxlayoutalign="space-between start" alt="Company Number"><!-- blank spacer--></mat-icon>
+        <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Company Number"><!-- blank spacer--></mat-icon>
         <mat-form-field [style.width]="dynamicWidth(user.companyNumber, 'Company Number')" class="margin-right-narrow">
           <input matInput placeholder="Company Number" value="{{user.companyNumber}}" readonly>
         </mat-form-field>
@@ -166,7 +166,7 @@
       </div>
 
       <div fxLayout="row" fxLayoutAlign="start center" *ngIf="user.fishBuyerRegistrationNumber">
-        <mat-icon matListIcon fxlayoutalign="space-between start" alt="Name">local_offer</mat-icon>
+        <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Name">local_offer</mat-icon>
         <mat-form-field class="margin-right-narrow">
           <input matInput placeholder="Fish Buyer Registration Number" value="{{ user.fishBuyerRegistrationNumber }}" readonly>
         </mat-form-field>
@@ -175,7 +175,7 @@
       <mat-divider [inset]="false"></mat-divider>
 
       <div fxLayout="row" fxLayoutAlign="start start">
-        <mat-icon matListIcon fxlayoutalign="start start" alt="Address" class="margin-top">place</mat-icon>
+        <mat-icon matListIcon fxLayoutAlign="start start" alt="Address" class="margin-top">place</mat-icon>
         <div fxLayout="column" fxLayout.sm="column" fxLayoutAlign="start center">
           <mat-form-field class="multiline" *ngIf="user.addressLine1">
             <input matInput placeholder="Address" value="{{ user.addressLine1 }}" readonly>
@@ -199,14 +199,14 @@
       </div>
 
       <div fxLayout="row" fxLayoutAlign="start center" class="margin-top-double">
-        <mat-icon matListIcon fxlayoutalign="space-between start" alt="Date of Birth">email</mat-icon>
+        <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Date of Birth">email</mat-icon>
         <mat-form-field>
           <input matInput placeholder="Email" value="{{user.email}}" readonly>
         </mat-form-field>
       </div>
 
       <div fxLayout="row" fxLayoutAlign="start center">
-        <mat-icon matListIcon fxlayoutalign="space-between start" alt="Phone">phone</mat-icon>
+        <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Phone">phone</mat-icon>
         <mat-form-field [style.width]="dynamicWidth(user.phoneMobile, 'Mobile Phone')" class="margin-right-narrow">
           <input matInput placeholder="Mobile Phone" value="{{user.phoneMobile}}" readonly>
         </mat-form-field>

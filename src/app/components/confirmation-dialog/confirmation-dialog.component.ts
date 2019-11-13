@@ -13,14 +13,14 @@ export class ConfirmationDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<ConfirmationDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public confirmationInfo: ConfirmationInfo) {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
   }
 
-  onYes(): void {
+  public onYes(): void {
     this.dialogRef.close(true);
   }
 
-  onNo(): void {
+  public onNo(): void {
     this.dialogRef.close(false);
   }
 

@@ -3,16 +3,16 @@
   <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px">
     <div fxFlexAlign="start">
       <h2>
-        <mat-icon matListIcon alt="Licences" style="position: relative; top: 4px; margin-right: 8px;">chrome_reader_mode</mat-icon>
+        <mat-icon matListIcon alt="Licence Application" style="position: relative; top: 4px; margin-right: 8px;">chrome_reader_mode</mat-icon>
         <span class="margin-right">Licence Application</span>
-        <span class="wizard-label">{{ licenceApplication.refId }}</span>
+        <span class="wizard-label">{{ licenceApplication.arn }}</span>
       </h2>
     </div>
     <!--
     <div *ngIf="authentication.access.userGroup === UserGroup['REPRESENTATIVE']" style="position: relative; top: -4px">
       <button mat-raised-button routerLink="/licencesinternal" [state]="{title: 'Applications'}">
         <span >APPLICATIONS LIST</span>
-      </button>
+      </button>k
     </div>
     <div *ngIf="authentication.access.userGroup !== UserGroup['REPRESENTATIVE']" style="position: relative; top: -4px">
       <button mat-raised-button routerLink="/licences" [state]="{title: 'My Applications'}">

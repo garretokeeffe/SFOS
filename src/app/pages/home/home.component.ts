@@ -7,6 +7,8 @@ import {EmitterService} from '../../services/emitter.service';
 import {Emitters} from '../../types/emitters';
 import {Router} from '@angular/router';
 import {Globals} from '../../globals';
+import { LaWizardMode } from '../../components/licence-application/la-wizard/la-wizard.component';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +16,8 @@ import {Globals} from '../../globals';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
+  public LaWizardMode: any = LaWizardMode; // html access to enum
 
   public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
   .pipe(
@@ -47,6 +51,7 @@ export class HomeComponent implements OnInit {
   constructor(public globals: Globals,
               private breakpointObserver: BreakpointObserver,
               public appComponent: AppComponent,
+              public authentication: AuthenticationService,
               private router: Router) { }
 
   public ngOnInit(): void { }
@@ -57,7 +62,10 @@ export class HomeComponent implements OnInit {
   }
 
   public newLicenceApplication(): void {
-    this.router.navigate(['/newlicenceapplication']).then((e) => {});
+    if (this.globals.demo) {
+      this.authentication.demoModeAuthenticated = true;
+    }
+    this.router.navigate(['/licence-application-wizard', LaWizardMode['NEW']]).then((e) => {});
   }
 
   public register(): void {

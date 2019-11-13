@@ -1,0 +1,62 @@
+<div [class.page]="standAlonePage" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)">
+
+  <app-la-header *ngIf="standAlonePage"></app-la-header>
+
+  <div class="margin-top max-width-centered-content">
+
+    <div class="fullWidth">
+
+      <div *ngIf="standAlonePage" class="wizard-label margin-bottom">CONFIRM QUALIFYING STATUS</div>
+
+      <div class="margin-bottom bold dafm-green">
+        Only qualifying individuals or companies under Section 97(5) of the Sea-Fisheries and Maritime Jurisdiction Act 2006 may apply for a Sea Fishing Boat Licence.
+      </div>
+
+      <div class="margin-bottom">
+        <span class="helpLink" (click)="openQualifyingStatusBottomSheet()">What is a qualifying individual or company?</span>
+      </div>
+      <div class="margin-bottom">
+        <span class="helpLink" (click)="openProcessExplanationBottomSheet()">Tell me about the licence application process</span>
+      </div>
+
+      <div class="margin-top-double margin-bottom margin-left-half">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+            <div fxFlexAlign="start" class="left">
+              <img width="60"
+                   alt="Government of Ireland"
+                   src="assets/images/logos/harp_with_rhs_green_divider.png"/>
+            </div>
+            <div fxFlexAlign="start" class="left">
+              <mat-checkbox [(ngModel)]="isQualified" [ngModelOptions]="{standalone: true}"></mat-checkbox>
+            </div>
+            <div fxFlexAlign="start" class="left">
+              I confirm that I am a
+              <span class="helpLinkWithinText" (click)="openQualifyingStatusBottomSheet()">qualifying individual or company</span> under Section 97(5) of the Sea-Fisheries and Maritime Jurisdiction Act 2006
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="margin-bottom-double">
+        <div class="margin-top">
+          <mat-divider [inset]="false"></mat-divider>
+        </div>
+        <div class="fullWidth" [class.margin-top-double]="standAlonePage" [class.margin-top]="!standAlonePage">
+          <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px">
+            <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" routerLink="/licences">
+              CANCEL
+            </button>
+            <button mat-raised-button [class.fullWidth]="(isHandset$ | async)"
+                    [disabled]="!isQualified"
+                    (click)="next.emit(licenceApplication)">
+              NEXT
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

@@ -1,36 +1,42 @@
-th.mat-header-cell:first-of-type {
-  padding-left: 0px;
+.readonly ::ng-deep .mat-form-field-underline {
+  display: none;
 }
 
-table.shareAllocationTable {
-  max-width: 600px;
+.readonly ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+  padding-bottom: .25em;
 }
 
-.mat-column-name,
-.mat-column-name mat-form-field {
-  max-width: 250px;
-  width: 250px;
-}
-.mat-column-name mat-form-field.userReferenceNumber {
-  max-width: 115px;
-  width: 115px;
+.handset .inline .mat-form-field {
+  display: inline-flex;
 }
 
-
-@media screen and (max-width: 720px) {
-  .mat-column-name,
-  .mat-column-name mat-form-field {
-    max-width: 200px;
-    width: 200px;
-  }
-  .mat-column-name mat-form-field.userReferenceNumber {
-    max-width: 115px;
-    width: 115px;
-  }
+::ng-deep mat-form-field.loa {
+  width: 50px !important;
+}
+::ng-deep mat-form-field.loa .mat-form-field-flex {
+  width: 50px !important;
+}
+::ng-deep mat-form-field.registeredLength {
+  width: 150px !important;
+}
+::ng-deep mat-form-field.registeredLength .mat-form-field-flex {
+  width: 150px !important;
 }
 
-.mat-column-numberOfShares,
-.mat-column-numberOfShares mat-form-field {
-  max-width: 60px;
-  width: 60px;
+button.doneButton.mat-icon-button {
+  xposition: absolute;
+  xleft: inherit;
+  xtop: inherit;
+  xmargin-top: 24px;
+
+  width: 24px;
+  height: 24px;
+  margin-left: 16px;
+  vertical-align: middle !important;
+}
+::ng-deep button.doneButton mat-icon {
+  vertical-align: baseline !important;
+}
+::ng-deep button.doneButton[disabled] mat-icon {
+  color: darkgrey;
 }

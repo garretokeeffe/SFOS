@@ -1,0 +1,27 @@
+.max-width-centered-content {
+  margin: auto;
+  text-align: center !important;
+  max-width: 600px;
+}
+
+::ng-deep .mat-form-field:not(first-child) {
+  margin-top: 8px; /* allows a little space between stack label and error message above (if any) */
+}
+
+.margin-right-narrow ::ng-deep mat-form-field,
+::ng-deep mat-form-field.margin-right-narrow {
+  margin-right: 8px;
+}
+
+::ng-deep .mat-form-field-infix {
+  width: 220px !important; /* allows untruncated display of the text Application Reference Number */
+}
+
+.letterOfOfferTerms {
+  max-width: 960px;
+  margin: 16px auto 32px;
+}
+.letterOfOfferTerms.compressed {
+  height: 200px;
+  overflow-y:auto;
+}

@@ -1,0 +1,83 @@
+<div [class.page]="standAlonePage" [class.readonly]="readonly" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)">
+
+  <app-la-header *ngIf="standAlonePage"></app-la-header>
+
+  <div class="margin-top max-width-centered-content">
+
+    <div class="fullWidth">
+
+      <div *ngIf="standAlonePage" class="wizard-label margin-bottom">DOWNLOAD FORMS</div>
+      <!--
+      <div *ngIf="(isHandset$ | async)" class="hoverable margin-bottom underline dafm-green" (click)="scroll('forms')">
+        Skip to the forms
+      </div>
+      -->
+      <div class="margin-bottom">
+        To comply with the terms of your Letter of Offer for your <span class="bold">Sea Fishing Boat Licence Application</span> you need to download and complete the forms below.
+      </div>
+
+      <div *ngIf="licenceApplication.documentationRequired && licenceApplication.documentationRequired | notFilter : 'url' : ''" class="margin-top" [class.margin-bottom]="!(isHandset$ | async)">
+        <mat-divider [inset]="false"></mat-divider>
+      </div>
+
+      <div [@fadeInOut]="'fadeIn'">
+        <div class="page" >
+          <div fxLayout="column" fxLayoutAlign="center center">
+            <div fxLayout="column" fxLayoutAlign="space-around start" fxLayoutGap="16px" >
+              <div *ngFor="let documentRequired of (licenceApplication.documentationRequired | notFilter : 'url' : '')" fxLayout="row" fxLayoutGap="16px">
+                <div fxFlexAlign="start">
+                  <mat-icon matListIcon alt="download">cloud_download</mat-icon>
+                </div>
+                <div fxFlexAlign="start" class="left">{{documentRequired.title}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--
+      <div class="margin-bottom">
+        Completed forms should be returned by registered post to:
+        <address class="margin-top">
+          Licensing Authority for Sea Fishing Boats
+          <div class="br"></div>Department of Agriculture, Food and the Marine
+          <div class="br"></div>National Seafood Centre
+          <div class="br"></div>Clonakilty
+          <div class="br"></div>Co. Cork
+        </address>
+      </div>
+      <div class="margin-bottom">
+        The Licensing Authority will endeavour to respond to your application within 28 days.
+      </div>
+      <div class="margin-bottom">
+        For further queries, the Licensing Authority may also be contacted by:
+        <div class="margin-top"></div>Telephone: <a href="tel:+353 23 88 59500">+353 23 88 59500</a>
+        <div class="br"></div>Fax: <a href="fax:+353 23 88 21786">+353 23 88 21786</a>
+        <div class="br"></div>Email: <a href="mailto:Licensingauthority@agriculture.gov.ie">Licensingauthority@agriculture.gov.ie</a>
+      </div>
+
+      <div id="forms" class="margin-top-double wizard-label">FORMS</div>
+      -->
+
+      <div *ngIf="!embedded" class="margin-bottom-double">
+        <div class="margin-top">
+          <mat-divider [inset]="false"></mat-divider>
+        </div>
+        <div class="fullWidth" [class.margin-top-double]="standAlonePage" [class.margin-top]="!standAlonePage">
+          <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px">
+            <button mat-raised-button [class.fullWidth]="(isHandset$ | async)"
+                    (click)="back.emit(licenceApplication)">
+              BACK
+            </button>
+            <button mat-raised-button [class.fullWidth]="(isHandset$ | async)"
+                    (click)="next.emit(licenceApplication)">
+              NEXT
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

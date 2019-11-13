@@ -27,49 +27,57 @@
         <span class="wizard-label color-primary cdk-focused">On Register</span>
       </ng-template>
 
-      <!-- POLYVALENT -->
-      <app-fleet-segment [allCapacity]="allCapacity"
-                         [fleetSegment]="FleetSegment['POLYVALENT']"
-                         [fleetSubSegments]="[FleetSubSegment['POLYVALENT_LT_18M_LOA'],
-                                              FleetSubSegment['POLYVALENT_GTE_18M_LOA'],
-                                              FleetSubSegment['POLYVALENT_SCALLOPS_GTE_10M_LOA'],
-                                              FleetSubSegment['POLYVALENT_POTTING']]"
-                         [offRegister]="false"
-                         [pointsEnabled]="pointsEnabled">
-      </app-fleet-segment>
+      <div *ngIf="!allCapacity.onRegister.length" class="margin-top-double centered-content">
+        You have no Capacity On Register
+      </div>
 
-      <!-- RSW PELAGIC -->
-      <app-fleet-segment [allCapacity]="allCapacity"
-                         [fleetSegment]="FleetSegment['RSW_PELAGIC']"
-                         [fleetSubSegments]="[FleetSubSegment['RSW_PELAGIC']]"
-                         [offRegister]="false"
-                         [pointsEnabled]="pointsEnabled">
-      </app-fleet-segment>
+      <div *ngIf="allCapacity.onRegister.length > 0">
 
-      <!-- SPECIFIC -->
-      <app-fleet-segment [allCapacity]="allCapacity"
-                         [fleetSegment]="FleetSegment['SPECIFIC']"
-                         [fleetSubSegments]="[FleetSubSegment['SPECIFIC_SCALLOPS_GTE_10M_LOA'],
-                                              FleetSubSegment['SPECIFIC_GENERAL']]"
-                         [offRegister]="false"
-                         [pointsEnabled]="pointsEnabled">
-      </app-fleet-segment>
+        <!-- POLYVALENT -->
+        <app-fleet-segment [allCapacity]="allCapacity"
+                           [fleetSegment]="FleetSegment['POLYVALENT']"
+                           [fleetSubSegments]="[FleetSubSegment['POLYVALENT_LT_18M_LOA'],
+                                                FleetSubSegment['POLYVALENT_GTE_18M_LOA'],
+                                                FleetSubSegment['POLYVALENT_SCALLOPS_GTE_10M_LOA'],
+                                                FleetSubSegment['POLYVALENT_POTTING']]"
+                           [offRegister]="false"
+                           [pointsEnabled]="pointsEnabled">
+        </app-fleet-segment>
 
-      <!-- AQUACULTURE -->
-      <app-fleet-segment [allCapacity]="allCapacity"
-                         [fleetSegment]="FleetSegment['AQUACULTURE']"
-                         [fleetSubSegments]="[FleetSubSegment['AQUACULTURE']]"
-                         [offRegister]="false"
-                         [pointsEnabled]="pointsEnabled">
-      </app-fleet-segment>
+        <!-- RSW PELAGIC -->
+        <app-fleet-segment [allCapacity]="allCapacity"
+                           [fleetSegment]="FleetSegment['RSW_PELAGIC']"
+                           [fleetSubSegments]="[FleetSubSegment['RSW_PELAGIC']]"
+                           [offRegister]="false"
+                           [pointsEnabled]="pointsEnabled">
+        </app-fleet-segment>
 
-      <!-- BEAM TRAWLER -->
-      <app-fleet-segment [allCapacity]="allCapacity"
-                         [fleetSegment]="FleetSegment['BEAM_TRAWLER']"
-                         [fleetSubSegments]="[FleetSubSegment['BEAM_TRAWLER']]"
-                         [offRegister]="false"
-                         [pointsEnabled]="pointsEnabled">
-      </app-fleet-segment>
+        <!-- SPECIFIC -->
+        <app-fleet-segment [allCapacity]="allCapacity"
+                           [fleetSegment]="FleetSegment['SPECIFIC']"
+                           [fleetSubSegments]="[FleetSubSegment['SPECIFIC_SCALLOPS_GTE_10M_LOA'],
+                                                FleetSubSegment['SPECIFIC_GENERAL']]"
+                           [offRegister]="false"
+                           [pointsEnabled]="pointsEnabled">
+        </app-fleet-segment>
+
+        <!-- BEAM TRAWLER -->
+        <app-fleet-segment [allCapacity]="allCapacity"
+                           [fleetSegment]="FleetSegment['BEAM_TRAWLER']"
+                           [fleetSubSegments]="[FleetSubSegment['BEAM_TRAWLER']]"
+                           [offRegister]="false"
+                           [pointsEnabled]="pointsEnabled">
+        </app-fleet-segment>
+
+        <!-- AQUACULTURE -->
+        <app-fleet-segment [allCapacity]="allCapacity"
+                           [fleetSegment]="FleetSegment['AQUACULTURE']"
+                           [fleetSubSegments]="[FleetSubSegment['AQUACULTURE']]"
+                           [offRegister]="false"
+                           [pointsEnabled]="pointsEnabled">
+        </app-fleet-segment>
+
+      </div>
 
     </mat-tab>
 
@@ -80,49 +88,57 @@
         <span class="wizard-label color-primary">Off Register</span>
       </ng-template>
 
-      <!-- POLYVALENT -->
-      <app-fleet-segment [allCapacity]="allCapacity"
-                         [fleetSegment]="FleetSegment['POLYVALENT']"
-                         [fleetSubSegments]="[FleetSubSegment['POLYVALENT_LT_18M_LOA'],
-                                              FleetSubSegment['POLYVALENT_GTE_18M_LOA'],
-                                              FleetSubSegment['POLYVALENT_SCALLOPS_GTE_10M_LOA'],
-                                              FleetSubSegment['POLYVALENT_POTTING']]"
-                         [offRegister]="true"
-                         [pointsEnabled]="pointsEnabled">
-      </app-fleet-segment>
+      <div *ngIf="!allCapacity.offRegister.length" class="margin-top-double centered-content">
+        You have no Capacity Off Register
+      </div>
 
-      <!-- RSW PELAGIC -->
-      <app-fleet-segment [allCapacity]="allCapacity"
-                         [fleetSegment]="FleetSegment['RSW_PELAGIC']"
-                         [fleetSubSegments]="[FleetSubSegment['RSW_PELAGIC']]"
-                         [offRegister]="true"
-                         [pointsEnabled]="pointsEnabled">
-      </app-fleet-segment>
+      <div *ngIf="allCapacity.offRegister.length > 0">
 
-      <!-- SPECIFIC -->
-      <app-fleet-segment [allCapacity]="allCapacity"
-                         [fleetSegment]="FleetSegment['SPECIFIC']"
-                         [fleetSubSegments]="[FleetSubSegment['SPECIFIC_SCALLOPS_GTE_10M_LOA'],
-                                              FleetSubSegment['SPECIFIC_GENERAL']]"
-                         [offRegister]="true"
-                         [pointsEnabled]="pointsEnabled">
-      </app-fleet-segment>
+        <!-- POLYVALENT -->
+        <app-fleet-segment [allCapacity]="allCapacity"
+                           [fleetSegment]="FleetSegment['POLYVALENT']"
+                           [fleetSubSegments]="[FleetSubSegment['POLYVALENT_LT_18M_LOA'],
+                                                FleetSubSegment['POLYVALENT_GTE_18M_LOA'],
+                                                FleetSubSegment['POLYVALENT_SCALLOPS_GTE_10M_LOA'],
+                                                FleetSubSegment['POLYVALENT_POTTING']]"
+                           [offRegister]="true"
+                           [pointsEnabled]="pointsEnabled">
+        </app-fleet-segment>
 
-      <!-- AQUACULTURE -->
-      <app-fleet-segment [allCapacity]="allCapacity"
-                         [fleetSegment]="FleetSegment['AQUACULTURE']"
-                         [fleetSubSegments]="[FleetSubSegment['AQUACULTURE']]"
-                         [offRegister]="true"
-                         [pointsEnabled]="pointsEnabled">
-      </app-fleet-segment>
+        <!-- RSW PELAGIC -->
+        <app-fleet-segment [allCapacity]="allCapacity"
+                           [fleetSegment]="FleetSegment['RSW_PELAGIC']"
+                           [fleetSubSegments]="[FleetSubSegment['RSW_PELAGIC']]"
+                           [offRegister]="true"
+                           [pointsEnabled]="pointsEnabled">
+        </app-fleet-segment>
 
-      <!-- BEAM TRAWLER -->
-      <app-fleet-segment [allCapacity]="allCapacity"
-                         [fleetSegment]="FleetSegment['BEAM_TRAWLER']"
-                         [fleetSubSegments]="[FleetSubSegment['BEAM_TRAWLER']]"
-                         [offRegister]="true"
-                         [pointsEnabled]="pointsEnabled">
-      </app-fleet-segment>
+        <!-- SPECIFIC -->
+        <app-fleet-segment [allCapacity]="allCapacity"
+                           [fleetSegment]="FleetSegment['SPECIFIC']"
+                           [fleetSubSegments]="[FleetSubSegment['SPECIFIC_SCALLOPS_GTE_10M_LOA'],
+                                                FleetSubSegment['SPECIFIC_GENERAL']]"
+                           [offRegister]="true"
+                           [pointsEnabled]="pointsEnabled">
+        </app-fleet-segment>
+
+        <!-- AQUACULTURE -->
+        <app-fleet-segment [allCapacity]="allCapacity"
+                           [fleetSegment]="FleetSegment['AQUACULTURE']"
+                           [fleetSubSegments]="[FleetSubSegment['AQUACULTURE']]"
+                           [offRegister]="true"
+                           [pointsEnabled]="pointsEnabled">
+        </app-fleet-segment>
+
+        <!-- BEAM TRAWLER -->
+        <app-fleet-segment [allCapacity]="allCapacity"
+                           [fleetSegment]="FleetSegment['BEAM_TRAWLER']"
+                           [fleetSubSegments]="[FleetSubSegment['BEAM_TRAWLER']]"
+                           [offRegister]="true"
+                           [pointsEnabled]="pointsEnabled">
+        </app-fleet-segment>
+
+      </div>
 
     </mat-tab>
 

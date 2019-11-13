@@ -1,0 +1,71 @@
+<div [class.page]="standAlonePage" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)">
+
+  <app-la-header *ngIf="standAlonePage"></app-la-header>
+
+  <div class="margin-top max-width-centered-content">
+
+    <div class="fullWidth">
+
+      <form [formGroup]="form">
+        <div *ngIf="standAlonePage" class="wizard-label margin-bottom">RETRIEVE PRELIMINARY APPLICATION</div>
+        <div class="margin-bottom">
+          If you have started a new <span class="bold">Sea Fishing Boat Licence Application</span> and
+          successfully submitted your Preliminary Information, you should have received an email containing your
+          Application Reference Number (ARN) and PIN. Enter these below to retrieve your Preliminary Application.
+        </div>
+        <div class="helpCursor" [class.margin-bottom-half]="(isHandset$ | async)" [class.margin-bottom]="!(isHandset$ | async)">
+          <div fxFill fxLayout="row" fxLayoutAlign="space-around center">
+            <div class="helpLink" (click)="openBottomSheet()">Looking for a Company Application?</div>
+          </div>
+        </div>
+
+        <!-- fxLayoutAlign="{{(isHandset$ | async) ? 'start center' : null}}" -->
+        <div fxLayout="column" fxLayoutAlign="start center" class="form-field-icons">
+
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Name">looks_one</mat-icon>
+            <mat-form-field>
+              <input matInput placeholder="Application Reference Number" number [formControl]="form.controls.arn" (focus)="errorMessage = ''">
+              <mat-error>* Required</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Name">fiber_pin</mat-icon>
+            <mat-form-field>
+              <input matInput placeholder="PIN" number [formControl]="form.controls.pin" (focus)="errorMessage = ''">
+              <mat-error>* Required</mat-error>
+            </mat-form-field>
+          </div>
+
+        </div>
+      </form>
+
+      <div *ngIf="errorMessage" [@fadeInOut]="'fadeIn'" class="errorBanner margin-vertical" fxLayoutAlign="start center">
+        <mat-icon class="info-icon">error_outline</mat-icon>
+        <div>{{ errorMessage }}</div>
+      </div>
+
+      <!-- DMcD: IMPORTANT - these buttons must be outside the form tag, otherwise clicking the cancel button reloads the webpage -->
+      <div class="margin-top">
+        <mat-divider [inset]="false"></mat-divider>
+      </div>
+      <div class="fullWidth" [class.margin-top-double]="standAlonePage" [class.margin-top]="!standAlonePage">
+        <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px"><!-- fxLayoutAlign="start start" -->
+          <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" routerLink="/licences">
+            CANCEL
+          </button>
+          <button mat-raised-button [class.fullWidth]="(isHandset$ | async)"
+                  [disabled]="!form.valid ? true : null" (click)="getApplication()">
+            RETRIEVE
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div id="bottomOfPage"></div>
+
+</div>

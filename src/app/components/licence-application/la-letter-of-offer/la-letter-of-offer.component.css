@@ -1,51 +1,27 @@
-/*::ng-deep .mat-raised-button .mat-button-wrapper>*,*/
-::ng-deep .mat-raised-button .mat-button-wrapper .mat-expansion-indicator {
-  vertical-align: top;
-  margin-left: 16px;
-  position: relative;
-  top: -4px;
+.max-width-centered-content {
+  margin: auto;
+  text-align: center !important;
+  max-width: 600px;
+}
+
+::ng-deep .mat-form-field:not(first-child) {
+  margin-top: 8px; /* allows a little space between stack label and error message above (if any) */
+}
+
+.margin-right-narrow ::ng-deep mat-form-field,
+::ng-deep mat-form-field.margin-right-narrow {
+  margin-right: 8px;
+}
+
+::ng-deep .mat-form-field-infix {
+  width: 220px !important; /* allows untruncated display of the text Application Reference Number */
 }
 
 .letterOfOfferTerms {
   max-width: 960px;
-  margin: 32px auto;
+  margin: 16px auto 16px;
 }
-
-/* START: SAME AS preliminary-info.css */
-th.mat-header-cell:first-of-type {
-  padding-left: 0px;
+.letterOfOfferTerms.compressed {
+  height: 200px;
+  overflow-y:auto;
 }
-
-table.shareAllocationTable {
-  max-width: 600px;
-}
-
-.mat-column-name,
-.mat-column-name mat-form-field {
-  max-width: 250px;
-  width: 250px;
-}
-.mat-column-name mat-form-field.userReferenceNumber {
-  max-width: 115px;
-  width: 115px;
-}
-
-
-@media screen and (max-width: 720px) {
-  .mat-column-name,
-  .mat-column-name mat-form-field {
-    max-width: 200px;
-    width: 200px;
-  }
-  .mat-column-name mat-form-field.userReferenceNumber {
-    max-width: 115px;
-    width: 115px;
-  }
-}
-
-.mat-column-numberOfShares,
-.mat-column-numberOfShares mat-form-field {
-  max-width: 60px;
-  width: 60px;
-}
-/* END: SAME AS preliminary-info.css */

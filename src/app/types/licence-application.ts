@@ -1,13 +1,94 @@
-import {Vessel, VesselView} from './vessel';
-import {Applicant, ApplicantView} from './applicant';
+import * as moment from 'moment';
+import { FleetSubSegment } from './fleet-segment';
+import { User, UserView } from './user';
+import { Vessel, VesselView } from './vessel';
+import { DocumentationRequired } from './documentation-required';
+import { ApplicantView } from './applicant';
 
-export enum LicenceApplicationUpdate {
-  PRIMLINARY_INFO_SUBMITTED = 1
+export enum ApplicantType {
+  NONE = 0,
+  INDIVIDUAL = 1,
+  COMPANY = 2,
+  PARTNERSHIP = 3,
+}
+export enum LetterOfOfferStatus {
+  NONE = 0,
+  PENDING = 1,
+  ACCEPTED = 2,
+  REJECTED = 3,
+  REVOKED = 4,
+}
+export enum LetterOfOfferTermType {
+  NONE = 0,
+  CONDITION = 1, // Relate to provision of documentation (Vary depending on Preliminary Info LOA)
+  RULE = 2, // Rules relating to permissible fishing (vary depending on preliminary Info Segment) and Vessel Systems and modifications
+}
+export enum LicenceApplicationStatus {
+  NONE = 0,
+  PENDING_ACCEPTANCE_OF_LETTER_OF_OFFER = 1,
+  REVOKED = 2,
+  PENDING_COMPLIANCE = 3,
+  PROCESSING_APPLICATION = 4,
+  ISSUED = 5,
+  REJECTED = 6,
+}
+
+export class Applicant {
+  public id?: number; // ccs id
+  public firstName: string = '';
+  public lastName: string = '';
+  public email: string = '';
+
+  constructor(applicant?: Applicant | User | UserView | any) {
+    if (applicant) {
+      // copy constructor
+      if (applicant.id) {
+        this.id = applicant.id;
+      }
+      this.firstName = applicant.firstName;
+      this.lastName = applicant.lastName;
+      this.email = applicant.email;
+    }
+  }
+}
+
+export class PreliminaryInformation {
+  public applicantType: number = ApplicantType.NONE; // Corresponds to ApplicantType enum
+  public primaryApplicant: Applicant = new Applicant();
+  public otherApplicants: Array<Applicant> = [];
+  public partnershipName: string = '';
+  public companyName: string = '';
+  public fleetSegment: number = FleetSubSegment.NONE;
+  public loa: number = null;
+  public registeredLength: number = null;
+  public submittedBy: Applicant = null;
+
+  constructor(preliminaryInformation?: PreliminaryInformation | any) {
+    if (preliminaryInformation) {
+      // copy constructor
+      this.applicantType = preliminaryInformation.applicantType;
+      this.primaryApplicant = new Applicant(preliminaryInformation.primaryApplicant);
+      this.otherApplicants = preliminaryInformation.otherApplicants ? preliminaryInformation.otherApplicants : []; // reference copy
+      this.partnershipName = preliminaryInformation.partnershipName ? preliminaryInformation.partnershipName : '';
+      this.companyName = preliminaryInformation.companyName ? preliminaryInformation.companyName : '';
+      this.fleetSegment = preliminaryInformation.fleetSegment;
+      this.loa = preliminaryInformation.loa;
+      this.registeredLength = preliminaryInformation.registeredLength;
+      this.submittedBy = preliminaryInformation.submittedBy ? new Applicant(preliminaryInformation.submittedBy) : null;
+      // If there are no otherApplicants, add a blank one so that the second applicant input fields
+      // will automatically appear if the user selects applicantType = PARTNERSHIP
+      // This blank item can be removed prior to being saved
+      if (this.otherApplicants.length === 0) {
+        this.otherApplicants.push(new Applicant());
+      }
+    }
+  }
 }
 
 export class LetterOfOfferTerm {
   public id: number = null;
   public text: string = '';
+  public termType: number = LetterOfOfferTermType.NONE;
 
   constructor(letterOfOfferTerm?: LetterOfOfferTerm | any) { // DMcD: added any option to permit unit testing with incomplete mock data
     if (letterOfOfferTerm) {
@@ -17,110 +98,86 @@ export class LetterOfOfferTerm {
     }
   }
 }
+export class LetterOfOffer {
+  public status: number = LetterOfOfferStatus.NONE;
+  public terms: Array<LetterOfOfferTerm> = [];
+  public issueDate: string = '';
+  public expiryDate: string = ''; // 30 days after being issued
+  public acceptedBy: Applicant = null;
+  public acceptedDate: string = '';
+  public rejectedBy: Applicant = null;
+  public rejectedDate: string = '';
+  // public downloadURL: string = '';
+
+  constructor(letterOfOffer?: LetterOfOffer | any) {
+    if (letterOfOffer) {
+      this.status = letterOfOffer.status ? letterOfOffer.status : LetterOfOfferStatus.NONE;
+      this.terms = letterOfOffer.terms; // reference copy
+      this.issueDate = letterOfOffer.issueDate;
+      this.expiryDate = letterOfOffer.expiryDate;
+      this.acceptedBy = letterOfOffer.acceptedBy;
+      this.acceptedDate = letterOfOffer.acceptedDate;
+      this.rejectedBy = letterOfOffer.rejectedBy;
+      this.rejectedDate = letterOfOffer.rejectedDate;
+      // this.downloadURL = letterOfOffer.downloadURL;
+    }
+  }
+}
+export class LetterOfOfferView extends LetterOfOffer {
+
+  constructor(letterOfOffer?: LetterOfOffer | LetterOfOfferView | any) { // DMcD 'any' only supported for unit testing
+    super(letterOfOffer);
+  }
+
+  public setAccepted(applicant: Applicant): void {
+    this.acceptedBy = applicant;
+    this.acceptedDate = moment.utc(new Date()).format('DD/MM/YYYY');
+    this.rejectedBy = null;
+    this.rejectedDate = '';
+  }
+  public setRejected(applicant: Applicant): void {
+    this.rejectedBy = applicant;
+    this.rejectedDate = moment.utc(new Date()).format('DD/MM/YYYY');
+    this.acceptedBy = null;
+    this.acceptedDate = '';
+  }
+}
 
 export class LicenceApplication {
-  public vessel: Vessel | VesselView;
-  public changed: boolean = false;
-  public applicants: Array<ApplicantView> = [];
+  public status: number = LicenceApplicationStatus.NONE;
+  public expiryDate: string = ''; // one year after letter of offer has been accepted
+  public preliminaryInformation: PreliminaryInformation = new PreliminaryInformation();
+  public arn: string = '';
+  public pin: string = '';
+  public letterOfOffer: LetterOfOffer | LetterOfOfferView = new LetterOfOfferView();
+  public documentationRequired: Array<DocumentationRequired> = [];
 
-  public vesselName_prelim: string = '';
-  public segment_prelim: string = '';
-  public loa_prelim: string = '';
-
-  public refId: string = '';
-  public letterOfOfferIssued: boolean = false;
-  public letterOfOfferIssueDate: string = '';
-  public letterOfOfferTerms: Array<LetterOfOfferTerm> = [];
-  public letterOfOfferTermsDeadlineDate: string = '';
+  public vessel: Vessel | VesselView; // May not be required
 
   constructor(licenceApplication?: LicenceApplication | any) { // DMcD: added any option to permit unit testing with incomplete mock data
     if (licenceApplication) {
       // copy constructor
-      // this.vessel = licenceApplication.vessel ? new VesselView(licenceApplication.vessel) : new VesselView(); // reference copy
-      this.vessel = new VesselView(licenceApplication.vessel); // reference copy
-
-      if (licenceApplication.applicants) {
-        licenceApplication.applicants.forEach((applicant: Applicant) => {
-          this.applicants.push(new ApplicantView(applicant));
+      this.status = licenceApplication.status ? licenceApplication.status : LicenceApplicationStatus.NONE;
+      this.expiryDate = licenceApplication.expiryDate;
+      this.preliminaryInformation = new PreliminaryInformation(licenceApplication.preliminaryInformation);
+      this.arn = licenceApplication.arn;
+      this.pin = licenceApplication.pin;
+      this.letterOfOffer = new LetterOfOfferView(licenceApplication.letterOfOffer);
+      this.documentationRequired = [];
+      if (licenceApplication.documentationRequired) {
+        licenceApplication.documentationRequired.forEach((downloadLink: DocumentationRequired) => {
+          this.documentationRequired.push(new DocumentationRequired((downloadLink)));
         });
       }
 
-      this.vesselName_prelim = licenceApplication.vesselName_prelim;
-      this.segment_prelim = licenceApplication.segment_prelim;
-      this.loa_prelim = licenceApplication.loa_prelim;
-
-      this.refId = licenceApplication.refId;
-      this.letterOfOfferIssued = licenceApplication.letterOfOfferIssued;
-      this.letterOfOfferIssueDate = licenceApplication.letterOfOfferIssueDate;
-      this.letterOfOfferTerms = licenceApplication.letterOfOfferTerms; // reference copy
-      this.letterOfOfferTermsDeadlineDate = licenceApplication.letterOfOfferTermsDeadlineDate;
-    } else {
-      this.vessel = new VesselView();
+      this.vessel = new VesselView(licenceApplication.vessel); // May not be required
     }
   }
 }
 
 export class LicenceApplicationView extends LicenceApplication {
 
-  private _activeApplicant: ApplicantView = new ApplicantView();
-
   constructor(licenceApplication?: LicenceApplication | LicenceApplicationView | any) { // DMcD 'any' only supported for unit testing
     super(licenceApplication);
   }
-
-  public setActiveApplicant(userReferenceNumber: string): boolean {
-    const applicant: ApplicantView = this.applicants.filter( (el: ApplicantView) => el.userReferenceNumber === userReferenceNumber)[0];
-    if (applicant) {
-      this._activeApplicant = applicant;
-      return true;
-    } else {
-      console.log('Failed to setActiveApplicant. No match found for User Reference Number: ' + userReferenceNumber);
-      return false; // no such userprofile.
-    }
-  }
-  public getApplicant(userReferenceNumber: string): ApplicantView {
-    const applicant: ApplicantView = this.applicants.filter( (el: ApplicantView) => el.userReferenceNumber === userReferenceNumber)[0];
-    if (applicant) {
-      return applicant;
-    } else {
-      return null; // no such userprofile.
-    }
-  }
-
-  public set activeApplicant(applicant: ApplicantView) {}
-  public get activeApplicant(): ApplicantView {
-    if (!this._activeApplicant) {
-      console.log('No active applicant. getActiveApplicant() has been called before a successful call to setActiveApplicant().');
-    }
-    return this._activeApplicant;
-  }
-
-  public setLetterOfOfferTermsAccepted(): boolean {
-    if (this.activeApplicant) {
-      this.activeApplicant.setLetterOfOfferTermsAccepted();
-      return true;
-    } else {
-      return false; // no such userprofile.
-    }
-  }
-  public setLetterOfOfferTermsRejected(): boolean {
-    if (this.activeApplicant) {
-      this.activeApplicant.setLetterOfOfferTermsRejected();
-      return true;
-    } else {
-      return false; // no such userprofile.
-    }
-  }
-
-  public set hasAcceptedLetterOfOfferTerms(val: boolean) {}
-  public get hasAcceptedLetterOfOfferTerms(): boolean {
-    let accepted: boolean = true;
-    this.applicants.forEach((applicant: ApplicantView) => {
-      if (!applicant.hasAcceptedLetterOfOfferTerms) {
-        accepted = false;
-      }
-    });
-    return accepted;
-  }
 }
-

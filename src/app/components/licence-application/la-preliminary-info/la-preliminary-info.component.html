@@ -1,124 +1,393 @@
-<div class="page">
+<div [class.page]="standAlonePage" [class.readonly]="readonly" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)">
 
-  <div *ngIf="(isHandset$ | async)" class="wizard-label">Preliminary Information</div>
+  <app-la-header *ngIf="standAlonePage"></app-la-header>
 
-  <div class="margin-top" fxLayout="column">
+  <div class="max-width-centered-content">
 
-    <!--
-    <mat-form-field [class.readonly-wrapper]="readonly">
-      <input matInput placeholder="Vessel Name" reguired [disabled]="readonly ? readonly : null" [value]="licenceApplication.vesselName_prelim">
-    </mat-form-field>
--->
-    <mat-form-field [class.readonly-wrapper]="readonly">
-      <mat-label>Segment</mat-label>
-      <mat-select [formControl]="segmentControl" required [disabled]="readonly ? true : null">
-        <mat-optgroup *ngFor="let group of segmentGroups" [label]="group.name"
-                      [disabled]="group.disabled">
-          <mat-option *ngFor="let segment of group.segment" [value]="segment.value">
-            {{ segment.viewValue }}
-          </mat-option>
-        </mat-optgroup>
-      </mat-select>
-      <mat-error *ngIf="segmentControl.hasError('required')">Please choose a segment</mat-error>
-      <!--<mat-hint>{{segmentControl.value?.sound}}</mat-hint>-->
-    </mat-form-field>
+    <div class="fullWidth">
 
-    <mat-form-field [class.readonly-wrapper]="readonly">
-      <mat-label>LOA</mat-label>
-      <mat-select [formControl]="loaControl" required [disabled]="readonly ? true : null">
-        <mat-option *ngFor="let loa of loas" [value]="loa.value">
-          {{loa.viewValue}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+      <form [formGroup]="form">
+        <div *ngIf="standAlonePage" class="wizard-label margin-bottom">PRELIMINARY INFORMATION</div>
+        <div *ngIf="displayContextHelp" class="helpCursor" [class.margin-bottom-half]="(isHandset$ | async)" [class.margin-bottom]="!(isHandset$ | async)">
+          <div fxFill fxLayout="row" fxLayoutAlign="space-around center">
+            <div class="helpLink" (click)="openReviewPreliminaryInfoBottomSheet()">Why do I need to review this?</div>
+          </div>
+        </div>
 
-    <div [class.left]="(isHandset$ | async)" [class.centered-content]="!(isHandset$ | async)">
-      <div *ngIf="this.licenceApplication.applicants.length > 0" class="wizard-label margin-top-double margin-bottom"
-           [class.centered-content]="!(isHandset$ | async)">
-        APPLICANTS AND SHARE ALLOCATION
-      </div>
-      <table mat-table [dataSource]="licenceApplication.applicants"
-             class="shareAllocationTable" [class.left]="(isHandset$ | async)" [class.centered-content]="!(isHandset$ | async)">
-        <ng-container matColumnDef="userReferenceNumber">
-          <th mat-header-cell *matHeaderCellDef [@flyInOut]="'in'">User Ref No.</th>
-          <td mat-cell *matCellDef="let applicant; let i=index;" [@flyInOut]="'in'">
-            <div *ngIf="applicant.userReferenceNumber">{{ applicant.userReferenceNumber }}</div>
+        <!-- mat-elevation-z8 padding-vertical -->
+        <div fxLayout="column" fxLayoutAlign="start center" class="form-field-icons" [style.width]="(isHandset$ | async) ? null : '75%'" [style.margin]="(isHandset$ | async) ? null : 'auto'">
 
-            <div *ngIf="!applicant.userReferenceNumber" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-              <div>
-                <mat-form-field>
-                  <input matInput #userRefNo type="text" placeholder="User Ref No." reguired>
+          <!-- LOA and Registered Length -->
+          <div *ngIf="showHelpText('LENGTH')" class="bold dafm-green" [@fadeInOut]="'fadeIn'">
+            To begin, what's the <span class="helpLinkWithinText" (click)="openVesselLengthBottomSheet()">length of the vessel</span>
+            <div class="br" *ngIf="(isHandset$ | async)"></div>
+            to be licensed?
+          </div>
+          <div *ngIf="lengthCompleted" class="bold grey margin-bottom" [@fadeInOut]="'fadeIn'">
+            <span class="helpLinkWithinText" (click)="openVesselLengthBottomSheet()">Vessel Length</span>
+            <span *ngIf="canProceedToFormSection('APPLICANT_TYPE')" class="bold grey margin-bottom" [@fadeInOut]="'fadeIn'">
+              and <span class="helpLinkWithinText" (click)="openFleetSegmentBottomSheet()">Segment</span>
+            </span>
+          </div>
+
+          <div [@fadeInOut]="'fadeIn'">
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <mat-icon matListIcon alt="Name">settings_ethernet</mat-icon>
+              <div class="inline">
+                <mat-form-field class="loa"><!-- [style.width]="'50px'" -->
+                  <input matInput placeholder="LOA" number
+                         [(ngModel)]="licenceApplication.preliminaryInformation.loa"
+                         [formControl]="form.controls.loa"
+                         (focus)="errorMessage = ''"
+                         (blur)="onLoseFocus('LENGTH');configureFleetSegments()"
+                         [readonly]="readonly ? readonly : null">
+                  <mat-error *ngIf="!readonly">* Required</mat-error>
                 </mat-form-field>
-              </div>
-              <div>
-                <button mat-raised-button mat-icon-button (click)="findApplicant(userRefNo.value, i)" [disabled]="readonly || userRefNo.value === '' ? true : null">
-                  <mat-icon>search</mat-icon>
+                <mat-form-field class="margin-left registeredLength"><!-- [style.width]="'170px'" -->
+                  <input matInput placeholder="Registered Length" number
+                         [(ngModel)]="licenceApplication.preliminaryInformation.registeredLength"
+                         [formControl]="form.controls.registeredLength"
+                         (focus)="errorMessage = ''"
+                         (blur)="onLoseFocus('LENGTH')"
+                         [readonly]="readonly ? readonly : null">
+                  <mat-error *ngIf="!readonly">* Required</mat-error>
+                </mat-form-field>
+                <button *ngIf="useDoneButtons" mat-raised-button mat-icon-button class="doneButton" [disabled]="!isDone('LENGTH')">
+                  <mat-icon matListIcon alt="Done">done</mat-icon>
                 </button>
               </div>
             </div>
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef [@flyInOut]="'in'">Applicant</th><!-- Applicant Name -->
-          <td mat-cell *matCellDef="let applicant; let i=index;" [@flyInOut]="'in'" class="left">
-            <!--<div *ngIf="applicant.userReferenceNumber && !applicant.id">
-              {{ applicant.id ? applicant.fullName : ''}}
-            </div>-->
-            <div *ngIf="applicant.userReferenceNumber && applicant.id">
-              <button mat-stroked-button class="transparent" (click)="popupApplicantInfo(applicant)">
-                {{ applicant.fullName }}
-              </button>
-            </div>
-            <div *ngIf="!applicant.userReferenceNumber" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-              <mat-form-field class="userReferenceNumber">
-                <input matInput #userRefNo type="text" placeholder="User Ref No." reguired>
+          </div>
+
+          <!-- Fleet Segment -->
+          <div *ngIf="showHelpText('SEGMENT')" class="bold dafm-green" [@flyInOut]="'in'">
+            next, which <span class="helpLinkWithinText" (click)="openFleetSegmentBottomSheet()">fishing segment</span> will you be targeting?
+          </div>
+          <div *ngIf="canProceedToFormSection('SEGMENT') || readonly" [@flyInOut]="'in'">
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Fleet Segment">public</mat-icon>
+              <mat-form-field *ngIf="readonly">
+                <input matInput placeholder="Fleet Segment" number value="{{ FleetSegmentManager.displayFleetSubSegment(licenceApplication.preliminaryInformation.fleetSegment) }}" readonly>
               </mat-form-field>
+              <mat-form-field *ngIf="!readonly" [class.readonly-wrapper]="readonly">
+                <mat-label>Segment</mat-label>
+                <mat-select required [disabled]="readonly ? true : null"
+                            [(ngModel)]="licenceApplication.preliminaryInformation.fleetSegment"
+                            [formControl]="form.controls.fleetSegment"
+                            (selectionChange)="onLoseFocus('SEGMENT')">
+                  <mat-optgroup *ngFor="let group of segmentGroups" [label]="group.name"
+                                [disabled]="group.disabled">
+                    <mat-option *ngFor="let segment of group.segment" [value]="segment.value">
+                      {{ segment.viewValue }}
+                    </mat-option>
+                  </mat-optgroup>
+                </mat-select>
+                <mat-error *ngIf="form.controls.fleetSegment.hasError('required')">* Required</mat-error>
+                <!--<mat-hint>{{segmentControl.value?.sound}}</mat-hint>-->
+              </mat-form-field>
+            </div>
+          </div>
 
-              <button mat-raised-button mat-icon-button (click)="findApplicant(userRefNo.value, i)" [disabled]="readonly || userRefNo.value === '' ? true : null">
-                <mat-icon>search</mat-icon>
-              </button>
+          <!-- Applicant Type -->
+          <div *ngIf="showHelpText('APPLICANT_TYPE')" class="bold dafm-green" [@flyInOut]="'in'">
+            now, some information about you and
+            <div class="br" *ngIf="(isHandset$ | async)"></div>
+            anyone else involved in this application
+          </div>
+          <!--<div *ngIf="canProceedToFormSection('PRIMARY_APPLICANT') || canProceedToFormSection('COMPANY') || canProceedToFormSection('PARTNERSHIP')"  class="bold grey margin-vertical" [@fadeInOut]="'fadeIn'">-->
+          <div *ngIf="primaryApplicantCompleted || companyCompleted || partnershipCompleted" class="bold grey margin-vertical" [@fadeInOut]="'fadeIn'">
+            Application
+          </div>
+
+          <div *ngIf="canProceedToFormSection('APPLICANT_TYPE')" [@flyInOut]="'in'">
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Fleet Segment">assignment_ind</mat-icon>
+              <mat-form-field *ngIf="!readonly" [class.readonly-wrapper]="readonly">
+                <mat-label>Who is this application for?</mat-label>
+                <mat-select required [disabled]="readonly ? true : null"
+                            [(ngModel)]="licenceApplication.preliminaryInformation.applicantType"
+                            [formControl]="form.controls.applicantType"
+                            (selectionChange)="onLoseFocus('APPLICANT_TYPE')">
+                  <mat-option *ngFor="let key of applicantTypes" [value]="key">
+                    {{ utils.displayEnumText(key, ApplicantType) }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.controls.applicantType.hasError('required')">* Required</mat-error>
+                <!--<mat-hint>{{segmentControl.value?.sound}}</mat-hint>-->
+              </mat-form-field>
             </div>
-          </td>
-          <td mat-footer-cell *matFooterCellDef [@flyInOut]="'in'">
-            <div class="left" *ngIf="!readonly">
-              <button mat-raised-button (click)="addApplicant()">
-                <mat-icon>add_circle_outline</mat-icon>
-                APPLICANT
-              </button>
-            </div>
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="numberOfShares">
-          <th mat-header-cell *matHeaderCellDef [@flyInOut]="'in'">#&nbsp;Shares</th>
-          <td mat-cell *matCellDef="let applicant;" [@flyInOut]="'in'">
+          </div>
+          <div *ngIf="readonly" fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Applicant Type">group</mat-icon>
             <mat-form-field>
-              <input matInput #shares type="number" min="0" max="64" reguired [(ngModel)]="applicant.numberOfShares"
-                     [ngModelOptions]="{standalone: true}" [disabled]="readonly || !applicant.id ? true : null">
-              <mat-hint align="start" *ngIf="shares.value > 64" class="error">Maximum Allocation is 64 Shares</mat-hint>
-              <!--<mat-hint align="end" [class.error]="shares.value > 64">{{shares.value}} / 64</mat-hint>-->
+              <input matInput placeholder="Applicant Type" value="{{ApplicantType[licenceApplication.preliminaryInformation.applicantType]}}" readonly>
             </mat-form-field>
-          </td>
-          <td mat-footer-cell *matFooterCellDef [@flyInOut]="'in'" [class.error]="countSharesAllocated() !== 64">
-            # {{ countSharesAllocated() }} / 64
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="commands">
-          <th mat-header-cell *matHeaderCellDef [@flyInOut]="'in'"></th>
-          <td mat-cell *matCellDef="let applicant; let i=index" [@flyInOut]="'in'">
-            <div *ngIf="!readonly" class="left margin-left-double">
-              <button mat-raised-button mat-icon-button (click)="deleteApplicant(i)">
-                <mat-icon>delete_forever</mat-icon>
-              </button>
+          </div>
+
+          <!-- Applicant Type - Company -->
+          <div *ngIf="showHelpText('COMPANY')" class="bold dafm-green" [@flyInOut]="'in'">
+            ok, what's the name of the company?
+          </div>
+          <!-- Company Name -->
+          <div *ngIf="canProceedToFormSection('COMPANY')" fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Company">apartment</mat-icon>
+            <mat-form-field>
+              <input matInput placeholder="Company Name"
+                     [(ngModel)]="licenceApplication.preliminaryInformation.companyName"
+                     [formControl]="form.controls.companyName"
+                     (focus)="errorMessage = ''"
+                     (blur)="onLoseFocus('COMPANY')">
+              <mat-error *ngIf="!readonly">* Required</mat-error>
+            </mat-form-field>
+            <button *ngIf="useDoneButtons" mat-raised-button mat-icon-button class="doneButton" [disabled]="!isDone('COMPANY')">
+              <mat-icon matListIcon alt="Done">done</mat-icon>
+            </button>
+          </div>
+
+          <!-- Applicant Type - Partnership -->
+          <div *ngIf="showHelpText('PARTNERSHIP')" class="bold dafm-green" [@flyInOut]="'in'">
+            ok, what's the partnership called?
+          </div>
+          <!-- Partnership Name -->
+          <div *ngIf="canProceedToFormSection('PARTNERSHIP')" fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Partnership">group</mat-icon>
+            <mat-form-field>
+              <input matInput placeholder="Partnership Name"
+                     [(ngModel)]="licenceApplication.preliminaryInformation.partnershipName"
+                     [formControl]="form.controls.partnershipName"
+                     (focus)="errorMessage = ''"
+                     (blur)="onLoseFocus('PARTNERSHIP')">
+              <mat-error *ngIf="!readonly">* Required</mat-error>
+            </mat-form-field>
+            <button *ngIf="useDoneButtons" mat-raised-button mat-icon-button class="doneButton" [disabled]="!isDone('PARTNERSHIP')">
+              <mat-icon matListIcon alt="Done">done</mat-icon>
+            </button>
+          </div>
+
+          <!-- Primary Applicant Details -->
+          <div *ngIf="showHelpText('PRIMARY_APPLICANT') && !primaryApplicantCompleted" class="bold dafm-green" [@flyInOut]="'in'">
+            <span *ngIf="isIndividual()">
+              great, we just need your name
+            <div *ngIf="(isHandset$ | async)" class="br"></div>
+            and email address
+            </span>
+            <span *ngIf="isCompany()">
+              great, we just need your name
+              <div *ngIf="(isHandset$ | async)" class="br"></div>
+              and a contact email address
+            </span>
+            <span *ngIf="isPartnership()">
+              <span *ngIf="!showHelpText('SECONDARY_APPLICANTS')">
+                nearly there, we need the names and email
+                <div *ngIf="(isHandset$ | async)" class="br"></div>
+                addresses of all the partners (applicants)
+                <div *ngIf="(isHandset$ | async)" class="br"></div>
+                - starting with yourself
+              </span>
+            </span>
+          </div>
+          <div *ngIf="primaryApplicantCompleted && isCompany() && companyCompleted" class="bold grey margin-vertical" [@fadeInOut]="'fadeIn'">Contact</div>
+          <div *ngIf="canProceedToFormSection('SECONDARY_APPLICANTS')" class="bold grey margin-vertical" [@fadeInOut]="'fadeIn'">Primary Applicant</div>
+
+          <!-- Name (readonly) -->
+          <div *ngIf="readonly" fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon matListIcon fxLayoutAlign="space-between start" alt="First Name">face</mat-icon>
+            <mat-form-field>
+              <input matInput placeholder="Name" value="{{form.controls.firstName.value}} {{form.controls.lastName.value}}" readonly>
+            </mat-form-field>
+          </div>
+
+          <!-- First Name -->
+          <div *ngIf="canProceedToFormSection('PRIMARY_APPLICANT')" fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon matListIcon fxLayoutAlign="space-between start" alt="First Name">face</mat-icon>
+            <mat-form-field>
+              <input matInput placeholder="{{ isPartnership() ? 'Your ' : '' }}First Name"
+                     [(ngModel)]="licenceApplication.preliminaryInformation.primaryApplicant.firstName"
+                     [formControl]="form.controls.firstName"
+                     (focus)="errorMessage = ''"
+                     (blur)="onLoseFocus('PRIMARY_APPLICANT')">
+              <mat-error *ngIf="!readonly">* Required</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Last Name -->
+          <div *ngIf="canProceedToFormSection('PRIMARY_APPLICANT')" fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Last Name"></mat-icon>
+            <mat-form-field>
+              <input matInput placeholder="{{ isPartnership() ? 'Your ' : '' }}Last Name"
+                     [(ngModel)]="licenceApplication.preliminaryInformation.primaryApplicant.lastName"
+                     [formControl]="form.controls.lastName"
+                     (focus)="errorMessage = ''"
+                     (blur)="onLoseFocus('PRIMARY_APPLICANT')">
+              <mat-error>* Required</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Email -->
+          <div *ngIf="readonly || canProceedToFormSection('PRIMARY_APPLICANT')" fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Name">email</mat-icon>
+            <mat-form-field>
+              <input matInput placeholder="{{ isPartnership() ? 'Your ' : '' }}Email"
+                     [(ngModel)]="licenceApplication.preliminaryInformation.primaryApplicant.email"
+                     [formControl]="form.controls.email"
+                     (focus)="errorMessage = ''" [readonly]="readonly ? readonly : null"
+                     (blur)="onLoseFocus('PRIMARY_APPLICANT')">
+              <mat-error *ngIf="!readonly">* Valid Email Address Required</mat-error>
+              <mat-hint *ngIf="!readonly" style="color: rgba(50, 112, 104, 1)">The Letter of Offer will be emailed here</mat-hint>
+            </mat-form-field>
+            <button *ngIf="useDoneButtons" mat-raised-button mat-icon-button class="doneButton" [disabled]="!isDone('PRIMARY_APPLICANT')">
+              <mat-icon matListIcon alt="Done">done</mat-icon>
+            </button>
+          </div>
+
+          <!-- Other Partners -->
+          <div *ngIf="canProceedToFormSection('SECONDARY_APPLICANTS')">
+            <ng-template ngFor let-i=index let-applicant [ngForOf]="licenceApplication.preliminaryInformation.otherApplicants">
+              <div class="bold centered-content grey margin-top-double margin-bottom" [@fadeInOut]="'fadeIn'">
+                Applicant {{ i+2 }}
+                <span *ngIf="i > 0" class="margin-left" [@flyInOut]="'in'"><!-- there must be at least one other partner -->
+                  <button mat-raised-button (click)="removeApplicant(i)">
+                    REMOVE
+                  </button>
+                </span>
+              </div>
+
+              <!-- First Name -->
+              <div [@flyInOut]="'in'">
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <mat-icon matListIcon fxLayoutAlign="space-between start" alt="First Name">face</mat-icon>
+                  <mat-form-field>
+                    <input matInput placeholder="Applicant {{ i + 2 }} First Name"
+                           [(ngModel)]="licenceApplication.preliminaryInformation.otherApplicants[i]['firstName']"
+                           [formControl]="otherApplicantForms[i].controls.firstName"
+                           (focus)="errorMessage = ''">
+                    <mat-error *ngIf="!readonly">* Required</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <!-- Last Name -->
+              <div [@flyInOut]="'in'">
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Last Name"></mat-icon>
+                  <mat-form-field>
+                    <input matInput placeholder="Applicant {{ i + 2 }} Last Name"
+                           [(ngModel)]="licenceApplication.preliminaryInformation.otherApplicants[i]['lastName']"
+                           [formControl]="otherApplicantForms[i].controls.lastName"
+                           (focus)="errorMessage = ''">
+                    <mat-error>* Required</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div [@flyInOut]="'in'">
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Name">email</mat-icon>
+                  <mat-form-field>
+                    <input matInput placeholder="Applicant {{ i + 2 }} Email"
+                           [(ngModel)]="licenceApplication.preliminaryInformation.otherApplicants[i]['email']"
+                           [formControl]="otherApplicantForms[i].controls.email"
+                           (focus)="errorMessage = ''"
+                           [readonly]="readonly ? readonly : null">
+                    <mat-error *ngIf="!readonly">* Required</mat-error>
+                  </mat-form-field>
+                  <button *ngIf="useDoneButtons" mat-raised-button mat-icon-button class="doneButton" [disabled]="!otherApplicantFormsValid(true)">
+                    <mat-icon matListIcon alt="Done">done</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </ng-template>
+
+            <div class="fullWidth margin-top-double" [@flyInOut]="'in'">
+              <div *ngIf="licenceApplication.preliminaryInformation.otherApplicants.length === 0" fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px">
+                <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="addApplicant()" [disabled]="!otherApplicantFormsValid(true)">
+                  ADD APPLICANT
+                </button>
+              </div>
+              <div *ngIf="licenceApplication.preliminaryInformation.otherApplicants.length > 0" fxFill fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="16px">
+                <div class="bold dafm-green">Add Another Applicant?</div>
+                <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px">
+                  <button mat-raised-button (click)="addApplicant()" [disabled]="!otherApplicantFormsValid(true)">
+                    YES
+                  </button>
+                  <button mat-raised-button (click)="applicantListCompleted = true" [disabled]="!otherApplicantFormsValid(true)">
+                    NO
+                  </button>
+                </div>
+              </div>
             </div>
-          </td>
-          <td mat-footer-cell *matFooterCellDef [@flyInOut]="'in'"></td>
-        </ng-container>
+          </div>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns" [@flyInOut]="'in'"></tr>
-        <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
-      </table>
+        </div>
+      </form>
+
+      <!-- <div *ngIf="!readonly && form.valid && otherApplicantFormsValid() && (!isPartnership() || applicantListCompleted)" class="margin-top-double margin-bottom margin-left-half"> -->
+      <div *ngIf="!readonly && form.valid && primaryApplicantCompleted && (
+         isIndividual() ||
+        (isCompany() && companyCompleted) ||
+        (isPartnership() && partnershipCompleted && applicantListCompleted && otherApplicantFormsValid())
+        )"
+           class="margin-top-double margin-bottom margin-left-half" [@fadeInOut]="'fadeIn'">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <div class="bold dafm-green">
+            Thank you.
+            <div class="br">That's all the information we need for now.</div>
+          </div>
+          <div class="dafm-green margin-top" [@fadeInOut]="'fadeIn'">
+            Please <span class="helpLinkWithinText" (click)="openReviewPreliminaryInfoBottomSheet(true)">review</span> before submitting your application.
+          </div>
+          <div *ngIf="isCompany() || isPartnership()" class="margin-top" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+            <!--<div fxFlexAlign="start" class="left">
+              <img width="60"
+                   alt="Government of Ireland"
+                   src="assets/images/logos/harp_with_rhs_green_divider.png"/>
+            </div>-->
+            <div fxFlexAlign="start" class="left">
+              <mat-checkbox [(ngModel)]="isAuthorised" [ngModelOptions]="{standalone: true}"></mat-checkbox>
+            </div>
+            <div *ngIf="isPartnership()" fxFlexAlign="start" class="left">
+              I confirm that I am authorised to act on behalf of all the partners (applicants)
+            </div>
+            <div *ngIf="isCompany()" fxFlexAlign="start" class="left">
+              I confirm that I am authorised to act on behalf of the company
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DMcD: IMPORTANT - these buttons must be outside the form tag, otherwise clicking the cancel button reloads the webpage -->
+      <div *ngIf="!embedded" class="margin-bottom-double">
+        <div class="margin-top">
+          <mat-divider [inset]="false"></mat-divider>
+        </div>
+
+        <mat-progress-bar *ngIf="submissionInProgress" class="margin-vertical" mode="indeterminate"></mat-progress-bar>
+
+        <div class="fullWidth" [class.margin-top-double]="standAlonePage" [class.margin-top]="!standAlonePage">
+          <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px">
+            <button mat-raised-button [class.fullWidth]="(isHandset$ | async)"
+                    (click)="back.emit(licenceApplication)" [disabled]="licenceApplication.letterOfOffer.status === LetterOfOfferStatus['ACCEPTED']">
+              BACK
+            </button>
+            <button *ngIf="readonly" mat-raised-button [class.fullWidth]="(isHandset$ | async)"
+                    (click)="next.emit(licenceApplication)">
+              NEXT
+            </button>
+            <button *ngIf="!readonly" mat-raised-button [class.fullWidth]="(isHandset$ | async)" [disabled]="(!readonly && (!form.valid || (!isAuthorised && !isIndividual())) || (isPartnership() && !applicantListCompleted)) ? true : null"
+                    (click)="onSubmit()">
+              SUBMIT
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="errorMessage" [@fadeInOut]="'fadeIn'" class="errorBanner margin-vertical" fxLayoutAlign="start center">
+        <mat-icon class="info-icon">error_outline</mat-icon>
+        <div>{{ errorMessage }}</div>
+      </div>
+
     </div>
-
   </div>
+
 </div>

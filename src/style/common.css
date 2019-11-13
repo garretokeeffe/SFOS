@@ -238,10 +238,26 @@ select:active {
 .green {
   color: darkgreen;
 }
+.dafm-green {
+  color: rgba(50, 112, 104, 1);
+}
+.lightgrey,
+.lightgray {
+  color: lightgrey;
+}
+.grey,
+.gray {
+  color: grey;
+}
 
 .fullWidth {
   width:100%;
   min-width:100%;
+}
+
+.centered-content {
+  margin: auto;
+  text-align: center !important;
 }
 
 .indent5 {
@@ -301,10 +317,14 @@ input[type="number"] {
   border-bottom: 1px dotted;
   color: rgba(50, 112, 104, 1); /* DAFM green theme */
 }
+.helpLinkWithinText {
+  cursor: help;
+  border-bottom: 1px dotted;
+}
 
 .br {
-  display:inline-block;
-  margin-top: 1em;
+  display: block;
+  xmargin-top: 1em;
 }
 
 .inline {
@@ -600,9 +620,11 @@ th mat-checkbox {
 }
 
 .form-field-icons mat-icon {
+  margin-right: 12px;
+}
+.readonly.form-field-icons mat-icon {
   position: relative;
   top: -12px;
-  margin-right: 12px;
 }
 
 mat-form-field.multiline {
@@ -644,6 +666,13 @@ mat-form-field.multiline {
   border-top: darkgrey solid 1px;
 }
 
+.successBanner {
+  color: whitesmoke;
+  background-color: rgba(50, 112, 104, 1); /* dafm green */
+  /*width: calc(100% - 16px);*/
+  width: 100%;
+  padding: .75em;
+}
 .errorBanner {
   color: whitesmoke;
   background-color: indianred; /* #ae2833; */

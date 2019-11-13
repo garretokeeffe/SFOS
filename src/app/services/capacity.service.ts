@@ -37,15 +37,19 @@ export class CapacityService {
         (res: AllCapacity) => {
           if (res) {
             const onRegisterCapacities: Array<CapacityView> = [];
-            res.onRegister.forEach((capacity: Capacity) => {
-              onRegisterCapacities.push(new CapacityView(capacity));
-            });
+            if (res.onRegister) {
+              res.onRegister.forEach((capacity: Capacity) => {
+                onRegisterCapacities.push(new CapacityView(capacity));
+              });
+            }
             res.onRegister = onRegisterCapacities;
 
             const offRegisterCapacities: Array<CapacityView> = [];
-            res.offRegister.forEach((capacity: Capacity) => {
-              offRegisterCapacities.push(new CapacityView(capacity));
-            });
+            if (res.offRegister) {
+              res.offRegister.forEach((capacity: Capacity) => {
+                offRegisterCapacities.push(new CapacityView(capacity));
+              });
+            }
             res.offRegister = offRegisterCapacities;
           }
 

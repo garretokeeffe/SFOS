@@ -2,7 +2,8 @@
   <div fxFill class="margin-top-half margin-horizontal">
     <!--<mat-divider></mat-divider>-->
     <div class="center">
-      <img width="50%" src="assets/images/divider.png"/>
+      <img *ngIf="!fullWidth" width="50%" src="assets/images/divider.png"/>
+      <img *ngIf="fullWidth" width="100%" src="assets/images/divider.png" style="max-height:6px"/>
     </div>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, DoCheck, OnInit} from '@angular/core';
+import { AfterViewChecked, Component, DoCheck, OnInit, Output } from '@angular/core';
 import {Observable} from 'rxjs';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {map} from 'rxjs/operators';
@@ -13,15 +13,26 @@ import {SubmissionView} from '../../types/submission';
 import {UserView} from '../../types/user';
 import {Utils} from '../../services/utils.service';
 import {ActivatedRoute} from '@angular/router';
+import { animations } from '../../animations';
+import { LaWizardMode } from '../../components/licence-application/la-wizard/la-wizard.component';
 
 @Component({
   selector: 'app-licences',
   templateUrl: './licences.component.html',
   styleUrls: ['./licences.component.css'],
+  animations: animations,
 })
 export class LicencesComponent implements OnInit, DoCheck {
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
+  public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
+  .pipe(
+    map((result) => result.matches),
+  );
+  public isAtLeastMedium$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.Medium, Breakpoints.Large, Breakpoints.XLarge])
+  .pipe(
+    map((result) => result.matches),
+  );
+  public isAtLeastLarge$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.Large, Breakpoints.XLarge])
   .pipe(
     map((result) => result.matches),
   );
@@ -32,8 +43,11 @@ export class LicencesComponent implements OnInit, DoCheck {
   public vessels: Array<VesselView> = [];
   public notifications: Array<NotificationView> = [];
   public submissions: Array<SubmissionView> = [];
+  public LaWizardMode: any = LaWizardMode; // html access to enum
 
   public showLicenceApplication: boolean = false;
+
+  public showRetrieveLetterOfOfferControls: boolean = false;
 
   public utils: Utils = Utils;
 
@@ -45,14 +59,14 @@ export class LicencesComponent implements OnInit, DoCheck {
               public notificationService: NotificationService,
               public vesselService: VesselService) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
 
     // title$ = this.activatedRoute.paramMap.pipe(map(() => window.history.state.title));
 
     this.userService.getUserByUserId().subscribe((user) => {
         this.user = user;
       },
-      error => {
+      (error) => {
         console.error('Failed to retrieve userprofile');
         this.user = null;
       });
@@ -60,7 +74,7 @@ export class LicencesComponent implements OnInit, DoCheck {
     this.vesselService.getVessels().subscribe((vessels) => {
         this.vessels = vessels;
       },
-      error => {
+      (error) => {
         console.error('Failed to retrieve vessels');
         this.vessels = [];
       });
@@ -82,6 +96,11 @@ export class LicencesComponent implements OnInit, DoCheck {
   public getVesselNotificationsBadge(vessel: VesselView): number {
     const count: number = this.notifications.filter((notification) => notification.vesselId === vessel.id).length;
     return count > 0 ? count : null;
+  }
+
+  public hideRetrieveLetterOfOfferControls(cancel: boolean): void {
+    console.log('about to hideRetrieveLetterOfOfferControls');
+    this.showRetrieveLetterOfOfferControls = !cancel;
   }
 
 }

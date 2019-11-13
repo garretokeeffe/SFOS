@@ -1,137 +1,240 @@
-<div class="page">
-  <div *ngIf="(isHandset$ | async)" class="wizard-label">Letter of Offer</div>
+<div id='top' [class.page]="standAlonePage" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)">
 
-  <div class="margin-top" fxLayout="column">
+  <app-la-header *ngIf="standAlonePage"></app-la-header>
 
-    <div>Your Application Reference Number is</div>
-    <div class="bold">{{ arn }}</div>
+  <div class="fullWidth" [@flyInOut]="'in'">
 
-    <div *ngIf="!licenceApplication.letterOfOfferIssued" class="margin-top-double">Your application has been submitted and is pending review by the Licencing Authority</div>
-    <div *ngIf="licenceApplication.letterOfOfferIssued" class="margin-top-double">
-      In response to your application, the Licencing Authority has issued a Letter of Offer.
-      <mat-card-actions class="margin-top">
-        <button mat-raised-button (click)="showingLetterOfOffer = !showingLetterOfOffer">
-          {{ showingLetterOfOffer ? 'HIDE TERMS' : 'VIEW TERMS' }}
-          <span class="mat-expansion-indicator ng-tns-c13-114 ng-trigger ng-trigger-indicatorRotate ng-star-inserted"
-                [class.point-down]="!showingLetterOfOffer" [class.point-up]="showingLetterOfOffer">
-          </span>
-        </button>
-        <button mat-raised-button>DOWNLOAD PDF</button>
-      </mat-card-actions>
-
-      <div *ngIf="globals.configuration.embeddedLetterOfOffer">
-        <div class="wizard-label centered-content margin-top-double" *ngIf="showingLetterOfOffer">LETTER OF OFFER TERMS</div>
-        <div class="page letterOfOfferTerms mat-elevation-z8" style="height: 200px; overflow-y:auto" *ngIf="showingLetterOfOffer">
-          <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="16px" >
-            <div *ngFor="let loaTerm of licenceApplication.letterOfOfferTerms" fxLayout="row" fxLayoutGap="16px">
-              <div fxFlexAlign="start">{{loaTerm.id}})</div>
-              <div fxFlexAlign="start" class="left">{{loaTerm.text}}</div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <div fxLayout="column" fxLayoutAlign="start start" class="letterOfOfferTerms page mat-elevation-z8" fxLayoutGap="16px" *ngIf="showingLetterOfOffer && !globals.configuration.embeddedLetterOfOffer">
-        <div class="wizard-label centered-content">LETTER OF OFFER TERMS</div>
-        <div *ngFor="let term of licenceApplication.letterOfOfferTerms" fxLayout="row" fxLayoutGap="16px">
-          <div fxFlexAlign="start">{{term.id}})</div>
-          <div fxFlexAlign="start" class="left">{{term.text}}</div>
-        </div>
-      </div>
-
-      <div *ngIf="licenceApplication.applicants.length === 1 && !licenceApplication.activeApplicant.letterOfOfferTermsAcceptedDate" class="bold margin-bottom">
-        You must accept the Terms of the Letter of Offer on or before {{ utils.toDate(licenceApplication.letterOfOfferTermsDeadlineDate) | date }}
-      </div>
-      <div *ngIf="licenceApplication.applicants.length > 1 && !licenceApplication.hasAcceptedLetterOfOfferTerms" class="bold margin-bottom">
-        All applicants must accept the Terms of the Letter of Offer on or before {{ utils.toDate(licenceApplication.letterOfOfferTermsDeadlineDate) | date }}
-      </div>
-
-      <mat-checkbox *ngIf="!licenceApplication.activeApplicant.letterOfOfferTermsAcceptedDate && !licenceApplication.activeApplicant.letterOfOfferTermsRejectedDate" [(ngModel)]="termsAccepted"
-                    (click)="licenceApplication.activeApplicant.setLetterOfOfferTermsAccepted(!termsAccepted); emitUpdate()">
-        <span style="font-weight: 300">I accept the Terms of the Letter of Offer</span>
-      </mat-checkbox>
-
-      <div class="margin-top" *ngIf="licenceApplication.applicants.length === 1 && licenceApplication.activeApplicant.letterOfOfferTermsAcceptedDate"
-           fxLayout="column" fxLayoutAlign="start center">
-        <span>You accepted the Terms of the Letter of Offer&nbsp;</span>
-        <span>on {{ utils.toDate(licenceApplication.activeApplicant.letterOfOfferTermsAcceptedDate) | date }}</span>
-      </div>
-
-      <!--
-      <div *ngIf="this.licenceApplication.applicants.length > 0" class="wizard-label margin-top-double margin-bottom"
-           [class.centered-content]="!(isHandset$ | async)">
-        APPLICANT ACCEPTANCE
-      </div>
-      -->
-
-      <table *ngIf="this.licenceApplication.applicants.length > 1" mat-table [dataSource]="licenceApplication.applicants"
-             class="shareAllocationTable" [class.left]="(isHandset$ | async)" [class.centered-content]="!(isHandset$ | async)">
-        <ng-container matColumnDef="userReferenceNumber">
-          <th mat-header-cell *matHeaderCellDef [@flyInOut]="'in'">User Ref No.</th>
-          <td mat-cell *matCellDef="let applicant; let i=index;" [@flyInOut]="'in'">
-            <div>{{ applicant.userReferenceNumber }}</div>
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef [@flyInOut]="'in'">Applicant</th>
-          <td mat-cell *matCellDef="let applicant; let i=index;" [@flyInOut]="'in'" class="left">
-            <div>
-              <button mat-stroked-button class="transparent" (click)="popupApplicantInfo(applicant)">
-                {{ applicant.fullName }}
-              </button>
-            </div>
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="numberOfShares">
-          <th mat-header-cell *matHeaderCellDef [@flyInOut]="'in'">#&nbsp;Shares</th>
-          <td mat-cell *matCellDef="let applicant;" [@flyInOut]="'in'">
-            <div>{{ applicant.numberOfShares }}</div>
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="acceptance">
-          <th mat-header-cell *matHeaderCellDef [@flyInOut]="'in'" class="centered-content">Acceptance</th>
-          <td mat-cell *matCellDef="let applicant; let i=index" [@flyInOut]="'in'">
-            <div *ngIf="applicant.letterOfOfferTermsAcceptedDate" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="16px">
-              <mat-icon *ngIf="!(isHandset$ | async)" class="has-success">done</mat-icon>
-              <div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="" class="has-success">
-                <div>{{ applicant.displayLetterOfOfferAcceptanceStatus() }}</div>
-                <div>{{ utils.toDate(applicant.letterOfOfferTermsAcceptedDate) | date }}</div>
-              </div>
-            </div>
-            <div *ngIf="!applicant.letterOfOfferTermsAcceptedDate">
-              <div *ngIf="applicant.letterOfOfferTermsRejectedDate" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="16px">
-                <mat-icon *ngIf="!(isHandset$ | async)" class="error">clear</mat-icon>
-                <div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="" class="error">
-                  <div>{{ applicant.displayLetterOfOfferAcceptanceStatus() }}</div>
-                  <div>{{ utils.toDate(licenceApplication.activeApplicant.letterOfOfferTermsRejectedDate) | date }}</div>
-                </div>
-              </div>
-              <div *ngIf="!applicant.letterOfOfferTermsRejectedDate"
-                   class="centered-content" [class.has-success]="applicant.hasAcceptedLetterOfOfferTerms">
-                {{ applicant.displayLetterOfOfferAcceptanceStatus() }}
-              </div>
-            </div>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns" [@flyInOut]="'in'"></tr>
-      </table>
-
-
-      <!-- Below is the way to go with flexLayout however the breakpoints are different to angular breakpoint observer, so for now use the angular way -->
-      <!--
-      <div class="margin-top" *ngIf="licenceApplication.activeApplicant.letterOfOfferTermsAcceptedDate"
-           fxLayout="row" fxLayoutAlign="center start"
-           fxLayout.xs="column" fxLayoutAlign.xs="start center">
-        <span>You accepted the terms of the Letter of Offer&nbsp;</span>
-        <span>on {{ utils.toDate(licenceApplication.activeApplicant.letterOfOfferTermsAcceptedDate) | date }}</span>
-      </div>
-      -->
-
+    <div *ngIf="continueApplicationFlow" class="margin-bottom text-small max-width-centered-content">
+      <mat-checkbox [(ngModel)]="userLoggedIn">UX Option: User has already logged in?</mat-checkbox>
     </div>
 
-  </div>
-</div>
+    <div class="margin-top max-width-centered-content">
 
+      <div class="margin-top dafm-green margin-left-half">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+            <div class="left">
+              <img width="60"
+                   alt="Government of Ireland"
+                   src="assets/images/logos/harp_with_rhs_green_divider.png"/>
+            </div>
+            <div [class.text-small]="(isHandset$ | async)">
+              A Letter of Offer for a <span class="bold">Sea Fishing Boat Licence</span> has been issued to
+              <div class="margin-top-half">
+                {{ licenceApplication.preliminaryInformation.primaryApplicant.firstName }} {{ licenceApplication.preliminaryInformation.primaryApplicant.lastName }}
+              </div>
+              <div *ngIf="licenceApplication.preliminaryInformation.applicantType == ApplicantType['COMPANY']">
+                representing the company <span class="italic">{{ licenceApplication.preliminaryInformation.companyName }}</span>
+              </div>
+              <div *ngIf="licenceApplication.preliminaryInformation.applicantType == ApplicantType['PARTNERSHIP']">
+                representing the partnership <span class="italic">{{ licenceApplication.preliminaryInformation.partnershipName }}</span>
+              </div>
+              <div class="margin-top-half">
+                for a vessel with an <span class="helpLinkWithinText" (click)="openVesselLengthBottomSheet()">LOA</span> of {{ licenceApplication.preliminaryInformation.loa }}m
+              </div>
+              <div class="br">
+                in the {{ FleetSegmentManager.displayFleetSubSegment(licenceApplication.preliminaryInformation.fleetSegment) }} <span class="helpLinkWithinText" (click)="openFleetSegmentBottomSheet()">segment</span>
+            </div>
+          </div>
+        </div>
+        <app-divider [fullWidth]="true"></app-divider>
+      </div>
+
+      <!-- TERMS HAVE NOT BEEN ACCEPTED YET -->
+      <div *ngIf="licenceApplication.letterOfOffer.status === LetterOfOfferStatus['PENDING']">
+
+        <div fxLayout="column" fxLayoutAlign="start center" class="form-field-icons"><!-- fxLayoutAlign="{{(isHandset$ | async) ? 'start center' : null}}" -->
+
+          <div class="fullWidth margin-top">
+            <div fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
+              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)">
+                DOWNLOAD YOUR LETTER OF OFFER
+              </button>
+              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)"(click)="showTerms = !showTerms">
+                {{ showTerms ? 'HIDE TERMS OF LETTER OF OFFER' : 'VIEW TERMS OF LETTER OF OFFER' }}
+                <mat-icon class="chevron_vert">{{!showTerms  ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <div *ngIf="showTerms" [@fadeInOut]="'fadeIn'">
+            <div class="centered-content margin-top-double wizard-label">YOUR LETTER OF OFFER IS SUBJECT TO THE FOLLOWING TERMS</div>
+            <div class="page letterOfOfferTerms mat-elevation-z8" >
+              <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="16px" >
+                <div *ngFor="let loaTerm of licenceApplication.letterOfOffer.terms" fxLayout="row" fxLayoutGap="16px">
+                  <div fxFlexAlign="start">{{ utils.decimalToRoman(loaTerm.id) }})</div>
+                  <div fxFlexAlign="start" class="left">{{loaTerm.text}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dafm-green" [class.margin-top-double]="!showTerms" [class.margin-top]="showTerms">
+            You must accept the Terms of your Letter of Offer and thereby
+            <span class="helpLinkWithinText" (click)="openActivateApplicationBottomSheet()">activate</span>
+            your application on or before <span class="bold">{{ licenceApplication.letterOfOffer.expiryDate }}</span><!--{{ utils.toDate(licenceApplication.letterOfOfferTermsDeadlineDate) | date }}-->
+          </div>
+
+          <div *ngIf="enableDisplayOfPreliminaryInformation" class="fullWidth margin-vertical">
+            <div fxFill fxLayout="row" fxLayoutAlign="center start">
+              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="showPreliminaryInformation = !showPreliminaryInformation">
+                {{ showPreliminaryInformation ? 'HIDE PRELIMINARY INFORMATION' : 'VIEW PRELIMINARY INFORMATION' }}
+                <mat-icon class="chevron_vert">{{!showTerms  ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</mat-icon>
+              </button>
+            </div>
+          </div>
+          <div *ngIf="showPreliminaryInformation" [@fadeInOut]="'fadeIn'">
+            <div class="centered-content margin-top wizard-label">PRELIMINARY INFORMATION</div>
+            <div class="page letterOfOfferTerms mat-elevation-z8" >
+              <app-la-preliminary-info [readonly]="true" [embedded]="true" [displayContextHelp]="false" [licenceApplication]="licenceApplication"></app-la-preliminary-info>
+            </div>
+          </div>
+
+          <div *ngIf="continueApplicationFlow && !userLoggedIn; else acceptTermsCheckBox" class="margin-top dafm-green">
+            You must <span class="helpLinkWithinText bold" (click)="login()">login</span> to accept the Terms of your Letter of Offer.
+            <span *ngIf="licenceApplication.arn && licenceApplication.pin" [class.br]="!(isHandset$ | async)">
+              Alternatively, you may retrieve this application at a later time using your
+              <div class="bold margin-top">Application Reference Number: {{ licenceApplication.arn }}</div>
+              <div class="br">and</div>
+              <div class="bold br">PIN: {{ licenceApplication.pin }}</div>
+            </span>
+            <div class="margin-top italic text-small">
+              (The Letter of Offer, ARN and PIN have been emailed to {{ licenceApplication.preliminaryInformation.primaryApplicant.email }})
+            </div>
+          </div>
+          <ng-template #acceptTermsCheckBox>
+            <mat-checkbox [(ngModel)]="termsAccepted" [ngModelOptions]="{standalone: true}" class="margin-top">
+              <span>I accept the Terms of the Letter of Offer</span>
+            </mat-checkbox>
+          </ng-template>
+
+        </div>
+
+        <div class="margin-top">
+          <mat-divider [inset]="false"></mat-divider>
+        </div>
+        <div class="fullWidth margin-top">
+          <div *ngIf="(continueApplicationFlow && !userLoggedIn); then NotLoggedInButtons else loggedInButtons"></div>
+          <ng-template #NotLoggedInButtons>
+            <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px">
+              <!-- User not logged in -->
+              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" routerLink="/login">
+                LOGIN
+              </button>
+              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" routerLink="/licences">
+                HOME
+              </button>
+              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="rejectLetterOfOffer()">
+                REJECT
+              </button>
+            </div>
+          </ng-template>
+          <ng-template #loggedInButtons>
+            <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px">
+              <!-- User is logged in -->
+              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)"
+                      (click)="back.emit(licenceApplication)"
+                      [disabled]="continueApplicationFlow">
+                BACK
+              </button>
+              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="acceptLetterOfOffer()" [disabled]="!termsAccepted">
+                SUBMIT
+              </button>
+              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="rejectLetterOfOffer()" [disabled]="termsAccepted">
+                REJECT
+              </button>
+            </div>
+          </ng-template>
+        </div>
+
+        <div *ngIf="errorMessage" [@fadeInOut]="'fadeIn'" class="errorBanner margin-vertical" fxLayoutAlign="start center">
+          <mat-icon class="info-icon">error_outline</mat-icon>
+          <div>{{ errorMessage }}</div>
+        </div>
+
+      </div> <!-- END TERMS NOT ACCEPTED YET -->
+
+      <!-- TERMS HAVE BEEN ACCEPTED -->
+      <div *ngIf="licenceApplication.letterOfOffer.status === LetterOfOfferStatus['ACCEPTED']" class="margin-top max-width-centered-content">
+
+        <div fxLayout="column" fxLayoutAlign="start center" class="form-field-icons"><!-- fxLayoutAlign="{{(isHandset$ | async) ? 'start center' : null}}" -->
+
+          <div class="fullWidth margin-top">
+            <div fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
+              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)">
+                DOWNLOAD YOUR LETTER OF OFFER
+              </button>
+              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="showTerms = !showTerms">
+                {{ showTerms ? 'HIDE TERMS OF LETTER OF OFFER' : 'VIEW TERMS OF LETTER OF OFFER' }}
+                <mat-icon class="chevron_vert">{{!showTerms  ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <div *ngIf="showTerms" [@fadeInOut]="'fadeIn'">
+            <div class="centered-content margin-top-double wizard-label">YOUR LETTER OF OFFER IS SUBJECT TO THE FOLLOWING TERMS</div>
+            <div class="page letterOfOfferTerms mat-elevation-z8" >
+              <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="16px" >
+                <div *ngFor="let loaTerm of licenceApplication.letterOfOffer.terms" fxLayout="row" fxLayoutGap="16px">
+                  <div fxFlexAlign="start">{{ utils.decimalToRoman(loaTerm.id) }})</div>
+                  <div fxFlexAlign="start" class="left">{{loaTerm.text}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div [class.margin-top-double]="!showTerms" [class.margin-top]="showTerms">
+            <span>
+              <!-- TODO: if the acceptor is the logged in your, say 'You accepted the terms...' rather than 'John Murphy accepted the terms...' -->
+              <!--{{ licenceApplication.letterOfOffer.acceptedBy.firstName }} {{ licenceApplication.letterOfOffer.acceptedBy.lastName }}-->
+              <span [class.br]="(isHandset$ | async)">You accepted the Terms of your Letter of Offer </span>
+              <span [class.br]="(isHandset$ | async)">on {{ licenceApplication.letterOfOffer.acceptedDate }}</span>
+            </span>
+          </div>
+
+          <div class="margin-top margin-bottom bold dafm-green">
+            You must comply with the Terms of your Letter of Offer on or before {{ licenceApplication.expiryDate }}<!--{{ utils.toDate(licenceApplication.letterOfOfferTermsDeadlineDate) | date }}-->
+          </div>
+
+          <div *ngIf="enableDisplayOfPreliminaryInformation" class="fullWidth margin-vertical">
+            <div fxFill fxLayout="row" fxLayoutAlign="center start">
+              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="showPreliminaryInformation = !showPreliminaryInformation">
+                {{ showPreliminaryInformation ? 'HIDE PRELIMINARY INFORMATION' : 'VIEW PRELIMINARY INFORMATION' }}
+                <mat-icon class="chevron_vert">{{!showTerms  ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</mat-icon>
+              </button>
+            </div>
+          </div>
+          <div *ngIf="showPreliminaryInformation" [@fadeInOut]="'fadeIn'">
+            <div class="centered-content margin-top wizard-label">PRELIMINARY INFORMATION</div>
+            <div class="page letterOfOfferTerms mat-elevation-z8" >
+              <app-la-preliminary-info [readonly]="true" [embedded]="true" [displayContextHelp]="false" [licenceApplication]="licenceApplication"></app-la-preliminary-info>
+            </div>
+          </div>
+        </div>
+
+        <div class="margin-top">
+          <mat-divider [inset]="false"></mat-divider>
+        </div>
+        <div class="fullWidth margin-top">
+          <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px">
+            <button mat-raised-button [class.fullWidth]="(isHandset$ | async)"
+                    (click)="back.emit(licenceApplication)" [disabled]="(isHandset$ | async) || licenceApplication.letterOfOffer.status === LetterOfOfferStatus['ACCEPTED']">
+              BACK
+            </button>
+            <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="next.emit(licenceApplication)">
+              NEXT
+            </button>
+          </div>
+        </div>
+
+        <div *ngIf="errorMessage" [@fadeInOut]="'fadeIn'" class="errorBanner margin-vertical" fxLayoutAlign="start center">
+          <mat-icon class="info-icon">error_outline</mat-icon>
+          <div>{{ errorMessage }}</div>
+        </div>
+
+      </div> <!-- END TERMS HAVE BEEN ACCEPTED -->
+
+    </div>
+  </div>
+
+</div>

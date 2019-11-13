@@ -1,0 +1,17 @@
+<div class="page padding-bottom-double light-green-background dafm-green max-width-centered-content">
+  <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="16px">
+    <h1 class="margin-bottom color-primary">REVIEW PRELIMINARY INFORMATION</h1>
+    <div *ngIf="!data.preSubmit">
+      On the basis of the Preliminary Information you entered in your
+      <span class="bold">Sea Fishing Boat Licence Application</span>
+      a Letter of Offer was issued.
+      If a correction is required you should reject the Letter of Offer in the next step and start a new Licence Application.
+    </div>
+    <div *ngIf="data.preSubmit">
+      The Terms and Conditions of the Letter of Offer will be based on the Preliminary Information you enter in your
+      <span class="bold">Sea Fishing Boat Licence Application</span>.
+      If a correction is subsequently required you will need to reject the Letter of Offer and start a new Licence Application.
+    </div>
+    <app-divider xstyle="width: 50%"></app-divider>
+  </div>
+</div>

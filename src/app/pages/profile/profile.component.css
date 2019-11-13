@@ -7,10 +7,6 @@ mat-divider {
   margin-right: 8px;
 }
 
-.example-full-width {
-  width: 100%;
-}
-
 .readonly ::ng-deep .mat-form-field-underline {
   display: none;
 }

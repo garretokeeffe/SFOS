@@ -5,6 +5,14 @@ import { environment } from '../../environments/environment';
 import { Keycloak } from 'keycloak-angular/lib/core/services/keycloak.service';
 import { UserView } from '../types/user';
 import { Capacity, CapacityView } from '../types/capacity';
+import {
+  LetterOfOfferStatus,
+  LicenceApplication,
+  LicenceApplicationStatus,
+  LicenceApplicationView
+} from '../types/licence-application';
+import { ProgressPatch } from './licence.service';
+import * as moment from 'moment';
 
 /* istanbul ignore next */
 @Injectable({
@@ -18,6 +26,7 @@ export class DemoService {
   public getVersionURL: string = 'assets/demo/version';
   public getKeycloakProfileURL: string = 'assets/demo/keycloakuserprofile';
   public getUserProfileURL: string = 'assets/demo/userprofile';
+  public getLicenceApplicationURL: string = 'assets/demo/licence-application';
   public getUsersURL: string = 'assets/demo/users';
   public getApplicationsURL: string = 'assets/demo/applications';
   public getNotificationCategoriesURL: string = 'assets/demo/notification-categories';
@@ -76,6 +85,66 @@ export class DemoService {
           observer.error(error);
           observer.complete();
         });
+    });
+  }
+
+  public createPreliminaryLicenceApplication(licenceApplication: LicenceApplicationView): Observable<LicenceApplicationView> {
+
+    const url: string = this.getLicenceApplicationURL;
+
+    return new Observable((observer) => {
+      this.http.get(url, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache, no-store, must-revalidate', // HTTP 1.1
+          'Pragma': 'no-cache', // HTTP 1.0
+          'Expires': '0', // Proxies
+        }),
+        observe: 'body',
+      })
+      .subscribe(
+        (res: LicenceApplication) => {
+          res = res ? new LicenceApplicationView(res) : null;
+
+          // Replace the preliminary information section of the demo response with the inputted values
+          if (res) {
+            res.preliminaryInformation = licenceApplication.preliminaryInformation;
+          }
+
+          observer.next(res);
+          observer.complete();
+
+        },
+        (error) => {
+          // logger.error(JSON.stringify(error));
+          console.log(JSON.stringify(error));
+          observer.error(error);
+          observer.complete();
+        });
+    });
+  }
+
+  public progressPreliminaryLicenceApplication(licenceApplication: LicenceApplicationView,
+                                               payload: ProgressPatch): Observable<LicenceApplicationView> {
+
+    const response: LicenceApplicationView = new LicenceApplicationView(licenceApplication);
+
+    return new Observable((observer) => {
+      response.letterOfOffer.acceptedBy = payload.acceptedBy;
+      response.letterOfOffer.rejectedBy = payload.rejectedBy;
+      if (payload.acceptedBy) {
+        response.letterOfOffer.acceptedDate = moment.utc(new Date()).format('DD/MM/YYYY');
+        response.letterOfOffer.rejectedDate = null;
+        response.letterOfOffer.status = LetterOfOfferStatus['ACCEPTED'];
+        response.status = LicenceApplicationStatus['PENDING_COMPLIANCE'];
+        response.expiryDate = moment.utc(new Date()).add(1, 'year').format('DD/MM/YYYY');
+      } else if (payload.rejectedBy) {
+        response.letterOfOffer.acceptedDate = null;
+        response.letterOfOffer.rejectedDate = moment.utc(new Date()).format('DD/MM/YYYY');
+        response.letterOfOffer.status = LetterOfOfferStatus['REJECTED'];
+        response.status = LicenceApplicationStatus['PREVOKED'];
+        response.expiryDate = null;
+      }
     });
   }
 }

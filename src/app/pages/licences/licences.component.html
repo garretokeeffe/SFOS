@@ -3,38 +3,60 @@
   <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px">
     <div fxFlexAlign="start">
       <h2>
-        <mat-icon matListIcon alt="Licences" style="position: relative; top: 4px; margin-right: 8px;">chrome_reader_mode</mat-icon>
+        <mat-icon matListIcon alt="My Applications" style="position: relative; top: 4px; margin-right: 8px;">library_books</mat-icon>
         <!--{{ title$ | async }}-->
-        My Applications
+        <span [@fadeInOut]="'fadeIn'">{{ !showRetrieveLetterOfOfferControls ? 'My Applications' : 'Licence Application' }}</span>
         <!--<span class="margin-left" style="position: relative; top: -4px"></span>-->
       </h2>
     </div>
+    <!--
     <div *ngIf="!(isHandset$ | async)" style="position: relative; top: -4px">
-      <button mat-raised-button routerLink="/newlicenceapplication">
-        START NEW APPLICATION
+      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+        <button mat-raised-button routerLink="/newlicenceapplication">
+          START NEW APPLICATION
+        </button>
+        <button mat-raised-button (click)="showRetrieveLetterOfOfferControls = !showRetrieveLetterOfOfferControls">
+          RETRIEVE PRELIMINARY APPLICATION
+        </button>
+      </div>
+    </div>
+    -->
+    <div *ngIf="showRetrieveLetterOfOfferControls" style="position: relative; top: -4px" [@fadeInOut]="'fadeIn'">
+      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+        <button mat-raised-button (click)="showRetrieveLetterOfOfferControls = false;">
+          <mat-icon matListIcon alt="My Applications" class="chevron_horz">chevron_left</mat-icon>BACK
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- *ngIf="(isHandset$ | async)" -->
+  <div style="position: relative; top: -4px" class="margin-bottom-double fullWidth" *ngIf="!showRetrieveLetterOfOfferControls">
+    <div fxLayout="{{ (isAtLeastMedium$ | async) ? 'row' : 'column' }}" fxLayoutAlign="start start" fxLayoutGap="16px">
+      <button mat-raised-button [class.fullWidth]="!(isAtLeastMedium$ | async)" [@fadeInOut]="'fadeIn'"
+              [routerLink]="['/licence-application-wizard', LaWizardMode['NEW']]"> <!-- routerLink="/newlicenceapplication" -->
+        NEW LICENCE APPLICATION
       </button>
+      <!--
+            <button mat-raised-button *ngIf="(isAtLeastMedium$ | async) || (!showRetrieveLetterOfOfferControls && !(isAtLeastMedium$ | async))"
+                    [@fadeInOut]="'fadeIn'"
+                    [class.fullWidth]="!(isAtLeastMedium$ | async)"
+                    [disabled]="showRetrieveLetterOfOfferControls ? true : null"
+                    (click)="showRetrieveLetterOfOfferControls = !showRetrieveLetterOfOfferControls">
+              RETRIEVE PRELIMINARY APPLICATION
+            </button>
+            -->
+            <button mat-raised-button *ngIf="(isAtLeastMedium$ | async) || (!showRetrieveLetterOfOfferControls && !(isAtLeastMedium$ | async))"
+                    [@fadeInOut]="'fadeIn'"
+                    [class.fullWidth]="!(isAtLeastMedium$ | async)"
+                    [disabled]="showRetrieveLetterOfOfferControls ? true : null"
+                    [routerLink]="['/licence-application-wizard', LaWizardMode['RETRIEVE']]">
+              RETRIEVE PRELIMINARY APPLICATION
+            </button>
     </div>
   </div>
 
-  <div *ngIf="(isHandset$ | async)" style="position: relative; top: -4px" class="margin-bottom-double fullWidth">
-    <button mat-raised-button routerLink="/newlicenceapplication" class="fullWidth">
-      START NEW APPLICATION
-    </button>
-  </div>
-
-  List of Applications (if any) here
-  <!--
-  <app-progress></app-progress>
-
-  <div *ngIf="vessels.length === 0">
-    <h2>You have no applications in progress</h2>
-  </div>
-
-  <div *ngIf="vessels.length > 0">
-    <div fxLayout="(isHandset$ | async) ? 'row' : 'column'" fxLayoutAlign="space-around start" >
-      <app-vessel *ngFor="let vessel of vessels; let i = index;" [vessel]="vessel"></app-vessel>
-    </div>
-  </div>
-  -->
+  <div class="margin-top-double centered-content">Activated Applications will be listed here</div>
 
 </div>

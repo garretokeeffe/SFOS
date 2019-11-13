@@ -6,7 +6,7 @@ export const kcConfig: KeycloakConfig = {
   url: 'https://sso-keycloak-sso1.apps.rhos.agriculture.gov.ie/auth',
   realm: 'Staging-Realm',
   clientId: '9d5d5361',
-  credentials: {secret: '8a6ad8d597f8915f43b31a912098c2ee'}
+  credentials: {secret: '8a6ad8d597f8915f43b31a912098c2ee'},
 };
 
 export const environment: any = {
@@ -19,15 +19,18 @@ export const environment: any = {
   getUserProfileURL: 'https://api-3scale-apicast-staging.apps.rhos.agriculture.gov.ie:443/sfos/users/ccs',
   getUsersURL: 'assets/demo/users',
   getApplicationsURL: 'assets/demo/applications',
-  getNotificationsURL: 'assets/demo/notifications',
   getNotificationCategoriesURL: 'assets/demo/notification-categories',
+  getNotificationsURL: 'assets/demo/notifications',
   getStatusesOfSubmissionsURL: 'assets/demo/statuses-of-submissions',
   getVesselsURL: 'https://api-3scale-apicast-staging.apps.rhos.agriculture.gov.ie:443/sfos/vessels/users/ccs',
   getVesselURL: 'assets/demo/vessel',
+  submitPreliminaryLicenceApplicationURL: 'assets/demo/submitPreliminaryLicenceApplicationURL',
+  progressPreliminaryLicenceApplicationURL: 'assets/demo/progressPreliminaryLicenceApplicationURL',
+  getLicenceApplicationURL: 'assets/demo/licence-application',
   getLetterOfOfferTermsURL: 'assets/demo/letter-of-offer-terms',
   getSubmissionsAllURL: 'assets/demo/submissions-all',
   getSubmissionsInProgressURL: 'assets/demo/submissions-in-progress',
   getCapacityURL: 'assets/demo/capacity',
 
-  salesNotesURL: 'http://salesnotesportal-fisheries-dev.apps.rhos.agriculture.gov.ie/'
+  salesNotesURL: 'http://salesnotesportal-fisheries-dev.apps.rhos.agriculture.gov.ie/',
 };

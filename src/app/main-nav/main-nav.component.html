@@ -59,7 +59,7 @@
         <mat-divider></mat-divider>
         <a mat-list-item routerLink="/capacity" [state]="{title: 'My Capacity'}"><mat-icon matListIcon>toys</mat-icon><span class="color-primary">My Capacity</span></a>
         <mat-divider></mat-divider>
-        <a mat-list-item routerLink="/licences" [state]="{title: 'My Applications'}"><mat-icon matListIcon>chrome_reader_mode</mat-icon><span class="color-primary">My Applications</span></a>
+        <a mat-list-item routerLink="/licences" [state]="{title: 'My Applications'}"><mat-icon matListIcon>library_books</mat-icon><span class="color-primary">My Applications</span></a>
       </div>
     </mat-nav-list>
 
@@ -80,18 +80,18 @@
               <mat-nav-list *ngIf="application.id === applicationID.LICENSING && [UserGroup['FISHERMAN'], UserGroup['FISHERMAN_RO']].includes(authentication.access.userGroup)">
                 <a mat-list-item routerLink="/vessels" [state]="{title: 'My Vessels'}"><mat-icon matListIcon>directions_boat</mat-icon>My Vessels</a><!-- submenu to include Registration History -->
                 <a mat-list-item routerLink="/capacity" [state]="{title: 'My Capacity'}"><mat-icon matListIcon>toys</mat-icon>My Capacity</a>
-                <a mat-list-item routerLink="/licences" [state]="{title: 'My Applications'}"><mat-icon matListIcon>chrome_reader_mode</mat-icon>My Applications</a>
+                <a mat-list-item routerLink="/licences" [state]="{title: 'My Applications'}"><mat-icon matListIcon>library_books</mat-icon>My Applications</a>
                 <mat-divider></mat-divider>
               </mat-nav-list>
               <mat-nav-list *ngIf="application.id === applicationID.LICENSING && authentication.access.userGroup === UserGroup['REPRESENTATIVE']">
                 <a mat-list-item routerLink="/clientvessels" [state]="{title: 'Client Vessels'}"><mat-icon matListIcon>directions_boat</mat-icon>Client Vessels</a><!-- submenu to include Registration History -->
                 <a mat-list-item routerLink="/clientcapacity" [state]="{title: 'Client Capacity'}"><mat-icon matListIcon>toys</mat-icon>Client Capacity</a>
-                <a mat-list-item routerLink="/licencesinternal" [state]="{title: 'Client Applications'}"><mat-icon matListIcon>chrome_reader_mode</mat-icon>Client Applications</a>
+                <a mat-list-item routerLink="/licencesinternal" [state]="{title: 'Client Applications'}"><mat-icon matListIcon>library_books</mat-icon>Client Applications</a>
                 <mat-divider></mat-divider>
               </mat-nav-list>
               <mat-nav-list *ngIf="application.id === applicationID.LICENSING && authentication.access.userGroup === UserGroup['LA']">
                 <a mat-list-item routerLink="/vessels"><mat-icon matListIcon>directions_boat</mat-icon>Vessels</a><!-- submenu to include Registration History -->
-                <a mat-list-item routerLink="/licencesinternal"><mat-icon matListIcon>chrome_reader_mode</mat-icon>Applications</a>
+                <a mat-list-item routerLink="/licencesinternal"><mat-icon matListIcon alt="Applications">library_books</mat-icon>Applications</a>
                 <mat-divider></mat-divider>
               </mat-nav-list>
               <mat-nav-list *ngIf="application.id === applicationID.LICENSING && authentication.access.userGroup === UserGroup['LA2']">
