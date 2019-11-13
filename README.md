@@ -1,2 +1,2 @@
-THis is the main development branch
+This is the main development branch
 
