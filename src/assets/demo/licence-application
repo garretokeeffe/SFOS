@@ -154,12 +154,6 @@
     },
     {
       "url": "someurl",
-      "title": "Application Form",
-      "category": 0,
-      "letterOfOfferTermId": 1947298
-    },
-    {
-      "url": "someurl",
       "title": "Assignment Note",
       "category": 3,
       "letterOfOfferTermId": 1947281

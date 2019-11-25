@@ -2,6 +2,17 @@
   <app-title-bar></app-title-bar>
 </div>
 <div class="page center" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)">
+
+ <!--<pdf-viewer src="assets/demo/docs/LetterOfOffer.pdf"></pdf-viewer>-->
+  <!--<ngx-extended-pdf-viewer [src]="'assets/demo/docs/LetterOfOffer.pdf'" backgroundColor="#ffffff"
+                           [height]="'90vh'"
+                           [useBrowserLocale]="true"
+                           [mobileFriendlyZoom]="'true'"
+                           [showZoomButtons]="true">
+  </ngx-extended-pdf-viewer>-->
+
+
+
   <div *ngIf="user">
 
     <!--<h1 class="center">{{ userprofile.firstName }}, welcome back to <span [class.display-block]="(isHandset$ | async)"> {{ appComponent.title }}.</span></h1>-->

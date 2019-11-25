@@ -57,7 +57,6 @@ import { AppComponent } from './app.component';
 import { IfisSimulatorComponent } from './components/ifis-simulator/ifis-simulator.component';
 import { UnderConstructionComponent } from './components/under-construction/under-construction.component';
 import { LoginComponent } from './pages/login/login.component';
-import { LicenceApplicationLanding } from './pages/licence-application/licenceApplicationLanding';
 
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -139,13 +138,8 @@ import { NumberDirective } from './directives/number/number.directive';
 import { LaHeaderComponent } from './components/licence-application/la-header/la-header.component';
 import { LaWizardComponent } from './components/licence-application/la-wizard/la-wizard.component';
 import {
-  LaFleetSegmentBottomSheet,
-  LaReviewPreliminaryInfoBottomSheet,
-  LaPreliminaryInfoComponent, LaVesselLengthBottomSheet,
-} from './components/licence-application/la-preliminary-info/la-preliminary-info.component';
-import {
   LaActivateApplicationBottomSheet,
-  LaLetterOfOfferComponent
+  LaLetterOfOfferComponent,
 } from './components/licence-application/la-letter-of-offer/la-letter-of-offer.component';
 import { LaDownloadFormsComponent } from './components/licence-application/la-download-forms/la-download-forms.component';
 import { LaSubmitManuallyComponent } from './components/licence-application/la-submit-manually/la-submit-manually.component';
@@ -153,6 +147,14 @@ import {
   LaLicenceApplicationProcessExplanationBottomSheet,
   LaConfirmQualifyingStatusComponent, LaConfirmQualifyingStatusBottomSheet
 } from './components/licence-application/la-confirm-qualifying-status/la-confirm-qualifying-status.component';
+import {
+  LaFleetSegmentBottomSheet,
+  LaPreliminaryInfoSimpleComponent,
+  LaReviewPreliminaryInfoBottomSheet,
+  LaVesselLengthBottomSheet,
+} from './components/licence-application/la-preliminary-info-simple/la-preliminary-info-simple.component';
+import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
+import { BottomsheetCloseIconComponent } from './components/bottomsheet-close-icon/bottomsheet-close-icon.component';
 
 @NgModule({
   declarations: [
@@ -166,7 +168,6 @@ import {
     ParallaxDirective,
     IfisSimulatorComponent,
     LoginComponent,
-    LicenceApplicationLanding,
     MainNavComponent,
     VesselsComponent,
     HomeVesselOwnerComponent,
@@ -218,7 +219,6 @@ import {
     NumberDirective,
     LaHeaderComponent,
     LaWizardComponent,
-    LaPreliminaryInfoComponent,
     LaReviewPreliminaryInfoBottomSheet,
     LaVesselLengthBottomSheet,
     LaFleetSegmentBottomSheet,
@@ -229,6 +229,8 @@ import {
     LaLicenceApplicationProcessExplanationBottomSheet,
     LaConfirmQualifyingStatusBottomSheet,
     LaActivateApplicationBottomSheet,
+    LaPreliminaryInfoSimpleComponent,
+    BottomsheetCloseIconComponent,
   ],
   imports: [
     routingModule,
@@ -280,8 +282,9 @@ import {
     MatTreeModule,
     ArchwizardModule,
     ProgressBarModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    PdfJsViewerModule,
     KeycloakAngularModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   entryComponents: [
     InfoDialogComponent,

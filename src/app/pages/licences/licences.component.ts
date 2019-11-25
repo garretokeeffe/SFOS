@@ -1,12 +1,9 @@
-import { AfterViewChecked, Component, DoCheck, OnInit, Output } from '@angular/core';
+import { Component, DoCheck, OnInit, Output } from '@angular/core';
 import {Observable} from 'rxjs';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {map} from 'rxjs/operators';
 import {AppComponent} from '../../app.component';
 import {UserService} from '../../services/user.service';
-import {LicenceService} from '../../services/licence.service';
-import {NotificationService} from '../../services/notification.service';
-import {VesselService} from '../../services/vessel.service';
 import {VesselView} from '../../types/vessel';
 import {NotificationView} from '../../types/notification';
 import {SubmissionView} from '../../types/submission';
@@ -45,19 +42,12 @@ export class LicencesComponent implements OnInit, DoCheck {
   public submissions: Array<SubmissionView> = [];
   public LaWizardMode: any = LaWizardMode; // html access to enum
 
-  public showLicenceApplication: boolean = false;
-
-  public showRetrieveLetterOfOfferControls: boolean = false;
-
   public utils: Utils = Utils;
 
   constructor(public activatedRoute: ActivatedRoute,
               public breakpointObserver: BreakpointObserver,
               public appComponent: AppComponent,
-              public userService: UserService,
-              public applicationService: LicenceService,
-              public notificationService: NotificationService,
-              public vesselService: VesselService) { }
+              public userService: UserService) { }
 
   public ngOnInit(): void {
 
@@ -69,38 +59,12 @@ export class LicencesComponent implements OnInit, DoCheck {
       (error) => {
         console.error('Failed to retrieve userprofile');
         this.user = null;
-      });
-
-    this.vesselService.getVessels().subscribe((vessels) => {
-        this.vessels = vessels;
       },
-      (error) => {
-        console.error('Failed to retrieve vessels');
-        this.vessels = [];
-      });
-
-    this.notificationService.getNotifications().subscribe((notifications) => {
-        this.notifications = notifications;
-      },
-      (error) => {
-        console.error('Failed to retrieve notifications');
-        this.notifications = [];
-      });
+    );
 
   }
 
   public ngDoCheck(): void {
 
   }
-
-  public getVesselNotificationsBadge(vessel: VesselView): number {
-    const count: number = this.notifications.filter((notification) => notification.vesselId === vessel.id).length;
-    return count > 0 ? count : null;
-  }
-
-  public hideRetrieveLetterOfOfferControls(cancel: boolean): void {
-    console.log('about to hideRetrieveLetterOfOfferControls');
-    this.showRetrieveLetterOfOfferControls = !cancel;
-  }
-
 }

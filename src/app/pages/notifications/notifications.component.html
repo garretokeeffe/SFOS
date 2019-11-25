@@ -8,6 +8,17 @@
       </h2>
     </div>
   </div>
+  <div class="margin-top centered-content">You have no messages</div>
+
+  <!--
+  <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px">
+    <div fxFlexAlign="start">
+      <h2>
+        <mat-icon matListIcon alt="My Inbox" style="position: relative; top: 4px; margin-right: 8px;">mail</mat-icon>
+        <span class="margin-right">My Inbox</span>
+      </h2>
+    </div>
+  </div>
   <div fxFill fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="32px">
 
     <mat-form-field>
@@ -33,14 +44,12 @@
       </button>
     </mat-form-field>
 
-    <!--</div>-->
-    <!--</div>-->
   </div>
 
   <table *ngIf="dataSource.data.length > 0" mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="date">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
-      <td mat-cell *matCellDef="let notification;" [@flyInOut]="'in'"> {{ notification.date }} <!-- {{ utils.toDate(notification.date) | date }} --> </td>
+      <td mat-cell *matCellDef="let notification;" [@flyInOut]="'in'"> {{ notification.date }} </td>
     </ng-container>
     <ng-container matColumnDef="category">
       <th mat-header-cell *matHeaderCellDef mat-sort-header [@flyInOut]="'in'">Category</th>
@@ -70,5 +79,8 @@
   </table>
   <mat-paginator *ngIf="!errorMessage && dataSource && dataSource.data.length > 0" class="pagination-bar" [pageSizeOptions]="pageSizeOptions"></mat-paginator>
   <div *ngIf="!dataSource || dataSource.data.length < 1" class="margin-top-double">No Notifications</div>
+
+  -->
+
 </div>
 

@@ -25,3 +25,11 @@
   height: 200px;
   overflow-y:auto;
 }
+
+.pdfViewer {
+  height: 400px;
+}
+
+::ng-deep .mat-checkbox-label {
+  padding-left: 8px;
+}

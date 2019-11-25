@@ -18,7 +18,7 @@ import { Globals } from '../../globals';
 })
 export class HomeVesselOwnerComponent implements OnInit {
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
+  public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
   .pipe(
     map(result => result.matches)
   );
@@ -30,7 +30,6 @@ export class HomeVesselOwnerComponent implements OnInit {
   public utils: Utils = Utils;
   public showSubmissions: boolean = false; // If UX is approved, remove the submissions panel and references to showSubmissions from this screen. For now switch it off.
   public hideNotifications: boolean = false;
-  public hideApplicationStatuses: boolean = true;
 
   constructor(private breakpointObserver: BreakpointObserver,
               public appComponent: AppComponent,
@@ -42,7 +41,7 @@ export class HomeVesselOwnerComponent implements OnInit {
     this.userService.getUserByUserId().subscribe((user: UserView) => {
       this.user = user;
     },
-    error => {
+      (error) => {
       console.error('Failed to retrieve userprofile');
       this.user = null;
     });
@@ -65,6 +64,7 @@ export class HomeVesselOwnerComponent implements OnInit {
     });
     */
 
+    /*
     this.notificationService.getNotifications().subscribe(notifications => {
       this.notifications = notifications;
     },
@@ -72,7 +72,7 @@ export class HomeVesselOwnerComponent implements OnInit {
       console.error('Failed to retrieve notifications');
       this.notifications = [];
     });
-
+    */
   }
 
   public goToNotificationItem(notification: NotificationView): void {

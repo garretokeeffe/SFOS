@@ -3,7 +3,7 @@ import { formatNumber } from '@angular/common';
 import { EnumValue } from '@angular/compiler-cli/src/ngtsc/metadata';
 import { FleetSubSegment } from '../types/fleet-segment';
 import { LicenceStatus } from '../types/licence';
-import { ApplicantType } from '../types/licence-application';
+import { ApplicantType, RegisteredLengthOption } from '../types/licence-application';
 
 @Injectable()
 export class Utils {
@@ -83,6 +83,12 @@ export class Utils {
         }
         if (enumValue === ApplicantType['INDIVIDUAL']) {
           text = 'A Sole Applicant / Myself';
+        }
+      } else if (enumType === RegisteredLengthOption) {
+        if (enumValue === RegisteredLengthOption['LT_24M']) {
+          text = 'Less than 24m';
+        } else if (enumValue === RegisteredLengthOption['GTE_24M']) {
+          text = '24m or longer';
         }
       }
     } else {

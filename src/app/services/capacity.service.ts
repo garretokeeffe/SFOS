@@ -71,7 +71,7 @@ export class CapacityService {
 
     const url: string = environment.getCapacityURL;
 
-    return Observable.create(observer => {
+    return new Observable((observer) => {
       this.http.get(url, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -90,7 +90,7 @@ export class CapacityService {
           });
 
           if (ownerId) {
-            capacities = capacities.filter(el => el.ownerId === ownerId);
+            capacities = capacities.filter((el) => el.ownerId === ownerId);
           }
           observer.next(capacities);
           observer.complete();
@@ -104,4 +104,5 @@ export class CapacityService {
         });
     });
   }
+
 }

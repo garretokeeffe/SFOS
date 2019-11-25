@@ -1,4 +1,4 @@
-<select #userType (change)="onChangeUserType(userType.value)">
+<select #userType (change)="onChangeUserType(userType.value)" class="hidden">
   <option [selected]="_userType === 'keycloak'" value="keycloak" *ngIf="user.isUsingKeycloak()">--- KEYCLOAK ---</option>
   <option [selected]="_userType === 'sfos_vessel_owner'" value="sfos_vessel_owner">VESSEL OWNER</option>
   <option [selected]="_userType === 'sfos_representative'" value="sfos_representative">REPRESENTATIVE</option>

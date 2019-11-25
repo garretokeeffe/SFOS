@@ -205,4 +205,19 @@ export class VesselView extends Vessel {
   public isRegistered(): boolean {
     return this.status === VesselStatus['REGISTERED'];
   }
+
+  public set complianceDocumentTitle(val: string) { }
+  public get complianceDocumentTitle(): string {
+    if (this.loa < 15) {
+      return 'Code of Practice';
+    } else if (this.loa >= 15 && this.loa < 24) {
+      return 'Safety Certificate';
+    } else if (this.loa >= 24) {
+      return 'Certificate of Compliance';
+    }
+    else {
+      // shouldn't be here
+      return '';
+    }
+  }
 }

@@ -43,7 +43,7 @@ export class TitleBarComponent implements OnInit {
   );
 
   constructor(public userService: UserService,
-              private breakpointObserver: BreakpointObserver,
+              public breakpointObserver: BreakpointObserver,
               public versionService: VersionService,
               public http: HttpClient,
               public globals: Globals) { }
@@ -73,10 +73,10 @@ export class TitleBarComponent implements OnInit {
     this.imageList.forEach ((file: string) => {
       this.http.get(file, {
         headers: new HttpHeaders({
-          'Content-Type': 'image/jpg'
+          'Content-Type': 'image/jpg',
         }),
         observe: 'body',
-        responseType: 'blob'
+        responseType: 'blob',
       })
       .subscribe(
         (res: Blob) => {

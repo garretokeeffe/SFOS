@@ -3,9 +3,11 @@
     <mat-icon matListIcon alt="My Capacity" style="position: relative; top: 4px; margin-right: 8px;">toys</mat-icon>{{ title$ | async }}
   </h2>
 
+  <!--
   <div style="font-size: small" class="margin-bottom">
     <mat-checkbox [(ngModel)]="pointsEnabled">UX Option: Points Enabled</mat-checkbox>
   </div>
+  -->
 
   <div *ngIf="errorMessage" class="errorBanner" fxLayoutAlign="start center">
     <mat-icon class="info-icon">error_outline</mat-icon>

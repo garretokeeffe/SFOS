@@ -21,7 +21,7 @@ import * as moment from 'moment';
 import {
   LaFleetSegmentBottomSheet,
   LaVesselLengthBottomSheet,
-} from '../la-preliminary-info/la-preliminary-info.component';
+} from '../la-preliminary-info-simple/la-preliminary-info-simple.component';
 import { FleetSegmentManager } from '../../../types/fleet-segment';
 import { Utils } from '../../../services/utils.service';
 import { UserService } from '../../../services/user.service';
@@ -36,8 +36,9 @@ export class LaLetterOfOfferComponent implements OnInit, OnDestroy {
 
   public enableDisplayOfPreliminaryInformation: boolean = false; // Configuration Option
   public showPreliminaryInformation: boolean = false;
+  public showLetterOfOffer: boolean = false;
 
-  public userLoggedIn: boolean = false; // TODO, replace this with code which checks if the user is logged in or not
+  public userLoggedIn: boolean = true; // TODO, replace this with code which checks if the user is logged in or not
 
   @Input() public continueApplicationFlow: boolean = false; // true = continue live application, false = retrieve with pin or select from my applications list
   @Input() public standAlonePage: boolean = false;
@@ -83,7 +84,8 @@ export class LaLetterOfOfferComponent implements OnInit, OnDestroy {
               private _bottomSheet: MatBottomSheet,
               @Optional() public cdRef: ChangeDetectorRef,
               private userService: UserService,
-              private licenceService: LicenceService) {  }
+              private licenceService: LicenceService) {
+  }
 
   public ngOnInit(): void {
     // If user details have not been passed in, retrieve them now.
@@ -107,7 +109,7 @@ export class LaLetterOfOfferComponent implements OnInit, OnDestroy {
     this.errorMessage = '';
     this.progressPreliminaryLicenceApplication(LetterOfOfferStatus['ACCEPTED']).subscribe(
       (success: boolean) => {
-        this.snackBar.open(`Licence Application (ARN: ${this.licenceApplication.arn}) has been activated`, null, {
+        this.snackBar.open(`Licence Application (ARN: ${this.licenceApplication.arn}) has been accepted`, null, {
           duration: 2500,
           horizontalPosition: 'center',
           verticalPosition: 'bottom',
@@ -117,7 +119,7 @@ export class LaLetterOfOfferComponent implements OnInit, OnDestroy {
         this.submit.emit(this.licenceApplication);
       },
       (error) => {
-        this.errorMessage = 'Sorry, something went wrong. We coould not process your request at this time';
+        this.errorMessage = 'Sorry, something went wrong. We could not process your request at this time';
       },
     );
   }
@@ -125,7 +127,7 @@ export class LaLetterOfOfferComponent implements OnInit, OnDestroy {
   public rejectLetterOfOffer(): void {
     this.confirmRejection().subscribe((confirmation) => {
       if (confirmation) {
-        this.snackBar.open(`Licence Application (ARN: ${this.licenceApplication.arn}) has been rejected`, null, {
+        this.snackBar.open(`Licence Application (ARN: ${this.licenceApplication.arn}) has been withdrawn`, null, {
           duration: 2500,
           horizontalPosition: 'center',
           verticalPosition: 'bottom',
@@ -141,9 +143,9 @@ export class LaLetterOfOfferComponent implements OnInit, OnDestroy {
     return new Observable((observer) => {
 
       const text: string = `Application Reference Number <div class="br bold">${this.licenceApplication.arn}</div>`;
-      const prompt: string = `The Letter of Offer for this application will be revoked and you will have to re-apply for a licence.`;
+      const prompt: string = `The Letter of Offer for this application will be withdrawn and you will have to re-apply for a licence.`;
 
-      const confirmationInfo: ConfirmationInfo = new ConfirmationInfo('Confirm Rejection', text, prompt, 'OK', 'CANCEL');
+      const confirmationInfo: ConfirmationInfo = new ConfirmationInfo('Confirm Withdraw', text, prompt, 'OK', 'CANCEL');
 
       const dialogRef: any = this.dialog.open(ConfirmationDialogComponent, {
         width: '300px',

@@ -32,6 +32,10 @@ export enum LicenceApplicationStatus {
   ISSUED = 5,
   REJECTED = 6,
 }
+export enum RegisteredLengthOption {
+  'LT_24M' = 1,
+  'GTE_24M' = 2,
+}
 
 export class Applicant {
   public id?: number; // ccs id
@@ -60,7 +64,7 @@ export class PreliminaryInformation {
   public companyName: string = '';
   public fleetSegment: number = FleetSubSegment.NONE;
   public loa: number = null;
-  public registeredLength: number = null;
+  public registeredLength: number = null; //  Corresponds to RegisteredLengthOption enum
   public submittedBy: Applicant = null;
 
   constructor(preliminaryInformation?: PreliminaryInformation | any) {

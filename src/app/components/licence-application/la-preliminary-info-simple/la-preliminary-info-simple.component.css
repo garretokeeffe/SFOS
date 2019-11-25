@@ -1,0 +1,46 @@
+.readonly ::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
+.readonly ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+  padding-bottom: .25em;
+}
+
+.handset .inline .mat-form-field {
+  display: inline-flex;
+}
+
+::ng-deep mat-form-field.loa {
+  width: 58px !important; /* 50px */
+}
+::ng-deep mat-form-field.loa .mat-form-field-flex {
+  width: 58px !important; /* 50px */
+}
+::ng-deep mat-form-field.registeredLength {
+  width: 142px !important; /* 150px */
+}
+::ng-deep mat-form-field.registeredLength .mat-form-field-flex {
+  width: 142px !important; /* 150px */
+}
+
+button.doneButton.mat-icon-button {
+  xposition: absolute;
+  xleft: inherit;
+  xtop: inherit;
+  xmargin-top: 24px;
+
+  width: 24px;
+  height: 24px;
+  margin-left: 16px;
+  vertical-align: middle !important;
+}
+::ng-deep button.doneButton mat-icon {
+  vertical-align: baseline !important;
+}
+::ng-deep button.doneButton[disabled] mat-icon {
+  color: darkgrey;
+}
+
+.width60pc {
+  max-width: 60%;
+}

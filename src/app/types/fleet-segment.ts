@@ -68,6 +68,24 @@ export class FleetSegmentManager  {
       return String(fleetSubSegment);
     }
   }
+  public static displayFleetSubSegmentHint(fleetSubSegment: number): string {
+    // display text in lieu of >= and < symbols for segments with specific LOAs
+
+    fleetSubSegment = Number(fleetSubSegment); // the value may have come directly from a list control, in which case it will be a string
+
+    if (fleetSubSegment === FleetSubSegment['POLYVALENT_LT_18M_LOA']) {
+      return 'POLYVALENT LESS THAN 18M LOA';
+    } else if (fleetSubSegment === FleetSubSegment['POLYVALENT_GTE_18M_LOA']) {
+      return 'POLYVALENT 18M OR LONGER LOA';
+    } else if (fleetSubSegment === FleetSubSegment['POLYVALENT_SCALLOPS_GTE_10M_LOA']) {
+      return 'POLYVALENT SCALLOPS 18M OR LONGER LOA';
+    } else if (fleetSubSegment === FleetSubSegment['SPECIFIC_SCALLOPS_GTE_10M_LOA']) {
+      return 'SPECIFIC SCALLOPS 10M OR LONGER LOA';
+    } else {
+      // ignore the other segments
+      return '';
+    }
+  }
   public static displayCombinedFleetSegment(fleetSegment: number, fleetSubSegment: number): string {
     const combinedFleetSegment: number = this.getCombinedFleetSegment(fleetSegment, fleetSubSegment);
 

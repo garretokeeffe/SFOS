@@ -333,15 +333,15 @@
           "capacityAmount": 20,
           "capacityType": "GT",
           "trackRecord_disabled": null,
-          "offRegisterDate": "01/11/2017",
-          "expiryDate": "31/10/2019",
+          "offRegisterDate": "15/12/2017",
+          "expiryDate": "15/12/2019",
           "sourceVesselName": "Kingfisher",
           "sourceVesselId": "5678",
           "penaltyPoints":
           [
             {
               "numberOfPoints": 3,
-              "expiryDate": "31/10/2019"
+              "expiryDate": "15/12/2019"
             }
           ]
         },

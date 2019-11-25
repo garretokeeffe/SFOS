@@ -6,15 +6,24 @@
 
     <div class="fullWidth">
 
-      <div *ngIf="standAlonePage" class="wizard-label margin-bottom">POST APPLICATION</div>
-      <div class="margin-bottom">
-        Before posting your application, please ensure that you have fully complied with the terms of your Letter of Offer
+      <div *ngIf="standAlonePage" class="wizard-label margin-bottom">RETURN APPLICATION</div>
+
+      <div class="margin-bottom bold dafm-green">
+        You must comply with the conditions of your Letter of Offer on or before {{ licenceApplication.expiryDate }}
+      </div>
+
+      <div class="margin-bottom dafm-green">
+        Before returning your application, please ensure that you have fully complied with the conditions of your Letter of Offer
         and provided all necessary documentation for your <span class="bold">Sea Fishing Boat Licence Application</span>.
         Failure to do so could result in a delay processing your application.
       </div>
 
-      <div class="wizard-label margin-top-double margin-bottom">CHECKLIST</div>
-
+      <div class="wizard-label margin-top-double">CHECKLIST</div>
+      <div class="margin-vertical grey italic">
+        (<span *ngIf="(isHandset$ | async)">Tap&nbsp;&nbsp;</span><span *ngIf="!(isHandset$ | async)">Click&nbsp;&nbsp;</span>
+        <mat-icon alt="download icon" title="Download icon" class="alignIcon">cloud_download</mat-icon>
+        &nbsp;to download form)
+      </div>
       <div class="page" [@fadeInOut]="'fadeIn'">
         <div fxLayout="column" fxLayoutAlign="center center">
           <div fxLayout="column" fxLayoutAlign="space-around start" fxLayoutGap="16px" >
@@ -23,11 +32,16 @@
                 <mat-checkbox (change)="onCheckBoxChange()"></mat-checkbox>
               </div>
               <div fxFlexAlign="start" class="left">{{documentRequired.title}}</div>
+              <div fxFlexAlign="start" class="left">
+                <div *ngIf="documentRequired.url">
+                  <mat-icon matListIcon alt="download" title="Download form" class="hoverable">cloud_download</mat-icon>
+                </div>
+              </div>
             </div>
           </div>
           <div *ngIf="checkListComplete" [@fadeInOut]="'fadeIn'" class="successBanner margin-top-double" fxLayoutAlign="start center">
             <mat-icon class="info-icon">check_circle_outline</mat-icon>
-            <div>You are ready to post your application</div>
+            <div>You are ready to return your application</div>
           </div>
         </div>
       </div>
@@ -36,25 +50,45 @@
         <mat-divider [inset]="false"></mat-divider>
       </div>
 
-      <div class="margin-bottom">
-        Completed forms should be returned by registered post to:
-        <address class="margin-top">
-          <!-- TODO Inject Address here -->
-          Licensing Authority for Sea Fishing Boats
-          <div class="br"></div>Department of Agriculture, Food and the Marine
-          <div class="br"></div>National Seafood Centre
-          <div class="br"></div>Clonakilty
-          <div class="br"></div>Co. Cork
-        </address>
-      </div>
-      <div class="margin-bottom">
-        The Licensing Authority will endeavour to respond to your application within 28 days.
-      </div>
-      <div class="margin-bottom">
-        For further queries, the Licensing Authority may also be contacted by:
-        <div class="margin-top"></div>Telephone: <a href="tel:+353 23 88 59500">+353 23 88 59500</a>
-        <div class="br"></div>Fax: <a href="fax:+353 23 88 21786">+353 23 88 21786</a>
-        <div class="br"></div>Email: <a href="mailto:Licensingauthority@agriculture.gov.ie">Licensingauthority@agriculture.gov.ie</a>
+      <div class="dafm-green">
+        <div class="margin-bottom">
+          Completed forms should be returned
+          <div class="margin-top">by email to: </div>
+          <div class="margin-top">
+            <a href="mailto:Licensingauthority@agriculture.gov.ie?subject=ARN {{ licenceApplication.arn }}">
+              <div fxLayout="row" fxLayoutAlign="center end" fxLayoutGap="8px">
+                <div><mat-icon matListIcon alt="Email">email</mat-icon></div>
+                <div class="underline">Licensingauthority@agriculture.gov.ie</div>
+              </div>
+            </a>
+          </div>
+          <div class="margin-top">or, by post to:</div>
+          <address class="margin-top">
+            <!-- TODO Inject Address here -->
+            <div><mat-icon matListIcon alt="Postal Address">place</mat-icon></div>
+            <div class="br">Licensing Authority for Sea Fishing Boats</div>
+            <div class="br"></div>Department of Agriculture, Food and the Marine
+            <div class="br"></div>National Seafood Centre
+            <div class="br"></div>Clonakilty
+            <div class="br"></div>Co. Cork
+          </address>
+        </div>
+        <div class="margin-bottom">
+          The Licensing Authority will endeavour to respond to your application within 28 days.
+        </div>
+        <div class="margin-bottom">
+          For further queries, the Licensing Authority may also be contacted by:
+          <div class="margin-top"></div>
+          <div fxLayout="row" fxLayoutAlign="center end" fxLayoutGap="8px">
+            <div title="Telephone"><a href="tel:+353 23 88 59500"><mat-icon class="alignIcon" alt="Phone">phone</mat-icon></a></div>
+            <div><span class="underline"><a href="tel:+353 23 88 59500">+353 23 88 59500</a></span></div>
+          </div>
+          <!--<div class="br"></div>Fax: <a href="fax:+353 23 88 21786">+353 23 88 21786</a>-->
+          <div fxLayout="row" fxLayoutAlign="center end" fxLayoutGap="8px">
+            <div title="Email"><a href="mailto:Licensingauthority@agriculture.gov.ie?subject=ARN {{ licenceApplication.arn }}"><mat-icon class="alignIcon" alt="Phone">email</mat-icon></a></div>
+            <div><span class="underline"><a href="mailto:Licensingauthority@agriculture.gov.ie?subject=ARN {{ licenceApplication.arn }}">Licensingauthority@agriculture.gov.ie</a></span></div>
+          </div>
+        </div>
       </div>
 
       <div *ngIf="!embedded" class="margin-bottom-double">

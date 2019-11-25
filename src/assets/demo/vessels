@@ -3,7 +3,7 @@
     "id": 1,
     "name": "Atlantic Way",
     "status": 1811007,
-    "safetyCertificateExpiryDate": "31/12/2020",
+    "safetyCertificateExpiryDate": "15/06/2020",
     "owners": [
       {
         "id": 1,
@@ -18,7 +18,7 @@
     ],
 
     "cfr": "IRL000I23234",
-    "prn": "S232",
+    "prn": "S952",
     "ircs": "EI5566",
     "uvi": "IMO1234567",
     "mmsi": "112233445",
@@ -34,12 +34,12 @@
       "endDate": "31/12/2019"
     },
 
-    "loa": 40,
-    "registeredLength": 40,
+    "loa": 14,
+    "registeredLength": 14,
     "draught": 3.5,
     "maximumDraught": 4.75,
     "lengthBetweenPerpendiculars": 20,
-    "boa": 8,
+    "boa": 3.75,
 
     "gt": 150.109,
     "kw": 260.609,
@@ -109,12 +109,12 @@
       "endDate": "31/12/2019"
     },
 
-    "loa": 46,
-    "registeredLength": 40,
+    "loa": 24,
+    "registeredLength": 24.5,
     "draught": 3.5,
     "maximumDraught": 4.75,
     "lengthBetweenPerpendiculars": 20,
-    "boa": 12,
+    "boa": 5.5,
 
     "gt": 195.251,
     "kw": 305.100,
@@ -189,12 +189,12 @@
       "endDate": "31/07/2019"
     },
 
-    "loa": 37.5,
-    "registeredLength": 35,
-    "draught": 3.5,
+    "loa": 21,
+    "registeredLength": 21.2,
+    "draught": 3.6,
     "maximumDraught": 4.75,
     "lengthBetweenPerpendiculars": 20,
-    "boa": 7.75,
+    "boa": 4.25,
 
     "gt": 118.303,
     "kw": 177.090,
