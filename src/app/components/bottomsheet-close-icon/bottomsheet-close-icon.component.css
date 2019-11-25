@@ -1,0 +1,11 @@
+.close-icon {
+  position: absolute;
+  left: calc(100% - 32px);
+  top: 8px;
+  color: rgba(50, 112, 104, 1);
+  cursor: pointer;
+  background-color: transparent;
+}
+.close-icon mat-icon:hover {
+  color: rgba(50, 112, 104, .75);
+}

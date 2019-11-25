@@ -254,6 +254,9 @@ select:active {
   width:100%;
   min-width:100%;
 }
+.doubleHeight {
+  height: 72px;
+}
 
 .centered-content {
   margin: auto;

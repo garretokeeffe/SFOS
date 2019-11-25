@@ -2,9 +2,11 @@
   <h2><mat-icon matListIcon alt="My Profile" style="position: relative; top: 4px; margin-right: 8px;">{{(title$ | async) == 'Client Profile' ? 'person_outline' : 'person'}}</mat-icon>{{ (title$ | async) == 'Client Profile' ? 'Client Profile' : 'My Profile' }}<span class="margin-left" style="position: relative; top: -4px"></span></h2>
 
   <!-- TODO: remove this after company screen ui approved -->
+  <!--
   <div style="font-size: small" class="margin-bottom" *ngIf="globals.demo">
     <mat-checkbox [(ngModel)]="isCompanyMode">UX Option: Company User</mat-checkbox>
   </div>
+  -->
 
   <!-- INDIVIDUAL PROFILE -->
   <div *ngIf="!this.isCompany()">
@@ -20,7 +22,7 @@
 
         <mat-form-field [style.width]="dynamicWidth('John', 'First Name')" class="margin-right-narrow">
           <!-- TODO: Remove the ngIfs which are only there for the DEMO -->
-          <input *ngIf="(title$ | async) === 'Client Profile'" matInput placeholder="First Name" value="Peter" readonly>
+          <input *ngIf="(title$ | async) === 'Client Profile'" matInput npm run buildlocalplaceholder="First Name" value="Peter" readonly>
           <input *ngIf="(title$ | async) !== 'Client Profile'" matInput placeholder="First Name" value="{{user.firstName}}" readonly>
         </mat-form-field>
 

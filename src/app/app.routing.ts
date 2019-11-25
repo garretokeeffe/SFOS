@@ -34,9 +34,7 @@ import {HomeFishBuyerComponent} from './pages/home-fish-buyer/home-fish-buyer.co
 import {HomeComponent} from './pages/home/home.component';
 import {NotificationsComponent} from './pages/notifications/notifications.component';
 import {HelpComponent} from './pages/help/help.component';
-import {LicenceApplicationLanding} from './pages/licence-application/licenceApplicationLanding';
-import { LaRetrievePreliminaryApplicationComponent } from './components/licence-application/la-retrieve-preliminary-application/la-retrieve-preliminary-application.component';
-import { LaWizardComponent } from './components/licence-application/la-wizard/la-wizard.component';
+import {LaWizardComponent} from './components/licence-application/la-wizard/la-wizard.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [AuthenticationService]}, /* no authentication required to reach login page */
@@ -78,7 +76,6 @@ const routes: Routes = [
   { path: 'help', component: HelpComponent, canActivate: [AuthenticationService] },
   { path: 'home', component: HomeComponent }, /* no authentication required on public home page */
 
-  { path: 'newlicenceapplication', component: LicenceApplicationLanding }, /* no authentication required on public home page */
   { path: 'licences', component: LicencesComponent, canActivate: [AuthenticationService] },
   { path: 'licence-application-wizard', component: LaWizardComponent }, /* no authentication required on licence application wizard */
   { path: 'licence-application-wizard/:id', component: LaWizardComponent  }, /* no authentication required on licence application wizard */

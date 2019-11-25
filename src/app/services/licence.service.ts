@@ -151,8 +151,11 @@ export class LicenceService {
       }
     }
 
-    // TODO: remove this hardcoded url (on Stepehen's PC) after testing
+    // TODO: remove this hardcoded url (on Stephen's PC) after testing
     // url = 'http://WKEBNFS26938:8080/sfos/preliminary-licence-applications/users/ccs/300/315061143/4274';
+    // url = 'https://api-3scale-apicast-staging.apps.rhos.agriculture.gov.ie:443/sfos/preliminary-licence-applications/users/ccs/300/315062099/9923';
+    // url = 'http://application-service-fisheries-dev.apps.rhos.agriculture.gov.ie/sfos/preliminary-licence-applications/users/ccs/300/315062099/9923';
+    // url = 'http://application-service-fisheries-dev.apps.rhos.agriculture.gov.ie/sfos/licence-applications/users/ccs/300/315062099/9923';
 
     return Observable.create((observer) => {
       this.http.get(url, {

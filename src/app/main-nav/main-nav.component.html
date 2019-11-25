@@ -138,16 +138,12 @@
       <mat-divider></mat-divider>
     </mat-nav-list>
 
-    <button class="addToHomeScreenButton centered-content" mat-raised-button (click)="addToHomeScreen()" *ngIf="showA2HSButton">Add to Home Screen</button>
+    <button *ngIf="showA2HSButton" class="addToHomeScreenButton centered-content" mat-raised-button (click)="addToHomeScreen()">Add to Home Screen</button>
 
   </mat-sidenav>
 
 
   <mat-sidenav-content>
-    <!--<mat-toolbar color="primary" *ngIf="isHomeOrLoginPage()" fxLayout="row" fxLayoutAlign="center center">
-      <span title="{{ appComponent.title }}">{{ (isAtLeastMedium$ | async) ? appComponent.title : appComponent.shortTitle }}</span>
-    </mat-toolbar>-->
-
     <app-title-bar *ngIf="isHomeOrLoginPage()" [authenticated]="false"></app-title-bar>
 
     <mat-toolbar color="primary" *ngIf="!isHomeOrLoginPage()">
@@ -162,7 +158,7 @@
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
 
-        <a mat-list-item routerLink="/home">
+        <a mat-list-item routerLink="/home-vessel-owner"><!-- TODO this needs to be dynamic depending on logged in user -->
           <span class="inline">
             <mat-icon matListIcon style="vertical-align: text-bottom">home</mat-icon>
             <span class="indent5" title="{{ appComponent.title }}">{{ (isAtLeastMedium$ | async) ? appComponent.title : appComponent.shortTitle }}</span>

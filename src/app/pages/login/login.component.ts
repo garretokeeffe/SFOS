@@ -94,7 +94,11 @@ export class LoginComponent implements OnInit {
   }
 
   public onLogin(): void {
-    this.loginFailed = (this.username.value.toLowerCase() === 'bad' || this.password.value.toLowerCase() === 'bad');
+    this.loginFailed = true;
+
+    if (this.username.value.toLowerCase() === 'demo' && (this.password.value.toLowerCase() === 'dunmoreeast' || this.password.value.toLowerCase() === 'dunmore east')) {
+      this.loginFailed = false;
+    }
 
     if (!this.loginFailed) {
       this.authenticationService.demoModeAuthenticated = true;

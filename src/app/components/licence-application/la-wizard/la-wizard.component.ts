@@ -75,6 +75,10 @@ export class LaWizardComponent implements OnInit {
     }
     this.mode = LaWizardMode['ACTIVE'];
     console.log('wizard mode = ' + LaWizardMode[this.mode]);
+
+    setTimeout( () => {
+      this.wizard.model.navigationMode.goToStep(this.wizard.model.getIndexOfStepWithId('SUBMIT_MANUALLY'));
+    }, 250);
   }
 
   public onRejectTerms(licenceApplication: LicenceApplicationView): void {

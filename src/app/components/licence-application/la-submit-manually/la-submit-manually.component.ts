@@ -91,6 +91,4 @@ export class LaSubmitManuallyComponent implements OnInit, OnChanges/*, AfterView
       }, 50);
     }
   }
-
-
 }

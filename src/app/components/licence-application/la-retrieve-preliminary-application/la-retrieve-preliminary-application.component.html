@@ -8,10 +8,10 @@
 
       <form [formGroup]="form">
         <div *ngIf="standAlonePage" class="wizard-label margin-bottom">RETRIEVE PRELIMINARY APPLICATION</div>
-        <div class="margin-bottom">
+        <div class="margin-bottom dafm-green">
           If you have started a new <span class="bold">Sea Fishing Boat Licence Application</span> and
-          successfully submitted your Preliminary Information, you should have received an email containing your
-          Application Reference Number (ARN) and PIN. Enter these below to retrieve your Preliminary Application.
+          successfully submitted your Licensing Information, you should have received an email containing your
+          Application Reference Number (ARN) and PIN. Enter these below to retrieve your Licence Application.
         </div>
         <div class="helpCursor" [class.margin-bottom-half]="(isHandset$ | async)" [class.margin-bottom]="!(isHandset$ | async)">
           <div fxFill fxLayout="row" fxLayoutAlign="space-around center">

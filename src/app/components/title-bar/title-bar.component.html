@@ -6,7 +6,7 @@ otherwise the title doesn't resize correctly. desktop isn't not being used in th
     <div class="qb-parallax-container">
       <div class="mat-elevation-z8 parallax-image" parallax [ratio]="0.375" #Image1 [@fadeInOut]="openImage ? 'fadeIn' : 'fadeOut'"></div>
       <div class="parallax-title" parallax [ratio]="0.75">Seafood Online Services
-        <span *ngIf="globals.demo" class="text-small" [class.text-x-small]="(isHandset$ | async)">Demo</span>
+        <span *ngIf="globals.demo" class="text-small hidden" [class.text-x-small]="(isHandset$ | async)">Demo</span>
         <span *ngIf="globals.prototype" class="text-small" [class.text-x-small]="(isHandset$ | async)">Prototype</span>
       </div>
       <div class="parallax-welcome" *ngIf="authenticated" parallax [ratio]="0.25">{{ user.firstName ? user.firstName + ', ' : '' }}welcome back to</div>

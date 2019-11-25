@@ -145,6 +145,8 @@ export class DemoService {
         response.status = LicenceApplicationStatus['PREVOKED'];
         response.expiryDate = null;
       }
+      observer.next(response);
+      observer.complete();
     });
   }
 }

@@ -10,3 +10,10 @@ a:visited {
 a:hover, a:active, a:focus { /* this group of selectors will give a keyboard navigator the same hover experience as the person using a mouse. */
   text-decoration: none;
 }
+
+a .mat-icon,
+.alignIcon {
+  /* move icon down a bit to bottom align with underlined anchor text */
+  position: relative;
+  top: 6px;
+}

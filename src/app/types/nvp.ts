@@ -2,7 +2,7 @@
 
 export class NVP {
   public name: string = '';
-  public value: string = '';
+  public value: string | number;
   public icon?: string = null;
 
   constructor(nvp?: NVP | any) { // DMcD: added any option to permit unit testing with incomplete mock data
@@ -14,4 +14,3 @@ export class NVP {
     }
   }
 }
-
