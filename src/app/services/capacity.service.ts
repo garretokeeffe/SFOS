@@ -67,7 +67,7 @@ export class CapacityService {
   }
 
   // TODO: method below may be removed when getAllCapacity() is implemented
-  public getCapacities(ownerId?: number): Observable<Array<CapacityView>> {
+  public getCapacities(ownerId?: string): Observable<Array<CapacityView>> {
 
     const url: string = environment.getCapacityURL;
 

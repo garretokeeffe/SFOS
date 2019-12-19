@@ -15,7 +15,7 @@
 
   <div *ngIf="user">
 
-    <!--<h1 class="center">{{ userprofile.firstName }}, welcome back to <span [class.display-block]="(isHandset$ | async)"> {{ appComponent.title }}.</span></h1>-->
+    <!--<h1 class="center">{{ userprofile.firstName }}, welcome to <span [class.display-block]="(isHandset$ | async)"> {{ appComponent.title }}.</span></h1>-->
     <!--<p class="text-small">You last logged in on {{ utils.toDate(userprofile.lastLoginDate) | date: (isHandset$ | async) ? 'E, d LLL' : 'EEEE, d LLLL yyyy' }} at {{ utils.toDate(userprofile.lastLoginDate) | date: 'H:mm' }}</p>-->
 
     <!--
@@ -52,6 +52,9 @@
     <!--<app-vessels embedded="true"></app-vessels>-->
     <app-feature-buttons></app-feature-buttons>
 
+    <div class="margin-top">
+      <app-divider></app-divider>
+    </div>
   </div>
 
 </div>

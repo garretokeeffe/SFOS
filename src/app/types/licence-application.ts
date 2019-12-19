@@ -1,16 +1,9 @@
 import * as moment from 'moment';
 import { FleetSubSegment } from './fleet-segment';
-import { User, UserView } from './user';
+import { User, UserType, UserView } from './user';
 import { Vessel, VesselView } from './vessel';
 import { DocumentationRequired } from './documentation-required';
-import { ApplicantView } from './applicant';
 
-export enum ApplicantType {
-  NONE = 0,
-  INDIVIDUAL = 1,
-  COMPANY = 2,
-  PARTNERSHIP = 3,
-}
 export enum LetterOfOfferStatus {
   NONE = 0,
   PENDING = 1,
@@ -33,12 +26,13 @@ export enum LicenceApplicationStatus {
   REJECTED = 6,
 }
 export enum RegisteredLengthOption {
-  'LT_24M' = 1,
-  'GTE_24M' = 2,
+  UNKNOWN = 0,
+  'LT_24M' = 315283238,
+  'GTE_24M' = 315283239,
 }
 
 export class Applicant {
-  public id?: number; // ccs id
+  public id?: string; // ccs id
   public firstName: string = '';
   public lastName: string = '';
   public email: string = '';
@@ -57,7 +51,7 @@ export class Applicant {
 }
 
 export class PreliminaryInformation {
-  public applicantType: number = ApplicantType.NONE; // Corresponds to ApplicantType enum
+  public applicantType: number = UserType.NONE; // Corresponds to UserType enum
   public primaryApplicant: Applicant = new Applicant();
   public otherApplicants: Array<Applicant> = [];
   public partnershipName: string = '';
@@ -147,25 +141,50 @@ export class LetterOfOfferView extends LetterOfOffer {
   }
 }
 
-export class LicenceApplication {
-  public status: number = LicenceApplicationStatus.NONE;
-  public expiryDate: string = ''; // one year after letter of offer has been accepted
-  public preliminaryInformation: PreliminaryInformation = new PreliminaryInformation();
+export class LicenceApplicationSummary {
+  public createDate: string = ''; // DD/MM/YYYY
   public arn: string = '';
+  public status: number = LicenceApplicationStatus.NONE;
+  public preliminaryInformation: PreliminaryInformation = new PreliminaryInformation();
+  public expiryDate: string = ''; // one year after letter of offer has been accepted
+
+  constructor(licenceApplication: LicenceApplicationSummary | LicenceApplicationSummaryView | LicenceApplication | LicenceApplicationView) {
+    if (licenceApplication) {
+      // copy constructor
+      this.createDate = licenceApplication.createDate;
+      this.arn = licenceApplication.arn;
+      this.status = licenceApplication.status ? licenceApplication.status : LicenceApplicationStatus.NONE;
+      this.preliminaryInformation = new PreliminaryInformation(licenceApplication.preliminaryInformation);
+      this.expiryDate = licenceApplication.expiryDate;
+    }
+  }
+}
+export class LicenceApplicationSummaryView extends LicenceApplicationSummary {
+  constructor(licenceApplication?: LicenceApplicationSummary | LicenceApplicationSummaryView | LicenceApplication | LicenceApplicationView) {
+    super(licenceApplication);
+  }
+}
+
+export class LicenceApplication extends LicenceApplicationSummary {
+  // public arn: string = '';
   public pin: string = '';
+  // public status: number = LicenceApplicationStatus.NONE;
+  // public preliminaryInformation: PreliminaryInformation = new PreliminaryInformation();
   public letterOfOffer: LetterOfOffer | LetterOfOfferView = new LetterOfOfferView();
+  // public expiryDate: string = ''; // one year after letter of offer has been accepted
   public documentationRequired: Array<DocumentationRequired> = [];
 
   public vessel: Vessel | VesselView; // May not be required
 
   constructor(licenceApplication?: LicenceApplication | any) { // DMcD: added any option to permit unit testing with incomplete mock data
+    super(licenceApplication);
     if (licenceApplication) {
       // copy constructor
-      this.status = licenceApplication.status ? licenceApplication.status : LicenceApplicationStatus.NONE;
-      this.expiryDate = licenceApplication.expiryDate;
-      this.preliminaryInformation = new PreliminaryInformation(licenceApplication.preliminaryInformation);
-      this.arn = licenceApplication.arn;
+      // this.arn = licenceApplication.arn;
       this.pin = licenceApplication.pin;
+      // this.status = licenceApplication.status ? licenceApplication.status : LicenceApplicationStatus.NONE;
+      // this.preliminaryInformation = new PreliminaryInformation(licenceApplication.preliminaryInformation);
+      // this.expiryDate = licenceApplication.expiryDate;
       this.letterOfOffer = new LetterOfOfferView(licenceApplication.letterOfOffer);
       this.documentationRequired = [];
       if (licenceApplication.documentationRequired) {

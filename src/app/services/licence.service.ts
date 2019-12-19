@@ -9,7 +9,7 @@ import {
   LetterOfOfferTerm,
   LicenceApplication,
   LicenceApplicationView,
-  Applicant,
+  Applicant, LicenceApplicationSummary, LicenceApplicationSummaryView,
 } from '../types/licence-application';
 import { Globals } from '../globals';
 import { DemoService } from './demo.service';
@@ -128,10 +128,55 @@ export class LicenceService {
     }
   }
 
+  public getLicenceApplicationSummaries(userId?: string): Observable<Array<LicenceApplicationSummaryView>> {
+    // userId = CCS Id from keycloak profile
+
+    let url: string = '';
+
+    // TODO remove the true below - for now always return demo data
+    if (true || this.globals.demo) {
+      url = this.demoService.getLicenceApplicationSummariesURL;
+    } else {
+      url = environment.getLicenceApplicationSummariesURL;
+      if (userId) {
+        url += '/' + userId;
+      }
+    }
+
+    return new Observable((observer) => {
+      this.http.get(url, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache, no-store, must-revalidate', // HTTP 1.1
+          'Pragma': 'no-cache', // HTTP 1.0
+          'Expires': '0', // Proxies
+        }),
+        observe: 'body',
+      })
+      .subscribe(
+        (res: Array<LicenceApplicationSummary>) => {
+          const licenceApplicationSummaries: Array<LicenceApplicationSummary> = [];
+          res = res ? res : [];
+          res.forEach((licenceApplicationSummary: LicenceApplicationSummary) => {
+            licenceApplicationSummaries.push(new LicenceApplicationSummaryView(licenceApplicationSummary));
+          });
+          observer.next(licenceApplicationSummaries);
+          observer.complete();
+
+        },
+        (error) => {
+          // logger.error(JSON.stringify(error));
+          console.log(JSON.stringify(error));
+          observer.error(error);
+          observer.complete();
+        });
+    });
+  }
+
   public getLicenceApplication(userId?: string, arn?: string, pin?: string): Observable<LicenceApplicationView> {
 
-    // ownerId = CCS Id from keycloak profile
-    // sample ownerId for hard-coding = VA100131F
+    // userId = CCS Id from keycloak profile
+    // sample userId for hard-coding = VA100131F
 
     let url: string = '';
 
@@ -157,7 +202,7 @@ export class LicenceService {
     // url = 'http://application-service-fisheries-dev.apps.rhos.agriculture.gov.ie/sfos/preliminary-licence-applications/users/ccs/300/315062099/9923';
     // url = 'http://application-service-fisheries-dev.apps.rhos.agriculture.gov.ie/sfos/licence-applications/users/ccs/300/315062099/9923';
 
-    return Observable.create((observer) => {
+    return new Observable((observer) => {
       this.http.get(url, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -172,7 +217,6 @@ export class LicenceService {
           res = res ? new LicenceApplicationView(res) : null;
           observer.next(res);
           observer.complete();
-
         },
         (error) => {
           // logger.error(JSON.stringify(error));
@@ -190,7 +234,7 @@ export class LicenceService {
       url += '/' + applicantId;
     }
 
-    return Observable.create((observer) => {
+    return new Observable((observer) => {
       this.http.get(url, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -235,7 +279,7 @@ export class LicenceService {
 
     const url: string = loadAllSubmissions ? environment.getSubmissionsAllURL  : environment.getSubmissionsInProgressURL;
 
-    return Observable.create((observer) => {
+    return new Observable((observer) => {
       this.http.get(url, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',

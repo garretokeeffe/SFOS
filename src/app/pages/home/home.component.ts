@@ -61,11 +61,15 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/login']).then((e) => {});
   }
 
-  public newLicenceApplication(): void {
+  public onNewLicenceApplication(): void {
     if (this.globals.demo) {
       this.authentication.demoModeAuthenticated = true;
     }
     this.router.navigate(['/licence-application-wizard', LaWizardMode['NEW']]).then((e) => {});
+  }
+
+  public onDownloadForms(): void {
+    this.router.navigate(['/forms']).then((e) => {});
   }
 
   public register(): void {

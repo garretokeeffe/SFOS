@@ -11,7 +11,7 @@
 
   <div *ngIf="user" class="center" style="display:none">
 
-    <h1 class="center">{{ user.firstName }}, welcome back <span [class.display-block]="(isHandset$ | async)">to {{ appComponent.title }}.</span></h1>
+    <h1 class="center">{{ user.firstName }}, welcome <span [class.display-block]="(isHandset$ | async)">to {{ appComponent.title }}.</span></h1>
     <p class="text-small">You last logged in on {{ utils.toDate(user.lastLoginDate) | date: (isHandset$ | async) ? 'E, d LLL' : 'EEEE, d LLLL yyyy' }} at {{ utils.toDate(user.lastLoginDate) | date: 'H:mm' }}</p>
     <p class="text-small no-margin-bottom" *ngIf="notifications.length > 0 && !showSubmissions">
       You have {{ notifications.length }} new {{ notifications.length === 1 ? 'notification' : 'notifications' }}

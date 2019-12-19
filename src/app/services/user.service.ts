@@ -44,7 +44,7 @@ export class UserService {
     }
 
     if (this.globals.demo) {
-      return Observable.create((observer) => {
+      return new Observable((observer) => {
         this.demoService.getKeycloakUserProfile()
         .subscribe(
           (profile: Keycloak.KeycloakProfile) => {
@@ -57,7 +57,7 @@ export class UserService {
         );
       });
     } else {
-      return Observable.create((observer) => {
+      return new Observable((observer) => {
         if (this.isUsingKeycloak()) {
           this.keycloakService.loadUserProfile()
           .then(
@@ -88,7 +88,7 @@ export class UserService {
       url += '/' + ccsId;
     }
 
-    return Observable.create((observer) => {
+    return new Observable((observer) => {
       this.http.get(url, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -111,6 +111,7 @@ export class UserService {
 
         },
         (error) => {
+          this.currentUserProfile = null;
           // logger.error(JSON.stringify(error));
           console.log(JSON.stringify(error));
           observer.error(error);

@@ -344,17 +344,17 @@
                   <div>
                     <div class="text-x-small left card-data-header helpCursor" title="Vessel Monitoring System">VMS</div>
                     <!-- DMcD: Deliberately using == (rather than ===) to check for null or not present -->
-                    <div class="card-data" [class.italic]="vessel.vms == null">{{ vessel.vms === true ? '&#10004;' : vessel.vms === false ? '&#10060;' : '?' }}</div>
+                    <div class="card-data">{{ vessel.vms === true ? '&#10004;' : vessel.vms === false ? '&#10060;' : '&#10060;' }}</div> <!-- [class.italic]="vessel.vms == null" -->
                   </div>
                   <div>
                     <div class="text-x-small card-data-header helpCursor" title="Electronic Recording System">ERS</div>
                     <!-- DMcD: Deliberately using == (rather than ===) to check for null or not present -->
-                    <div class="card-data" [class.italic]="vessel.ers == null">{{ vessel.ers === true ? '&#10004;' : vessel.ers === false ? '&#10060;' : '?' }}</div>
+                    <div class="card-data">{{ vessel.ers === true ? '&#10004;' : vessel.ers === false ? '&#10060;' : '&#10060;' }}</div> <!-- [class.italic]="vessel.vms == null" -->
                   </div>
                   <div>
                     <div class="text-x-small card-data-header helpCursor" title="Automatic Identification System">AIS</div>
                     <!-- DMcD: Deliberately using == (rather than ===) to check for null or not present -->
-                    <div class="card-data" [class.italic]="vessel.ais == null">{{ vessel.ais === true ? '&#10004;' : vessel.ais === false ? '&#10060;' : '?' }}</div>
+                    <div class="card-data">{{ vessel.ais === true ? '&#10004;' : vessel.ais === false ? '&#10060;' : '&#10060;' }}</div> <!-- [class.italic]="vessel.vms == null" -->
                   </div>
                 </div>
               </div>

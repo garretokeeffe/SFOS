@@ -1,0 +1,40 @@
+::ng-deep .mat-card-header {
+  justify-content: center !important;
+  width: 100% !important;
+}
+
+.licence-application-card {
+  min-width: 400px;
+  max-width: 400px;
+  width: 400px;
+  margin: 0 32px 32px 0;
+  border-radius: 12px;
+  text-align: center; /* centers the image and the action buttons */
+  padding-bottom: 32px;
+}
+.licence-application-card.handset,
+.handset.licence-application-card {
+  min-width: calc(100vw - 64px);/*308px;*/
+  max-width: calc(100vw - 64px);
+  width: calc(100vw - 64px);
+}
+
+::ng-deep .mat-card-title:not(.card-data-header) {
+  xtext-transform: uppercase;
+  font-size: smaller !important;
+  font-weight: bolder !important; /* remove this if you remove font-size: smaller */
+  color: rgba(50, 112, 104, 1) !important;
+}
+::ng-deep .mat-card-title .card-data-header {
+  text-transform: none;
+  font-size: small !important;
+  font-weight: bold !important;
+}
+
+::ng-deep .mat-card-header-text {
+  margin: 0 !important;
+}
+
+mat-card-content {
+  padding: 16px 16px 0 16px;
+}

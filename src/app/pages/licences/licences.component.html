@@ -1,48 +1,48 @@
 <div class="page" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)">
 
-  <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px">
-    <div fxFlexAlign="start">
-      <h2>
-        <mat-icon matListIcon alt="My Applications" style="position: relative; top: 4px; margin-right: 8px;">library_books</mat-icon>
-        <!--{{ title$ | async }}-->
-        <span [@fadeInOut]="'fadeIn'">My Applications</span>
-        <!--<span class="margin-left" style="position: relative; top: -4px"></span>-->
-      </h2>
-    </div>
-    <!--
-    <div *ngIf="!(isHandset$ | async)" style="position: relative; top: -4px">
-      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
-        <button mat-raised-button routerLink="/newlicenceapplication">
-          START NEW APPLICATION
-        </button>
-        <button mat-raised-button (click)="showRetrieveLetterOfOfferControls = !showRetrieveLetterOfOfferControls">
-          RETRIEVE PRELIMINARY APPLICATION
-        </button>
-      </div>
-    </div>
-    -->
-  </div>
+  <div fxFill fxLayout="row" fxLayoutAlign="space-between start">
+    <h2>
+      <mat-icon matListIcon alt="My Applications" style="position: relative; top: 4px; margin-right: 8px;">library_books</mat-icon>
+      <span [@fadeInOut]="'fadeIn'">My Applications</span>
+    </h2>
 
-  <!-- *ngIf="(isHandset$ | async)" -->
-  <div style="position: relative; top: -4px" class="margin-bottom-double fullWidth">
-    <div fxLayout="{{ (isAtLeastMedium$ | async) ? 'row' : 'column' }}" fxLayoutAlign="start start" fxLayoutGap="16px">
+    <div *ngIf="(isAtLeastMedium$ | async)" [@fadeInOut]="'fadeIn'" style="position: relative; top: 4px">
+      <div fxLayout="'row'" fxLayoutAlign="start start" fxLayoutGap="16px">
       <button mat-raised-button
               [@fadeInOut]="'fadeIn'"
-              [class.fullWidth]="!(isAtLeastMedium$ | async)"
-              [class.doubleHeight]="!(isAtLeastMedium$ | async)"
               [routerLink]="['/licence-application-wizard', LaWizardMode['NEW']]">
         NEW LICENCE APPLICATION
       </button>
       <button mat-raised-button
               [@fadeInOut]="'fadeIn'"
-              [class.fullWidth]="!(isAtLeastMedium$ | async)"
-              [class.doubleHeight]="!(isAtLeastMedium$ | async)"
               [routerLink]="['/licence-application-wizard', LaWizardMode['RETRIEVE']]">
         RETRIEVE APPLICATION
       </button>
     </div>
+    </div>
   </div>
 
-  <div class="margin-top-double centered-content">Active Applications will be listed here</div>
+  <div *ngIf="!(isAtLeastMedium$ | async)" [@fadeInOut]="'fadeIn'">
+
+    <div style="position: relative; top: -4px" class="margin-bottom fullWidth">
+      <div fxLayout="{{ (isAtLeastMedium$ | async) ? 'row' : 'column' }}" fxLayoutAlign="start start" fxLayoutGap="16px">
+        <button mat-raised-button class="fullWidth doubleHeight"
+                [@fadeInOut]="'fadeIn'"
+                [routerLink]="['/licence-application-wizard', LaWizardMode['NEW']]">
+          NEW LICENCE APPLICATION
+        </button>
+        <button mat-raised-button class="fullWidth doubleHeight"
+                [@fadeInOut]="'fadeIn'"
+                [routerLink]="['/licence-application-wizard', LaWizardMode['RETRIEVE']]">
+          RETRIEVE APPLICATION
+        </button>
+      </div>
+    </div>
+
+    <app-divider></app-divider>
+
+  </div>
+
+  <app-la-applications class="margin-top"></app-la-applications>
 
 </div>

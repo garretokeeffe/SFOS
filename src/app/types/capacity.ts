@@ -4,7 +4,7 @@ import { PenaltyPoints } from './points';
 import { FleetSegment, FleetSegmentManager, FleetSubSegment } from './fleet-segment';
 
 export class AllCapacity {
-  public ownerId: number = null; // maybe required for top level access by the LA, otherwise ownerId is accessible at Capacity level
+  public ownerId: string = null; // maybe required for top level access by the LA, otherwise ownerId is accessible at Capacity level
   public onRegister: Array<Capacity | CapacityView> = [];
   public offRegister: Array<Capacity | CapacityView> = [];
 
@@ -63,7 +63,7 @@ export class Capacity {
   public capAccountId: number = null; // currently not required by the ui,
                             // but may be required for update capacity functionality
 
-  public ownerId: number = null; // CCS User Id
+  public ownerId: string = null; // CCS User Id
   public offRegister: boolean = null; // true if capacity is off-register, otherwise false
   public fleetSegment: number = FleetSegment.NONE; // corresponds to FleetSegment ENUM
   public fleetSubSegment: number = FleetSubSegment.NONE; // corresponds to FleetSegment ENUM

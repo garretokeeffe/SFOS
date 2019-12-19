@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Optional, Output } from '@angular/core';
 import {
   Applicant,
-  ApplicantType,
   LetterOfOfferStatus,
   LetterOfOfferTerm,
   LicenceApplicationView,
@@ -15,7 +14,7 @@ import { ConfirmationInfo } from '../../../types/dialog-info';
 import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
 import { map } from 'rxjs/operators';
 import { animations } from '../../../animations';
-import { UserView } from '../../../types/user';
+import { UserType, UserView } from '../../../types/user';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import {
@@ -58,7 +57,7 @@ export class LaLetterOfOfferComponent implements OnInit, OnDestroy {
 
   public FleetSegmentManager: any = FleetSegmentManager; // access to static methods
   public LetterOfOfferStatus: any = LetterOfOfferStatus;
-  public ApplicantType: any = ApplicantType;
+  public ApplicantType: any = UserType;
   public utils: Utils = Utils;
 
   // request status

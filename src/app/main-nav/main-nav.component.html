@@ -47,8 +47,10 @@
       <a *ngIf="authentication.access.userGroup === UserGroup['LA']" mat-list-item routerLink="/lahome"><mat-icon matListIcon alt="Home">home</mat-icon><span class="color-primary">Home</span></a>
       <a *ngIf="authentication.access.userGroup === UserGroup['FISH_BUYER']" mat-list-item routerLink="/fishbuyerhome"><mat-icon matListIcon alt="Home">home</mat-icon><span class="color-primary">Home</span></a>
 
+      <!--
       <mat-divider></mat-divider>
       <a mat-list-item routerLink="/notifications"><mat-icon matListIcon alt="Notifications">mail</mat-icon><span class="color-primary">My Inbox</span></a>
+      -->
       <mat-divider></mat-divider>
       <a *ngIf="authentication.access.userGroup === UserGroup['REPRESENTATIVE']" mat-list-item routerLink="/clientprofile" [state]="{title: 'Client Profile'}"><mat-icon matListIcon alt="Client Profile">person_outline</mat-icon><span class="color-primary">Client Profile</span></a>
       <mat-divider *ngIf="authentication.access.userGroup === UserGroup['REPRESENTATIVE'] && globals.configuration.showPWATestMenuItem"></mat-divider>
@@ -132,6 +134,8 @@
       <mat-divider></mat-divider>
       <a mat-list-item routerLink="/profile" [state]="{title: 'My Profile'}"><mat-icon matListIcon alt="My Profile">person</mat-icon><span class="color-primary">My Profile</span></a>
       <mat-divider></mat-divider>
+      <a mat-list-item routerLink="/forms" [state]="{title: 'Forms'}"><mat-icon matListIcon alt="Forms">cloud_download</mat-icon><span class="color-primary">Forms</span></a>
+      <mat-divider></mat-divider>
       <a mat-list-item routerLink="/help" [state]="{title: 'Help'}"><mat-icon matListIcon alt="Help">help</mat-icon><span class="color-primary">Help</span></a>
       <mat-divider></mat-divider>
       <a mat-list-item routerLink="/home" (click)="logout()"><mat-icon matListIcon alt="Logout">cancel</mat-icon><span class="color-primary">Logout</span></a>
@@ -172,8 +176,10 @@
       <span class="spacer"></span>
 
       <span *ngIf="!(isHandset$ | async) && user">{{ user.firstName }}&nbsp;{{ user.lastName }}</span>
+      <!--
       <mat-icon aria-label="Side nav toggle icon" class="hoverable margin-left-half" routerLink="/notifications" title="My Inbox"
                 matBadge="{{ '3' }}" matBadgePosition="after" matBadgeColor="warn">email</mat-icon>
+      -->
       <mat-icon aria-label="Side nav toggle icon" class="hoverable margin-left" [matMenuTriggerFor]="menu">person</mat-icon>
 
       <span *ngIf="authentication.access.userGroup === UserGroup['REPRESENTATIVE'] && (isAtLeastMedium$ | async)" class="margin-left-double">
@@ -181,10 +187,12 @@
       </span>
 
       <mat-menu #menu="matMenu">
+        <!--
         <button mat-menu-item routerLink="/notifications">
           <mat-icon alt="My Inbox" class="color-primary">email</mat-icon>
           <span>My Inbox</span>
         </button>
+        -->
         <button mat-menu-item routerLink="/profile" [state]="{title: 'My Profile'}">
           <mat-icon alt="My Profile" class="color-primary">person</mat-icon>
           <span>My Profile</span>

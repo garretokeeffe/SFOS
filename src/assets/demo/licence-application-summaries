@@ -1,0 +1,92 @@
+[
+  {
+    "createDate": "01/11/2019",
+    "arn": "12345",
+    "status": 1,
+    "expiryDate": "",
+    "preliminaryInformation": {
+      "applicantType": 1,
+      "primaryApplicant": {
+        "firstName": "John",
+        "lastName": "Murphy",
+        "email": "john.murphy@demo.com"
+      },
+      "otherApplicants": [],
+      "partnershipName": "",
+      "companyName": "",
+      "fleetSegment": 338360921,
+      "loa": 23,
+      "registeredLength": 24.5,
+      "submittedBy":
+      {
+        "id": "1",
+        "firstName": "John",
+        "lastName": "Murphy",
+        "email": "john.murphy@demo.com"
+      }
+    }
+  },
+  {
+    "createDate": "27/11/2019",
+    "arn": "11223",
+    "status": 3,
+    "expiryDate": "",
+    "preliminaryInformation": {
+      "applicantType": 2,
+      "primaryApplicant": {
+        "firstName": "John",
+        "lastName": "Murphy",
+        "email": "john.murphy@demo.com"
+      },
+      "otherApplicants": [],
+      "partnershipName": "",
+      "companyName": "ACME Ltd",
+      "fleetSegment": 1807585,
+      "loa": 14,
+      "registeredLength": 14.5,
+      "submittedBy":
+      {
+        "id": "1",
+        "firstName": "John",
+        "lastName": "Murphy",
+        "email": "john.murphy@demo.com"
+      }
+    }
+  },
+  {
+    "createDate": "18/12/2019",
+    "arn": "22334",
+    "status": 1,
+    "expiryDate": "",
+    "preliminaryInformation": {
+      "applicantType": 3,
+      "primaryApplicant": {
+        "firstName": "John",
+        "lastName": "Murphy",
+        "email": "john.murphy@demo.com"
+      },
+      "otherApplicants": [
+        {
+          "firstName": "Mary",
+          "lastName": "Murphy"
+        },
+        {
+          "firstName": "Tom",
+          "lastName": "Dunne"
+        }
+      ],
+      "partnershipName": "Murphy & Dunne",
+      "companyName": "",
+      "fleetSegment": 1807585,
+      "loa": 16,
+      "registeredLength": 16,
+      "submittedBy":
+      {
+        "id": "1",
+        "firstName": "John",
+        "lastName": "Murphy",
+        "email": "john.murphy@demo.com"
+      }
+    }
+  }
+]

@@ -9,7 +9,7 @@ otherwise the title doesn't resize correctly. desktop isn't not being used in th
         <span *ngIf="globals.demo" class="text-small hidden" [class.text-x-small]="(isHandset$ | async)">Demo</span>
         <span *ngIf="globals.prototype" class="text-small" [class.text-x-small]="(isHandset$ | async)">Prototype</span>
       </div>
-      <div class="parallax-welcome" *ngIf="authenticated" parallax [ratio]="0.25">{{ user.firstName ? user.firstName + ', ' : '' }}welcome back to</div>
+      <div class="parallax-welcome" *ngIf="authenticated" parallax [ratio]="0.25">{{ user.firstName ? user.firstName + ', ' : '' }}welcome to</div>
       <!--<div class="parallax-version" parallax [ratio]="0.675">{{ version }}</div>-->
     </div>
   </div>

@@ -58,6 +58,7 @@ export const environment: any = {
   progressPreliminaryLicenceApplicationURL: 'assets/demo/progressPreliminaryLicenceApplicationURL',
   demo_getLicenceApplicationURL: 'assets/demo/licence-application',
   getLicenceApplicationURL: 'http://WKEBNFS26938:8080/sfos/preliminary-licence-applications/users/ccs/300/315061143/4274',
+  getLicenceApplicationSummariesURL: 'assets/demo/licence-application-summaries',
   smcc_getLicenceApplicationURL: 'sfos/licence-applications/ccs',
   getLetterOfOfferTermsURL: 'assets/demo/letter-of-offer-terms',
   getSubmissionsAllURL: 'assets/demo/submissions-all',

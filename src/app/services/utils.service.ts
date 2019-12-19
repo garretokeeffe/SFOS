@@ -3,7 +3,8 @@ import { formatNumber } from '@angular/common';
 import { EnumValue } from '@angular/compiler-cli/src/ngtsc/metadata';
 import { FleetSubSegment } from '../types/fleet-segment';
 import { LicenceStatus } from '../types/licence';
-import { ApplicantType, RegisteredLengthOption } from '../types/licence-application';
+import { RegisteredLengthOption } from '../types/licence-application';
+import { UserType } from '../types/user';
 
 @Injectable()
 export class Utils {
@@ -53,6 +54,9 @@ export class Utils {
   }
 
   public static dynamicWidth(value: string, placeHolder: string = value): string {
+    value = value ? value : 'ABCDEFGH'; // Min Length = 8 characters
+    placeHolder = placeHolder ? placeHolder : value;
+
     const width: string = value.length ? Math.max(value.length * 0.66, placeHolder.length * 0.5) + 'em' : '0';
     // console.log('dynamic width of (value: ' + value + ', placeHolder: ' + placeHolder + ' = ' + width);
     return width;
@@ -75,13 +79,13 @@ export class Utils {
     if (enumType[enumValue]) {
       text = enumType[enumValue].replace(/_/g, ' ');
 
-      if (enumType === ApplicantType) {
+      if (enumType === UserType) {
         text = text.toLowerCase();
         if (text) {
           text = text.charAt(0).toUpperCase() + text.slice(1); // capitalise first letter
           text = 'A ' + text;
         }
-        if (enumValue === ApplicantType['INDIVIDUAL']) {
+        if (enumValue === UserType['INDIVIDUAL']) {
           text = 'A Sole Applicant / Myself';
         }
       } else if (enumType === RegisteredLengthOption) {

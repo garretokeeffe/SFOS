@@ -13,13 +13,14 @@
           successfully submitted your Licensing Information, you should have received an email containing your
           Application Reference Number (ARN) and PIN. Enter these below to retrieve your Licence Application.
         </div>
+        <!--
         <div class="helpCursor" [class.margin-bottom-half]="(isHandset$ | async)" [class.margin-bottom]="!(isHandset$ | async)">
           <div fxFill fxLayout="row" fxLayoutAlign="space-around center">
             <div class="helpLink" (click)="openBottomSheet()">Looking for a Company Application?</div>
           </div>
         </div>
+        -->
 
-        <!-- fxLayoutAlign="{{(isHandset$ | async) ? 'start center' : null}}" -->
         <div fxLayout="column" fxLayoutAlign="start center" class="form-field-icons">
 
           <div fxLayout="row" fxLayoutAlign="start center">
@@ -44,6 +45,11 @@
       <div *ngIf="errorMessage" [@fadeInOut]="'fadeIn'" class="errorBanner margin-vertical" fxLayoutAlign="start center">
         <mat-icon class="info-icon">error_outline</mat-icon>
         <div>{{ errorMessage }}</div>
+      </div>
+      <div *ngIf="errorMessage" class="helpCursor" [class.margin-bottom-half]="(isHandset$ | async)" [class.margin-bottom]="!(isHandset$ | async)">
+        <div fxFill fxLayout="row" fxLayoutAlign="space-around center">
+          <div class="helpLink" (click)="openBottomSheet()">Trouble Finding Your Application?</div>
+        </div>
       </div>
 
       <!-- DMcD: IMPORTANT - these buttons must be outside the form tag, otherwise clicking the cancel button reloads the webpage -->

@@ -1,0 +1,71 @@
+<mat-card *ngIf="licenceApplicationSummary" [class.handset]="(isHandset$ | async)" class="licence-application-card">
+  <mat-card-header>
+    <mat-card-title>
+      <div fxFill fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="8px">
+        <div fxFlexAlign="center">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon>directions_boat</mat-icon>
+          </div>
+        </div>
+        <div fxFlexAlign="center" >
+          <span >{{ FleetSegmentManager.displayFleetSubSegment(licenceApplicationSummary.preliminaryInformation.fleetSegment ) }}</span>
+        </div>
+      </div>
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div fxFill fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+      <div fxLayout="column" fxFlex="50" fxLayoutAlign="space-between start" fxLayoutGap="16px">
+        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+          <div>
+            <div class="text-x-small left card-data-header">LOA</div>
+            <div class="left">{{licenceApplicationSummary.preliminaryInformation.loa}}m</div>
+          </div>
+          <div>
+            <div class="text-x-small left card-data-header">Reg. Length</div>
+            <div class="left">{{licenceApplicationSummary.preliminaryInformation.registeredLength}}m</div>
+          </div>
+        </div>
+        <div>
+          <div class="text-x-small left card-data-header">Application Made on Behalf of</div>
+          <div class="left">{{ utils.displayEnumText(licenceApplicationSummary.preliminaryInformation.applicantType, ApplicantType) }}</div>
+        </div>
+        <div *ngIf="licenceApplicationSummary.preliminaryInformation.applicantType === ApplicantType['COMPANY']">
+          <div class="text-x-small left card-data-header">Company Name</div>
+          <div class="left">{{licenceApplicationSummary.preliminaryInformation.companyName }}</div>
+        </div>
+        <div *ngIf="licenceApplicationSummary.preliminaryInformation.applicantType === ApplicantType['PARTNERSHIP']">
+          <div>
+            <div class="text-x-small left card-data-header">Partnership Name</div>
+            <div class="left">{{licenceApplicationSummary.preliminaryInformation.partnershipName }}</div>
+          </div>
+          <div class="text-x-small left card-data-header margin-top">Applicants</div>
+          <div class="left">{{ licenceApplicationSummary.preliminaryInformation.primaryApplicant.firstName }}&nbsp;{{ licenceApplicationSummary.preliminaryInformation.primaryApplicant.lastName }}</div>
+          <div *ngFor="let applicant of licenceApplicationSummary.preliminaryInformation.otherApplicants">
+            <div class="left">{{ applicant.firstName }}&nbsp;{{ applicant.lastName }}</div>
+          </div>
+        </div>
+      </div>
+      <div fxLayout="column" fxFlex="50" fxLayoutAlign="space-between start" fxLayoutGap="16px">
+        <div>
+          <div class="text-x-small left card-data-header">ARN</div>
+          <div class="left">{{licenceApplicationSummary.arn}}</div>
+        </div>
+        <div>
+          <div class="text-x-small left card-data-header">Date of Application</div>
+          <div class="left">{{licenceApplicationSummary.createDate}}</div>
+        </div>
+        <div>
+          <div class="text-x-small left card-data-header">Status</div>
+          <div class="left">{{utils.displayEnumText(licenceApplicationSummary.status, LicenceApplicationStatus)}}</div>
+        </div>
+      </div>
+    </div>
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button [routerLink]="['/licence-application-wizard', LaWizardMode['ACTIVE']]">OPEN</button><!-- [class.fullWidth]="(isHandset$ | async)" -->
+  </mat-card-actions>
+
+</mat-card>

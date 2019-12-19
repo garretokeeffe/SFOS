@@ -1,9 +1,17 @@
-import {Keycloak} from 'keycloak-angular/lib/core/services/keycloak.service';
+import { Keycloak } from 'keycloak-angular/lib/core/services/keycloak.service';
+
+export enum UserType {
+  NONE = 0,
+  INDIVIDUAL = 1,
+  COMPANY = 2,
+  PARTNERSHIP = 3,
+}
 
 export class User {
 
   // attributes - common
   public id: string = null; // ccs id
+  public userType: number = UserType.NONE;
   public title: string = ''; // Mr | Mrs | Ms etc
   public firstName: string = '';
   public lastName: string = '';
@@ -37,6 +45,7 @@ export class User {
 
       // attributes - common
       this.id = user.id ? user.id : this.id;
+      this.userType = user.userType ? user.userType : this.userType;
       this.title = user.title ? user.title : this.title;
       this.firstName = user.firstName ? user.firstName : this.firstName;
       this.lastName = user.lastName ? user.lastName : this.lastName;
@@ -79,7 +88,13 @@ export class UserView extends User {
   }
 
   public isCompany(): boolean {
-    return this.companyName ? true : false;
+    // return this.companyName ? true : false;
+    return this.userType === UserType['COMPANY'];
+  }
+
+  public isIndividual(): boolean {
+    // return this.companyName ? true : false;
+    return this.userType === UserType['INDIVIDUAL'];
   }
 
   public setKeycloakAttributes(keycloakProfile: Keycloak.KeycloakProfile): void {

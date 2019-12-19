@@ -155,6 +155,9 @@ import {
 } from './components/licence-application/la-preliminary-info-simple/la-preliminary-info-simple.component';
 import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 import { BottomsheetCloseIconComponent } from './components/bottomsheet-close-icon/bottomsheet-close-icon.component';
+import { LaApplicationsComponent } from './components/licence-application/la-applications/la-applications.component';
+import { LaApplicationCardComponent } from './components/licence-application/la-application-card/la-application-card.component';
+import { FormsComponent } from './pages/forms/forms.component';
 
 @NgModule({
   declarations: [
@@ -231,6 +234,9 @@ import { BottomsheetCloseIconComponent } from './components/bottomsheet-close-ic
     LaActivateApplicationBottomSheet,
     LaPreliminaryInfoSimpleComponent,
     BottomsheetCloseIconComponent,
+    LaApplicationsComponent,
+    LaApplicationCardComponent,
+    FormsComponent,
   ],
   imports: [
     routingModule,

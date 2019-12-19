@@ -148,7 +148,7 @@ export class MainNavComponent implements OnInit, OnChanges, AfterViewChecked {
       );
     },
     (error) => {
-      console.error('Failed to retrieve userprofile');
+      console.error('Failed to retrieve user profile');
       this.user = null;
     });
   }

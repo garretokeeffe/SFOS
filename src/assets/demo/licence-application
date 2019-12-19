@@ -1,4 +1,5 @@
 {
+  "createDate": "24/10/2019",
   "arn": "12345",
   "pin": "9876",
   "status": 1,
@@ -18,7 +19,7 @@
     "registeredLength": 24.5,
     "submittedBy":
     {
-      "id": 1,
+      "id": "1",
       "firstName": "John",
       "lastName": "Murphy",
       "email": "john.murphy@demo.com"

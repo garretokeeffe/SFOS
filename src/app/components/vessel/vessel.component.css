@@ -14,11 +14,13 @@
   xposition: relative;
   xleft: -15px;
 }
+
 ::ng-deep .mat-card-header {
   justify-content: center !important;
   width: 100% !important;
-  xmargin-bottom: 8px;
 }
+
+
 .vessel-card {
   max-width: 400px;
   margin: 0 32px 32px 0;

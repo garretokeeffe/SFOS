@@ -27,6 +27,7 @@ export class DemoService {
   public getKeycloakProfileURL: string = 'assets/demo/keycloakuserprofile';
   public getUserProfileURL: string = 'assets/demo/userprofile';
   public getLicenceApplicationURL: string = 'assets/demo/licence-application';
+  public getLicenceApplicationSummariesURL: string = 'assets/demo/licence-application-summaries';
   public getUsersURL: string = 'assets/demo/users';
   public getApplicationsURL: string = 'assets/demo/applications';
   public getNotificationCategoriesURL: string = 'assets/demo/notification-categories';

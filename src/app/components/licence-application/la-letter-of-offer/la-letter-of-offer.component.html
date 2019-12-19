@@ -24,6 +24,9 @@
               A Letter of Offer for a <span class="bold">Sea Fishing Boat Licence</span> has been issued to
               <div class="margin-top-half">
                 {{ licenceApplication.preliminaryInformation.primaryApplicant.firstName }} {{ licenceApplication.preliminaryInformation.primaryApplicant.lastName }}
+                <div class="br text-small">
+                  {{ licenceApplication.preliminaryInformation.primaryApplicant.email }}
+                </div>
               </div>
               <div *ngIf="licenceApplication.preliminaryInformation.applicantType == ApplicantType['COMPANY']">
                 representing the company <span class="italic">{{ licenceApplication.preliminaryInformation.companyName }}</span>

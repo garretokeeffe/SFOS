@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -6,13 +6,13 @@ import { map } from 'rxjs/operators';
 import { animations } from '../../../animations';
 import { ConfirmationInfo } from '../../../types/dialog-info';
 import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
-import { MatBottomSheet, MatBottomSheetRef, MatDialog, MatSnackBar } from '@angular/material';
-import { LetterOfOfferTerm, LicenceApplicationView } from '../../../types/licence-application';
+import { MAT_BOTTOM_SHEET_DATA, MatBottomSheet, MatBottomSheetRef, MatDialog, MatSnackBar } from '@angular/material';
+import { LicenceApplicationView } from '../../../types/licence-application';
 import { LicenceService } from '../../../services/licence.service';
 import { UserView } from '../../../types/user';
 import { Globals } from '../../../globals';
-import { VesselView } from '../../../types/vessel';
 import { UserService } from '../../../services/user.service';
+import { UserType } from '../../../types/user';
 
 @Component({
   selector: 'app-la-retrieve-preliminary-application',
@@ -160,7 +160,7 @@ export class LaRetrievePreliminaryApplicationComponent implements OnInit, OnDest
   }
 
   public openBottomSheet(): void {
-    this._bottomSheet.open(LaRetrievePreliminaryApplicationBottomSheet);
+    this._bottomSheet.open(LaRetrievePreliminaryApplicationBottomSheet, { data: this.user });
   }
 }
 
@@ -169,7 +169,10 @@ export class LaRetrievePreliminaryApplicationComponent implements OnInit, OnDest
   templateUrl: 'la-retrieve-preliminary-application.bottomsheet.html',
 })
 export class LaRetrievePreliminaryApplicationBottomSheet {
-  constructor(private _bottomSheetRef: MatBottomSheetRef<LaRetrievePreliminaryApplicationBottomSheet>) {}
+  public UserType: any = UserType; // give HTML access to UserType enum
+
+  constructor(@Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
+              private _bottomSheetRef: MatBottomSheetRef<LaRetrievePreliminaryApplicationBottomSheet>) {}
 
   public openLink(event: MouseEvent): void {
     this._bottomSheetRef.dismiss();

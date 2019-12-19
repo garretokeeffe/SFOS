@@ -9,19 +9,20 @@ import {
   Output, QueryList,
   SimpleChanges, ViewChildren,
 } from '@angular/core';
-import { Applicant, ApplicantType, LicenceApplicationView, RegisteredLengthOption } from '../../../types/licence-application';
+import { Applicant, LicenceApplicationView, RegisteredLengthOption } from '../../../types/licence-application';
 import { Observable } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { animations } from '../../../animations';
-import { UserView } from '../../../types/user';
+import { UserType, UserView } from '../../../types/user';
 import { FleetSegmentManager, FleetSubSegment } from '../../../types/fleet-segment';
 import { LetterOfOfferStatus } from '../../../types/licence-application';
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheet, MatBottomSheetRef, MatCheckbox, MatFormField } from '@angular/material';
 import { Utils } from '../../../services/utils.service';
 import { LicenceService } from '../../../services/licence.service';
 import { NVP } from '../../../types/nvp';
+import { UserService } from '../../../services/user.service';
 
 export interface OptionItem {
   value: string;
@@ -63,7 +64,7 @@ export class LaPreliminaryInfoSimpleComponent implements OnInit, OnChanges {
   public Object: any = Object;
   public RegisteredLengthOption: any = RegisteredLengthOption;
   public FleetSubSegment: any = FleetSubSegment;
-  public ApplicantType: any = ApplicantType;
+  public ApplicantType: any = UserType;
   public LetterOfOfferStatus: any = LetterOfOfferStatus;
   public FleetSegmentManager: any = FleetSegmentManager; // access to static methods
   public utils: Utils = Utils;
@@ -150,8 +151,12 @@ export class LaPreliminaryInfoSimpleComponent implements OnInit, OnChanges {
       partnershipName: [this.licenceApplication.preliminaryInformation.partnershipName, []], // TODO add control with validation dynamically
       firstName: [this.licenceApplication.preliminaryInformation.primaryApplicant.firstName, [Validators.required]],
       lastName: [this.licenceApplication.preliminaryInformation.primaryApplicant.lastName, [Validators.required]],
-      email: [this.licenceApplication.preliminaryInformation.primaryApplicant.email, [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')]],
+      email: [this.licenceApplication.preliminaryInformation.primaryApplicant.email,
+        [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')]],
     });
+
+    // Call after initialising the form
+    this.prefillPreliminaryInformationWithUserDetails();
 
     this.segmentGroups = this.allSegmentGroups;
     this.setupOtherApplicantControls(this.licenceApplication.preliminaryInformation.otherApplicants);
@@ -173,8 +178,26 @@ export class LaPreliminaryInfoSimpleComponent implements OnInit, OnChanges {
       this.form.controls['firstName'].setValue(changes['licenceApplication'].currentValue['preliminaryInformation']['primaryApplicant']['firstName']);
       this.form.controls['lastName'].setValue(changes['licenceApplication'].currentValue['preliminaryInformation']['primaryApplicant']['lastName']);
       this.form.controls['email'].setValue(changes['licenceApplication'].currentValue['preliminaryInformation']['primaryApplicant']['email']);
-
       // this.setupOtherApplicantControls(changes['licenceApplication'].currentValue['preliminaryInformation']['otherApplicants']);
+
+      this.prefillPreliminaryInformationWithUserDetails();
+    }
+
+    if (changes['user'] && changes['user'].currentValue && !changes['user'].firstChange) {
+      this.prefillPreliminaryInformationWithUserDetails();
+    }
+  }
+
+  public prefillPreliminaryInformationWithUserDetails(): void {
+    if (this.user) {
+      this.licenceApplication.preliminaryInformation.primaryApplicant.firstName = this.user.firstName;
+      this.licenceApplication.preliminaryInformation.primaryApplicant.lastName = this.user.lastName;
+      this.licenceApplication.preliminaryInformation.primaryApplicant.email = this.user.email;
+      this.licenceApplication.preliminaryInformation.companyName = this.user.companyName;
+      this.form.controls['firstName'].setValue(this.licenceApplication.preliminaryInformation.primaryApplicant.firstName);
+      this.form.controls['lastName'].setValue(this.licenceApplication.preliminaryInformation.primaryApplicant.lastName);
+      this.form.controls['email'].setValue(this.licenceApplication.preliminaryInformation.primaryApplicant.email);
+      this.form.controls['companyName'].setValue(this.licenceApplication.preliminaryInformation.companyName);
     }
   }
 
@@ -308,12 +331,12 @@ export class LaPreliminaryInfoSimpleComponent implements OnInit, OnChanges {
         this.fb.group({
           firstName: ['', [Validators.required]],
           lastName: ['', [Validators.required]],
-          email: ['', [Validators.required]],
+          // email: ['', [Validators.required]],
         }),
       );
       this.otherApplicantForms[index].controls['firstName'].setValue(applicant['firstName']);
       this.otherApplicantForms[index].controls['lastName'].setValue(applicant['lastName']);
-      this.otherApplicantForms[index].controls['email'].setValue(applicant['email']);
+      // this.otherApplicantForms[index].controls['email'].setValue(applicant['email']);
     });
   }
 
@@ -325,7 +348,7 @@ export class LaPreliminaryInfoSimpleComponent implements OnInit, OnChanges {
       this.fb.group({
         firstName: new FormControl ('', [Validators.required]),
         lastName: new FormControl ('', [Validators.required]),
-        email: new FormControl ('', [Validators.required]),
+        // email: new FormControl ('', [Validators.required]),
       }),
     );
     setTimeout(() => {
@@ -357,7 +380,14 @@ export class LaPreliminaryInfoSimpleComponent implements OnInit, OnChanges {
     return keys;
   }
   public get applicantTypes(): Array<string> {
-    const keys: Array<string> = Object.keys(ApplicantType).filter((key: string) => !isNaN(Number(key)) && Number(key) !== ApplicantType['NONE']);
+    let keys: Array<string> = Object.keys(UserType).filter((key: string) => !isNaN(Number(key)) && Number(key) !== UserType['NONE']);
+
+    // don't return COMPANY as an option if the logged in user is an INDIVIDUAL and Vice-Versa
+    if (this.user.userType === UserType['INDIVIDUAL']) {
+      keys = keys.filter((key: string) => Number(key) !== UserType['COMPANY']);
+    } else if (this.user.userType === UserType['COMPANY']) {
+      keys = keys.filter((key: string) => Number(key) !== UserType['INDIVIDUAL']);
+    }
     return keys;
   }
 
@@ -366,13 +396,13 @@ export class LaPreliminaryInfoSimpleComponent implements OnInit, OnChanges {
   }
 
   public isIndividual(): boolean {
-    return Number(this.form.controls.applicantType.value) === ApplicantType['INDIVIDUAL'];
+    return Number(this.form.controls.applicantType.value) === UserType['INDIVIDUAL'];
   }
   public isCompany(): boolean {
-    return Number(this.form.controls.applicantType.value) === ApplicantType['COMPANY'];
+    return Number(this.form.controls.applicantType.value) === UserType['COMPANY'];
   }
   public isPartnership(): boolean {
-    return Number(this.form.controls.applicantType.value) === ApplicantType['PARTNERSHIP'];
+    return Number(this.form.controls.applicantType.value) === UserType['PARTNERSHIP'];
   }
 
   public onLoseFocus(section: string): void {
@@ -439,13 +469,13 @@ export class LaPreliminaryInfoSimpleComponent implements OnInit, OnChanges {
     } else if (section.toUpperCase() === 'APPLICANT_TYPE') {
       return !this.readonly && this.lengthCompleted && this.segmentCompleted;
     } else if (section.toUpperCase() === 'COMPANY') {
-      return Number(this.form.controls.applicantType.value) === ApplicantType['COMPANY'];
+      return Number(this.form.controls.applicantType.value) === UserType['COMPANY'];
     } else if (section.toUpperCase() === 'PARTNERSHIP') {
-      return Number(this.form.controls.applicantType.value) === ApplicantType['PARTNERSHIP'];
+      return Number(this.form.controls.applicantType.value) === UserType['PARTNERSHIP'];
     } else if (section.toUpperCase() === 'PRIMARY_APPLICANT') {
       return this.form.controls.applicantType.value ? true : false; // return true if any applicant type is selected
     } else if (section.toUpperCase() === 'SECONDARY_APPLICANTS') {
-      return Number(this.form.controls.applicantType.value) === ApplicantType['PARTNERSHIP'];
+      return Number(this.form.controls.applicantType.value) === UserType['PARTNERSHIP'];
     }
   }
 
@@ -458,17 +488,17 @@ export class LaPreliminaryInfoSimpleComponent implements OnInit, OnChanges {
     } else if (section.toUpperCase() === 'APPLICANT_TYPE') {
       return !this.readonly && this.form.controls.loa.value && this.form.controls.registeredLength.value && this.form.controls.fleetSegment.value;
     } else if (section.toUpperCase() === 'COMPANY') {
-      return !this.readonly && this.form.controls.loa.value && this.form.controls.registeredLength.value && this.form.controls.fleetSegment.value && Number(this.form.controls.applicantType.value) === ApplicantType['COMPANY'];
+      return !this.readonly && this.form.controls.loa.value && this.form.controls.registeredLength.value && this.form.controls.fleetSegment.value && Number(this.form.controls.applicantType.value) === UserType['COMPANY'];
     } else if (section.toUpperCase() === 'PARTNERSHIP') {
-      return !this.readonly && this.form.controls.loa.value && this.form.controls.registeredLength.value && this.form.controls.fleetSegment.value && Number(this.form.controls.applicantType.value) === ApplicantType['PARTNERSHIP'];
+      return !this.readonly && this.form.controls.loa.value && this.form.controls.registeredLength.value && this.form.controls.fleetSegment.value && Number(this.form.controls.applicantType.value) === UserType['PARTNERSHIP'];
     } else if (section.toUpperCase() === 'PRIMARY_APPLICANT') {
       return !this.readonly && this.form.controls.loa.value && this.form.controls.registeredLength.value && this.form.controls.fleetSegment.value
-        && (Number(this.form.controls.applicantType.value) === ApplicantType['INDIVIDUAL']
-          || (Number(this.form.controls.applicantType.value) === ApplicantType['COMPANY'] && this.form.controls.companyName.value)
-          || (Number(this.form.controls.applicantType.value) === ApplicantType['PARTNERSHIP'] && this.form.controls.partnershipName.value));
+        && (Number(this.form.controls.applicantType.value) === UserType['INDIVIDUAL']
+          || (Number(this.form.controls.applicantType.value) === UserType['COMPANY'] && this.form.controls.companyName.value)
+          || (Number(this.form.controls.applicantType.value) === UserType['PARTNERSHIP'] && this.form.controls.partnershipName.value));
     } else if (section.toUpperCase() === 'SECONDARY_APPLICANTS') {
       return !this.readonly && this.form.controls.loa.value && this.form.controls.registeredLength.value && this.form.controls.fleetSegment.value
-        && (Number(this.form.controls.applicantType.value) === ApplicantType['PARTNERSHIP'] && this.form.controls.partnershipName.value)
+        && (Number(this.form.controls.applicantType.value) === UserType['PARTNERSHIP'] && this.form.controls.partnershipName.value)
         && this.form.controls.firstName.value && this.form.controls.lastName.value && this.form.controls.email.value;
     }
 

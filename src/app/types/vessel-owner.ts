@@ -1,5 +1,5 @@
 export class VesselOwner {
-  public id: number = null;
+  public id: string = null; // CCS Id
   public firstName: string = '';
   public lastName: string = '';
   public numberOfShares: number; // max =64

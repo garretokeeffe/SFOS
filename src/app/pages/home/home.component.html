@@ -8,7 +8,7 @@
 
   <div fxLayout="row" fxLayoutGap="16px" class="margin-top-double margin-bottom-double">
     <button mat-raised-button (click)="login()">LOGIN</button>
-    <button mat-raised-button (click)="register()">REGISTER</button>
+    <!--<button mat-raised-button (click)="register()">REGISTER</button>-->
   </div>
 
   <div fxFill class="margin-vertical">
@@ -18,7 +18,7 @@
 
   <div class="margin light-grey-background padding-left padding-right padding-bottom" [class.padding-horizontal-double]="!(isHandset$ | async)">
     <div class="wizard-label margin-top margin-bottom-double centered-content">PUBLIC SERVICES</div>
-    <div fxLayout="{{ (isAtLeastMedium$ | async) ? 'row' : 'column' }}" fxLayoutAlign="center center" fxLayoutGap="{{ (isAtLeastMedium$ | async) ? '16px' : '' }}">
+    <div fxLayout="{{ (isAtLeastMedium$ | async) ? 'row' : 'column' }}" fxLayoutAlign="center center" fxLayoutGap="16px"><!-- fxLayoutGap="{{ (isAtLeastMedium$ | async) ? '16px' : '' }}" -->
 
       <mat-card class="hoverable">
         <mat-card-header fxLayoutAlign="center center">
@@ -34,10 +34,37 @@
         </mat-card-header>
         <mat-card-content class="padding-bottom">
           Initiate a preliminary application and determine the conditions that must be satisfied. Fulfillment of the conditions will require registration.
+          <div *ngIf='!(isHandset$ | async)'>&nbsp;</div>
         </mat-card-content>
         <mat-actions fxLayoutAlign="center center">
-          <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="newLicenceApplication()">
+          <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="onNewLicenceApplication()">
             APPLY NOW
+          </button>
+        </mat-actions>
+      </mat-card>
+
+      <mat-card class="hoverable">
+        <mat-card-header fxLayoutAlign="center center">
+          <mat-card-title>
+            <div>
+              <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="16px">
+                <mat-icon>cloud_download</mat-icon>
+                <div>Download Forms</div>
+              </div>
+            </div>
+          </mat-card-title>
+          <mat-card-subtitle></mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="padding-bottom">
+          Access the SFOS repository of forms.
+          <div class='margin-top-half'>
+            Vessel Registration, Licence Application, Proof of Ownership, Vessel and Engine Measurement,
+            Capacity Assignment, Economic Link Questionnaire, Appeals etc
+          </div>
+        </mat-card-content>
+        <mat-actions fxLayoutAlign="center center">
+          <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="onDownloadForms()">
+            ACCESS FORMS
           </button>
         </mat-actions>
       </mat-card>

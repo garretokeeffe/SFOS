@@ -138,12 +138,13 @@
           <!-- Company Name -->
           <div *ngIf="canProceedToFormSection('COMPANY')" fxLayout="row" fxLayoutAlign="start center">
             <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Company">apartment</mat-icon>
-            <mat-form-field>
+            <mat-form-field [class.readonly]='user.companyName'>
               <input matInput placeholder="Company Name"
                      [(ngModel)]="licenceApplication.preliminaryInformation.companyName"
                      [formControl]="form.controls.companyName"
                      (focus)="errorMessage = ''"
-                     (blur)="onLoseFocus('COMPANY')">
+                     (blur)="onLoseFocus('COMPANY')"
+              [readonly]='user.companyName'>
               <mat-error *ngIf="!readonly">* Required</mat-error>
             </mat-form-field>
             <button *ngIf="useDoneButtons" mat-raised-button mat-icon-button class="doneButton" [disabled]="!isDone('COMPANY')">
@@ -173,15 +174,17 @@
           <div *ngIf="canProceedToFormSection('SECONDARY_APPLICANTS')" class="bold grey margin-vertical" [@fadeInOut]="'fadeIn'">Primary Applicant</div>
 
           <!-- Name (readonly) -->
-          <div *ngIf="readonly" fxLayout="row" fxLayoutAlign="start center">
+          <div *ngIf="readonly || (user.firstName && user.lastName && canProceedToFormSection('PRIMARY_APPLICANT'))" fxLayout="row" fxLayoutAlign="start center">
             <mat-icon matListIcon fxLayoutAlign="space-between start" alt="First Name">face</mat-icon>
-            <mat-form-field>
-              <input matInput placeholder="Name" value="{{form.controls.firstName.value}} {{form.controls.lastName.value}}" readonly>
+            <mat-form-field class="readonly">
+              <input matInput placeholder="Name"
+                     value="{{licenceApplication.preliminaryInformation.primaryApplicant.firstName}} {{licenceApplication.preliminaryInformation.primaryApplicant.lastName}}"
+                     readonly>
             </mat-form-field>
           </div>
 
           <!-- First Name -->
-          <div *ngIf="canProceedToFormSection('PRIMARY_APPLICANT')" fxLayout="row" fxLayoutAlign="start center">
+          <div *ngIf="!(user.firstName && user.lastName) && canProceedToFormSection('PRIMARY_APPLICANT')" fxLayout="row" fxLayoutAlign="start center">
             <mat-icon matListIcon fxLayoutAlign="space-between start" alt="First Name">face</mat-icon>
             <mat-form-field>
               <input matInput placeholder="{{ isPartnership() ? 'Your ' : '' }}First Name"
@@ -194,7 +197,7 @@
           </div>
 
           <!-- Last Name -->
-          <div *ngIf="canProceedToFormSection('PRIMARY_APPLICANT')" fxLayout="row" fxLayoutAlign="start center">
+          <div *ngIf="!user && canProceedToFormSection('PRIMARY_APPLICANT')" fxLayout="row" fxLayoutAlign="start center">
             <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Last Name"></mat-icon>
             <mat-form-field>
               <input matInput placeholder="{{ isPartnership() ? 'Your ' : '' }}Last Name"
@@ -209,11 +212,12 @@
           <!-- Email -->
           <div *ngIf="readonly || canProceedToFormSection('PRIMARY_APPLICANT')" fxLayout="row" fxLayoutAlign="start center">
             <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Name">email</mat-icon>
-            <mat-form-field>
+            <mat-form-field [class.readonly]="user.email">
               <input matInput placeholder="{{ isPartnership() ? 'Your ' : '' }}Email"
                      [(ngModel)]="licenceApplication.preliminaryInformation.primaryApplicant.email"
                      [formControl]="form.controls.email"
-                     (focus)="errorMessage = ''" [readonly]="readonly ? readonly : null"
+                     (focus)="errorMessage = ''"
+                     [readonly]="(readonly || user.email ) ? true : null"
                      (blur)="onLoseFocus('PRIMARY_APPLICANT')">
               <mat-error *ngIf="!readonly">* Valid Email Address Required</mat-error>
               <mat-hint *ngIf="!readonly" style="color: rgba(50, 112, 104, 1)">The Letter of Offer will be emailed here</mat-hint>
@@ -264,6 +268,8 @@
               </div>
 
               <!-- Email -->
+              <!-- 27/11/19 the business requested removal of partner email fields -->
+              <!--
               <div [@flyInOut]="'in'">
                 <div fxLayout="row" fxLayoutAlign="start center">
                   <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Name">email</mat-icon>
@@ -280,6 +286,7 @@
                   </button>
                 </div>
               </div>
+              -->
             </ng-template>
 
             <div class="fullWidth margin-top-double" [@flyInOut]="'in'">

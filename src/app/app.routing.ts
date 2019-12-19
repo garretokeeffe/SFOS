@@ -35,6 +35,7 @@ import {HomeComponent} from './pages/home/home.component';
 import {NotificationsComponent} from './pages/notifications/notifications.component';
 import {HelpComponent} from './pages/help/help.component';
 import {LaWizardComponent} from './components/licence-application/la-wizard/la-wizard.component';
+import { FormsComponent } from './pages/forms/forms.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [AuthenticationService]}, /* no authentication required to reach login page */
@@ -73,6 +74,7 @@ const routes: Routes = [
   { path: 'redirect/:url', component: RedirectComponent, pathMatch: 'full', canActivate: [AuthenticationService] },
 
   { path: 'notifications', component: NotificationsComponent, canActivate: [AuthenticationService] },
+  { path: 'forms', component: FormsComponent }, /* no authentication required on forms page */
   { path: 'help', component: HelpComponent, canActivate: [AuthenticationService] },
   { path: 'home', component: HomeComponent }, /* no authentication required on public home page */
 

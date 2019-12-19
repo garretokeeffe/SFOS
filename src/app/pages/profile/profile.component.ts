@@ -18,7 +18,7 @@ import { Globals } from '../../globals';
 export class ProfileComponent implements OnInit {
 
   // UX Options (Can be removed after demo)
-  public isCompanyMode: boolean = false;
+  // public isCompanyMode: boolean = false;
 
   public utils: Utils = Utils; // .getInstance(); // provide access to static Utils functions in html
   public user: UserView = new UserView();
@@ -49,14 +49,7 @@ export class ProfileComponent implements OnInit {
   }
 
   public isCompany(): boolean {
-    // IMPORTANT TODO: return this.user.isCompany() rather than this.isCompanyMode when UX Options are removed
-    // return this.user.isCompany();
-
-    if (this.globals.demo) {
-      return this.isCompanyMode;
-    } else {
-      return this.user.isCompany();
-    }
+    return this.user.isCompany();
   }
 
   private getUserProfile(): void {

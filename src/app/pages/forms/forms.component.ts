@@ -5,12 +5,12 @@ import { map } from 'rxjs/operators';
 import { animations } from '../../animations';
 
 @Component({
-  selector: 'app-help',
-  templateUrl: './help.component.html',
-  styleUrls: ['./help.component.css'],
+  selector: 'app-forms',
+  templateUrl: './forms.component.html',
+  styleUrls: ['./forms.component.css'],
   animations: animations,
 })
-export class HelpComponent implements OnInit {
+export class FormsComponent implements OnInit {
 
   public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
   .pipe(
