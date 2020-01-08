@@ -59,7 +59,7 @@ export class LaApplicationsListComponent implements OnInit, AfterViewInit {
   public assignees: Array<User> = [];
 
   public selectedClient: UserView;
-  
+
   // toggle buttons
   public clientToggleGroup: string = 'ALL_CLIENTS';
   @ViewChild('licenceToggle') public licenceToggle: ElementRef;
@@ -127,7 +127,7 @@ export class LaApplicationsListComponent implements OnInit, AfterViewInit {
     if (this.authentication.access.userGroup === UserGroup['REPRESENTATIVE']) {
       this.clientToggleGroup = 'SELECTED_CLIENT';
       this.displayedColumns = ['createDate', 'type', 'refId', 'userId', 'vessel', 'status', 'updateDate', 'buttons'];
-      
+
       // TODO: remove this hard-coded client
       this.selectedClient = new UserView(
       {
@@ -164,7 +164,7 @@ export class LaApplicationsListComponent implements OnInit, AfterViewInit {
         || data.applicants.filter( applicant => (applicant.firstName.toUpperCase().indexOf(filter) >= 0 || applicant.lastName.toUpperCase().indexOf(filter) >= 0)).length > 0
         || data.vessels.filter( vessel => vessel.name.toUpperCase().indexOf(filter) >= 0).length > 0
         || data.displayStatus().indexOf(filter.toUpperCase()) >= 0
-        || data.createDate.toUpperCase().indexOf(filter.toUpperCase()) >= 0
+        || data.applicationDate.toUpperCase().indexOf(filter.toUpperCase()) >= 0
         || data.updateDate.toUpperCase().indexOf(filter.toUpperCase()) >= 0
         || (data.assignee && data.assignee.firstName.toUpperCase().indexOf(filter.toUpperCase()) >= 0)
         || (data.assignee && data.assignee.lastName.toUpperCase().indexOf(filter.toUpperCase()) >= 0)
@@ -205,7 +205,7 @@ export class LaApplicationsListComponent implements OnInit, AfterViewInit {
     this.loadAllSubmissions = !this.loadAllSubmissions;
     this.getData();
   }
-  
+
   public getData(): void {
     this.isLoading = true; // Display progress bar
     this.errorMessage = '';

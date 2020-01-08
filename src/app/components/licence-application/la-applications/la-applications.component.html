@@ -1,6 +1,10 @@
 <div class="margin-vertical" [class.handset]="(isHandset$ | async)">
-  <div *ngIf="loading">
+  <!--<div *ngIf="loading">
     Checking for applications...
+  </div>-->
+  <div *ngIf="loading" class="progressContainer">
+    <div class="progressText" loading-text></div>
+    <md-progress-bar mode="indeterminate"></md-progress-bar>
   </div>
   <div *ngIf="licenceApplicationSummaries.length === 0 && !loading">
     You don't have any applications at the moment

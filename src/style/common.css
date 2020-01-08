@@ -704,6 +704,22 @@ mat-form-field.multiline {
   color: #ae2833 !important; /* error red */
 }
 
+/* progress controls */
+
+.progressContainer {
+  margin-top: 1.5em;
+}
+.progressText {
+  text-align:left;
+  font-size:0.85em;
+  font-weight:500;
+  color:darkblue;
+  margin-bottom:0.25em;
+}
+.progressText::after {
+  content:'...';
+}
+
 @-moz-keyframes blinker {
   0% { opacity: 1.0; }
   50% { opacity: 0.0; }

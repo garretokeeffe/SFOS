@@ -1,11 +1,11 @@
 {
-  "createDate": "24/10/2019",
+  "applicationDate": "24/10/2019",
   "arn": "12345",
   "pin": "9876",
-  "status": 1,
+  "status": 1942540,
   "expiryDate": "",
   "preliminaryInformation": {
-    "applicantType": 1,
+    "applicantType": 8461,
     "primaryApplicant": {
       "firstName": "John",
       "lastName": "Murphy",
@@ -16,7 +16,7 @@
     "companyName": "",
     "fleetSegment": 338360921,
     "loa": 23,
-    "registeredLength": 24.5,
+    "registeredLength": 315283238,
     "submittedBy":
     {
       "id": "1",

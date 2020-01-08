@@ -26,7 +26,7 @@
           <input *ngIf="(title$ | async) !== 'Client Profile'" matInput placeholder="First Name" value="{{user.firstName || ' '}}" readonly>
         </mat-form-field>
 
-        <mat-form-field [style.width]="dynamicWidth(user.lastName, 'Surname')" class="margin-right-narrow">
+        <mat-form-field [style.width]="dynamicWidth(user.lastName, 'Last Name')" class="margin-right-narrow">
           <!-- TODO: Remove the ngIfs which are only there for the DEMO -->
           <input *ngIf="(title$ | async) === 'Client Profile'" matInput placeholder="Last Name" value="Mahoney" readonly>
           <input *ngIf="(title$ | async) !== 'Client Profile'" matInput placeholder="Last Name" value="{{user.lastName || ' '}}" readonly>
@@ -43,7 +43,7 @@
       <div fxLayout="row" fxLayoutAlign="start center">
         <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Nationality">flag</mat-icon>
         <mat-form-field>
-          <input matInput placeholder="Country of Nationality" value="{{ user.countryOfNationality || ' ' }}" readonly>
+          <input matInput placeholder="Nationality" value="{{ user.nationality || ' ' }}" readonly>
         </mat-form-field>
       </div>
 
@@ -134,10 +134,10 @@
           <input *ngIf="(title$ | async) !== 'Client Profile'" matInput placeholder="First Name" value="{{user.firstName || ' '}}" readonly>
         </mat-form-field>
 
-        <mat-form-field [style.width]="dynamicWidth(user.lastName, 'Surname')" class="margin-right-narrow">
+        <mat-form-field [style.width]="dynamicWidth(user.lastName, 'Last Name')" class="margin-right-narrow">
           <!-- TODO: Remove the ngIfs which are only there for the DEMO -->
-          <input *ngIf="(title$ | async) === 'Client Profile'" matInput placeholder="Surname" value="Mahoney" readonly>
-          <input *ngIf="(title$ | async) !== 'Client Profile'" matInput placeholder="Surname" value="{{user.lastName || ' '}}" readonly>
+          <input *ngIf="(title$ | async) === 'Client Profile'" matInput placeholder="Last Name" value="Mahoney" readonly>
+          <input *ngIf="(title$ | async) !== 'Client Profile'" matInput placeholder="Last Name" value="{{user.lastName || ' '}}" readonly>
         </mat-form-field>
       </div>
 

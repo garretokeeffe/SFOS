@@ -20,16 +20,13 @@ export interface ProgressPatch {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LicenceService {
 
   constructor(private http: HttpClient,
               private globals: Globals,
-              @Optional() private demoService: DemoService)
-  {
-
-  }
+              @Optional() private demoService: DemoService) {  }
 
   public createPreliminaryLicenceApplication(licenceApplication: LicenceApplication | LicenceApplicationView): Observable<LicenceApplicationView> {
 
@@ -37,7 +34,7 @@ export class LicenceService {
       return this.demoService.createPreliminaryLicenceApplication(licenceApplication);
     }
     else {
-      const url: string = environment.submitPreliminaryLicenceApplicationURL;
+      const url: string = environment.createPreliminaryLicenceApplicationURL;
 
       const httpOptions: any = {
         headers: new HttpHeaders({
@@ -49,7 +46,7 @@ export class LicenceService {
       };
 
       return new Observable((observer) => {
-        this.http.post<LicenceApplication>(url, licenceApplication, httpOptions)
+        this.http.post<LicenceApplication>(url, licenceApplication.preliminaryInformation, httpOptions)
         .subscribe(
           (response) => {
             observer.next(new LicenceApplicationView(response)); // response contains the licence application with appended data
@@ -131,6 +128,7 @@ export class LicenceService {
   public getLicenceApplicationSummaries(userId?: string): Observable<Array<LicenceApplicationSummaryView>> {
     // userId = CCS Id from keycloak profile
 
+    /*
     let url: string = '';
 
     // TODO remove the true below - for now always return demo data
@@ -142,6 +140,9 @@ export class LicenceService {
         url += '/' + userId;
       }
     }
+    */
+
+    const url: string = this.globals.demo ? this.demoService.getLicenceApplicationSummariesURL : environment.getLicenceApplicationSummariesURL + '/' + userId;
 
     return new Observable((observer) => {
       this.http.get(url, {
@@ -180,19 +181,19 @@ export class LicenceService {
 
     let url: string = '';
 
-    // TODO remove the true below - for now always return demo data
-    if (true || this.globals.demo) {
+    if (this.globals.demo) {
       url = this.demoService.getLicenceApplicationURL;
     } else {
       url = environment.getLicenceApplicationURL;
       if (userId) {
         url += '/' + userId;
-      }
-      if (arn) {
-        url += '/' + arn;
-      }
-      if (pin) {
-        url += '/' + pin;
+
+        if (arn) {
+          url += '/' + arn;
+        }
+        if (pin) {
+          url += '/' + pin;
+        }
       }
     }
 

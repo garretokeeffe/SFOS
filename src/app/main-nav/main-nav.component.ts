@@ -114,7 +114,7 @@ export class MainNavComponent implements OnInit, OnChanges, AfterViewChecked {
   }
 
   public getUserProfile(): void {
-    this.userService.getUserProfile().subscribe((user: UserView) => {
+    this.userService.getCurrentUser().subscribe((user: UserView) => {
       this.user = user;
 
       this.userService.getApplications().subscribe(

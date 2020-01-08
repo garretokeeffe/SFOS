@@ -20,7 +20,7 @@
     <div>You have capacity expiring soon!</div>
   </div>
 
-  <mat-tab-group mat-stretch-tabs [selectedIndex]="0">
+  <mat-tab-group *ngIf="!errorMessage" mat-stretch-tabs [selectedIndex]="0">
 
     <!-- ON REGISTER -->
     <mat-tab>

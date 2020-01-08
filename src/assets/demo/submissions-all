@@ -17,7 +17,7 @@
     "vesselId": 3,
     "vesselName": "Celtic Explorer",
     "status": 2,
-    "createDate": "07/12/18",
+    "applicationDate": "07/12/18",
     "statusDate": "15/03/19"
   },
   {
@@ -33,7 +33,7 @@
     "vesselId": 3,
     "vesselName": "Star of Hope",
     "status": 1,
-    "createDate": "15/01/19",
+    "applicationDate": "15/01/19",
     "statusDate": "13/03/19"
   }
 ]

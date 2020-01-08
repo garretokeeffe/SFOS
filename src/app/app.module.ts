@@ -158,6 +158,8 @@ import { BottomsheetCloseIconComponent } from './components/bottomsheet-close-ic
 import { LaApplicationsComponent } from './components/licence-application/la-applications/la-applications.component';
 import { LaApplicationCardComponent } from './components/licence-application/la-application-card/la-application-card.component';
 import { FormsComponent } from './pages/forms/forms.component';
+import { IsoDatePipe } from './pipes/iso-date.pipe';
+import { LoadingText } from './directives/loading-text/loading-text.directive';
 
 @NgModule({
   declarations: [
@@ -237,6 +239,8 @@ import { FormsComponent } from './pages/forms/forms.component';
     LaApplicationsComponent,
     LaApplicationCardComponent,
     FormsComponent,
+    IsoDatePipe,
+    LoadingText,
   ],
   imports: [
     routingModule,

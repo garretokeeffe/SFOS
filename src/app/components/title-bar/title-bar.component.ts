@@ -57,7 +57,7 @@ export class TitleBarComponent implements OnInit {
   }
 
   public getUserProfile(): void {
-    this.userService.getUserProfile().subscribe((user: UserView) => {
+    this.userService.getCurrentUser().subscribe((user: UserView) => {
       this.user = user;
     });
   }

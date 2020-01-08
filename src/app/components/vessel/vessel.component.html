@@ -48,12 +48,13 @@
       <div fxFill fxLayout="row" fxLayoutAlign="space-around start" fxLayoutGap="16px">
         <div>
           <div class="text-x-small card-data-header">{{ vessel.complianceDocumentTitle }} Expires</div>
-          <div>{{ vessel.safetyCertificateExpiryDate }}</div>
+          <div>{{ vessel.safetyCertificateExpiryDate || '-' }}</div>
         </div>
       </div>
     </mat-card-subtitle>
 
     <mat-card-content>
+      <!--
       <div class="imageContainer">
         <div *ngIf="display === 'IMAGE'" [@fadeInOut]="'fadeIn'">
           <img mat-card-image [src]="vessel.images.length > 0 ? vessel.images[0] : 'assets/images/vessels/default.jpg'" alt="Photo of {{ vessel.name }}" >
@@ -125,6 +126,7 @@
           </mat-card-subtitle>
         </div>
       </div>
+      -->
 
       <!-- LICENCE -->
       <div>
@@ -137,7 +139,7 @@
                   <div class="left" [class.text-small]="(isHandset$ | async)">{{ vessel.licence.displayCombinedFleetSegment() }}</div>
                   <div class="text-x-small left padding-top-half">Valid From</div>
                   <div class="text-small left padding-bottom-half">
-                    <span>{{ vessel.licence.startDate }}</span> - <span>{{ vessel.licence.endDate }}</span>
+                    <span>{{ vessel.licence.startDate | isoDate: 'To' }}</span> - <span>{{ vessel.licence.endDate | isoDate: 'To' }}</span>
                   </div>
                 </div>
                 <div class="padding-top-half padding-bottom-half">

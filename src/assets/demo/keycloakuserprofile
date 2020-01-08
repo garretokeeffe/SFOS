@@ -1,5 +1,9 @@
 {
-  "id": 1,
+  "attributes": [
+    {
+      "ccsId": "1"
+    }
+  ],
   "firstName": "John",
   "lastName": "Murphy",
   "email": "John@demo.com",

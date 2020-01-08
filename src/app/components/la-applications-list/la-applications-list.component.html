@@ -68,9 +68,9 @@
   </div>
 
   <table *ngIf="dataSource.data.length > 0" mat-table [dataSource]="dataSource" matSort>
-    <ng-container matColumnDef="createDate">
+    <ng-container matColumnDef="applicationDate">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Submitted</th>
-      <td mat-cell *matCellDef="let submission;"> {{ submission.createDate }} <!-- {{ utils.toDate(submission.createDate) | date }} --> </td>
+      <td mat-cell *matCellDef="let submission;"> {{ submission.createDate }} <!-- {{ utils.toDate(submission.applicationDate) | date }} --> </td>
     </ng-container>
     <ng-container matColumnDef="type">
       <th mat-header-cell *matHeaderCellDef mat-sort-header [@flyInOut]="'in'">Type</th>

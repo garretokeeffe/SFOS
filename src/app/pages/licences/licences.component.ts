@@ -53,11 +53,11 @@ export class LicencesComponent implements OnInit, DoCheck {
 
     // title$ = this.activatedRoute.paramMap.pipe(map(() => window.history.state.title));
 
-    this.userService.getUserByUserId().subscribe((user) => {
+    this.userService.getCurrentUser().subscribe((user) => {
         this.user = user;
       },
       (error) => {
-        console.error('Failed to retrieve userprofile');
+        console.error('Failed to retrieve user profile');
         this.user = null;
       },
     );

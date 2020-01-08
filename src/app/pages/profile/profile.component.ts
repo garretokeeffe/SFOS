@@ -53,7 +53,7 @@ export class ProfileComponent implements OnInit {
   }
 
   private getUserProfile(): void {
-    this.userService.getUserProfile().subscribe(
+    this.userService.getCurrentUser().subscribe(
       (data: UserView) => {
         this.user = new UserView(data);
       },

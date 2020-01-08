@@ -48,7 +48,7 @@ export class LaApplicationsComponent implements OnInit {
   public ngOnInit(): void {
     this.loading = true;
 
-    this.userService.getUserProfile().subscribe((user: UserView) => {
+    this.userService.getCurrentUser().subscribe((user: UserView) => {
         this.user = user;
 
         this.licenceService.getLicenceApplicationSummaries(this.user.id).subscribe(

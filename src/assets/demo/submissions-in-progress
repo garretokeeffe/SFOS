@@ -27,7 +27,7 @@
       }
     ],
     "status": 2,
-    "createDate": "07/12/18",
+    "applicationDate": "07/12/18",
     "updateDate": "15/03/19",
     "assignee": {
       "id": 1,
@@ -73,7 +73,7 @@
       }
     ],
     "status": 1,
-    "createDate": "15/01/19",
+    "applicationDate": "15/01/19",
     "updateDate": "13/03/19",
     "assignee": {
       "id": 1,
@@ -107,7 +107,7 @@
       }
     ],
     "status": 4,
-    "createDate": "01/01/19",
+    "applicationDate": "01/01/19",
     "updateDate": "15/01/19",
     "assignee": {
       "id": 2,
@@ -134,7 +134,7 @@
       }
     ],
     "status": 2,
-    "createDate": "03/04/19",
+    "applicationDate": "03/04/19",
     "updateDate": "05/05/19"
   },
   {
@@ -154,7 +154,7 @@
       }
     ],
     "status": 5,
-    "createDate": "07/12/18",
+    "applicationDate": "07/12/18",
     "updateDate": "15/03/19"
   },
   {
@@ -174,7 +174,7 @@
       }
     ],
     "status": 1,
-    "createDate": "15/01/19",
+    "applicationDate": "15/01/19",
     "updateDate": "13/03/19"
   },
   {
@@ -199,7 +199,7 @@
       }
     ],
     "status": 2,
-    "createDate": "07/12/18",
+    "applicationDate": "07/12/18",
     "updateDate": "15/03/19"
   },
   {
@@ -219,7 +219,7 @@
       }
     ],
     "status": 1,
-    "createDate": "15/01/19",
+    "applicationDate": "15/01/19",
     "updateDate": "13/03/19"
   },
   {
@@ -248,7 +248,7 @@
       }
     ],
     "status": 2,
-    "createDate": "07/12/18",
+    "applicationDate": "07/12/18",
     "updateDate": "15/03/19"
   },
   {
@@ -268,7 +268,7 @@
       }
     ],
     "status": 1,
-    "createDate": "15/01/19",
+    "applicationDate": "15/01/19",
     "updateDate": "13/03/19"
   },
   {
@@ -288,7 +288,7 @@
       }
     ],
     "status": 1,
-    "createDate": "15/01/19",
+    "applicationDate": "15/01/19",
     "updateDate": "13/03/19"
   },
 {
@@ -313,7 +313,7 @@
       }
     ],
     "status": 2,
-    "createDate": "07/12/18",
+    "applicationDate": "07/12/18",
     "updateDate": "15/03/19"
   },
   {
@@ -333,7 +333,7 @@
       }
     ],
     "status": 1,
-    "createDate": "15/01/19",
+    "applicationDate": "15/01/19",
     "updateDate": "13/03/19"
   },
   {
@@ -358,7 +358,7 @@
       }
     ],
     "status": 2,
-    "createDate": "07/12/18",
+    "applicationDate": "07/12/18",
     "updateDate": "15/03/19"
   },
   {
@@ -378,7 +378,7 @@
       }
     ],
     "status": 1,
-    "createDate": "15/01/19",
+    "applicationDate": "15/01/19",
     "updateDate": "13/03/19"
   },
 {
@@ -403,7 +403,7 @@
       }
     ],
     "status": 2,
-    "createDate": "07/12/18",
+    "applicationDate": "07/12/18",
     "updateDate": "15/03/19"
   },
   {
@@ -423,7 +423,7 @@
       }
     ],
     "status": 1,
-    "createDate": "15/01/19",
+    "applicationDate": "15/01/19",
     "updateDate": "13/03/19"
   },
 {
@@ -448,7 +448,7 @@
       }
     ],
     "status": 2,
-    "createDate": "07/12/18",
+    "applicationDate": "07/12/18",
     "updateDate": "15/03/19"
   },
   {
@@ -468,7 +468,7 @@
       }
     ],
     "status": 1,
-    "createDate": "15/01/19",
+    "applicationDate": "15/01/19",
     "updateDate": "13/03/19"
   },
 {
@@ -493,7 +493,7 @@
       }
     ],
     "status": 2,
-    "createDate": "07/12/18",
+    "applicationDate": "07/12/18",
     "updateDate": "15/03/19"
   },
   {
@@ -513,7 +513,7 @@
       }
     ],
     "status": 1,
-    "createDate": "15/01/19",
+    "applicationDate": "15/01/19",
     "updateDate": "13/03/19"
   },
 {
@@ -538,7 +538,7 @@
       }
     ],
     "status": 2,
-    "createDate": "07/12/18",
+    "applicationDate": "07/12/18",
     "updateDate": "15/03/19"
   },
   {
@@ -558,7 +558,7 @@
       }
     ],
     "status": 1,
-    "createDate": "15/01/19",
+    "applicationDate": "15/01/19",
     "updateDate": "13/03/19"
   },
 {
@@ -583,7 +583,7 @@
       }
     ],
     "status": 2,
-    "createDate": "07/12/18",
+    "applicationDate": "07/12/18",
     "updateDate": "15/03/19"
   },
   {
@@ -603,7 +603,7 @@
       }
     ],
     "status": 1,
-    "createDate": "15/01/19",
+    "applicationDate": "15/01/19",
     "updateDate": "13/03/19"
   },
 {
@@ -628,7 +628,7 @@
       }
     ],
     "status": 2,
-    "createDate": "07/12/18",
+    "applicationDate": "07/12/18",
     "updateDate": "15/03/19"
   },
   {
@@ -648,7 +648,7 @@
       }
     ],
     "status": 1,
-    "createDate": "15/01/19",
+    "applicationDate": "15/01/19",
     "updateDate": "13/03/19"
   },
   {
@@ -673,7 +673,7 @@
       }
     ],
     "status": 2,
-    "createDate": "07/12/18",
+    "applicationDate": "07/12/18",
     "updateDate": "15/03/19"
   },
   {
@@ -698,7 +698,7 @@
      }
     ],
     "status": 7,
-    "createDate": "07/12/18",
+    "applicationDate": "07/12/18",
     "updateDate": "27/05/19"
   }
 ]

@@ -57,7 +57,7 @@ export class VesselsComponent implements OnInit {
     this.title$ = this.activatedRoute.paramMap.pipe(map(() => window.history.state.title));
     this.errorMessage = '';
 
-    this.userService.getUserProfile().subscribe((user: UserView) => {
+    this.userService.getCurrentUser().subscribe((user: UserView) => {
       this.user = user;
 
       this.vesselService.getVessels(user.id).subscribe((vessels: Array<VesselView>) => {

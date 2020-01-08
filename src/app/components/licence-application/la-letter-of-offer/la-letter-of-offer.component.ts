@@ -89,7 +89,7 @@ export class LaLetterOfOfferComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     // If user details have not been passed in, retrieve them now.
     if (!this.user) {
-      this.userService.getUserProfile().subscribe((user: UserView) => {
+      this.userService.getCurrentUser().subscribe((user: UserView) => {
         this.user = user;
       });
     }

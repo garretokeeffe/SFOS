@@ -18,9 +18,10 @@ export enum LetterOfOfferTermType {
 }
 export enum LicenceApplicationStatus {
   NONE = 0,
-  PENDING_ACCEPTANCE_OF_LETTER_OF_OFFER = 1,
+  PENDING_LETTER_OF_OFFER = 1942535,
+  PENDING_ACCEPTANCE_OF_LETTER_OF_OFFER = 1942540,
   REVOKED = 2,
-  PENDING_COMPLIANCE = 3,
+  PENDING_COMPLIANCE = 315357739,
   PROCESSING_APPLICATION = 4,
   ISSUED = 5,
   REJECTED = 6,
@@ -142,16 +143,16 @@ export class LetterOfOfferView extends LetterOfOffer {
 }
 
 export class LicenceApplicationSummary {
-  public createDate: string = ''; // DD/MM/YYYY
+  public applicationDate: string = ''; // DD/MM/YYYY
   public arn: string = '';
   public status: number = LicenceApplicationStatus.NONE;
   public preliminaryInformation: PreliminaryInformation = new PreliminaryInformation();
-  public expiryDate: string = ''; // one year after letter of offer has been accepted
+  public expiryDate: string = ''; // 30 days after applicationDate is terms have not yet been accepted OR one year after letter of offer terms have been accepted
 
   constructor(licenceApplication: LicenceApplicationSummary | LicenceApplicationSummaryView | LicenceApplication | LicenceApplicationView) {
     if (licenceApplication) {
       // copy constructor
-      this.createDate = licenceApplication.createDate;
+      this.applicationDate = licenceApplication.applicationDate;
       this.arn = licenceApplication.arn;
       this.status = licenceApplication.status ? licenceApplication.status : LicenceApplicationStatus.NONE;
       this.preliminaryInformation = new PreliminaryInformation(licenceApplication.preliminaryInformation);

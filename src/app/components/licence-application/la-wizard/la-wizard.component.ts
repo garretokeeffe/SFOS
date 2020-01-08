@@ -48,7 +48,7 @@ export class LaWizardComponent implements OnInit {
     this.mode = this.route.snapshot.params.id ? this.route.snapshot.params.id : LaWizardMode.NONE;
     console.log('wizard mode = ' + LaWizardMode[this.mode]);
 
-    this.userService.getUserProfile().subscribe((user: UserView) => {
+    this.userService.getCurrentUser().subscribe((user: UserView) => {
         this.user = user;
       },
       (error) => {

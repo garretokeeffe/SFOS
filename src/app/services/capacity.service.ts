@@ -1,14 +1,13 @@
 import { Injectable, Optional } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Vessel, VesselView} from '../types/vessel';
 import {environment} from '../../environments/environment';
 import { AllCapacity, AllCapacityView, Capacity, CapacityView } from '../types/capacity';
 import { Globals } from '../globals';
 import { DemoService } from './demo.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CapacityService {
 
@@ -16,14 +15,14 @@ export class CapacityService {
               private globals: Globals,
               @Optional() private demoService: DemoService) { }
 
-  public getAllCapacity(ownerId?: string): Observable<AllCapacityView> {
+  public getAllCapacity(ownerId?: string): Observable<AllCapacity | AllCapacityView> {
 
     // ownerId = CCS Id from keycloak profile
     // sample ownerId for hard-coding = VA100131F
 
-    const url: string = this.globals.demo ? this.demoService.getCapacityURL : environment.getCapacityURL; // + '/' + ownerId;
+    const url: string = this.globals.demo ? this.demoService.getCapacityURL : environment.getCapacityURL + '/' + ownerId;
 
-    return Observable.create( (observer) => {
+    return new Observable( (observer) => {
       this.http.get(url, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',

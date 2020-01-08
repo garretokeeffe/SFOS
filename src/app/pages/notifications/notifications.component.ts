@@ -135,7 +135,7 @@ export class NotificationsComponent implements OnInit, AfterViewInit {
         || data.applicants.filter( applicant => (applicant.firstName.toUpperCase().indexOf(filter) >= 0 || applicant.lastName.toUpperCase().indexOf(filter) >= 0)).length > 0
         || data.vessels.filter( vessel => vessel.name.toUpperCase().indexOf(filter) >= 0).length > 0
         || data.displayStatus().indexOf(filter.toUpperCase()) >= 0
-        || data.createDate.toUpperCase().indexOf(filter.toUpperCase()) >= 0
+        || data.applicationDate.toUpperCase().indexOf(filter.toUpperCase()) >= 0
         || data.updateDate.toUpperCase().indexOf(filter.toUpperCase()) >= 0
         || (data.assignee && data.assignee.firstName.toUpperCase().indexOf(filter.toUpperCase()) >= 0)
         || (data.assignee && data.assignee.lastName.toUpperCase().indexOf(filter.toUpperCase()) >= 0)

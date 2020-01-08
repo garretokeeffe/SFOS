@@ -71,18 +71,7 @@ export class CapacityComponent implements OnInit, AfterViewChecked {
     // this.title$ = this.activatedRoute.paramMap.pipe(map(() => window.history.state.title));
     this.title$ = of('My Capacity');
 
-    console.log(Breakpoints.HandsetPortrait); // remove me
-
-    this.userService.getUserByUserId().subscribe((user: UserView) => {
-        this.user = user;
-      },
-      (error) => {
-        console.error('Failed to retrieve userprofile');
-        this.user = null;
-      },
-    );
-
-    this.userService.getUserProfile().subscribe((user: UserView) => {
+    this.userService.getCurrentUser().subscribe((user: UserView) => {
       this.user = user;
 
       this.capacityService.getAllCapacity(user.id).subscribe(

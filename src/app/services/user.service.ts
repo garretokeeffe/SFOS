@@ -35,9 +35,9 @@ export class UserService {
     }
   }
 
-  public getUserProfile(): Observable<UserView> {
+  public getCurrentUser(): Observable<UserView> {
     if (this.currentUserProfile) {
-      return Observable.create((observer) => {
+      return new Observable((observer) => {
         observer.next(this.currentUserProfile);
         observer.complete();
       });
@@ -49,7 +49,7 @@ export class UserService {
         .subscribe(
           (profile: Keycloak.KeycloakProfile) => {
             // simulate getting the remaining user attributes from ifis
-            this.getUserProfileByCcsId(profile.id).subscribe((user: UserView) => {
+            this.getUserProfileByCcsId(profile['attributes']['ccsId']).subscribe((user: UserView) => {
               observer.next(user);
               observer.complete();
             });
@@ -63,14 +63,14 @@ export class UserService {
           .then(
             (profile: Keycloak.KeycloakProfile) => {
               // get the remaining user attributes from ifis
-              this.getUserProfileByCcsId(profile.id).subscribe((user: UserView) => {
+              this.getUserProfileByCcsId(profile['attributes']['ccsId']).subscribe((user: UserView) => {
                 observer.next(user);
                 observer.complete();
               });
             },
           );
         } else {
-          console.log('Attempted to getUserProfile() without keycloak authentication');
+          console.log('Attempted to getCurrentUser() without keycloak authentication');
           observer.next(new UserView()); // return an empty userprofile object
           observer.complete();
         }
@@ -128,7 +128,7 @@ export class UserService {
       url += '/' + userId;
     }
 
-    return Observable.create((observer) => {
+    return new Observable((observer) => {
       this.http.get(url, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -163,7 +163,7 @@ export class UserService {
     //   url += '/' + userReferenceNumber;
     // }
 
-    return Observable.create((observer) => {
+    return new Observable((observer) => {
       this.http.get(url, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -203,7 +203,7 @@ export class UserService {
       url += '/' + userId;
     }
 
-    return Observable.create((observer) => {
+    return new Observable((observer) => {
       this.http.get(url, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',

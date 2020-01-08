@@ -20,7 +20,7 @@ export class HomeVesselOwnerComponent implements OnInit {
 
   public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
   .pipe(
-    map(result => result.matches)
+    map((result) => result.matches),
   );
 
   public user: UserView = null;
@@ -38,11 +38,11 @@ export class HomeVesselOwnerComponent implements OnInit {
               public notificationService: NotificationService) { }
 
   public ngOnInit(): void {
-    this.userService.getUserByUserId().subscribe((user: UserView) => {
+    this.userService.getCurrentUser().subscribe((user: UserView) => {
       this.user = user;
     },
       (error) => {
-      console.error('Failed to retrieve userprofile');
+      console.error('Failed to retrieve user profile');
       this.user = null;
     });
 

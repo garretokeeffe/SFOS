@@ -23,7 +23,7 @@ export class VesselService {
 
     const url: string = this.globals.demo ? this.demoService.getVesselsURL : environment.getVesselsURL + '/' + ownerId;
 
-    return Observable.create((observer) => {
+    return new Observable((observer) => {
       this.http.get(url, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -75,15 +75,15 @@ export class VesselService {
     // WIP The above should be const url: string = environment.getVesselURL;
     // for now just use the first vessel returned from list
 
-    return Observable.create(observer => {
+    return new Observable(observer => {
       this.http.get(url, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
           'Cache-Control': 'no-cache, no-store, must-revalidate', // HTTP 1.1
           'Pragma': 'no-cache', // HTTP 1.0
-          'Expires': '0' // Proxies
+          'Expires': '0', // Proxies
         }),
-        observe: 'body'
+        observe: 'body',
       })
       .subscribe(
         (res: Array<Vessel>) => {

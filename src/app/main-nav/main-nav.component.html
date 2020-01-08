@@ -56,7 +56,7 @@
       <mat-divider *ngIf="authentication.access.userGroup === UserGroup['REPRESENTATIVE'] && globals.configuration.showPWATestMenuItem"></mat-divider>
       <a *ngIf="globals.configuration.showPWATestMenuItem" mat-list-item routerLink="/pwatest"><mat-icon matListIcon alt="PWA Test">gesture</mat-icon><span class="color-primary">PWA Test</span></a>
 
-      <div *ngIf="isLicensingApplication() && [UserGroup['FISHERMAN'], UserGroup['FISHERMAN_RO']].includes(authentication.access.userGroup)">
+      <div *ngIf="[UserGroup['FISHERMAN'], UserGroup['FISHERMAN_RO']].includes(authentication.access.userGroup)"> <!-- *ngIf="isLicensingApplication() && [UserGroup['FISHERMAN'], UserGroup['FISHERMAN_RO']].includes(authentication.access.userGroup)" -->
         <a mat-list-item routerLink="/vessels" [state]="{title: 'My Vessels'}"><mat-icon matListIcon>directions_boat</mat-icon><span class="color-primary">My Vessels</span></a><!-- submenu to include Registration History -->
         <mat-divider></mat-divider>
         <a mat-list-item routerLink="/capacity" [state]="{title: 'My Capacity'}"><mat-icon matListIcon>toys</mat-icon><span class="color-primary">My Capacity</span></a>

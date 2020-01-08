@@ -2,9 +2,9 @@ import { Keycloak } from 'keycloak-angular/lib/core/services/keycloak.service';
 
 export enum UserType {
   NONE = 0,
-  INDIVIDUAL = 1,
-  COMPANY = 2,
-  PARTNERSHIP = 3,
+  INDIVIDUAL = 8461,
+  COMPANY = 8463,
+  PARTNERSHIP = 8465,
 }
 
 export class User {
@@ -29,7 +29,7 @@ export class User {
 
   // attributes - individual
   public dob: string = ''; // date of birth dd/mm/yyyy
-  public countryOfNationality: string = '';
+  public nationality: string = '';
   public ppsn: string = '';
 
   // attributes - company
@@ -63,7 +63,7 @@ export class User {
 
       // attributes - individual
       this.dob = user.dob ? user.dob : this.dob;
-      this.countryOfNationality = user.countryOfNationality ? user.countryOfNationality : this.countryOfNationality;
+      this.nationality = user.nationality ? user.nationality : this.nationality;
       this.ppsn = user.ppsn ? user.ppsn : this.ppsn;
 
       // attributes - company
@@ -89,7 +89,7 @@ export class UserView extends User {
 
   public isCompany(): boolean {
     // return this.companyName ? true : false;
-    return this.userType === UserType['COMPANY'];
+    return (this.userType === UserType['COMPANY'] || this.companyName) ? true : false;
   }
 
   public isIndividual(): boolean {

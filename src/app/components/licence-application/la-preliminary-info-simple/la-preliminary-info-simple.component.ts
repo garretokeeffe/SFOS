@@ -190,6 +190,13 @@ export class LaPreliminaryInfoSimpleComponent implements OnInit, OnChanges {
 
   public prefillPreliminaryInformationWithUserDetails(): void {
     if (this.user) {
+      this.licenceApplication.preliminaryInformation.submittedBy = new Applicant();
+      this.licenceApplication.preliminaryInformation.submittedBy.id = this.user.id;
+      this.licenceApplication.preliminaryInformation.submittedBy.firstName = this.user.firstName;
+      this.licenceApplication.preliminaryInformation.submittedBy.lastName = this.user.lastName;
+      this.licenceApplication.preliminaryInformation.submittedBy.email = this.user.email;
+
+      this.licenceApplication.preliminaryInformation.primaryApplicant.id = this.user.id;
       this.licenceApplication.preliminaryInformation.primaryApplicant.firstName = this.user.firstName;
       this.licenceApplication.preliminaryInformation.primaryApplicant.lastName = this.user.lastName;
       this.licenceApplication.preliminaryInformation.primaryApplicant.email = this.user.email;
@@ -563,7 +570,7 @@ export class LaPreliminaryInfoSimpleComponent implements OnInit, OnChanges {
     this._bottomSheet.open(LaFleetSegmentBottomSheet);
   }
   public openReviewPreliminaryInfoBottomSheet(preSubmit: boolean = false): void {
-    this._bottomSheet.open(LaReviewPreliminaryInfoBottomSheet, { data: {'preSubmit': preSubmit}});
+    this._bottomSheet.open(LaReviewPreliminaryInfoBottomSheet, { data: {preSubmit: preSubmit}});
   }
 
   public onSubmit(): void {

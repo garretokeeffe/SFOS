@@ -35,11 +35,11 @@ export class LicenceApplicationComponent implements OnInit, AfterViewChecked {
               public userService: UserService) { }
 
   public ngOnInit(): void {
-    this.userService.getUserByUserId().subscribe((user: UserView) => {
+    this.userService.getCurrentUser().subscribe((user: UserView) => {
       this.user = user;
     },
       (error) => {
-      console.error('Failed to retrieve userprofile');
+      console.error('Failed to retrieve user profile');
       this.user = null;
     });
   }

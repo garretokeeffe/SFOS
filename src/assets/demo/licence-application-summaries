@@ -1,11 +1,11 @@
 [
   {
-    "createDate": "01/11/2019",
+    "applicationDate": "01/11/2019",
     "arn": "12345",
-    "status": 1,
+    "status": 1942540,
     "expiryDate": "",
     "preliminaryInformation": {
-      "applicantType": 1,
+      "applicantType": 8461,
       "primaryApplicant": {
         "firstName": "John",
         "lastName": "Murphy",
@@ -16,7 +16,7 @@
       "companyName": "",
       "fleetSegment": 338360921,
       "loa": 23,
-      "registeredLength": 24.5,
+      "registeredLength": 315283238,
       "submittedBy":
       {
         "id": "1",
@@ -27,12 +27,12 @@
     }
   },
   {
-    "createDate": "27/11/2019",
+    "applicationDate": "27/11/2019",
     "arn": "11223",
-    "status": 3,
-    "expiryDate": "",
+    "status": 315357739,
+    "expiryDate": "30/12/2020",
     "preliminaryInformation": {
-      "applicantType": 2,
+      "applicantType": 8463,
       "primaryApplicant": {
         "firstName": "John",
         "lastName": "Murphy",
@@ -43,7 +43,7 @@
       "companyName": "ACME Ltd",
       "fleetSegment": 1807585,
       "loa": 14,
-      "registeredLength": 14.5,
+      "registeredLength": 315283238,
       "submittedBy":
       {
         "id": "1",
@@ -54,12 +54,12 @@
     }
   },
   {
-    "createDate": "18/12/2019",
+    "applicationDate": "18/12/2019",
     "arn": "22334",
-    "status": 1,
+    "status": 1942540,
     "expiryDate": "",
     "preliminaryInformation": {
-      "applicantType": 3,
+      "applicantType": 8465,
       "primaryApplicant": {
         "firstName": "John",
         "lastName": "Murphy",
@@ -78,8 +78,8 @@
       "partnershipName": "Murphy & Dunne",
       "companyName": "",
       "fleetSegment": 1807585,
-      "loa": 16,
-      "registeredLength": 16,
+      "loa": 26,
+      "registeredLength": 315283239,
       "submittedBy":
       {
         "id": "1",

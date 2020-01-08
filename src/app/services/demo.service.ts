@@ -26,6 +26,7 @@ export class DemoService {
   public getVersionURL: string = 'assets/demo/version';
   public getKeycloakProfileURL: string = 'assets/demo/keycloakuserprofile';
   public getUserProfileURL: string = 'assets/demo/userprofile';
+  // public createPreliminaryLicenceApplicationURL: string = 'assets/demo/createPreliminaryLicenceApplicationURL';
   public getLicenceApplicationURL: string = 'assets/demo/licence-application';
   public getLicenceApplicationSummariesURL: string = 'assets/demo/licence-application-summaries';
   public getUsersURL: string = 'assets/demo/users';
@@ -64,7 +65,7 @@ export class DemoService {
   public getKeycloakUserProfile(): Observable<Keycloak.KeycloakProfile> {
     const url: string = this.getKeycloakProfileURL;
 
-    return Observable.create((observer) => {
+    return new Observable((observer) => {
       this.http.get(url, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
