@@ -139,7 +139,8 @@
                   <div class="left" [class.text-small]="(isHandset$ | async)">{{ vessel.licence.displayCombinedFleetSegment() }}</div>
                   <div class="text-x-small left padding-top-half">Valid From</div>
                   <div class="text-small left padding-bottom-half">
-                    <span>{{ vessel.licence.startDate | isoDate: 'To' }}</span> - <span>{{ vessel.licence.endDate | isoDate: 'To' }}</span>
+                    <!--<span>{{ vessel.licence.startDate | isoDate: 'To' }}</span> - <span>{{ vessel.licence.endDate | isoDate: 'To' }}</span>-->
+                    <span>{{ vessel.licence.startDate }}</span> - <span>{{ vessel.licence.endDate }}</span>
                   </div>
                 </div>
                 <div class="padding-top-half padding-bottom-half">
