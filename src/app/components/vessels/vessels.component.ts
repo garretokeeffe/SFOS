@@ -43,6 +43,7 @@ export class VesselsComponent implements OnInit {
   public hideNotifications: boolean = true;
   public hideApplicationStatuses: boolean = true;
 
+  public loading: boolean = false;
   public errorMessage: string = '';
 
   constructor(public activatedRoute: ActivatedRoute,
@@ -55,6 +56,7 @@ export class VesselsComponent implements OnInit {
 
   public ngOnInit(): void {
     this.title$ = this.activatedRoute.paramMap.pipe(map(() => window.history.state.title));
+    this.loading = true;
     this.errorMessage = '';
 
     this.userService.getCurrentUser().subscribe((user: UserView) => {
@@ -64,14 +66,18 @@ export class VesselsComponent implements OnInit {
         this.vessels = vessels.sort((v1, v2) => {
           return (v1.name < v2.name ? -1 : 1); // ascending
         });
+
+        this.loading = false;
       },
     (error) => {
         console.error('Failed to retrieve vessels');
         this.vessels = [];
+        this.loading = false;
         this.errorMessage = 'Sorry, something went wrong. Your vessels could not be retrieved at this time.';
       });
     },
     (error) => {
+      this.loading = false;
       console.error('Failed to retrieve user profile and hence vessels');
       this.errorMessage = 'Sorry, something went wrong. Your vessels could not be retrieved at this time.';
     });

@@ -8,6 +8,15 @@
   </div>
   -->
 
+  <div *ngIf="loading" class="progressContainer">
+    <div class="progressText" loading-text></div>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+  <div *ngIf="errorMessage && !loading" class="errorBanner" fxLayoutAlign="start center">
+    <mat-icon class="info-icon">error_outline</mat-icon>
+    <div>{{ errorMessage }}</div>
+  </div>
+
   <!-- INDIVIDUAL PROFILE -->
   <div *ngIf="!this.isCompany()">
 
@@ -36,7 +45,7 @@
       <div fxLayout="row" fxLayoutAlign="start center">
         <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Date of Birth">date_range</mat-icon> <!-- for some reason calendar_today renders incorrectly on the right of the text -->
         <mat-form-field>
-          <input matInput placeholder="Date of Birth" value="{{ user.dob || ' ' }}" readonly>
+          <input matInput placeholder="Date of Birth" value="{{ (user.dob | isoDate) || '-' }}" readonly>
         </mat-form-field>
       </div>
 

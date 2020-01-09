@@ -82,6 +82,15 @@ table tbody .mat-stroked-button.transparent:hover {
 }
 
 /* progress controls */
+.mat-progress-bar-background {
+  fill: rgb(149, 180, 176); /* light green - doesnt seem to do anything */
+}
+.mat-progress-bar-buffer {
+  background-color: rgb(149, 180, 176); /* light green, don't use rgba opacity here otherwise dots appear on progress bar */
+}
+.mat-progress-bar-fill::after {
+  background-color: rgba(50, 112, 104, 1); /* dafm green */
+}
 .progressContainer {
   margin-top: 1.5em;
 }
@@ -96,8 +105,8 @@ table tbody .mat-stroked-button.transparent:hover {
   text-align: left;
   font-size: 0.85em;
   font-weight: normal;
-  color: whitesmoke;
-  margin-left: 16px;
+  color: rgba(50, 112, 104, 1); /* dafm green */
+  margin-left: 0; /* 16px; */
   margin-bottom: 0.50em;
 }
 .progressContainerInline .progressText {

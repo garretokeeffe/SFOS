@@ -1,6 +1,9 @@
 <div class="page">
   <app-title-bar></app-title-bar>
 </div>
+<div *ngIf="loading" class="margin-horizontal progressContainer">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
 <div class="page center" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)">
 
  <!--<pdf-viewer src="assets/demo/docs/LetterOfOffer.pdf"></pdf-viewer>-->
@@ -10,8 +13,6 @@
                            [mobileFriendlyZoom]="'true'"
                            [showZoomButtons]="true">
   </ngx-extended-pdf-viewer>-->
-
-
 
   <div *ngIf="user">
 

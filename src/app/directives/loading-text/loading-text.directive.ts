@@ -18,8 +18,6 @@ export class LoadingText {
 
   constructor(private el: ElementRef) {
 
-    console.log('invoking loading-text directive');
-
     const nativeElement: HTMLElement = this.el.nativeElement;
     nativeElement.innerText = this.messageList[this.messageIndex];
 

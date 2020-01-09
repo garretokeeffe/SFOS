@@ -30,13 +30,13 @@
   <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px" [class.margin-top]="block.trackRecord.length > 0">
     <div class="left">
       <div class="text-small card-data-header">Off Register Since</div>
-      <div class="card-data centered-content">{{ block.offRegisterDate || '-' }}</div>
+      <div class="card-data centered-content">{{ (block.offRegisterDate | isoDate) || '-' }}</div>
     </div>
     <div class="left">
       <div class="text-small card-data-header centered-content">Expiry Date</div>
       <div class="card-data centered-content" [class.error]="isExpiringSoon()">
         <span *ngIf="isExpiringSoon()">&#x26A0;&nbsp;</span> <!-- warning symbol -->
-        {{ block.expiryDate  || '-' }}
+        {{ (block.expiryDate | isoDate)  || '-' }}
       </div>
     </div>
   </div>
@@ -52,7 +52,7 @@
     <div class="left">
       <div class="text-small card-data-header">Points&nbsp;Expire</div>
       <div *ngIf="!block.penaltyPoints || !block.penaltyPoints.length" class="card-data centered-content">-</div>
-      <div *ngFor="let penaltyPoints of block.penaltyPoints" class="card-data centered-content">{{ penaltyPoints.expiryDate || '-' }}</div>
+      <div *ngFor="let penaltyPoints of block.penaltyPoints" class="card-data centered-content">{{ (penaltyPoints.expiryDate | isoDate) || '-' }}</div>
     </div>
   </div>
   <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px" class="margin-top">

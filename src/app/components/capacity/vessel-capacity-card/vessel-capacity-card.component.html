@@ -33,7 +33,7 @@
       <div class="left">
         <div class="text-small card-data-header">Points&nbsp;Expire</div>
         <div *ngIf="!capacity.penaltyPoints || !capacity.penaltyPoints.length" class="card-data centered-content">-</div>
-        <div *ngFor="let penaltyPoints of capacity.penaltyPoints" class="card-data centered-content">{{ penaltyPoints.expiryDate || '-' }}</div>
+        <div *ngFor="let penaltyPoints of capacity.penaltyPoints" class="card-data centered-content">{{ (penaltyPoints.expiryDate | isoDate) || '-' }}</div>
       </div>
     </div>
     <div *ngIf="capacity.hasQuotaEligibility()" fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px" class="margin-top">

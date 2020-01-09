@@ -51,6 +51,7 @@ export class CapacityComponent implements OnInit, AfterViewChecked {
   public FleetSegmentManager: any = FleetSegmentManager; // access to static methods
 
   public document: HTMLElement;
+  public loading: boolean = false;
   public errorMessage: string = '';
 
   constructor(public activatedRoute: ActivatedRoute,
@@ -64,6 +65,7 @@ export class CapacityComponent implements OnInit, AfterViewChecked {
   }
 
   public ngOnInit(): void {
+    this.loading = true;
     this.errorMessage = '';
 
     // TODO: for now set title = 'MY CAPACITY' , when Representative User is implemented w need to use window.history.state.title
@@ -77,14 +79,17 @@ export class CapacityComponent implements OnInit, AfterViewChecked {
       this.capacityService.getAllCapacity(user.id).subscribe(
         (allCapacity: AllCapacity) => {
           this.allCapacity = new AllCapacityView(allCapacity);
+          this.loading = false;
         },
         (error) => {
+          this.loading = false;
           console.error('Failed to retrieve capacity');
           this.allCapacity = new AllCapacityView();
           this.errorMessage = 'Sorry, something went wrong. Your capacity could not be retrieved at this time.';
         });
       },
       (error) => {
+        this.loading = false;
         console.error('Failed to retrieve user profile and hence capacity');
         this.errorMessage = 'Sorry, something went wrong. Your capacity could not be retrieved at this time.';
       });

@@ -48,7 +48,7 @@
       <div fxFill fxLayout="row" fxLayoutAlign="space-around start" fxLayoutGap="16px">
         <div>
           <div class="text-x-small card-data-header">{{ vessel.complianceDocumentTitle }} Expires</div>
-          <div>{{ vessel.safetyCertificateExpiryDate || '-' }}</div>
+          <div>{{ (vessel.safetyCertificateExpiryDate | isoDate) || '-' }}</div>
         </div>
       </div>
     </mat-card-subtitle>
@@ -140,7 +140,7 @@
                   <div class="text-x-small left padding-top-half">Valid From</div>
                   <div class="text-small left padding-bottom-half">
                     <!--<span>{{ vessel.licence.startDate | isoDate: 'To' }}</span> - <span>{{ vessel.licence.endDate | isoDate: 'To' }}</span>-->
-                    <span>{{ vessel.licence.startDate }}</span> - <span>{{ vessel.licence.endDate }}</span>
+                    <span>{{ vessel.licence.startDate | isoDate }}</span> - <span>{{ vessel.licence.endDate | isoDate }}</span>
                   </div>
                 </div>
                 <div class="padding-top-half padding-bottom-half">
@@ -155,7 +155,7 @@
           <div class="padding-horizontal padding-bottom">
             <div fxFill fxLayout="column" fxAlign="start start">
               <div class="text-x-small card-data-header margin-top-half left">{{ vessel.complianceDocumentTitle }} Expires</div>
-              <div class="card-data left">{{ vessel.safetyCertificateExpiryDate }}</div>
+              <div class="card-data left">{{ (vessel.safetyCertificateExpiryDate | isoDate) || '-' }}</div>
             </div>
           </div>
 
@@ -481,7 +481,7 @@
                   <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
                     <div fxFlex="50">
                       <div class="text-x-small card-data-header">Construction&nbsp;Date</div>
-                      <div class="card-data">{{ vessel.constructionDate }}</div>
+                      <div class="card-data">{{ (vessel.constructionDate | isoDate) || '-' }}</div>
                     </div>
                     <div fxFlex="50">
                       <div class="text-x-small card-data-header">Constructed In</div>
@@ -537,7 +537,7 @@
                     <div fxFlex="50">
                       <div class="text-x-small card-data-header" *ngIf="(isXSmall$ | async)">First&nbsp;Reg&nbsp;In&nbsp;Ireland</div>
                       <div class="text-x-small card-data-header" *ngIf="!(isXSmall$ | async)">First&nbsp;Registered&nbsp;In&nbsp;Ireland</div>
-                      <div class="card-data">{{ vessel.firstRegisteredInIrelandDate }}</div>
+                      <div class="card-data">{{ (vessel.firstRegisteredInIrelandDate | isoDate) || '-' }}</div>
                     </div>
                     <div fxFlex="50">
                       <div class="text-x-small card-data-header" *ngIf="(isXSmall$ | async)">Irish&nbsp;Registration&nbsp;Port</div>

@@ -19,7 +19,7 @@ export enum LetterOfOfferTermType {
 export enum LicenceApplicationStatus {
   NONE = 0,
   PENDING_LETTER_OF_OFFER = 1942535,
-  PENDING_ACCEPTANCE_OF_LETTER_OF_OFFER = 1942540,
+  PENDING_ACCEPTANCE_OF_LETTER_OF_OFFER = 315632756,
   REVOKED = 2,
   PENDING_COMPLIANCE = 315357739,
   PROCESSING_APPLICATION = 4,
@@ -154,7 +154,7 @@ export class LicenceApplicationSummary {
       // copy constructor
       this.applicationDate = licenceApplication.applicationDate;
       this.arn = licenceApplication.arn;
-      this.status = licenceApplication.status ? licenceApplication.status : LicenceApplicationStatus.NONE;
+      this.status = licenceApplication.status ? licenceApplication.status : licenceApplication['statusId'] ? licenceApplication['statusId'] : LicenceApplicationStatus.NONE;
       this.preliminaryInformation = new PreliminaryInformation(licenceApplication.preliminaryInformation);
       this.expiryDate = licenceApplication.expiryDate;
     }

@@ -9,7 +9,11 @@
   </div>
   -->
 
-  <div *ngIf="errorMessage" class="errorBanner" fxLayoutAlign="start center">
+  <div *ngIf="loading" class="progressContainer">
+    <div class="progressText" loading-text></div>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+  <div *ngIf="errorMessage && !loading" class="errorBanner" fxLayoutAlign="start center">
     <mat-icon class="info-icon">error_outline</mat-icon>
     <div>{{ errorMessage }}</div>
   </div>
@@ -20,7 +24,7 @@
     <div>You have capacity expiring soon!</div>
   </div>
 
-  <mat-tab-group *ngIf="!errorMessage" mat-stretch-tabs [selectedIndex]="0">
+  <mat-tab-group *ngIf="!errorMessage && !loading" mat-stretch-tabs [selectedIndex]="0">
 
     <!-- ON REGISTER -->
     <mat-tab>

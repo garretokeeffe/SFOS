@@ -22,6 +22,10 @@ export class ProfileComponent implements OnInit {
 
   public utils: Utils = Utils; // .getInstance(); // provide access to static Utils functions in html
   public user: UserView = new UserView();
+
+  public loading: boolean = false;
+  public errorMessage: string = '';
+
   public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
   .pipe(
     map((result) => result.matches),
@@ -53,12 +57,18 @@ export class ProfileComponent implements OnInit {
   }
 
   private getUserProfile(): void {
+    this.loading = true;
+    this.errorMessage = '';
+
     this.userService.getCurrentUser().subscribe(
       (data: UserView) => {
+        this.loading = false;
         this.user = new UserView(data);
       },
       (error) => {
+        this.loading = false;
         console.error('Error in getting profile data ' + error);
+        this.errorMessage = 'Sorry, something went wrong. Your profile could not be retrieved at this time.';
       },
     );
   }
@@ -76,7 +86,7 @@ export class ProfileComponent implements OnInit {
       duration: 2500,
       horizontalPosition: 'center',
       verticalPosition: 'top',
-      panelClass: 'snackBarConfig'
+      panelClass: 'snackBarConfig',
     });
   }
 

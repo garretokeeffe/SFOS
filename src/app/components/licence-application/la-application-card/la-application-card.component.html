@@ -22,24 +22,30 @@
             <div class="text-x-small left card-data-header">LOA</div>
             <div class="left">{{licenceApplicationSummary.preliminaryInformation.loa}}m</div>
           </div>
+          <!--
           <div>
             <div class="text-x-small left card-data-header">Reg. Length</div>
             <div class="left">{{licenceApplicationSummary.preliminaryInformation.registeredLength}}m</div>
           </div>
+          -->
         </div>
         <div>
-          <div class="text-x-small left card-data-header">Application Made on Behalf of</div>
+          <div class="text-x-small left card-data-header">Applied on behalf of</div>
           <div class="left">{{ utils.displayEnumText(licenceApplicationSummary.preliminaryInformation.applicantType, ApplicantType) }}</div>
         </div>
+        <!--
         <div *ngIf="licenceApplicationSummary.preliminaryInformation.applicantType === ApplicantType['COMPANY']">
           <div class="text-x-small left card-data-header">Company Name</div>
           <div class="left">{{licenceApplicationSummary.preliminaryInformation.companyName }}</div>
         </div>
+        -->
         <div *ngIf="licenceApplicationSummary.preliminaryInformation.applicantType === ApplicantType['PARTNERSHIP']">
+          <!--
           <div>
             <div class="text-x-small left card-data-header">Partnership Name</div>
             <div class="left">{{licenceApplicationSummary.preliminaryInformation.partnershipName }}</div>
           </div>
+          -->
           <div class="text-x-small left card-data-header margin-top">Applicants</div>
           <div class="left">{{ licenceApplicationSummary.preliminaryInformation.primaryApplicant.firstName }}&nbsp;{{ licenceApplicationSummary.preliminaryInformation.primaryApplicant.lastName }}</div>
           <div *ngFor="let applicant of licenceApplicationSummary.preliminaryInformation.otherApplicants">
@@ -48,13 +54,21 @@
         </div>
       </div>
       <div fxLayout="column" fxFlex="50" fxLayoutAlign="space-between start" fxLayoutGap="16px">
-        <div>
-          <div class="text-x-small left card-data-header">ARN</div>
-          <div class="left">{{licenceApplicationSummary.arn}}</div>
+        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+          <div>
+            <div class="text-x-small left card-data-header">ARN</div>
+            <div class="left">{{licenceApplicationSummary.arn}}</div>
+          </div>
+          <!--
+          <div>
+            <div class="text-x-small left card-data-header">PIN</div>
+            <div class="left">{{licenceApplicationSummary.pin}}</div>
+          </div>
+          -->
         </div>
         <div>
           <div class="text-x-small left card-data-header">Date of Application</div>
-          <div class="left">{{licenceApplicationSummary.applicationDate || '-'}}</div>
+          <div class="left">{{ (licenceApplicationSummary.applicationDate | isoDate) || '-' }}</div>
         </div>
         <div>
           <div class="text-x-small left card-data-header">Status</div>

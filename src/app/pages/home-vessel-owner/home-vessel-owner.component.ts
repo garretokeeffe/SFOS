@@ -31,6 +31,8 @@ export class HomeVesselOwnerComponent implements OnInit {
   public showSubmissions: boolean = false; // If UX is approved, remove the submissions panel and references to showSubmissions from this screen. For now switch it off.
   public hideNotifications: boolean = false;
 
+  public loading: boolean = false;
+
   constructor(private breakpointObserver: BreakpointObserver,
               public appComponent: AppComponent,
               public globals: Globals,
@@ -38,10 +40,13 @@ export class HomeVesselOwnerComponent implements OnInit {
               public notificationService: NotificationService) { }
 
   public ngOnInit(): void {
+    this.loading = true;
     this.userService.getCurrentUser().subscribe((user: UserView) => {
+      this.loading = false;
       this.user = user;
     },
       (error) => {
+      this.loading = false;
       console.error('Failed to retrieve user profile');
       this.user = null;
     });

@@ -144,7 +144,7 @@
                      [formControl]="form.controls.companyName"
                      (focus)="errorMessage = ''"
                      (blur)="onLoseFocus('COMPANY')"
-              [readonly]='user.companyName'>
+                     [readonly]="(readonly || user.companyName ) ? true : null">
               <mat-error *ngIf="!readonly">* Required</mat-error>
             </mat-form-field>
             <button *ngIf="useDoneButtons" mat-raised-button mat-icon-button class="doneButton" [disabled]="!isDone('COMPANY')">

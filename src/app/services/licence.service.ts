@@ -159,7 +159,9 @@ export class LicenceService {
           const licenceApplicationSummaries: Array<LicenceApplicationSummary> = [];
           res = res ? res : [];
           res.forEach((licenceApplicationSummary: LicenceApplicationSummary) => {
-            licenceApplicationSummaries.push(new LicenceApplicationSummaryView(licenceApplicationSummary));
+            // TODO: revert to LicenceApplicationSummaryView after testing (only converting to LicenceApplicationView to get PIN for testing)
+            // licenceApplicationSummaries.push(new LicenceApplicationSummaryView(licenceApplicationSummary));
+            licenceApplicationSummaries.push(new LicenceApplicationView(licenceApplicationSummary));
           });
           observer.next(licenceApplicationSummaries);
           observer.complete();
