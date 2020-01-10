@@ -17,7 +17,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { animations } from '../../../animations';
 import { UserType, UserView } from '../../../types/user';
 import { FleetSegmentManager, FleetSubSegment } from '../../../types/fleet-segment';
-import { LetterOfOfferStatus } from '../../../types/licence-application';
+import { LetterOfOfferStatus, LicenceApplicationStatus } from '../../../types/licence-application';
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheet, MatBottomSheetRef, MatCheckbox, MatFormField } from '@angular/material';
 import { Utils } from '../../../services/utils.service';
 import { LicenceService } from '../../../services/licence.service';
@@ -65,6 +65,7 @@ export class LaPreliminaryInfoSimpleComponent implements OnInit, OnChanges {
   public RegisteredLengthOption: any = RegisteredLengthOption;
   public FleetSubSegment: any = FleetSubSegment;
   public ApplicantType: any = UserType;
+  public LicenceApplicationStatus: any = LicenceApplicationStatus;
   public LetterOfOfferStatus: any = LetterOfOfferStatus;
   public FleetSegmentManager: any = FleetSegmentManager; // access to static methods
   public utils: Utils = Utils;

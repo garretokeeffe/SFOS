@@ -26,7 +26,9 @@
           <div fxLayout="row" fxLayoutAlign="start center">
             <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Name">looks_one</mat-icon>
             <mat-form-field>
-              <input matInput placeholder="Application Reference Number" number [formControl]="form.controls.arn" (focus)="errorMessage = ''">
+              <input matInput placeholder="Application Reference Number" number
+                     [formControl]="form.controls.arn"
+                     (focus)="errorMessage = ''">
               <mat-error>* Required</mat-error>
             </mat-form-field>
           </div>
@@ -53,9 +55,11 @@
       </div>
 
       <!-- DMcD: IMPORTANT - these buttons must be outside the form tag, otherwise clicking the cancel button reloads the webpage -->
-      <div class="margin-top">
+      <div class="margin-top" *ngIf="!submissionInProgress">
         <mat-divider [inset]="false"></mat-divider>
       </div>
+      <mat-progress-bar *ngIf="submissionInProgress" class="margin-vertical" mode="indeterminate"></mat-progress-bar>
+
       <div class="fullWidth" [class.margin-top-double]="standAlonePage" [class.margin-top]="!standAlonePage">
         <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px"><!-- fxLayoutAlign="start start" -->
           <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" routerLink="/licences">

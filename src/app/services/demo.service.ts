@@ -137,14 +137,14 @@ export class DemoService {
       if (payload.acceptedBy) {
         response.letterOfOffer.acceptedDate = moment.utc(new Date()).format('DD/MM/YYYY');
         response.letterOfOffer.rejectedDate = null;
-        response.letterOfOffer.status = LetterOfOfferStatus['ACCEPTED'];
+        // response.letterOfOffer.status = LetterOfOfferStatus['ACCEPTED'];
         response.status = LicenceApplicationStatus['PENDING_COMPLIANCE'];
         response.expiryDate = moment.utc(new Date()).add(1, 'year').format('DD/MM/YYYY');
       } else if (payload.rejectedBy) {
         response.letterOfOffer.acceptedDate = null;
         response.letterOfOffer.rejectedDate = moment.utc(new Date()).format('DD/MM/YYYY');
-        response.letterOfOffer.status = LetterOfOfferStatus['REJECTED'];
-        response.status = LicenceApplicationStatus['PREVOKED'];
+        // response.letterOfOffer.status = LetterOfOfferStatus['REJECTED'];
+        response.status = LicenceApplicationStatus['WITHDRAWN'];
         response.expiryDate = null;
       }
       observer.next(response);

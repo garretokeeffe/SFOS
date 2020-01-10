@@ -329,6 +329,18 @@ progress-bar .progress-inner {
   width: 12px !important;
 }
 
+.my-mat-card:not([class*=mat-elevation-z]) {
+  box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+}
+.my-mat-card {
+  transition: box-shadow 280ms cubic-bezier(.4,0,.2,1);
+  display: block;
+  position: relative;
+  padding: 16px;
+  border-radius: 4px;
+  margin: 2px; /* DMcD added this attribute, the rest are copied from mat-card */
+}
+
 /*
  1. solve the vertical alignment problem of the icon inside the button
  2. material icon fonts are always a little too small compared to button text

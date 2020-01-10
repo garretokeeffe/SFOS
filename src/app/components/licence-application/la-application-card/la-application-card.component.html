@@ -78,8 +78,8 @@
     </div>
 
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button [routerLink]="['/licence-application-wizard', LaWizardMode['ACTIVE']]">OPEN</button><!-- [class.fullWidth]="(isHandset$ | async)" -->
+  <mat-card-actions *ngIf="[LicenceApplicationStatus['PENDING_ACCEPTANCE_OF_LETTER_OF_OFFER'], LicenceApplicationStatus['PENDING_COMPLIANCE']].includes(licenceApplicationSummary.status)">
+    <button [class.fullWidthWithMargin]="(isHandset$ | async)" mat-raised-button [routerLink]="['/licence-application-wizard', LaWizardMode['ACTIVE'], licenceApplicationSummary.arn]">OPEN</button><!-- [class.fullWidth]="(isHandset$ | async)" -->
   </mat-card-actions>
 
 </mat-card>

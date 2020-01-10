@@ -1,4 +1,4 @@
-<div *ngIf="capacities.length" class="padding-horizontal padding-bottom margin-bottom">
+<div *ngIf="capacities.length"><!-- class="padding-horizontal padding-bottom margin-bottom" -->
   <div class="wizard-label margin-top color-primary margin-bottom">
     <span *ngIf="[FleetSegment['POLYVALENT'], FleetSegment['SPECIFIC']].includes(capacities[0].fleetSegment)">
       {{ (capacities[0]).displayFleetSubSegment() }}

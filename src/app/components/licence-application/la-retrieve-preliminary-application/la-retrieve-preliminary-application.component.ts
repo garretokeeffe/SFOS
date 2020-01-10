@@ -33,6 +33,7 @@ export class LaRetrievePreliminaryApplicationComponent implements OnInit, OnDest
 
   public form: FormGroup;
   public errorMessage: string = null;
+  public submissionInProgress: boolean = false;
 
   public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
   .pipe(
@@ -83,9 +84,11 @@ export class LaRetrievePreliminaryApplicationComponent implements OnInit, OnDest
 
   public getApplication(): void {
     this.errorMessage = '';
+    this.submissionInProgress = true;
 
     // This condition is for DEMO only
     if (this.globals.demo && (this.form.controls.arn.value === '999' || this.form.controls.pin.value === '999')) {
+      this.submissionInProgress = false;
       this.errorMessage = 'No Match Found';
       this.scroll('bottomOfPage');
     } else {
@@ -101,8 +104,10 @@ export class LaRetrievePreliminaryApplicationComponent implements OnInit, OnDest
           this.licenceApplication = licenceApplication;
           this.next.emit(this.licenceApplication);
         }
+        this.submissionInProgress = false;
       }, (error) => {
           this.errorMessage = 'Sorry, something went wrong. Looks like the system is unavailable at the moment.';
+          this.submissionInProgress = false;
       });
     }
   }

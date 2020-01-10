@@ -8,6 +8,7 @@ import { UserView } from '../../../types/user';
 import { UserService } from '../../../services/user.service';
 import { animations } from '../../../animations';
 import { ActivatedRoute } from '@angular/router';
+import { LicenceService } from '../../../services/licence.service';
 
 export enum LaWizardMode {
   NONE = 0,
@@ -31,8 +32,11 @@ export class LaWizardComponent implements OnInit {
   @ViewChild(WizardComponent)
   public wizard: WizardComponent;
 
-  public user: UserView = null;
   public licenceApplication: LicenceApplicationView = new LicenceApplicationView();
+  public user: UserView = null;
+
+  public errorMessage: string = '';
+  public loading: boolean = false;
 
   public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
   .pipe(
@@ -42,14 +46,36 @@ export class LaWizardComponent implements OnInit {
   constructor(private breakpointObserver: BreakpointObserver,
               @Optional() public cdRef: ChangeDetectorRef,
               private route: ActivatedRoute,
-              private userService: UserService) { }
+              private userService: UserService,
+              private licenceService: LicenceService) { }
 
   public ngOnInit(): void {
+    this.errorMessage = '';
+
     this.mode = this.route.snapshot.params.id ? this.route.snapshot.params.id : LaWizardMode.NONE;
-    console.log('wizard mode = ' + LaWizardMode[this.mode]);
+    console.log('Wizard mode = ' + LaWizardMode[this.mode]);
 
     this.userService.getCurrentUser().subscribe((user: UserView) => {
         this.user = user;
+
+        if (this.route.snapshot.params.arn) {
+          this.loading = true;
+
+          console.log('Wizard is opening Licence Application with ARN: [' + this.route.snapshot.params.arn + ']');
+          this.licenceService.getLicenceApplication(this.user.id, this.route.snapshot.params.arn)
+          .subscribe( (licenceApplication: LicenceApplicationView) => {
+            if (licenceApplication === null) {
+              this.errorMessage = 'Sorry, something went wrong. The licence application ' + this.route.snapshot.params.arn + ' could not be retrieved.';
+            } else {
+              this.licenceApplication = licenceApplication;
+            }
+            this.loading = false;
+            // this.submissionInProgress = false;
+          }, (error) => {
+            this.errorMessage = 'Sorry, something went wrong. The licence application ' + this.route.snapshot.params.arn + ' could not be retrieved.';
+            this.loading = false;
+          });
+        }
       },
       (error) => {
         console.log('Failed to get user profile');

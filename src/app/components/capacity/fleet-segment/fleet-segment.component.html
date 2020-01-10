@@ -1,6 +1,6 @@
-<div class="mat-elevation-z8 forceShadow">
-  <div *ngIf="(capacities | filter: 'fleetSegment' : fleetSegment).length" >
-    <div class="wizard-label margin-top-double padding-top-and-sides color-primary">
+<!-- <div >class="mat-elevation-z4 forceShadow" -->
+  <div *ngIf="(capacities | filter: 'fleetSegment' : fleetSegment).length" class="my-mat-card margin-top">
+    <div class="wizard-label color-primary"> <!-- class="wizard-label margin-top-double padding-top-and-sides color-primary" -->
       <div fxLayout="row" fxLayoutAlign="start center" class="padding-bottom" fxLayoutGap="16px">
         <mat-icon>toys</mat-icon>
         <span>{{ FleetSegmentManager.displayFleetSegment(fleetSegment) }}</span>
@@ -16,4 +16,4 @@
       </app-capacity-card>
     </ng-template>
   </div>
-</div>
+<!--</div>-->

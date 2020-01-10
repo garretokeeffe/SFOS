@@ -1,35 +1,36 @@
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Optional, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatBottomSheet, MatBottomSheetRef, MatDialog, MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
+import * as moment from 'moment';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { animations } from '../../../animations';
+import { LicenceService } from '../../../services/licence.service';
+import { UserService } from '../../../services/user.service';
+import { Utils } from '../../../services/utils.service';
+import { ConfirmationInfo } from '../../../types/dialog-info';
+import { FleetSegmentManager } from '../../../types/fleet-segment';
 import {
   Applicant,
   LetterOfOfferStatus,
   LetterOfOfferTerm,
+  LicenceApplicationStatus,
   LicenceApplicationView,
 } from '../../../types/licence-application';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatBottomSheet, MatBottomSheetRef, MatDialog, MatSnackBar } from '@angular/material';
-import { LicenceService } from '../../../services/licence.service';
-import { Observable } from 'rxjs';
-import { ConfirmationInfo } from '../../../types/dialog-info';
-import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
-import { map } from 'rxjs/operators';
-import { animations } from '../../../animations';
 import { UserType, UserView } from '../../../types/user';
-import { Router } from '@angular/router';
-import * as moment from 'moment';
+import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
 import {
   LaFleetSegmentBottomSheet,
   LaVesselLengthBottomSheet,
 } from '../la-preliminary-info-simple/la-preliminary-info-simple.component';
-import { FleetSegmentManager } from '../../../types/fleet-segment';
-import { Utils } from '../../../services/utils.service';
-import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-la-letter-of-offer',
   templateUrl: './la-letter-of-offer.component.html',
   styleUrls: ['./la-letter-of-offer.component.css'],
-  animations: animations,
+  animations,
 })
 export class LaLetterOfOfferComponent implements OnInit, OnDestroy {
 
@@ -56,6 +57,7 @@ export class LaLetterOfOfferComponent implements OnInit, OnDestroy {
   public termsAccepted: boolean = false;
 
   public FleetSegmentManager: any = FleetSegmentManager; // access to static methods
+  public LicenceApplicationStatus: any = LicenceApplicationStatus;
   public LetterOfOfferStatus: any = LetterOfOfferStatus;
   public ApplicantType: any = UserType;
   public utils: Utils = Utils;
@@ -106,7 +108,7 @@ export class LaLetterOfOfferComponent implements OnInit, OnDestroy {
 
   public acceptLetterOfOffer(): void {
     this.errorMessage = '';
-    this.progressPreliminaryLicenceApplication(LetterOfOfferStatus['ACCEPTED']).subscribe(
+    this.progressPreliminaryLicenceApplication(LicenceApplicationStatus['PENDING_COMPLIANCE']).subscribe(
       (success: boolean) => {
         this.snackBar.open(`Licence Application (ARN: ${this.licenceApplication.arn}) has been accepted`, null, {
           duration: 2500,

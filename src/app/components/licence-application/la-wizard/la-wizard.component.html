@@ -1,4 +1,24 @@
-<div class="page" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)">
+<div *ngIf="loading || errorMessage" class="page">
+  <app-la-header [arn]="licenceApplication.arn" [fleetSegment]="licenceApplication.preliminaryInformation.fleetSegment"></app-la-header>
+  <div *ngIf="loading">
+    <div class="progressText" loading-text></div>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+
+  <div *ngIf="errorMessage && !loading" class="errorBanner" fxLayoutAlign="start center">
+    <mat-icon class="info-icon">error_outline</mat-icon>
+    <div>{{ errorMessage }}</div>
+  </div>
+
+  <div *ngIf="errorMessage && !loading" class="margin-top">
+    <button mat-raised-button routerLink="/licences" [class.fullWidth]="(isHandset$ | async)">
+      <mat-icon matListIcon alt="My Applications" class="chevron_horz">chevron_left</mat-icon>
+      Back
+    </button>
+  </div>
+</div>
+
+<div *ngIf="!loading && !errorMessage" class="page" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)">
 
   <app-la-header [arn]="licenceApplication.arn" [fleetSegment]="licenceApplication.preliminaryInformation.fleetSegment"></app-la-header>
 

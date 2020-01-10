@@ -367,16 +367,15 @@
 
       <!-- DMcD: IMPORTANT - these buttons must be outside the form tag, otherwise clicking the cancel button reloads the webpage -->
       <div *ngIf="!embedded" class="margin-bottom-double">
-        <div class="margin-top">
+        <div *ngIf="!submissionInProgress" class="margin-top">
           <mat-divider [inset]="false"></mat-divider>
         </div>
-
         <mat-progress-bar *ngIf="submissionInProgress" class="margin-vertical" mode="indeterminate"></mat-progress-bar>
 
         <div class="fullWidth" [class.margin-top-double]="standAlonePage" [class.margin-top]="!standAlonePage">
           <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px">
             <button mat-raised-button [class.fullWidth]="(isHandset$ | async)"
-                    (click)="back.emit(licenceApplication)" [disabled]="licenceApplication.letterOfOffer.status === LetterOfOfferStatus['ACCEPTED']">
+                    (click)="back.emit(licenceApplication)" [disabled]="licenceApplication.status === LicenceApplicationStatus['PENDING_COMPLIANCE']">
               BACK
             </button>
             <button *ngIf="readonly" mat-raised-button [class.fullWidth]="(isHandset$ | async)"

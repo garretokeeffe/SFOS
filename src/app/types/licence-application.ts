@@ -25,6 +25,7 @@ export enum LicenceApplicationStatus {
   PROCESSING_APPLICATION = 4,
   ISSUED = 5,
   REJECTED = 6,
+  WITHDRAWN = 1942551,
 }
 export enum RegisteredLengthOption {
   UNKNOWN = 0,

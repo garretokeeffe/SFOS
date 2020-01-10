@@ -254,6 +254,10 @@ select:active {
   width:100%;
   min-width:100%;
 }
+.fullWidthWithMargin {
+  width: calc(100% - 16px);
+  min-width: calc(100% - 16px);
+}
 .doubleHeight {
   height: 72px;
 }
@@ -463,10 +467,6 @@ table {
 .margin-vertical-double {
   margin-top: 32px;
   margin-bottom: 32px;
-}
-.full-width-with-margin {
-  width: 100%;
-  margin: auto;
 }
 
 .title {

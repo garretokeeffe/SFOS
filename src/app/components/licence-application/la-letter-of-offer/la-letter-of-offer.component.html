@@ -47,7 +47,7 @@
       </div>
 
       <!-- CONDITIONS HAVE NOT BEEN ACCEPTED YET -->
-      <div *ngIf="licenceApplication.letterOfOffer.status === LetterOfOfferStatus['PENDING']">
+      <div *ngIf="licenceApplication.status === LicenceApplicationStatus['PENDING_ACCEPTANCE_OF_LETTER_OF_OFFER']">
 
         <div fxLayout="column" fxLayoutAlign="start center" class="form-field-icons">
 
@@ -174,7 +174,7 @@
       </div> <!-- END CONDITIONS NOT ACCEPTED YET -->
 
       <!-- CONDITIONS HAVE BEEN ACCEPTED -->
-      <div *ngIf="licenceApplication.letterOfOffer.status === LetterOfOfferStatus['ACCEPTED']" class="margin-top max-width-centered-content">
+      <div *ngIf="licenceApplication.status === LicenceApplicationStatus['PENDING_COMPLIANCE']" class="margin-top max-width-centered-content">
 
         <div fxLayout="column" fxLayoutAlign="start center" class="form-field-icons">
 
@@ -250,7 +250,8 @@
         <div class="fullWidth margin-top">
           <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px">
             <button mat-raised-button [class.fullWidth]="(isHandset$ | async)"
-                    (click)="back.emit(licenceApplication)" [disabled]="(isHandset$ | async) || licenceApplication.letterOfOffer.status === LetterOfOfferStatus['ACCEPTED']">
+                    (click)="back.emit(licenceApplication)"
+                    [disabled]="(isHandset$ | async) || licenceApplication.status === LicenceApplicationStatus['PENDING_COMPLIANCE']">
               BACK
             </button>
             <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="next.emit(licenceApplication)">

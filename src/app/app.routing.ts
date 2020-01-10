@@ -81,6 +81,7 @@ const routes: Routes = [
   { path: 'licences', component: LicencesComponent, canActivate: [AuthenticationService] },
   { path: 'licence-application-wizard', component: LaWizardComponent }, /* no authentication required on licence application wizard */
   { path: 'licence-application-wizard/:id', component: LaWizardComponent  }, /* no authentication required on licence application wizard */
+  { path: 'licence-application-wizard/:id/:arn', component: LaWizardComponent  }, /* no authentication required on licence application wizard */
 
   { path: 'vessel/:id', component: VesselsComponent, canActivate: [AuthenticationService] }, /* This will link routes like /vessel/1 or /vessel/9 etc. to the VesselsComponent component. */
   // { path: '',  redirectTo: '/login', pathMatch: 'full' },

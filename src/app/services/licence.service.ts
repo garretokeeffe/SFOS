@@ -1,17 +1,17 @@
-import { Injectable, Optional } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Injectable, Optional } from '@angular/core';
 import {Observable} from 'rxjs';
-import {Vessel, VesselView} from '../types/vessel';
 import {environment} from '../../environments/environment';
-import {Submission, SubmissionView} from '../types/submission';
+import { Globals } from '../globals';
 import {
+  Applicant,
   LetterOfOfferStatus,
   LetterOfOfferTerm,
-  LicenceApplication,
-  LicenceApplicationView,
-  Applicant, LicenceApplicationSummary, LicenceApplicationSummaryView,
+  LicenceApplication, LicenceApplicationStatus,
+  LicenceApplicationSummary, LicenceApplicationSummaryView, LicenceApplicationView,
 } from '../types/licence-application';
-import { Globals } from '../globals';
+import {Submission, SubmissionView} from '../types/submission';
+import {Vessel, VesselView} from '../types/vessel';
 import { DemoService } from './demo.service';
 
 export interface ProgressPatch {
@@ -74,11 +74,11 @@ export class LicenceService {
     let action: string = '';
 
     switch (moveToStatus) {
-      case LetterOfOfferStatus['ACCEPTED']:
+      case LicenceApplicationStatus['PENDING_COMPLIANCE']:
         payload.acceptedBy = applicant;
         action = 'accept';
         break;
-      case LetterOfOfferStatus['REJECTED']:
+      case LicenceApplicationStatus['WITHDRAWN']:
         payload.rejectedBy = applicant;
         action = 'reject;';
         break;
@@ -91,7 +91,7 @@ export class LicenceService {
     }
 
     // TODO remove the true below - for now always return demo data
-    if (true || this.globals.demo) {
+    if (this.globals.demo) {
       return this.demoService.progressPreliminaryLicenceApplication(licenceApplication, payload);
     }
     else {
@@ -159,9 +159,7 @@ export class LicenceService {
           const licenceApplicationSummaries: Array<LicenceApplicationSummary> = [];
           res = res ? res : [];
           res.forEach((licenceApplicationSummary: LicenceApplicationSummary) => {
-            // TODO: revert to LicenceApplicationSummaryView after testing (only converting to LicenceApplicationView to get PIN for testing)
-            // licenceApplicationSummaries.push(new LicenceApplicationSummaryView(licenceApplicationSummary));
-            licenceApplicationSummaries.push(new LicenceApplicationView(licenceApplicationSummary));
+            licenceApplicationSummaries.push(new LicenceApplicationSummaryView(licenceApplicationSummary));
           });
           observer.next(licenceApplicationSummaries);
           observer.complete();
@@ -243,9 +241,9 @@ export class LicenceService {
           'Content-Type': 'application/json',
           'Cache-Control': 'no-cache, no-store, must-revalidate', // HTTP 1.1
           'Pragma': 'no-cache', // HTTP 1.0
-          'Expires': '0' // Proxies
+          'Expires': '0', // Proxies
         }),
-        observe: 'body'
+        observe: 'body',
       })
       .subscribe(
         (res: Array<Submission>) => {
@@ -288,9 +286,9 @@ export class LicenceService {
           'Content-Type': 'application/json',
           'Cache-Control': 'no-cache, no-store, must-revalidate', // HTTP 1.1
           'Pragma': 'no-cache', // HTTP 1.0
-          'Expires': '0' // Proxies
+          'Expires': '0', // Proxies
         }),
-        observe: 'body'
+        observe: 'body',
       })
       .subscribe(
         (res: Array<Submission>) => {
