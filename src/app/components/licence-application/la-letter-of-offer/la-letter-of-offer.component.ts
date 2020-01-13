@@ -166,7 +166,7 @@ export class LaLetterOfOfferComponent implements OnInit, OnDestroy {
     const applicant: Applicant = new Applicant(this.user);
 
     return new Observable((observer) => {
-      this.licenceService.progressPreliminaryLicenceApplication(this.licenceApplication, moveToStatus, applicant).subscribe(
+      this.licenceService.progressPreliminaryLicenceApplication(this.user.id, this.licenceApplication, moveToStatus, applicant).subscribe(
         (response: LicenceApplicationView) => {
           this.submissionInProgress = false;
           this.licenceApplication = response;

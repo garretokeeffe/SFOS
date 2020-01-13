@@ -62,7 +62,8 @@ export class LicenceService {
     }
   }
 
-  public progressPreliminaryLicenceApplication( licenceApplication: LicenceApplication | LicenceApplicationView,
+  public progressPreliminaryLicenceApplication( userId: string,
+                                                licenceApplication: LicenceApplication | LicenceApplicationView,
                                                 moveToStatus: number,
                                                 applicant: Applicant): Observable<LicenceApplicationView | boolean> {
 
@@ -95,9 +96,13 @@ export class LicenceService {
       return this.demoService.progressPreliminaryLicenceApplication(licenceApplication, payload);
     }
     else {
+      // To accept the terms
+      // http://application-service-fisheries-dev.apps.rhos.agriculture.gov.ie/sfos/licence-applications/accept/ccs/{ccsUserId}/arn/{arn}
+
       let url: string = environment.progressPreliminaryLicenceApplicationURL;
       url += '/' + action;
-      url += '/' + licenceApplication.arn;
+      url += '/ccs/' + userId;
+      url += '/arn/' + licenceApplication.arn;
 
       const httpOptions: any = {
         headers: new HttpHeaders({
@@ -109,7 +114,7 @@ export class LicenceService {
       };
 
       return new Observable((observer) => {
-        this.http.patch<LicenceApplication>(url, payload, httpOptions)
+        this.http.put<LicenceApplication>(url, payload, httpOptions)
         .subscribe(
           (response) => {
             observer.next(new LicenceApplicationView(response)); // response contains the licence application with amended data
