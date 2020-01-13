@@ -101,8 +101,8 @@ export class LicenceService {
 
       let url: string = environment.progressPreliminaryLicenceApplicationURL;
       url += '/' + action;
-      url += '/ccs/' + userId;
-      url += '/arn/' + licenceApplication.arn;
+      url += '/users/ccs/' + userId;
+      url += '/' + licenceApplication.arn;
 
       const httpOptions: any = {
         headers: new HttpHeaders({

@@ -89,7 +89,7 @@
           <div class="dafm-green" [class.margin-top-double]="!showTerms" [class.margin-top]="showTerms">
             <span>You must accept the conditions of your </span>
             <!-- and thereby <span class="helpLinkWithinText" (click)="openActivateApplicationBottomSheet()">activate</span> your application -->
-            <span [class.br]="(isHandset$ | async)">Letter of Offer on or before <span class="bold">{{ licenceApplication.letterOfOffer.expiryDate }}</span></span>
+            <span [class.br]="(isHandset$ | async)">Letter of Offer on or before <span class="bold">{{ licenceApplication.letterOfOffer.expiryDate | isoDate }}</span></span>
           </div>
 
           <div *ngIf="enableDisplayOfPreliminaryInformation" class="fullWidth margin-vertical">
@@ -218,13 +218,13 @@
               <!-- TODO: if the acceptor is the logged in your, say 'You accepted the conditions...' rather than 'John Murphy accepted the conditions...' -->
               <!--{{ licenceApplication.letterOfOffer.acceptedBy.firstName }} {{ licenceApplication.letterOfOffer.acceptedBy.lastName }}-->
               <span [class.br]="(isHandset$ | async)">You accepted the conditions of </span>
-              <span [class.br]="(isHandset$ | async)">your Letter of Offer on {{ licenceApplication.letterOfOffer.acceptedDate }}</span>
+              <span [class.br]="(isHandset$ | async)">your Letter of Offer on {{ licenceApplication.letterOfOffer.acceptedDate | isoDate }}</span>
             </span>
           </div>
 
           <!--
           <div class="margin-top margin-bottom bold dafm-green">
-            You must comply with the conditions of your Letter of Offer on or before {{ licenceApplication.expiryDate }}
+            You must comply with the conditions of your Letter of Offer on or before {{ licenceApplication.expiryDate | isoDate }}
           </div>
           -->
 

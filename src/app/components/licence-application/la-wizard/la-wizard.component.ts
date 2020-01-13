@@ -55,12 +55,11 @@ export class LaWizardComponent implements OnInit {
     this.mode = this.route.snapshot.params.id ? this.route.snapshot.params.id : LaWizardMode.NONE;
     console.log('Wizard mode = ' + LaWizardMode[this.mode]);
 
+    this.loading = true;
     this.userService.getCurrentUser().subscribe((user: UserView) => {
         this.user = user;
 
         if (this.route.snapshot.params.arn) {
-          this.loading = true;
-
           console.log('Wizard is opening Licence Application with ARN: [' + this.route.snapshot.params.arn + ']');
           this.licenceService.getLicenceApplication(this.user.id, this.route.snapshot.params.arn)
           .subscribe( (licenceApplication: LicenceApplicationView) => {
@@ -78,6 +77,7 @@ export class LaWizardComponent implements OnInit {
         }
       },
       (error) => {
+        this.loading = false;
         console.log('Failed to get user profile');
       },
     );

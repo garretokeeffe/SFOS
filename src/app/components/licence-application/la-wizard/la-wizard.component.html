@@ -71,7 +71,7 @@
   </aw-wizard>
 
   <!-- PRELIMINARY INFORMATION TO DOCUMENT UPLOAD (FINAL SUBMISSION) -->
-  <aw-wizard *ngIf="mode === LaWizardMode['ACTIVE']" #wizard [navBarLayout]="(isHandset$ | async) ? 'large-empty-symbols' : 'large-empty-symbols'" [navBarLocation]="'top'" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)" [@flyInOut]="'in'">
+  <aw-wizard *ngIf="mode == LaWizardMode['ACTIVE']" #wizard [navBarLayout]="(isHandset$ | async) ? 'large-empty-symbols' : 'large-empty-symbols'" [navBarLocation]="'top'" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)" [@flyInOut]="'in'">
 
     <aw-wizard-step [stepId]="'LETTER_OF_OFFER'" [stepTitle]="'Letter of Offer'" [navigationSymbol]="{ symbol: '&#xf03a;', fontFamily: 'FontAwesome' }">
       <div [class.margin-top]="!(isHandset$ | async)">
