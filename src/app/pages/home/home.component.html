@@ -7,7 +7,7 @@
   <div class="center">The Irish Government's Sea Fishing and Aquaculture Portal</div>
 
   <div fxLayout="row" fxLayoutGap="16px" class="margin-top-double margin-bottom-double">
-    <button mat-raised-button (click)="login()">LOGIN</button>
+    <button mat-raised-button (click)="login()" [attr.data-button]="'LOGIN'">LOGIN</button>
     <!--<button mat-raised-button (click)="register()">REGISTER</button>-->
   </div>
 
@@ -37,7 +37,9 @@
           <div *ngIf='!(isHandset$ | async)'>&nbsp;</div>
         </mat-card-content>
         <mat-actions fxLayoutAlign="center center">
-          <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="onNewLicenceApplication()">
+          <button mat-raised-button [class.fullWidth]="(isHandset$ | async)"
+                  (click)="onNewLicenceApplication()"
+                  [attr.data-button]="'NEW LICENCE APPLICATION'">
             APPLY NOW
           </button>
         </mat-actions>
@@ -63,7 +65,9 @@
           </div>
         </mat-card-content>
         <mat-actions fxLayoutAlign="center center">
-          <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="onDownloadForms()">
+          <button mat-raised-button [class.fullWidth]="(isHandset$ | async)"
+                  (click)="onDownloadForms()"
+                  [attr.data-button]="'ACCESS FORMS'">
             ACCESS FORMS
           </button>
         </mat-actions>

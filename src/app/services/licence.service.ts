@@ -233,6 +233,39 @@ export class LicenceService {
     });
   }
 
+  public deleteLicenceApplication(userId: string, arn: string): Observable<boolean> {
+
+    if (this.globals.demo) {
+      return this.demoService.deleteLicenceApplication(userId, arn);
+    } else {
+      const url: string = environment.deleteLicenceApplicationURL + '/' + arn + '/inactive/Y';
+
+      const httpOptions: any = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache, no-store, must-revalidate', // HTTP 1.1
+          'Pragma': 'no-cache', // HTTP 1.0
+          'Expires': '0', // Proxies
+        }),
+      };
+
+      return new Observable((observer) => {
+        this.http.put<boolean>(url, httpOptions)
+        .subscribe(
+          (response) => {
+            observer.next(response); // response contains the licence application with amended data
+            observer.complete();
+
+          },
+          (error) => {
+            console.log(JSON.stringify(error));
+            observer.error(error);
+            observer.complete();
+          });
+      });
+    }
+  }
+
   public getStatusesOfSubmissions(applicantId?: string): Observable<Array<SubmissionView>> {
 
     let url: string = environment.getStatusesOfSubmissionsURL;

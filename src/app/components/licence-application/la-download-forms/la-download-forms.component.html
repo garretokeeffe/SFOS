@@ -66,11 +66,13 @@
         <div class="fullWidth" [class.margin-top-double]="standAlonePage" [class.margin-top]="!standAlonePage">
           <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px">
             <button mat-raised-button [class.fullWidth]="(isHandset$ | async)"
-                    (click)="back.emit(licenceApplication)">
+                    (click)="back.emit(licenceApplication)"
+                    [attr.data-button]="'BACK'">
               BACK
             </button>
             <button mat-raised-button [class.fullWidth]="(isHandset$ | async)"
-                    (click)="next.emit(licenceApplication)">
+                    (click)="next.emit(licenceApplication)"
+                    [attr.data-button]="'NEXT'">
               NEXT
             </button>
           </div>

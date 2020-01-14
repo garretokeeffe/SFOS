@@ -8,7 +8,7 @@
       </h2>
     </div>
     <div style="position: relative; top: -4px">
-      <button mat-raised-button (click)="onNewApplication()">
+      <button mat-raised-button (click)="onNewApplication()" [attr.data-button]="'NEW APPLICATION'">
         START NEW APPLICATION
       </button>
     </div>
@@ -58,7 +58,7 @@
         </mat-button-toggle-group>
         <mat-form-field >
           <input matInput (keyup)="applyFilter($event.target.value)" [(ngModel)]="filterValue" placeholder="FILTER">
-          <button mat-button *ngIf="filterValue" matSuffix mat-icon-button aria-label="Clear" (click)="filterValue=''; applyFilter()">
+          <button mat-button *ngIf="filterValue" matSuffix mat-icon-button aria-label="Clear" (click)="filterValue=''; applyFilter()" [attr.data-button]="'CLEAR'">
             <mat-icon>close</mat-icon>
           </button>
         </mat-form-field>
@@ -108,7 +108,7 @@
       <th mat-header-cell *matHeaderCellDef [@flyInOut]="'in'" mat-sort-header>Assignee</th>
       <td mat-cell *matCellDef="let submission; let i=index" [@flyInOut]="'in'">
         <div class="sub-cell button" *ngIf="!submission.assignInProgress">
-          <button mat-stroked-button class="assignButton" (click)="selectAssignee(submission, i)">{{submission.assignee ? submission.assignee.fullName : ''}}</button>
+          <button mat-stroked-button class="assignButton" (click)="selectAssignee(submission, i)" [attr.data-button]="'ASSIGN'">{{submission.assignee ? submission.assignee.fullName : ''}}</button>
         </div>
         <div class="search-results" *ngIf="submission.assignInProgress">
           <input matInput [value]="submission.assignee.fullName"
@@ -127,7 +127,7 @@
     <ng-container matColumnDef="buttons">
       <th mat-header-cell *matHeaderCellDef [@flyInOut]="'in'"></th>
       <td mat-cell *matCellDef="let submission;" [@flyInOut]="'in'">
-        <div class="sub-cell button"><button mat-stroked-button (click)="displaySubmission(submission, i)">Select</button></div>
+        <div class="sub-cell button"><button mat-stroked-button (click)="displaySubmission(submission, i)" [attr.data-button]="'SELECT'">Select</button></div>
       </td>
     </ng-container>
 

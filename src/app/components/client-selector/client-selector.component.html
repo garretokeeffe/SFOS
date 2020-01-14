@@ -9,7 +9,7 @@
     </div>
 
     <mat-menu #clientmenu="matMenu">
-      <button mat-menu-item (click)="selectClient()">
+      <button mat-menu-item (click)="selectClient()" [attr.data-button]="'SELECT CLIENT'">
         <mat-icon alt="Select Client">group</mat-icon>
         <span>Select a different client</span>
       </button>

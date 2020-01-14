@@ -1,5 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import * as moment from 'moment';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Globals } from '../globals';
 
 // TODO
 // 01/05/2016 - 30/04/2017 piped into isoDate: 'To' incorrectly converts to:
@@ -20,6 +22,8 @@ export class IsoDatePipe implements PipeTransform {
   private static previousLocale: string = null;
   private static iso8601Format: RegExp = new RegExp(/^(?:[1-9]\d{3}(-?)(?:(?:0[1-9]|1[0-2])\1(?:0[1-9]|1\d|2[0-8])|(?:0[13-9]|1[0-2])\1(?:29|30)|(?:0[13578]|1[02])(?:\1)31|00[1-9]|0[1-9]\d|[12]\d{2}|3(?:[0-5]\d|6[0-5]))|(?:[1-9]\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)(?:(-?)02(?:\2)29|-?366))T(?:[01]\d|2[0-3])(:?)[0-5]\d(?:\3[0-5]\d)?(?:Z|[+-][01]\d(?:\3[0-5]\d)?)$/g);
 
+  constructor(private globals: Globals) { }
+
   public transform(value: string, direction: string = 'from', time: boolean = false): string {
 
     if (!value) {
@@ -37,7 +41,9 @@ export class IsoDatePipe implements PipeTransform {
 
       try {
         if (!value.match(IsoDatePipe.iso8601Format)) {
-          console.error('IsoDatePipe: Invalid ISO8601 date [' + value + '] specified. Date must be in ISO8601 format (eg 2020-10-03T14:49:00.000Z) to be transformed.');
+          if (!this.globals.demo) {
+            console.error('IsoDatePipe: Invalid ISO8601 date [' + value + '] specified. Date must be in ISO8601 format (eg 2020-10-03T14:49:00.000Z) to be transformed.');
+          }
           return value;
         } else {
           const date: Date = new Date(value);

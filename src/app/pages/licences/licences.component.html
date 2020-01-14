@@ -10,12 +10,14 @@
       <div fxLayout="'row'" fxLayoutAlign="start start" fxLayoutGap="16px">
       <button mat-raised-button
               [@fadeInOut]="'fadeIn'"
-              [routerLink]="['/licence-application-wizard', LaWizardMode['NEW']]">
+              [routerLink]="['/licence-application-wizard', LaWizardMode['NEW']]"
+              [attr.data-button]="'NEW LICENCE APPLICATION'">
         NEW LICENCE APPLICATION
       </button>
       <button mat-raised-button
               [@fadeInOut]="'fadeIn'"
-              [routerLink]="['/licence-application-wizard', LaWizardMode['RETRIEVE']]">
+              [routerLink]="['/licence-application-wizard', LaWizardMode['RETRIEVE']]"
+              [attr.data-button]="'RETRIEVE LICENCE APPLICATION'">
         RETRIEVE APPLICATION
       </button>
     </div>
@@ -28,12 +30,14 @@
       <div fxLayout="{{ (isAtLeastMedium$ | async) ? 'row' : 'column' }}" fxLayoutAlign="start start" fxLayoutGap="16px">
         <button mat-raised-button class="fullWidth doubleHeight"
                 [@fadeInOut]="'fadeIn'"
-                [routerLink]="['/licence-application-wizard', LaWizardMode['NEW']]">
+                [routerLink]="['/licence-application-wizard', LaWizardMode['NEW']]"
+                [attr.data-button]="'NEW LICENCE APPLICATION'">
           NEW LICENCE APPLICATION
         </button>
         <button mat-raised-button class="fullWidth doubleHeight"
                 [@fadeInOut]="'fadeIn'"
-                [routerLink]="['/licence-application-wizard', LaWizardMode['RETRIEVE']]">
+                [routerLink]="['/licence-application-wizard', LaWizardMode['RETRIEVE']]"
+                [attr.data-button]="'RETRIEVE LICENCE APPLICATION'">
           RETRIEVE APPLICATION
         </button>
       </div>

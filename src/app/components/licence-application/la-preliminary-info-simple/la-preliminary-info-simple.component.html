@@ -65,7 +65,9 @@
                   <mat-error *ngIf="form.controls.registeredLength.hasError('required')">* Required</mat-error>
                   <!--<mat-hint class="text-x-small">{{ displayRegisteredLengthHint() }}</mat-hint>-->
                 </mat-form-field>
-                <button *ngIf="useDoneButtons" mat-raised-button mat-icon-button class="doneButton" [disabled]="!isDone('LENGTH')">
+                <button *ngIf="useDoneButtons" mat-raised-button mat-icon-button class="doneButton"
+                        [disabled]="!isDone('LENGTH')"
+                        [attr.data-button]="'CANCEL'">
                   <mat-icon matListIcon alt="Done">done</mat-icon>
                 </button>
               </div>
@@ -147,7 +149,9 @@
                      [readonly]="(readonly || user.companyName ) ? true : null">
               <mat-error *ngIf="!readonly">* Required</mat-error>
             </mat-form-field>
-            <button *ngIf="useDoneButtons" mat-raised-button mat-icon-button class="doneButton" [disabled]="!isDone('COMPANY')">
+            <button *ngIf="useDoneButtons" mat-raised-button mat-icon-button class="doneButton"
+                    [disabled]="!isDone('COMPANY')"
+                    [attr.data-button]="'DONE'">
               <mat-icon matListIcon alt="Done">done</mat-icon>
             </button>
           </div>
@@ -164,7 +168,9 @@
                      (blur)="onLoseFocus('PARTNERSHIP')">
               <mat-error *ngIf="!readonly">* Required</mat-error>
             </mat-form-field>
-            <button *ngIf="useDoneButtons" mat-raised-button mat-icon-button class="doneButton" [disabled]="!isDone('PARTNERSHIP')">
+            <button *ngIf="useDoneButtons" mat-raised-button mat-icon-button class="doneButton"
+                    [disabled]="!isDone('PARTNERSHIP')"
+                    [attr.data-button]="'DONE'">
               <mat-icon matListIcon alt="Done">done</mat-icon>
             </button>
           </div>
@@ -222,7 +228,9 @@
               <mat-error *ngIf="!readonly">* Valid Email Address Required</mat-error>
               <mat-hint *ngIf="!readonly" style="color: rgba(50, 112, 104, 1)">The Letter of Offer will be emailed here</mat-hint>
             </mat-form-field>
-            <button *ngIf="useDoneButtons" mat-raised-button mat-icon-button class="doneButton" [disabled]="!isDone('PRIMARY_APPLICANT')">
+            <button *ngIf="useDoneButtons" mat-raised-button mat-icon-button class="doneButton"
+                    [disabled]="!isDone('PRIMARY_APPLICANT')"
+                    [attr.data-button]="'DONE'">
               <mat-icon matListIcon alt="Done">done</mat-icon>
             </button>
           </div>
@@ -233,7 +241,7 @@
               <div class="bold centered-content grey margin-top-double margin-bottom" [@fadeInOut]="'fadeIn'">
                 Applicant {{ i+2 }}
                 <span *ngIf="i > 0" class="margin-left" [@flyInOut]="'in'"><!-- there must be at least one other partner -->
-                  <button mat-raised-button (click)="removeApplicant(i)">
+                  <button mat-raised-button (click)="removeApplicant(i)" [attr.data-button]="'REMOVE APPLICANT'">
                     REMOVE
                   </button>
                 </span>
@@ -291,17 +299,23 @@
 
             <div class="fullWidth margin-top-double" [@flyInOut]="'in'">
               <div *ngIf="licenceApplication.preliminaryInformation.otherApplicants.length === 0" fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px">
-                <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="addApplicant()" [disabled]="!otherApplicantFormsValid(true)">
+                <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="addApplicant()"
+                        [disabled]="!otherApplicantFormsValid(true)"
+                        [attr.data-button]="'ADD APPLICANT'">
                   ADD APPLICANT
                 </button>
               </div>
               <div *ngIf="licenceApplication.preliminaryInformation.otherApplicants.length > 0" fxFill fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="16px">
                 <div class="bold dafm-green">Add Another Applicant?</div>
                 <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px">
-                  <button mat-raised-button (click)="addApplicant()" [disabled]="!otherApplicantFormsValid(true)">
+                  <button mat-raised-button (click)="addApplicant()"
+                          [disabled]="!otherApplicantFormsValid(true)"
+                          [attr.data-button]="'ADD APPLICANT YES'">
                     YES
                   </button>
-                  <button mat-raised-button (click)="applicantListCompleted = true" [disabled]="!otherApplicantFormsValid(true)">
+                  <button mat-raised-button (click)="applicantListCompleted = true"
+                          [disabled]="!otherApplicantFormsValid(true)"
+                          [attr.data-button]="'ADD APPLICANT NO'">
                     NO
                   </button>
                 </div>
@@ -367,6 +381,7 @@
 
       <!-- DMcD: IMPORTANT - these buttons must be outside the form tag, otherwise clicking the cancel button reloads the webpage -->
       <div *ngIf="!embedded" class="margin-bottom-double">
+
         <div *ngIf="!submissionInProgress" class="margin-top">
           <mat-divider [inset]="false"></mat-divider>
         </div>
@@ -375,15 +390,20 @@
         <div class="fullWidth" [class.margin-top-double]="standAlonePage" [class.margin-top]="!standAlonePage">
           <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px">
             <button mat-raised-button [class.fullWidth]="(isHandset$ | async)"
-                    (click)="back.emit(licenceApplication)" [disabled]="licenceApplication.status === LicenceApplicationStatus['PENDING_COMPLIANCE']">
+                    (click)="back.emit(licenceApplication)"
+                    [disabled]="licenceApplication.status === LicenceApplicationStatus['PENDING_COMPLIANCE']"
+                    [attr.data-button]="'BACK'">
               BACK
             </button>
             <button *ngIf="readonly" mat-raised-button [class.fullWidth]="(isHandset$ | async)"
-                    (click)="next.emit(licenceApplication)">
+                    (click)="next.emit(licenceApplication)"
+                    [attr.data-button]="'NEXT'">
               NEXT
             </button>
-            <button *ngIf="!readonly" mat-raised-button [class.fullWidth]="(isHandset$ | async)" [disabled]="(!readonly && (!form.valid || (!isAuthorised && !isIndividual())) || (isPartnership() && !applicantListCompleted)) ? true : null"
-                    (click)="onSubmit()">
+            <button *ngIf="!readonly" mat-raised-button [class.fullWidth]="(isHandset$ | async)"
+                    [disabled]="(!readonly && (!form.valid || (!isAuthorised && !isIndividual())) || (isPartnership() && !applicantListCompleted)) ? true : null"
+                    (click)="onSubmit()"
+                    [attr.data-button]="'SUBMIT'">
               SUBMIT
             </button>
           </div>

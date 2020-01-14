@@ -12,7 +12,8 @@
       <app-capacity-card [capacities]="capacities | filter: 'fleetSubSegment' : fleetSubSegment"
                          [showSubSegmentTotal]="allCapacity.getTotalCapacity(capacities | filter: 'fleetSubSegment' : fleetSubSegment) < allCapacity.getTotalCapacity(capacities | filter: 'fleetSegment' : fleetSegment)"
                          [pointsEnabled]="this.pointsEnabled"
-                         [offRegister]="offRegister">
+                         [offRegister]="offRegister"
+                         [attr.data-fleet-subsegment]="fleetSubSegment">
       </app-capacity-card>
     </ng-template>
   </div>

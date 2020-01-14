@@ -33,8 +33,15 @@
         <a (click)="onForgottenPassword()">Forgot Password?</a>
       </div>
       <div class="margin-top-double" fxLayoutAlign="space-around end">
-        <span><button mat-raised-button type="login" [disabled]="this.username.value === '' || this.password.value === ''" (click)="onLogin()">Login</button></span>
-        <span class="margin-left"><button mat-raised-button (click)="onCancel()">Cancel</button></span>
+        <span>
+          <button mat-raised-button type="login"
+                  [disabled]="this.username.value === '' || this.password.value === ''"
+                  (click)="onLogin()"
+                  [attr.data-button]="'LOGIN'">Login</button>
+        </span>
+        <span class="margin-left">
+          <button mat-raised-button (click)="onCancel()" [attr.data-button]="'CANCEL'">Cancel</button>
+        </span>
       </div>
     </form>
   </div>

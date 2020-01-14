@@ -126,6 +126,13 @@ export class DemoService {
     });
   }
 
+  public deleteLicenceApplication(userId: string, arn: string): Observable<boolean> {
+    return new Observable((observer) => {
+      observer.next(true);
+      observer.complete();
+    });
+  }
+
   public progressPreliminaryLicenceApplication(licenceApplication: LicenceApplication | LicenceApplicationView,
                                                payload: ProgressPatch): Observable<LicenceApplicationView> {
 

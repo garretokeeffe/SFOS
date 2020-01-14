@@ -30,7 +30,9 @@
   <div *ngIf="vessels.length > 0">
     <div fxLayout="{{(isHandset$ | async) ? 'column' : 'row wrap'}}" fxLayoutAlign="{{(isHandset$ | async) ? 'center start' : 'space-evenly start'}}">
       <app-vessel *ngFor="let vessel of vessels; let i = index;" [vessel]="vessel" [vCardInfo]="createVesselCardInfo(i+1, vessels.length)"
-                  [notificationBadge]="getVesselNotificationsBadge(vessel)"></app-vessel>
+                  [notificationBadge]="getVesselNotificationsBadge(vessel)"
+                  [attr.data-cfr]="vessel.cfr">
+      </app-vessel>
     </div>
   </div>
 

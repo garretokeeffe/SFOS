@@ -161,8 +161,8 @@
 
           <div class="margin-top padding-horizontal padding-bottom" *ngIf="globals.prototype">
             <div fxLayout="column" fxAlign="start start" fxLayoutGap="16px">
-              <button fxFill mat-raised-button routerLink="/licence-application">APPLY FOR NEW LICENCE</button>
-              <button fxFill mat-raised-button routerLink="/licences">MY APPLICATIONS</button>
+              <button fxFill mat-raised-button routerLink="/licence-application" [attr.data-button]="'APPLY FOR NEW LICENCE'">APPLY FOR NEW LICENCE</button>
+              <button fxFill mat-raised-button routerLink="/licences" [attr.data-button]="'APPLICATIONS'">MY APPLICATIONS</button>
             </div>
           </div>
 
@@ -193,8 +193,8 @@
             </div>
           </div>
           <mat-card-actions>
-            <button mat-raised-button>AUTHORISATIONS</button>
-            <button mat-raised-button>BALANCING STATEMENTS</button>
+            <button mat-raised-button [attr.data-button]="'AUTHORISATIONS'">AUTHORISATIONS</button>
+            <button mat-raised-button [attr.data-button]="'BALANCING STATEMENTS'">BALANCING STATEMENTS</button>
           </mat-card-actions>
         </mat-expansion-panel>
       </div>
@@ -218,7 +218,7 @@
             </div>
           </div>
           <mat-card-actions>
-            <button mat-raised-button>SEARCH</button>
+            <button mat-raised-button [attr.data-button]="'SEARCH'">SEARCH</button>
           </mat-card-actions>
         </mat-expansion-panel>
       </div>
@@ -255,7 +255,7 @@
           </mat-expansion-panel-header>
           <div class="absoluteContainer padding-horizontal">
             <img mat-card-image [src]="'assets/demo/images/celtic_explorer_location.png'">
-            <button class="zoomButton" mat-raised-button mat-icon-button routerLink="/map">
+            <button class="zoomButton" mat-raised-button mat-icon-button routerLink="/map" [attr.data-button]="'ZOOM'">
               <mat-icon class="hoverable">zoom_out_map</mat-icon>
             </button>
           </div>

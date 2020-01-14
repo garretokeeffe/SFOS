@@ -11,7 +11,7 @@
   </div>
 
   <div *ngIf="errorMessage && !loading" class="margin-top">
-    <button mat-raised-button routerLink="/licences" [class.fullWidth]="(isHandset$ | async)">
+    <button mat-raised-button routerLink="/licences" [class.fullWidth]="(isHandset$ | async)" [attr.data-button]="'BACK'">
       <mat-icon matListIcon alt="My Applications" class="chevron_horz">chevron_left</mat-icon>
       Back
     </button>
@@ -75,7 +75,7 @@
 
     <aw-wizard-step [stepId]="'LETTER_OF_OFFER'" [stepTitle]="'Letter of Offer'" [navigationSymbol]="{ symbol: '&#xf03a;', fontFamily: 'FontAwesome' }">
       <div [class.margin-top]="!(isHandset$ | async)">
-        <app-la-letter-of-offer [user]="user" [licenceApplication]="licenceApplication" (next)="nextStep($event)"  (back)="previousStep($event)"></app-la-letter-of-offer>
+        <app-la-letter-of-offer [user]="user" [licenceApplication]="licenceApplication" (next)="nextStep($event)"  (back)="goToMyApplications()"></app-la-letter-of-offer>
       </div>
     </aw-wizard-step>
 

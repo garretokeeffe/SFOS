@@ -7,7 +7,7 @@ import { WizardComponent } from 'angular-archwizard';
 import { UserView } from '../../../types/user';
 import { UserService } from '../../../services/user.service';
 import { animations } from '../../../animations';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LicenceService } from '../../../services/licence.service';
 
 export enum LaWizardMode {
@@ -44,10 +44,11 @@ export class LaWizardComponent implements OnInit {
   );
 
   constructor(private breakpointObserver: BreakpointObserver,
-              @Optional() public cdRef: ChangeDetectorRef,
+              private router: Router,
               private route: ActivatedRoute,
               private userService: UserService,
-              private licenceService: LicenceService) { }
+              private licenceService: LicenceService,
+              @Optional() public cdRef: ChangeDetectorRef) { }
 
   public ngOnInit(): void {
     this.errorMessage = '';
@@ -57,30 +58,31 @@ export class LaWizardComponent implements OnInit {
 
     this.loading = true;
     this.userService.getCurrentUser().subscribe((user: UserView) => {
-        this.user = user;
+      this.user = user;
 
-        if (this.route.snapshot.params.arn) {
-          console.log('Wizard is opening Licence Application with ARN: [' + this.route.snapshot.params.arn + ']');
-          this.licenceService.getLicenceApplication(this.user.id, this.route.snapshot.params.arn)
-          .subscribe( (licenceApplication: LicenceApplicationView) => {
-            if (licenceApplication === null) {
-              this.errorMessage = 'Sorry, something went wrong. The licence application ' + this.route.snapshot.params.arn + ' could not be retrieved.';
-            } else {
-              this.licenceApplication = licenceApplication;
-            }
-            this.loading = false;
-            // this.submissionInProgress = false;
-          }, (error) => {
+      if (this.route.snapshot.params.arn) {
+        console.log('Wizard is opening Licence Application with ARN: [' + this.route.snapshot.params.arn + ']');
+        this.licenceService.getLicenceApplication(this.user.id, this.route.snapshot.params.arn)
+        .subscribe( (licenceApplication: LicenceApplicationView) => {
+          if (licenceApplication === null) {
             this.errorMessage = 'Sorry, something went wrong. The licence application ' + this.route.snapshot.params.arn + ' could not be retrieved.';
-            this.loading = false;
-          });
-        }
-      },
-      (error) => {
+          } else {
+            this.licenceApplication = licenceApplication;
+          }
+          this.loading = false;
+          // this.submissionInProgress = false;
+        }, (error) => {
+          this.errorMessage = 'Sorry, something went wrong. The licence application ' + this.route.snapshot.params.arn + ' could not be retrieved.';
+          this.loading = false;
+        });
+      } else {
         this.loading = false;
-        console.log('Failed to get user profile');
-      },
-    );
+      }
+    },
+    (error) => {
+      this.loading = false;
+      console.log('Failed to get user profile');
+    });
   }
 
   public ngAfterViewChecked(): void {
@@ -125,5 +127,15 @@ export class LaWizardComponent implements OnInit {
       this.licenceApplication = licenceApplication;
     }
     this.wizard.model.navigationMode.goToPreviousStep();
+  }
+
+  public goToMyApplications(): void {
+    this.router.navigate(['/licences']).then( (e) => {
+      /*if (e) {
+        console.log('Rendering the My Applications page');
+      } else {
+        console.error('Failed to render the My Applications page');
+      }*/
+    });
   }
 }

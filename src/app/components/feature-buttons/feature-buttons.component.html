@@ -17,7 +17,7 @@
 </mat-card>
 -->
 
-<mat-card class="hoverable" routerLink="/vessels">
+<mat-card class="hoverable" routerLink="/vessels" [attr.data-button]="'VESSELS'">
   <mat-card-header fxLayoutAlign="center center">
     <mat-card-title>
       <div>
@@ -34,7 +34,7 @@
   </mat-card-content>
 </mat-card>
 
-<mat-card class="hoverable" routerLink="/capacity" [state]="{title: 'My Capacity'}">
+<mat-card class="hoverable" routerLink="/capacity" [state]="{title: 'My Capacity'}" [attr.data-button]="'CAPACITY'">
   <mat-card-header fxLayoutAlign="center center">
     <mat-card-title>
       <div>
@@ -51,7 +51,7 @@
   </mat-card-content>
 </mat-card>
 
-<mat-card class="hoverable" routerLink="/licences">
+<mat-card class="hoverable" routerLink="/licences" [attr.data-button]="'APPLICATIONS'">
   <mat-card-header fxLayoutAlign="center center">
     <mat-card-title>
       <div>

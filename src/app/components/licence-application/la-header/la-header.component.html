@@ -22,10 +22,10 @@
   </div>
 
   <div [@fadeInOut]="'fadeIn'">
-    <button *ngIf="!(isAtLeastMedium$ | async)" mat-raised-button mat-icon-button routerLink="/licences">
+    <button *ngIf="!(isAtLeastMedium$ | async)" mat-raised-button mat-icon-button routerLink="/licences" [attr.data-button]="'APPLICATIONS'">
       <mat-icon matListIcon alt="My Applications">library_books</mat-icon>
     </button>
-    <button *ngIf="(isAtLeastMedium$ | async)" mat-raised-button routerLink="/licences">
+    <button *ngIf="(isAtLeastMedium$ | async)" mat-raised-button routerLink="/licences" [attr.data-button]="'APPLICATIONS'">
       <mat-icon matListIcon alt="My Applications" class="chevron_horz">chevron_left</mat-icon>
       My Applications
     </button>

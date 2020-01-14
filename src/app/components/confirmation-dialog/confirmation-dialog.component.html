@@ -11,8 +11,8 @@
   </div>
 
   <div mat-dialog-actions class="margin-bottom-double">
-    <button mat-raised-button [mat-dialog-close]="true">{{confirmationInfo.yesButtonText}}</button>
-    <button mat-raised-button [mat-dialog-close]="false" cdkFocusInitial>{{confirmationInfo.noButtonText}}</button>
+    <button mat-raised-button [mat-dialog-close]="true" [attr.data-button]="'CLOSE TRUE'">{{confirmationInfo.yesButtonText}}</button>
+    <button mat-raised-button [mat-dialog-close]="false" [attr.data-button]="'CLOSE FALSE'" cdkFocusInitial>{{confirmationInfo.noButtonText}}</button>
   </div>
 
 </div>

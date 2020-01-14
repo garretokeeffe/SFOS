@@ -11,7 +11,7 @@ export class VesselOwner {
       // copy constructor
       this.id = vesselOwner.id;
       this.firstName = vesselOwner.firstName;
-      this.lastName = vesselOwner.lastName;
+      this.lastName = vesselOwner.lastName ? vesselOwner.lastName : vesselOwner['surname'] ? vesselOwner['surname'] : '';
       this.numberOfShares = vesselOwner.numberOfShares;
       this.userReferenceNumber = vesselOwner.userReferenceNumber;
       this.email = vesselOwner.email;

@@ -62,11 +62,11 @@
 
       <div class="fullWidth" [class.margin-top-double]="standAlonePage" [class.margin-top]="!standAlonePage">
         <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px"><!-- fxLayoutAlign="start start" -->
-          <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" routerLink="/licences">
+          <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" routerLink="/licences" [attr.data-button]="'CANCEL'">
             CANCEL
           </button>
           <button mat-raised-button [class.fullWidth]="(isHandset$ | async)"
-                  [disabled]="!form.valid ? true : null" (click)="getApplication()">
+                  [disabled]="!form.valid ? true : null" (click)="getApplication()" [attr.data-button]="'RETRIEVE'">
             RETRIEVE
           </button>
         </div>

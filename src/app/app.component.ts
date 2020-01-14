@@ -62,6 +62,7 @@ export class AppComponent implements OnInit {
     globals.demo = urlParams.has('demo') ? urlParams.get('demo').toLowerCase() === 'false' ? false : true : globals.demo;
     globals.demoSkipLoginScreen = urlParams.has('skiplogin') && urlParams.get('skiplogin').toLowerCase() !== 'false' && globals.demo ? true : globals.demoSkipLoginScreen;
     globals.prototype = urlParams.has('prototype') ? urlParams.get('prototype').toLowerCase() === 'false' ? false : true : globals.prototype;
+    globals.admin = urlParams.has('admin') ? urlParams.get('admin').toLowerCase() === 'false' ? false : true : globals.admin;
 
     if (globals.demo) {
       console.log('Running in DEMO mode');

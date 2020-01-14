@@ -19,6 +19,7 @@ export enum LetterOfOfferTermType {
 export enum LicenceApplicationStatus {
   NONE = 0,
   PENDING_LETTER_OF_OFFER = 1942535,
+  // OFFER_ISSUED = 1942540,
   PENDING_ACCEPTANCE_OF_LETTER_OF_OFFER = 315632756,
   REVOKED = 2,
   PENDING_COMPLIANCE = 315357739,

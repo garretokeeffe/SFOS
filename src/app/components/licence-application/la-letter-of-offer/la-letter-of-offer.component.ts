@@ -183,9 +183,7 @@ export class LaLetterOfOfferComponent implements OnInit, OnDestroy {
     });
   }
 
-  public login(): void {
-
-  }
+  public login(): void {  }
 
   public openVesselLengthBottomSheet(): void {
     this._bottomSheet.open(LaVesselLengthBottomSheet);

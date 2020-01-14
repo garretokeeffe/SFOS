@@ -142,7 +142,9 @@
       <mat-divider></mat-divider>
     </mat-nav-list>
 
-    <button *ngIf="showA2HSButton" class="addToHomeScreenButton centered-content" mat-raised-button (click)="addToHomeScreen()">Add to Home Screen</button>
+    <button *ngIf="showA2HSButton" class="addToHomeScreenButton centered-content" mat-raised-button
+            (click)="addToHomeScreen()"
+            [attr.data-button]="'ADD TO HOME SCREEN'">Add to Home Screen</button>
 
   </mat-sidenav>
 
@@ -158,7 +160,8 @@
           aria-label="Toggle sidenav"
           mat-icon-button
           (click)="drawer.toggle()"
-          *ngIf="(isHandset$ | async) || !drawer.opened">
+          *ngIf="(isHandset$ | async) || !drawer.opened"
+          [attr.data-button]="'MENU'">
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
 
@@ -193,11 +196,11 @@
           <span>My Inbox</span>
         </button>
         -->
-        <button mat-menu-item routerLink="/profile" [state]="{title: 'My Profile'}">
+        <button mat-menu-item routerLink="/profile" [state]="{title: 'My Profile'}" [attr.data-button]="'PROFILE'">
           <mat-icon alt="My Profile" class="color-primary">person</mat-icon>
           <span>My Profile</span>
         </button>
-        <button mat-menu-item (click)="logout()" routerLink="/home">
+        <button mat-menu-item (click)="logout()" routerLink="/home" [attr.data-button]="'HOME'">
           <mat-icon alt="Logout" class="color-primary">cancel</mat-icon>
           <span>Logout</span>
         </button>

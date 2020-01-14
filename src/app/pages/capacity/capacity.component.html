@@ -47,7 +47,8 @@
                                                 FleetSubSegment['POLYVALENT_SCALLOPS_GTE_10M_LOA'],
                                                 FleetSubSegment['POLYVALENT_POTTING']]"
                            [offRegister]="false"
-                           [pointsEnabled]="pointsEnabled">
+                           [pointsEnabled]="pointsEnabled"
+                           [attr.data-fleet-segment]="'POLYVALENT'">
         </app-fleet-segment>
 
         <!-- RSW PELAGIC -->
@@ -55,7 +56,8 @@
                            [fleetSegment]="FleetSegment['RSW_PELAGIC']"
                            [fleetSubSegments]="[FleetSubSegment['RSW_PELAGIC']]"
                            [offRegister]="false"
-                           [pointsEnabled]="pointsEnabled">
+                           [pointsEnabled]="pointsEnabled"
+                           [attr.data-fleet-segment]="'RSW PELAGIC'">
         </app-fleet-segment>
 
         <!-- SPECIFIC -->
@@ -64,7 +66,8 @@
                            [fleetSubSegments]="[FleetSubSegment['SPECIFIC_SCALLOPS_GTE_10M_LOA'],
                                                 FleetSubSegment['SPECIFIC_GENERAL']]"
                            [offRegister]="false"
-                           [pointsEnabled]="pointsEnabled">
+                           [pointsEnabled]="pointsEnabled"
+                           [attr.data-fleet-segment]="'SPECIFIC'">
         </app-fleet-segment>
 
         <!-- BEAM TRAWLER -->
@@ -72,7 +75,8 @@
                            [fleetSegment]="FleetSegment['BEAM_TRAWLER']"
                            [fleetSubSegments]="[FleetSubSegment['BEAM_TRAWLER']]"
                            [offRegister]="false"
-                           [pointsEnabled]="pointsEnabled">
+                           [pointsEnabled]="pointsEnabled"
+                           [attr.data-fleet-segment]="'BEAM TRAWLER'">
         </app-fleet-segment>
 
         <!-- AQUACULTURE -->
@@ -80,7 +84,8 @@
                            [fleetSegment]="FleetSegment['AQUACULTURE']"
                            [fleetSubSegments]="[FleetSubSegment['AQUACULTURE']]"
                            [offRegister]="false"
-                           [pointsEnabled]="pointsEnabled">
+                           [pointsEnabled]="pointsEnabled"
+                           [attr.data-fleet-segment]="'AQUACULTURE'">
         </app-fleet-segment>
 
       </div>

@@ -53,7 +53,9 @@
 
           <div class="fullWidth margin-top">
             <div fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
-              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="showLetterOfOffer = !showLetterOfOffer">
+              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)"
+                      (click)="showLetterOfOffer = !showLetterOfOffer"
+                      [attr.data-button]="'PDF'">
                 {{ showLetterOfOffer ? 'HIDE YOUR LETTER OF OFFER' : 'VIEW YOUR LETTER OF OFFER' }}
               </button>
               <!--
@@ -94,7 +96,9 @@
 
           <div *ngIf="enableDisplayOfPreliminaryInformation" class="fullWidth margin-vertical">
             <div fxFill fxLayout="row" fxLayoutAlign="center start">
-              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="showPreliminaryInformation = !showPreliminaryInformation">
+              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)"
+                      (click)="showPreliminaryInformation = !showPreliminaryInformation"
+                      [attr.data-button]="'SHOW PRELIMINARY INFORMATION'">
                 {{ showPreliminaryInformation ? 'HIDE LICENSING INFORMATION' : 'VIEW LICENSING INFORMATION' }}
                 <mat-icon class="chevron_vert">{{!showTerms  ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</mat-icon>
               </button>
@@ -137,13 +141,13 @@
           <ng-template #NotLoggedInButtons>
             <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px">
               <!-- User not logged in -->
-              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" routerLink="/login">
+              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" routerLink="/login" [attr.data-button]="'LOGIN'">
                 LOGIN
               </button>
-              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="rejectLetterOfOffer()">
+              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="rejectLetterOfOffer()" [attr.data-button]="'WITHDRAW'">
                 WITHDRAW
               </button>
-              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" routerLink="/licences">
+              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" routerLink="/licences" [attr.data-button]="'HOME'">
                 HOME
               </button>
             </div>
@@ -153,13 +157,14 @@
               <!-- User is logged in -->
               <button mat-raised-button [class.fullWidth]="(isHandset$ | async)"
                       (click)="back.emit(licenceApplication)"
-                      [disabled]="continueApplicationFlow">
+                      [disabled]="continueApplicationFlow"
+                      [attr.data-button]="'BACK'">
                 BACK
               </button>
-              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="rejectLetterOfOffer()" [disabled]="termsAccepted">
+              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="rejectLetterOfOffer()" [disabled]="termsAccepted" [attr.data-button]="'WITHDRAW'">
                 WITHDRAW
               </button>
-              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="acceptLetterOfOffer()" [disabled]="!termsAccepted">
+              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="acceptLetterOfOffer()" [disabled]="!termsAccepted" [attr.data-button]="'SUBMIT'">
                 SUBMIT
               </button>
             </div>
@@ -180,7 +185,9 @@
 
           <div class="fullWidth margin-top">
             <div fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
-              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="showLetterOfOffer = !showLetterOfOffer">
+              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)"
+                      (click)="showLetterOfOffer = !showLetterOfOffer"
+                      [attr.data-button]="'PDF'">
                 {{ showLetterOfOffer ? 'HIDE YOUR LETTER OF OFFER' : 'VIEW YOUR LETTER OF OFFER' }}
               </button>
               <!--
@@ -230,7 +237,9 @@
 
           <div *ngIf="enableDisplayOfPreliminaryInformation" class="fullWidth margin-vertical">
             <div fxFill fxLayout="row" fxLayoutAlign="center start">
-              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="showPreliminaryInformation = !showPreliminaryInformation">
+              <button mat-raised-button [class.fullWidth]="(isHandset$ | async)"
+                      (click)="showPreliminaryInformation = !showPreliminaryInformation"
+                      [attr.data-button]="'LICENSING INFORMATION'">
                 {{ showPreliminaryInformation ? 'HIDE LICENSING INFORMATION' : 'VIEW LICENSING INFORMATION' }}
                 <mat-icon class="chevron_vert">{{!showTerms  ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</mat-icon>
               </button>
@@ -244,17 +253,21 @@
           </div>
         </div>
 
-        <div class="margin-top">
+        <div class="margin-top" *ngIf="!submissionInProgress">
           <mat-divider [inset]="false"></mat-divider>
         </div>
+        <mat-progress-bar *ngIf="submissionInProgress" class="margin-vertical" mode="indeterminate"></mat-progress-bar>
+
         <div class="fullWidth margin-top">
           <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px">
             <button mat-raised-button [class.fullWidth]="(isHandset$ | async)"
                     (click)="back.emit(licenceApplication)"
-                    [disabled]="(isHandset$ | async) || licenceApplication.status === LicenceApplicationStatus['PENDING_COMPLIANCE']">
+                    [disabled]="(isHandset$ | async) || licenceApplication.status === LicenceApplicationStatus['PENDING_COMPLIANCE']"
+                    [attr.data-button]="'BACK'">
               BACK
             </button>
-            <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="next.emit(licenceApplication)">
+            <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" (click)="next.emit(licenceApplication)"
+                    [attr.data-button]="'NEXT'">
               NEXT
             </button>
           </div>

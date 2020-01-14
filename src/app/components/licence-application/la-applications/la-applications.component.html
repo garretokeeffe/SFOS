@@ -12,7 +12,7 @@
   <div *ngIf="licenceApplicationSummaries.length > 0 && !loading">
     <div fxLayout="{{(isHandset$ | async) ? 'column' : 'row wrap'}}" fxLayoutAlign="{{(isHandset$ | async) ? 'center start' : 'space-evenly start'}}">
       <div *ngFor="let licenceApplicationSummary of licenceApplicationSummaries; let i = index;">
-        <app-la-application-card [licenceApplicationSummary]="licenceApplicationSummary"></app-la-application-card>
+        <app-la-application-card [licenceApplicationSummary]="licenceApplicationSummary" [attr.data-arn]="licenceApplicationSummary.arn"></app-la-application-card>
       </div>
     </div>
   </div>

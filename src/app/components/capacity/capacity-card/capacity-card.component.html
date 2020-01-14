@@ -11,7 +11,7 @@
   <!-- ON REGISTER -->
   <div *ngIf="!offRegister" fxLayout="(isHandset$ | async) ? 'row' : 'column'"  fxLayoutAlign="start stretch" fxLayoutGap="16px" class="mat-card-group">
     <div *ngFor="let capacity of capacities; let i = index;" [class.fullWidth]="(isHandset$ | async)">
-      <app-vessel-capacity-card [capacity]="capacity" [pointsEnabled]="pointsEnabled"></app-vessel-capacity-card>
+      <app-vessel-capacity-card [capacity]="capacity" [pointsEnabled]="pointsEnabled" [attr.data-cfr]="capacity.vessel.cfr"></app-vessel-capacity-card>
     </div>
   </div>
 
@@ -22,7 +22,7 @@
       <div *ngIf="capacity.proposed" fxLayout="(isHandset$ | async) ? 'row' : 'column'"  fxLayoutAlign="start stretch" fxLayoutGap="16px" class="mat-card-group">
         <!-- proposed capacity - display as a vessel card -->
         <div [class.fullWidth]="(isHandset$ | async)">
-          <app-vessel-capacity-card [capacity]="capacity" [pointsEnabled]="pointsEnabled"></app-vessel-capacity-card>
+          <app-vessel-capacity-card [capacity]="capacity" [pointsEnabled]="pointsEnabled" [attr.data-cfr]="capacity.vessel.cfr"></app-vessel-capacity-card>
         </div>
       </div>
 

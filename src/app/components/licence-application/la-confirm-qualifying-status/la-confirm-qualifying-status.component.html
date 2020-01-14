@@ -44,12 +44,13 @@
         </div>
         <div class="fullWidth" [class.margin-top-double]="standAlonePage" [class.margin-top]="!standAlonePage">
           <div fxFill fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="16px">
-            <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" routerLink="/licences">
+            <button mat-raised-button [class.fullWidth]="(isHandset$ | async)" routerLink="/licences" [attr.data-button]="'CANCEL'">
               CANCEL
             </button>
             <button mat-raised-button [class.fullWidth]="(isHandset$ | async)"
                     [disabled]="!isQualified"
-                    (click)="next.emit(licenceApplication)">
+                    (click)="next.emit(licenceApplication)"
+                    [attr.data-button]="'NEXT'">
               NEXT
             </button>
           </div>
