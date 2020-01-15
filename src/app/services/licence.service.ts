@@ -133,20 +133,6 @@ export class LicenceService {
   public getLicenceApplicationSummaries(userId?: string): Observable<Array<LicenceApplicationSummaryView>> {
     // userId = CCS Id from keycloak profile
 
-    /*
-    let url: string = '';
-
-    // TODO remove the true below - for now always return demo data
-    if (true || this.globals.demo) {
-      url = this.demoService.getLicenceApplicationSummariesURL;
-    } else {
-      url = environment.getLicenceApplicationSummariesURL;
-      if (userId) {
-        url += '/' + userId;
-      }
-    }
-    */
-
     const url: string = this.globals.demo ? this.demoService.getLicenceApplicationSummariesURL : environment.getLicenceApplicationSummariesURL + '/' + userId;
 
     return new Observable((observer) => {

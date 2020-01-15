@@ -86,7 +86,7 @@
           <mat-form-field class="multiline">
             <input matInput placeholder="Address" value="{{ user.addressLine1 || ' ' }}" readonly>
           </mat-form-field>
-          <mat-form-field class="multiline" *ngIf="user.addressLine2">
+          <mat-form-field class="multiline" *ngIf="user.addressLine2" >
             <input matInput value="{{ user.addressLine2 }}" readonly>
           </mat-form-field>
           <mat-form-field class="multiline" *ngIf="user.addressLine3">
@@ -106,12 +106,12 @@
 
       <div fxLayout="row" fxLayoutAlign="start center" class="margin-top-double">
         <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Email">email</mat-icon>
-        <mat-form-field>
+        <mat-form-field [style.width]="dynamicWidth(user.email, 'Email')">
           <input matInput placeholder="Email" value="{{user.email || ' '}}" readonly>
         </mat-form-field>
       </div>
 
-      <div fxLayout="row" fxLayoutAlign="start center">
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="0">
         <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Phone">phone</mat-icon>
         <mat-form-field [style.width]="dynamicWidth(user.phoneMobile, 'Mobile Phone')" class="margin-right-narrow">
           <input matInput placeholder="Mobile Phone" value="{{user.phoneMobile || ' '}}" readonly>
@@ -215,7 +215,7 @@
 
       <div fxLayout="row" fxLayoutAlign="start center" class="margin-top-double">
         <mat-icon matListIcon fxLayoutAlign="space-between start" alt="Email">email</mat-icon>
-        <mat-form-field>
+        <mat-form-field [style.width]="dynamicWidth(user.email, 'Email')">
           <input matInput placeholder="Email" value="{{user.email || ' '}}" readonly>
         </mat-form-field>
       </div>

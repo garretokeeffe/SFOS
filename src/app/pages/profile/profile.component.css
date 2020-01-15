@@ -11,4 +11,8 @@ mat-divider {
   display: none;
 }
 
+::ng-deep mat-form-field.multiline .mat-form-field-infix {
+  width: 280px !important; /* allows untruncated display of the address fields */
+}
+
 
