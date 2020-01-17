@@ -9,7 +9,7 @@
       <div *ngIf="standAlonePage" class="wizard-label margin-bottom">RETURN APPLICATION</div>
 
       <div class="margin-bottom bold dafm-green">
-        You must comply with the conditions of your Letter of Offer on or before {{ licenceApplication.expiryDate }}
+        You must comply with the conditions of your Letter of Offer on or before {{ licenceApplication.expiryDate | isoDate }}
       </div>
 
       <div class="margin-bottom dafm-green">

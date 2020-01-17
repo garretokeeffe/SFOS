@@ -3,7 +3,7 @@
     "id": 1,
     "name": "Atlantic Way",
     "status": 1811007,
-    "safetyCertificateExpiryDate": "15/06/2020",
+    "safetyCertificateExpiryDate": "2016-05-01T00:00:00Z",
     "owners": [
       {
         "id": 1,
@@ -30,8 +30,8 @@
       "status": 1942550,
       "fleetSegment": 1,
       "fleetSubSegment": 1942697,
-      "startDate": "01/01/2019",
-      "endDate": "31/12/2019"
+      "startDate": "2020-05-27",
+      "endDate": "2020-05-27T23:00:00"
     },
 
     "loa": 14,
