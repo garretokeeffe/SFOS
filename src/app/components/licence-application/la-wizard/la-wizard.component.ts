@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, Input, OnInit, Optional, ViewChild } from
 import { Observable } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
-import { LicenceApplicationView } from '../../../types/licence-application';
+import { LicenceApplicationStatus, LicenceApplicationView } from '../../../types/licence-application';
 import { WizardComponent } from 'angular-archwizard';
 import { UserView } from '../../../types/user';
 import { UserService } from '../../../services/user.service';
@@ -37,6 +37,7 @@ export class LaWizardComponent implements OnInit {
 
   public errorMessage: string = '';
   public loading: boolean = false;
+  public forceNavigation: boolean = false; // set to true to make wizard automatically skip to a specific step
 
   public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.HandsetPortrait)
   .pipe(
@@ -67,6 +68,7 @@ export class LaWizardComponent implements OnInit {
           if (licenceApplication === null) {
             this.errorMessage = 'Sorry, something went wrong. The licence application ' + this.route.snapshot.params.arn + ' could not be retrieved.';
           } else {
+            this.forceNavigation = true;
             this.licenceApplication = licenceApplication;
           }
           this.loading = false;
@@ -88,6 +90,12 @@ export class LaWizardComponent implements OnInit {
   public ngAfterViewChecked(): void {
     // detect changes after view checked to avoid "expression has changed after it was checked" exceptions
     this.cdRef.detectChanges();
+
+    if (this.wizard && this.route.snapshot.params.arn && this.forceNavigation && this.licenceApplication.status === LicenceApplicationStatus['PENDING_COMPLIANCE']) {
+      // User has already accepted the terms of the letter of offer, so skip to the document checklist page
+      this.forceNavigation = false;
+      this.goToStep('SUBMIT_MANUALLY');
+    }
   }
 
   public goToStep(stepId: string, licenceApplication?: LicenceApplicationView): void {
