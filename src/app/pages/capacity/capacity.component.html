@@ -1,6 +1,7 @@
 <div class="page readonly" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)">
   <h2 style="width:100%">
-    <mat-icon matListIcon alt="My Capacity" style="position: relative; top: 4px; margin-right: 8px;">toys</mat-icon>{{ title$ | async }}
+    <mat-icon matListIcon alt="My Capacity" style="position: relative; top: 4px; margin-right: 8px;">toys</mat-icon>
+    <span>{{ title$ | async }}</span>
   </h2>
 
   <!--

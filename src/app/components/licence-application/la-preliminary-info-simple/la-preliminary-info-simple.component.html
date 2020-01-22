@@ -57,8 +57,9 @@
                   <mat-select required [disabled]="readonly ? true : null"
                               [(ngModel)]="licenceApplication.preliminaryInformation.registeredLength"
                               [formControl]="form.controls.registeredLength"
-                              (selectionChange)="onLoseFocus('LENGTH')">
-                    <mat-option *ngFor="let key of registeredLengthOptions" [value]="key">
+                              (selectionChange)="onLoseFocus('LENGTH')"
+                              [attr.data-select]="'REGISTERED LENGTH'">
+                    <mat-option *ngFor="let key of registeredLengthOptions" [value]="key" [attr.data-option]="key">
                       {{ utils.displayEnumText(key, RegisteredLengthOption) }}
                     </mat-option>
                   </mat-select>
@@ -86,7 +87,8 @@
                 <mat-select required [disabled]="readonly ? true : null"
                             [(ngModel)]="licenceApplication.preliminaryInformation.fleetSegment"
                             [formControl]="form.controls.fleetSegment"
-                            (selectionChange)="onLoseFocus('SEGMENT')">
+                            (selectionChange)="onLoseFocus('SEGMENT')"
+                            [attr.data-select]="'FLEET SEGMENT'">
                   <!-- Use the commented out block to group segments, otherwise use the ng-template block to display a flattened list -->
                   <!--
                   <mat-optgroup *ngFor="let group of segmentGroups" [label]="group.name"
@@ -97,7 +99,7 @@
                   </mat-optgroup>
                   -->
                   <ng-template ngFor let-group [ngForOf]="segmentGroups">
-                    <mat-option *ngFor="let segment of group.segment" [value]="segment.value">
+                    <mat-option *ngFor="let segment of group.segment" [value]="segment.value" [attr.data-option]="segment.value">
                       {{ segment.viewValue }}
                     </mat-option>
                   </ng-template>
@@ -120,8 +122,9 @@
                 <mat-select required [disabled]="readonly ? true : null"
                             [(ngModel)]="licenceApplication.preliminaryInformation.applicantType"
                             [formControl]="form.controls.applicantType"
-                            (selectionChange)="onLoseFocus('APPLICANT_TYPE')">
-                  <mat-option *ngFor="let key of applicantTypes" [value]="key">
+                            (selectionChange)="onLoseFocus('APPLICANT_TYPE')"
+                            [attr.data-select]="'APPLICANT TYPE'">
+                  <mat-option *ngFor="let key of applicantTypes" [value]="key" [attr.data-option]="key">
                     {{ utils.displayEnumText(key, ApplicantType) }}
                   </mat-option>
                 </mat-select>

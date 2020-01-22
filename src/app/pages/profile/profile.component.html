@@ -1,5 +1,8 @@
 <div class="page" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)">
-  <h2><mat-icon matListIcon alt="My Profile" style="position: relative; top: 4px; margin-right: 8px;">{{(title$ | async) == 'Client Profile' ? 'person_outline' : 'person'}}</mat-icon>{{ (title$ | async) == 'Client Profile' ? 'Client Profile' : 'My Profile' }}<span class="margin-left" style="position: relative; top: -4px"></span></h2>
+  <h2>
+    <mat-icon matListIcon alt="My Profile" style="position: relative; top: 4px; margin-right: 8px;">{{(title$ | async) == 'Client Profile' ? 'person_outline' : 'person'}}</mat-icon>
+    <span>{{ (title$ | async) == 'Client Profile' ? 'Client Profile' : 'My Profile' }}</span>
+  </h2>
 
   <!-- TODO: remove this after company screen ui approved -->
   <!--

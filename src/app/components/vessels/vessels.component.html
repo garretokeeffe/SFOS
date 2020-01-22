@@ -5,13 +5,13 @@
     <mat-icon matListIcon alt="My Vessels" style="position: relative; top: 4px; margin-right: 8px;">directions_boat
     </mat-icon>
 
-    <span *ngIf="vessels.length > 1">
+    <span *ngIf="vessels.length > 1" [attr.data-title]="'My ' + vessels.length + ' Vessels'">
       My {{ vessels.length }} Vessels
     </span>
-    <span *ngIf="vessels.length === 1">
+    <span *ngIf="vessels.length === 1" [attr.data-title]="'My Vessel'">
       My Vessel
     </span>
-    <span *ngIf="vessels.length === 0">
+    <span *ngIf="vessels.length === 0" [attr.data-title]="'My Vessels'">
       My Vessels
     </span>
 
