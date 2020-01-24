@@ -1,7 +1,12 @@
+<div *ngIf="capacity.proposed" class="successBanner" fxLayoutAlign="center center">
+  <mat-icon class="info-icon">how_to_vote</mat-icon>
+  <div>PROPOSED</div>
+</div>
+
 <mat-card *ngIf="capacity" #card class="margin-bottom-half" [@fadeInOut]="'fadeIn'"> <!-- class="margin-bottom" -->
   <mat-card-header>
     <mat-card-title class="fullWidth">
-      <div *ngIf="capacity.proposed" class="error centered-content margin-bottom">*** PROPOSED ***</div>
+      <!-- <div *ngIf="capacity.proposed" class="error centered-content margin-bottom">*** PROPOSED ***</div> -->
       <div fxFill fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="16px">
         <mat-icon>directions_boat</mat-icon>
         <div>{{ capacity.vessel.name }}</div>
@@ -63,12 +68,17 @@
 
       <div *ngIf="capacity.hasTrackRecord()" class="margin-top"></div>
 
-      <mat-expansion-panel [expanded]="false">
+      <mat-expansion-panel [expanded]="isExpiringSoon()">
         <mat-expansion-panel-header>
           <mat-panel-title><div style="width: 100%; text-align: center">DETAILS</div></mat-panel-title>
         </mat-expansion-panel-header>
         <div fxLayout="column"  fxLayoutAlign="start stretch" xfxLayoutGap="16px" class="mat-card-group">
-          <div *ngFor="let block of capacity.blocks | orderBy : ['capacityType']" class="capacityBlocks" [class.fullWidth]="(isHandset$ | async)">
+          <div *ngFor="let block of capacity.blocks | orderBy : ['expiryDate']" class="capacityBlocks" [class.fullWidth]="(isHandset$ | async)">
+
+            <div *ngIf="block.isExpiringSoon()" class="errorBanner" [class.handset]="(isHandset$ | async)" fxLayoutAlign="center center">
+              <mat-icon class="info-icon">error_outline</mat-icon>
+              <div>{{ block.expiryMessage() }}</div>
+            </div>
             <mat-card #card class="margin-bottom innerCard" [@fadeInOut]="'fadeIn'" [class.handset]="(isHandset$ | async)" [class.desktop]="!(isHandset$ | async)">
               <mat-card-header>
                 <mat-card-title>

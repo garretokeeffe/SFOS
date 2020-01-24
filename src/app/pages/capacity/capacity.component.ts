@@ -6,7 +6,7 @@ import { ActivatedRoute} from '@angular/router';
 import { UserView} from '../../types/user';
 import { UserService} from '../../services/user.service';
 import { CapacityService} from '../../services/capacity.service';
-import { AllCapacity, AllCapacityView, CapacityBlock, CapacityView } from '../../types/capacity';
+import { AllCapacity, AllCapacityView, CapacityBlock, CapacityBlockView, CapacityView } from '../../types/capacity';
 import { FleetSegment, FleetSegmentManager, FleetSubSegment } from '../../types/fleet-segment';
 import { Globals} from '../../globals';
 import { MatButtonToggleGroup, MatSelect, MatTabGroup} from '@angular/material';
@@ -145,20 +145,11 @@ export class CapacityComponent implements OnInit, AfterViewChecked {
 
   public isExpiringSoon(): boolean {
     let expiringSoon: boolean = false;
-    if (this.allCapacity && this.allCapacity.offRegister && this.allCapacity.offRegister) {
+    if (this.allCapacity && this.allCapacity.offRegister) {
       this.allCapacity.offRegister.forEach( (capacity: CapacityView) => {
-        capacity.blocks.forEach( (detail: CapacityBlock) => {
-          if (detail.expiryDate) {
-
-            const now: any = moment.utc(new Date()); // today's date
-            const expiryDate: any = moment(detail.expiryDate, 'DD/MM/YYYY'); // expiryDate should already be in utc
-            const difference: Duration = moment.duration(expiryDate.diff(now));
-            const daysToExpiry: number = difference.asDays();
-            // console.log('Days to expiry: ' + daysToExpiry);
-
-            if (daysToExpiry <= this.globals.configuration.warnIfCapacityExpiryDateIsApproachingDays) {
-              expiringSoon = true;
-            }
+        capacity.blocks.forEach( (block: CapacityBlockView) => {
+          if (block.isExpiringSoon()) {
+            expiringSoon = true;
           }
         });
       });

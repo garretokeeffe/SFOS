@@ -33,9 +33,9 @@
       <div class="card-data centered-content">{{ (block.offRegisterDate | isoDate) || '-' }}</div>
     </div>
     <div class="left">
-      <div class="text-small card-data-header centered-content">Expiry Date</div>
-      <div class="card-data centered-content" [class.error]="isExpiringSoon()">
-        <span *ngIf="isExpiringSoon()">&#x26A0;&nbsp;</span> <!-- warning symbol -->
+      <div class="text-small card-data-header centered-content" [class.error]="block.isExpiringSoon()">Expiry Date</div>
+      <div class="card-data centered-content" [class.error]="block.isExpiringSoon()">
+        <!--<span *ngIf="block.isExpiringSoon()">&#x26A0;&nbsp;</span>--> <!-- warning symbol -->
         {{ (block.expiryDate | isoDate)  || '-' }}
       </div>
     </div>

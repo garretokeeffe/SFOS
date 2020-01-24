@@ -3,14 +3,17 @@
   background: rgba(50, 112, 104, .05) !important;
 }
 
-.innerCard {
+.xinnerCard {
   max-width: 220px;
   min-width: 220px;
 }
-
 .innerCard.handset {
   max-width: 204px;
   min-width: 204px;
+}
+.errorBanner.handset {
+  max-width: 236px; /* 204px + 32px padding to make same width as the innerCard */
+  min-width: 236px;
 }
 mat-card-header {
   margin-bottom: 8px;

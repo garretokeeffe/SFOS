@@ -29,21 +29,4 @@ export class CapacityBlockComponent implements OnInit {
     });
     return total;
   }
-
-  public isExpiringSoon(): boolean {
-    let expiringSoon: boolean = false;
-    if (this.block && this.block.expiryDate) {
-
-      const now: any = moment.utc(new Date()); // today's date
-      const expiryDate: any = moment(this.block.expiryDate, 'DD/MM/YYYY'); // expiryDate should already be in utc
-      const difference: Duration = moment.duration(expiryDate.diff(now));
-      const daysToExpiry: number = difference.asDays();
-      // console.log('Days to expiry: ' + daysToExpiry);
-
-      if (daysToExpiry <= this.globals.configuration.warnIfCapacityExpiryDateIsApproachingDays) {
-        expiringSoon = true;
-      }
-    }
-    return expiringSoon;
-  }
 }

@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CapacityView } from '../../../types/capacity';
+import { CapacityBlock, CapacityBlockView, CapacityView } from '../../../types/capacity';
 import { animations } from '../../../animations';
 import { Observable } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-vessel-capacity-card',
@@ -24,6 +25,15 @@ export class VesselCapacityCardComponent implements OnInit {
   constructor(public breakpointObserver: BreakpointObserver) { }
 
   public ngOnInit(): void {
+  }
+
+  public isExpiringSoon(): boolean {
+    for (let i: number = 0; i < this.capacity.blocks.length; i++) {
+      const block: CapacityBlockView = new CapacityBlockView(this.capacity.blocks[i]);
+      if (block.isExpiringSoon()) {
+        return true;
+      }
+    }
   }
 
 }

@@ -28,21 +28,27 @@
 
       <div *ngIf="!capacity.proposed" fxLayout="(isHandset$ | async) ? 'row' : 'column'"  fxLayoutAlign="start stretch" fxLayoutGap="16px" class="mat-card-group">
         <!-- standard off register capacity - display non-vessel specific blocks -->
-        <div *ngFor="let block of capacity.blocks | orderBy : ['capacityType']" class="capacityBlocks" [class.fullWidth]="(isHandset$ | async)">
+        <div *ngFor="let block of capacity.blocks | orderBy : ['expiryDate']" class="capacityBlocks" [class.fullWidth]="(isHandset$ | async)">
+
+          <div *ngIf="block.isExpiringSoon()" class="errorBanner" fxLayoutAlign="center center">
+            <mat-icon class="info-icon">error_outline</mat-icon>
+            <div>{{ block.expiryMessage() }}</div>
+          </div>
           <mat-card #card class="margin-bottom" [@fadeInOut]="'fadeIn'">
             <mat-card-header>
-              <mat-card-title>
-                <div fxFill fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="16px">
-                  <mat-icon>{{ block.capacityType.toUpperCase() === 'KW' ? 'speed' : 'gradient'}}</mat-icon>
-                  <div>{{ block.capacityAmount }}&nbsp;<span style="text-transform: none">{{ block.capacityType }}</span></div>
-                </div>
-              </mat-card-title>
+                <mat-card-title>
+                  <div fxFill fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="16px">
+                    <mat-icon>{{ block.capacityType.toUpperCase() === 'KW' ? 'speed' : 'gradient'}}</mat-icon>
+                    <div>{{ block.capacityAmount }}&nbsp;<span style="text-transform: none">{{ block.capacityType }}</span></div>
+                  </div>
+                </mat-card-title>
               <mat-card-subtitle></mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
               <app-capacity-block [block]="block" [showQuotaEligibility]="capacity.hasQuotaEligibility()" [pointsEnabled]="pointsEnabled"></app-capacity-block>
             </mat-card-content>
           </mat-card>
+
         </div>
       </div>
     </div>

@@ -2,6 +2,10 @@ import { VesselSummary, VesselView } from './vessel';
 import { TrackRecord, TrackRecordView } from './trackRecord';
 import { PenaltyPoints } from './points';
 import { FleetSegment, FleetSegmentManager, FleetSubSegment } from './fleet-segment';
+import * as moment from 'moment';
+import { Duration } from 'moment';
+import { Globals } from '../globals';
+import { Inject } from '@angular/core';
 
 export class AllCapacity {
   public ownerId: string = null; // maybe required for top level access by the LA, otherwise ownerId is accessible at Capacity level
@@ -70,7 +74,7 @@ export class Capacity {
   public gt: number = null; // this may be a subset of the entire capacity of the vessel
   public kw: number = null; // this may be a subset of the entire capacity of the vessel
 
-  public blocks: Array<CapacityBlock> = [];
+  public blocks: Array<CapacityBlock | CapacityBlockView> = [];
 
   // capacity-card attributes
   public vessel: VesselSummary | VesselView = null;
@@ -97,7 +101,7 @@ export class Capacity {
       const blocks: Array<CapacityBlock> = [];
       if (capacity.blocks) {
         capacity.blocks.forEach((capacityBlock: CapacityBlock) => {
-          blocks.push(new CapacityBlock(capacityBlock));
+          blocks.push(new CapacityBlockView(capacityBlock));
         });
         this.blocks = blocks;
       } else {
@@ -115,7 +119,6 @@ export class CapacityView extends Capacity {
 
   constructor(capacity?: Capacity | CapacityView | any) { // DMcD 'any' only supported for unit testing
     super(capacity);
-    // this.trackRecord = new TrackRecordView(capacity.trackRecord);
   }
 
   public hasQuotaEligibility(): boolean {
@@ -241,5 +244,56 @@ export class CapacityBlock {
       this.expiryDate = capacityBlock.expiryDate ? capacityBlock.expiryDate : this.expiryDate;
       this.sourceVesselName = capacityBlock.sourceVesselName ? capacityBlock.sourceVesselName : this.sourceVesselName;
     }
+  }
+}
+
+export class CapacityBlockView extends CapacityBlock {
+  private globals: Globals = new Globals();
+
+  constructor(capacityBlock?: CapacityBlock | any) {
+    super(capacityBlock);
+  }
+
+  public isExpiringSoon(returnNumberOfDaysToExpiry: boolean = false): boolean | number {
+    let expiringSoon: boolean = false;
+    let daysToExpiry: number = null;
+
+    if (this.expiryDate) {
+
+      const now: any = moment.utc(new Date()); // today's date
+      // const expiryDate: any = moment(this.expiryDate, 'DD/MM/YYYY'); // expiryDate should already be in utc
+      const expiryDate: any = moment.utc(this.expiryDate); // expiryDate should already be in utc
+      const difference: Duration = moment.duration(expiryDate.diff(now));
+      daysToExpiry = Math.round(difference.asDays()) + 1;
+      // console.log('Days to expiry: ' + daysToExpiry);
+
+      if (daysToExpiry <= this.globals.configuration.warnIfCapacityExpiryDateIsApproachingDays) {
+        expiringSoon = true;
+      }
+    }
+
+    return returnNumberOfDaysToExpiry ? daysToExpiry : expiringSoon;
+  }
+
+  public expiryMessage(): string {
+    const daysToExpiry: number | boolean = this.isExpiringSoon(true);
+    if (daysToExpiry !== null) {
+      if (daysToExpiry < 0) {
+        if (daysToExpiry >= -1) {
+          return 'Expired yesterday';
+        } else {
+          return 'Expired ' + (Number(daysToExpiry) * -1) + ' days ago';
+        }
+      }
+      switch (daysToExpiry) {
+        case 0:
+          return 'Expires today';
+        case 1:
+          return 'Expires tomorrow';
+        default:
+          return 'Expires in ' + daysToExpiry + ' days';
+      }
+    }
+    return '';
   }
 }

@@ -316,15 +316,15 @@
               "quotaEligibility": true
             }
           ],
-          "offRegisterDate": "01/09/2019",
-          "expiryDate": "31/08/2021",
+          "offRegisterDate": "2019-09-01T00:00:00Z",
+          "expiryDate": "2021-09-01T00:00:00Z",
           "sourceVesselName": "Sea Spirit",
           "sourceVesselId": "1234",
           "penaltyPoints":
           [
             {
               "numberOfPoints": 5,
-              "expiryDate": "31/12/2021"
+              "expiryDate": "2020-09-22T00:00:00Z"
             }
           ]
         },
@@ -333,15 +333,15 @@
           "capacityAmount": 20,
           "capacityType": "GT",
           "trackRecord_disabled": null,
-          "offRegisterDate": "15/12/2017",
-          "expiryDate": "15/12/2019",
+          "offRegisterDate": "2018-01-28T00:00:00Z",
+          "expiryDate": "2020-01-28T00:00:00Z",
           "sourceVesselName": "Kingfisher",
           "sourceVesselId": "5678",
           "penaltyPoints":
           [
             {
               "numberOfPoints": 3,
-              "expiryDate": "15/12/2019"
+              "expiryDate": "2020-12-01T00:00:00Z"
             }
           ]
         },
@@ -355,8 +355,8 @@
               "quotaEligibility": false
             }
           ],
-          "offRegisterDate": "01/09/2019",
-          "expiryDate": "31/08/2021",
+          "offRegisterDate": "2019-09-01T00:00:00Z",
+          "expiryDate": "2021-09-01T00:00:00Z",
           "sourceVesselName": "Sea Spirit",
           "sourceVesselId": "1234",
           "penaltyPoints": null
@@ -366,8 +366,19 @@
           "capacityAmount": 500,
           "capacityType": "kW",
           "trackRecord_disabled": null,
-          "offRegisterDate": "01/09/2019",
-          "expiryDate": "31/12/2021",
+          "offRegisterDate": "2018-01-27T00:00:00Z",
+          "expiryDate": "2020-01-27T00:00:00Z",
+          "sourceVesselName": "Sea Spirit",
+          "sourceVesselId": "1234",
+          "penaltyPoints": null
+        },
+        {
+          "capBlockId": 4,
+          "capacityAmount": 150,
+          "capacityType": "kW",
+          "trackRecord_disabled": null,
+          "offRegisterDate": "2018-02-06T00:00:00Z",
+          "expiryDate": "2020-02-06T00:00:00Z",
           "sourceVesselName": "Sea Spirit",
           "sourceVesselId": "1234",
           "penaltyPoints": null
@@ -403,15 +414,15 @@
               "quotaEligibility": true
             }
           ],
-          "offRegisterDate": "01/09/2019",
-          "expiryDate": "31/08/2021",
+          "offRegisterDate": "2019-09-01T00:00:00Z",
+          "expiryDate": "2021-09-01T00:00:00Z",
           "sourceVesselName": "Maire II",
           "sourceVesselId": "2",
           "penaltyPoints":
           [
             {
               "numberOfPoints": 3,
-              "expiryDate": "31/12/2019"
+              "expiryDate": "2020-12-31T00:00:00Z"
             }
           ]
         },
@@ -426,15 +437,15 @@
               "quotaEligibility": false
             }
           ],
-          "offRegisterDate": "20/01/2019",
-          "expiryDate": "19/01/2021",
+          "offRegisterDate": "2019-01-20T00:00:00Z",
+          "expiryDate": "2021-01-20T00:00:00Z",
           "sourceVesselName": "Maire II",
           "sourceVesselId": "2",
           "penaltyPoints":
           [
             {
               "numberOfPoints": 3,
-              "expiryDate": "31/12/2020"
+              "expiryDate": "2020-12-31T00:00:00Z"
             }
           ]
         },
@@ -449,8 +460,8 @@
               "quotaEligibility": false
             }
           ],
-          "offRegisterDate": "22/03/2020",
-          "expiryDate": "21/03/2022",
+          "offRegisterDate": "2020-01-10T00:00:00Z",
+          "expiryDate": "2022-01-10T00:00:00Z",
           "sourceVesselName": "Maire II",
           "sourceVesselId": "2",
           "penaltyPoints": [
@@ -471,8 +482,8 @@
               "quotaEligibility": false
             }
           ],
-          "offRegisterDate": "20/01/2019",
-          "expiryDate": "19/01/2021",
+          "offRegisterDate": "2020-01-10T00:00:00Z",
+          "expiryDate": "2022-01-10T00:00:00Z",
           "sourceVesselName": "Maire II",
           "sourceVesselId": "2",
           "penaltyPoints": [
@@ -493,8 +504,8 @@
               "quotaEligibility": true
             }
           ],
-          "offRegisterDate": "20/03/2018",
-          "expiryDate": "19/03/2020",
+          "offRegisterDate": "2018-02-24T00:00:00Z",
+          "expiryDate": "2020-02-24T00:00:00Z",
           "sourceVesselName": "Maire II",
           "sourceVesselId": "2",
           "penaltyPoints": [
@@ -515,8 +526,8 @@
               "quotaEligibility": true
             }
           ],
-          "offRegisterDate": "22/03/2020",
-          "expiryDate": "21/03/2022",
+          "offRegisterDate": "2019-06-01T00:00:00Z",
+          "expiryDate": "2021-06-01T00:00:00Z",
           "sourceVesselName": "Maire II",
           "sourceVesselId": "2",
           "penaltyPoints": [
@@ -530,7 +541,7 @@
       "penaltyPoints": [
         {
           "numberOfPoints": 6,
-          "expiryDate": "31/12/2020"
+          "expiryDate": "2020-06-30T00:00:00Z"
         }
       ],
       "vessel": {
@@ -570,15 +581,15 @@
               "quotaEligibility": true
             }
           ],
-          "offRegisterDate": "01/09/2019",
-          "expiryDate": "31/08/2021",
+          "offRegisterDate": "2019-09-01T00:00:00Z",
+          "expiryDate": "2021-09-01T00:00:00Z",
           "sourceVesselName": "Aine III",
           "sourceVesselId": "555",
           "penaltyPoints":
           [
             {
               "numberOfPoints": 5,
-              "expiryDate": "31/12/2021"
+              "expiryDate": "2020-11-01T00:00:00Z"
             }
           ]
         },
@@ -593,17 +604,71 @@
               "quotaEligibility": false
             }
           ],
-          "offRegisterDate": "01/11/2018",
-          "expiryDate": "31/10/2020",
+          "offRegisterDate": "2018-11-01T00:00:00Z",
+          "expiryDate": "2020-11-01T00:00:00Z",
           "sourceVesselName": "Aine III",
           "sourceVesselId": "555",
           "penaltyPoints":
           [
             {
               "numberOfPoints": 3,
-              "expiryDate": "31/10/2019"
+              "expiryDate": "2020-11-01T00:00:00Z"
             }
           ]
+        }
+      ],
+      "penaltyPoints": null,
+      "vessel": null
+    },
+
+    {
+      "capAccountId": 103,
+      "ownerId": 1,
+      "offRegister": true,
+      "proposed": false,
+      "fleetSegment": 5,
+      "fleetSubSegment": 1942696,
+      "gt": 2000,
+      "kw": 500,
+      "blocks":
+      [
+        {
+          "capBlockId": 1,
+          "capacityAmount": 2000,
+          "capacityType": "GT",
+          "trackRecord_disabled":
+          [
+            {
+              "type": 1,
+              "quotaEligibility": true
+            },
+            {
+              "type": 4,
+              "quotaEligibility": true
+            }
+          ],
+          "offRegisterDate": "2018-03-20T00:00:00Z",
+          "expiryDate": "2020-03-20T00:00:00Z",
+          "sourceVesselName": "Aine IV",
+          "sourceVesselId": "666",
+          "penaltyPoints": null
+        },
+        {
+          "capBlockId": 2,
+          "capacityAmount": 500,
+          "capacityType": "kW",
+          "trackRecord_disabled":
+          [
+            {
+              "type": 2,
+              "quotaEligibility": false
+            }
+          ],
+          "offRegisterDate": "2019-03-20T00:00:00Z",
+          "expiryDate": "2021-03-20T00:00:00Z",
+          "sourceVesselName": "Aine III",
+          "sourceVesselId": "555",
+          "penaltyPoints": null
         }
       ],
       "penaltyPoints": null,

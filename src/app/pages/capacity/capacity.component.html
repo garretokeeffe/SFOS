@@ -14,13 +14,13 @@
     <div class="progressText" loading-text></div>
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   </div>
-  <div *ngIf="errorMessage && !loading" class="errorBanner" fxLayoutAlign="start center">
+  <div *ngIf="errorMessage && !loading" class="errorBanner" fxLayoutAlign="{{ (isHandset$ | async) ? 'center center' : 'start center' }}">
     <mat-icon class="info-icon">error_outline</mat-icon>
     <div>{{ errorMessage }}</div>
   </div>
 
   <!-- Expiry Date Approaching Warning Bar -->
-  <div *ngIf="isExpiringSoon()" class="errorBanner margin-bottom" fxLayoutAlign="start center">
+  <div *ngIf="isExpiringSoon()" class="errorBanner margin-bottom" fxLayoutAlign="{{ (isHandset$ | async) ? 'center center' : 'start center' }}">
     <mat-icon class="info-icon">error_outline</mat-icon>
     <div>You have capacity expiring soon!</div>
   </div>
