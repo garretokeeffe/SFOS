@@ -36,7 +36,7 @@ export class VesselService {
       .subscribe(
         (res: Array<Vessel>) => {
           const vessels: Array<VesselView> = [];
-          res = res ? res : [];
+          res = res && res['content'] ? res['content'] : [];
           res.forEach((vessel: Vessel) => {
             vessels.push(new VesselView(vessel));
           });

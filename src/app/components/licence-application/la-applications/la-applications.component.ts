@@ -51,7 +51,7 @@ export class LaApplicationsComponent implements OnInit {
     this.userService.getCurrentUser().subscribe((user: UserView) => {
         this.user = user;
 
-        this.licenceService.getLicenceApplicationSummaries(this.user.id).subscribe(
+        this.licenceService.getActiveLicenceApplicationSummaries(this.user.id).subscribe(
           (data: Array<LicenceApplicationSummaryView>) => {
           this.licenceApplicationSummaries = data;
           this.loading = false;

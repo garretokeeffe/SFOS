@@ -39,7 +39,8 @@ export const environment: any = {
   createPreliminaryLicenceApplicationURL: 'https://api-3scale-apicast-staging.apps.rhos.agriculture.gov.ie:443/sfos/licence-applications',
   getLicenceApplicationURL: 'https://api-3scale-apicast-staging.apps.rhos.agriculture.gov.ie:443/sfos/licence-applications/users/ccs',
   progressPreliminaryLicenceApplicationURL: 'https://api-3scale-apicast-staging.apps.rhos.agriculture.gov.ie:443/sfos/licence-applications',
-  getLicenceApplicationSummariesURL: 'https://api-3scale-apicast-staging.apps.rhos.agriculture.gov.ie:443/sfos/licence-applications/summaries/users/ccs',
+  getActiveLicenceApplicationSummariesURL: 'https://api-3scale-apicast-staging.apps.rhos.agriculture.gov.ie:443/sfos/licence-applications/summaries/active/users/ccs',
+  getInactiveLicenceApplicationSummariesURL: 'https://api-3scale-apicast-staging.apps.rhos.agriculture.gov.ie:443/sfos/licence-applications/summaries/inactive/users/ccs',
 
   authenticationURL: 'http://localhost:8080/ws/login',
   deleteLicenceApplicationURL: 'http://application-service-fisheries-dev.apps.rhos.agriculture.gov.ie/sfos/licence-applications',

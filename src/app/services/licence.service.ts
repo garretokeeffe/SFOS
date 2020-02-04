@@ -130,10 +130,20 @@ export class LicenceService {
     }
   }
 
-  public getLicenceApplicationSummaries(userId?: string): Observable<Array<LicenceApplicationSummaryView>> {
+  public getActiveLicenceApplicationSummaries(userId?: string): Observable<Array<LicenceApplicationSummaryView>> {
+    return this.getLicenceApplicationSummaries(true, userId);
+  }
+
+  public getInactiveLicenceApplicationSummaries(userId?: string): Observable<Array<LicenceApplicationSummaryView>> {
+    return this.getLicenceApplicationSummaries(false, userId);
+  }
+
+  private getLicenceApplicationSummaries(active: boolean = true, userId?: string): Observable<Array<LicenceApplicationSummaryView>> {
     // userId = CCS Id from keycloak profile
 
-    const url: string = this.globals.demo ? this.demoService.getLicenceApplicationSummariesURL : environment.getLicenceApplicationSummariesURL + '/' + userId;
+    const url: string = this.globals.demo ? this.demoService.getActiveLicenceApplicationSummariesURL
+      : active ? environment.getActiveLicenceApplicationSummariesURL + '/' + userId
+      : environment.getInactiveLicenceApplicationSummariesURL + '/' + userId;
 
     return new Observable((observer) => {
       this.http.get(url, {
@@ -148,7 +158,7 @@ export class LicenceService {
       .subscribe(
         (res: Array<LicenceApplicationSummary>) => {
           const licenceApplicationSummaries: Array<LicenceApplicationSummary> = [];
-          res = res ? res : [];
+          res = res && res['content'] ? res['content'] : [];
           res.forEach((licenceApplicationSummary: LicenceApplicationSummary) => {
             licenceApplicationSummaries.push(new LicenceApplicationSummaryView(licenceApplicationSummary));
           });

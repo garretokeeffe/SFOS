@@ -1,92 +1,101 @@
-[
-  {
-    "applicationDate": "01/11/2019",
-    "arn": "12345",
-    "status": 315632756,
-    "expiryDate": "",
-    "preliminaryInformation": {
-      "applicantType": 8461,
-      "primaryApplicant": {
-        "firstName": "John",
-        "lastName": "Murphy",
-        "email": "john.murphy@demo.com"
-      },
-      "otherApplicants": [],
-      "partnershipName": "",
-      "companyName": "",
-      "fleetSegment": 338360921,
-      "loa": 23,
-      "registeredLength": 315283238,
-      "submittedBy":
-      {
-        "id": "1",
-        "firstName": "John",
-        "lastName": "Murphy",
-        "email": "john.murphy@demo.com"
-      }
+{
+  "links": [
+    {
+      "rel": "self",
+      "href": "assets/demo/licence-application-summaries"
     }
-  },
-  {
-    "applicationDate": "27/11/2019",
-    "arn": "11223",
-    "status": 315357739,
-    "expiryDate": "30/12/2020",
-    "preliminaryInformation": {
-      "applicantType": 8463,
-      "primaryApplicant": {
-        "firstName": "John",
-        "lastName": "Murphy",
-        "email": "john.murphy@demo.com"
-      },
-      "otherApplicants": [],
-      "partnershipName": "",
-      "companyName": "ACME Ltd",
-      "fleetSegment": 1807585,
-      "loa": 14,
-      "registeredLength": 315283238,
-      "submittedBy":
-      {
-        "id": "1",
-        "firstName": "John",
-        "lastName": "Murphy",
-        "email": "john.murphy@demo.com"
-      }
-    }
-  },
-  {
-    "applicationDate": "18/12/2019",
-    "arn": "22334",
-    "status": 315632756,
-    "expiryDate": "",
-    "preliminaryInformation": {
-      "applicantType": 8465,
-      "primaryApplicant": {
-        "firstName": "John",
-        "lastName": "Murphy",
-        "email": "john.murphy@demo.com"
-      },
-      "otherApplicants": [
-        {
-          "firstName": "Mary",
-          "lastName": "Murphy"
+  ],
+  "content":
+  [
+    {
+      "applicationDate": "01/11/2019",
+      "arn": "12345",
+      "status": 315632756,
+      "expiryDate": "",
+      "preliminaryInformation": {
+        "applicantType": 8461,
+        "primaryApplicant": {
+          "firstName": "John",
+          "lastName": "Murphy",
+          "email": "john.murphy@demo.com"
         },
+        "otherApplicants": [],
+        "partnershipName": "",
+        "companyName": "",
+        "fleetSegment": 338360921,
+        "loa": 23,
+        "registeredLength": 315283238,
+        "submittedBy":
         {
-          "firstName": "Tom",
-          "lastName": "Dunne"
+          "id": "1",
+          "firstName": "John",
+          "lastName": "Murphy",
+          "email": "john.murphy@demo.com"
         }
-      ],
-      "partnershipName": "Murphy & Dunne",
-      "companyName": "",
-      "fleetSegment": 1807585,
-      "loa": 26,
-      "registeredLength": 315283239,
-      "submittedBy":
-      {
-        "id": "1",
-        "firstName": "John",
-        "lastName": "Murphy",
-        "email": "john.murphy@demo.com"
+      }
+    },
+    {
+      "applicationDate": "27/11/2019",
+      "arn": "11223",
+      "status": 315357739,
+      "expiryDate": "30/12/2020",
+      "preliminaryInformation": {
+        "applicantType": 8463,
+        "primaryApplicant": {
+          "firstName": "John",
+          "lastName": "Murphy",
+          "email": "john.murphy@demo.com"
+        },
+        "otherApplicants": [],
+        "partnershipName": "",
+        "companyName": "ACME Ltd",
+        "fleetSegment": 1807585,
+        "loa": 14,
+        "registeredLength": 315283238,
+        "submittedBy":
+        {
+          "id": "1",
+          "firstName": "John",
+          "lastName": "Murphy",
+          "email": "john.murphy@demo.com"
+        }
+      }
+    },
+    {
+      "applicationDate": "18/12/2019",
+      "arn": "22334",
+      "status": 315632756,
+      "expiryDate": "",
+      "preliminaryInformation": {
+        "applicantType": 8465,
+        "primaryApplicant": {
+          "firstName": "John",
+          "lastName": "Murphy",
+          "email": "john.murphy@demo.com"
+        },
+        "otherApplicants": [
+          {
+            "firstName": "Mary",
+            "lastName": "Murphy"
+          },
+          {
+            "firstName": "Tom",
+            "lastName": "Dunne"
+          }
+        ],
+        "partnershipName": "Murphy & Dunne",
+        "companyName": "",
+        "fleetSegment": 1807585,
+        "loa": 26,
+        "registeredLength": 315283239,
+        "submittedBy":
+        {
+          "id": "1",
+          "firstName": "John",
+          "lastName": "Murphy",
+          "email": "john.murphy@demo.com"
+        }
       }
     }
-  }
-]
+  ]
+}

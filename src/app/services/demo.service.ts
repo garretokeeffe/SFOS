@@ -28,7 +28,8 @@ export class DemoService {
   public getUserProfileURL: string = 'assets/demo/userprofile';
   // public createPreliminaryLicenceApplicationURL: string = 'assets/demo/createPreliminaryLicenceApplicationURL';
   public getLicenceApplicationURL: string = 'assets/demo/licence-application';
-  public getLicenceApplicationSummariesURL: string = 'assets/demo/licence-application-summaries';
+  public getActiveLicenceApplicationSummariesURL: string = 'assets/demo/licence-application-summaries';
+  public getInactiveLicenceApplicationSummariesURL: string = 'assets/demo/licence-application-summaries';
   public getUsersURL: string = 'assets/demo/users';
   public getApplicationsURL: string = 'assets/demo/applications';
   public getNotificationCategoriesURL: string = 'assets/demo/notification-categories';

@@ -260,11 +260,14 @@ export class CapacityBlockView extends CapacityBlock {
 
     if (this.expiryDate) {
 
-      const now: any = moment.utc(new Date()); // today's date
-      // const expiryDate: any = moment(this.expiryDate, 'DD/MM/YYYY'); // expiryDate should already be in utc
+      // const now: any = moment.utc(new Date()); // today's date
+      const nowDateTime: Date = new Date();
+      // today started at midnight so put the time back to midnight
+      const nowDate: Date = new Date(nowDateTime.getFullYear(), nowDateTime.getMonth(), nowDateTime.getDate(), 0, 0, 0, 0);
+      const now: any = moment.utc(nowDate);
       const expiryDate: any = moment.utc(this.expiryDate); // expiryDate should already be in utc
       const difference: Duration = moment.duration(expiryDate.diff(now));
-      daysToExpiry = Math.round(difference.asDays()) + 1;
+      daysToExpiry = Math.trunc(difference.asDays());
       // console.log('Days to expiry: ' + daysToExpiry);
 
       if (daysToExpiry <= this.globals.configuration.warnIfCapacityExpiryDateIsApproachingDays) {
