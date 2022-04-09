@@ -37,7 +37,7 @@
     "jquery": "^3.4.1",
     "keycloak-angular": "^6.1.0",
     "material-design-icons-iconfont": "^5.0.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "ng2-pdf-viewer": "^6.0.2",
     "ng2-pdfjs-viewer": "^5.0.1",
     "ngx-extended-pdf-viewer": "^1.8.0-rc.0",
